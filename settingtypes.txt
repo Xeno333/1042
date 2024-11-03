@@ -1,0 +1,26 @@
+
+[General]
+
+#   Allow 1042 to automaticly adjust your settings to what the game requires.
+#
+#   Recomended for novice players
+1042_auto_adjust_settings (Automaticly adjust settings) bool false
+
+
+[Server settings]
+
+#   Warn players to adjust settings on join.
+1042_warn_players_about_settings (Warn players about settings) bool true
+
+
+[Advanced]
+
+#   Ignore game required settings, and force run.
+#
+#   ***THIS IS NOT RECOMENDED***
+1042_ignore_required_settings (Force override required settings) bool false
+
+#   Disable in-game weather
+#
+#   ***THIS IS NOT RECOMENDED***
+1042_disable_weather (Disable in-game weather) bool false
