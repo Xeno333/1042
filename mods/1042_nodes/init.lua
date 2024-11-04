@@ -298,8 +298,7 @@ core.register_node("1042_nodes:water_source", {
     
     paramtype = "light",
     paramtype2 = "none",
-    sunlight_propagates = true,
-    light_source = 2,
+    light_source = 4,
 
     walkable = false,
     pointable = false,
@@ -341,8 +340,7 @@ core.register_node("1042_nodes:water_flowing", {
 
     paramtype = "light",
     paramtype2 = "flowingliquid",
-    sunlight_propagates = true,
-    light_source = 2,
+    light_source = 4,
 
     walkable = false,
     pointable = false,
