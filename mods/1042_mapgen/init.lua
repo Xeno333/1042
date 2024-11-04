@@ -1,7 +1,10 @@
 -- init.lua
-mapgen = {}
+mapgen_1042 = {}
 
 
+local path = core.get_modpath("1042_mapgen")
+
+dofile(path.."/api.lua")
 
 
 -- Settings
