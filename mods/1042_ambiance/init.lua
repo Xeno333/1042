@@ -36,16 +36,6 @@ core.register_on_joinplayer(function(player)
             }
         }
     )
-    player:set_clouds(
-        {
-            density = 0.35,
-            color = "#f0faffaa",
-            ambient = "#006699",
-            thickness = 128,
-            speed = {x=1, y=1},
-            shadow = "#cccccc"
-        }
-    )
     player:set_sun(
         {
             texture = "1042_plain_node.png^[colorize:#ddaa66:144",
