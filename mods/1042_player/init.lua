@@ -27,18 +27,7 @@ core.register_on_joinplayer(function(player, last_join)
             jump = 1.2,
             sneak_glitch = true
         }
-    )
-
-    local zoom_time = 0
-    if last_join == nil then
-        zoom_time = 1
-
-        core.chat_send_player(player:get_player_name(), core.colorize("#00ff00", "It is the year 1042 and you are lost."))
-    end
-
-    player:set_fov(100, false, zoom_time)
-
-    
+    )   
 
     player:hud_set_flags(
         {
