@@ -12,7 +12,8 @@ core.register_on_joinplayer(function(player)
                 strength = 0.1
             },
             shadows = {
-                intensity = 0.15
+                intensity = 0.4,
+                tint = {r=0x99, g=0x99, b=0x99}
             },
             bloom = {
                 intensity = 0.07,
