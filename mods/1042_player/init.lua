@@ -21,6 +21,10 @@ core.register_item(":", {
 -- Join player
 
 core.register_on_joinplayer(function(player, last_join)
+    player:set_properties({
+        show_on_minimap = false,
+    })
+
     player:set_physics_override(
         {
             gravity = 1.5,

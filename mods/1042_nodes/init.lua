@@ -178,6 +178,33 @@ core.register_node("1042_nodes:apple", {
 
 -- Speacal nodes
 
+core.register_node("1042_nodes:amethyst", {
+    description = "Amethyst",
+    drawtype = "mesh",
+    mesh = "crystal.obj",
+    tiles = {"1042_plain_node.png^[colorize:#aa66aa:128"},
+    use_texture_alpha = "blend",
+
+    paramtype = "light",
+    paramtype2 = "4dir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+
+    light_source = 4,
+    
+    groups = {breakable_by_hand = 2, attached_node = 3},
+})
+
 core.register_node("1042_nodes:rock", {
     description = "Rock",
     drawtype = "mesh",
@@ -185,10 +212,20 @@ core.register_node("1042_nodes:rock", {
     tiles = {"1042_plain_node.png^[colorize:#777777:128"},
     use_texture_alpha = "opaque",
 
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.4, -0.5, -0.4, 0.4, -0.2, 0.4}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.4, -0.5, -0.4, 0.4, -0.2, 0.4}
+    },
+
     paramtype = "light",
-    paramtype2 = "facedir",
+    paramtype2 = "4dir",
     sunlight_propagates = true,
-    walkable = false,
+    walkable = true,
     buildable_to = false,
     
     groups = {breakable_by_hand = 2, attached_node = 3},
