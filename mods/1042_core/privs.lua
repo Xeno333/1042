@@ -5,11 +5,15 @@ core.register_privilege("creative",
         give_to_singleplayer = false,
         on_grant = function(name, granter_name) 
             local player = core.get_player_by_name(name)
-            player:set_inventory_formspec(core_1042.make_inv_formspec(player))
+            if player then
+                player:set_inventory_formspec(core_1042.make_inv_formspec(player))
+            end
         end,
         on_revoke = function(name, granter_name) 
             local player = core.get_player_by_name(name)
-            player:set_inventory_formspec(core_1042.make_inv_formspec(player))
+            if player then
+                player:set_inventory_formspec(core_1042.make_inv_formspec(player))
+            end
         end
     }
 )
