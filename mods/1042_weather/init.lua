@@ -4,7 +4,7 @@ weather = {}
 local temp_m
 
 local weather_def = {
-    offset = 0.2,
+    offset = 0,
     scale = 1,
     spread = {x = 600, y = 600, z = 600},
     seed = 33464573,
@@ -221,6 +221,7 @@ if core.settings:get("1042_disable_weather") ~= "true" then
 
     local function get_weather(pos)
         local i = math.random(1, #weather.weathers)
+        
         local m = weather.get_temp_map(math.ceil(pos.x), math.ceil(pos.z))
         local temp = weather.get_temp({x=1,z=1}, m)
 

@@ -15,39 +15,30 @@ local water_level = -3
 local caves_max = T_ymax-68
 
 
-local dirt_n = "1042_nodes:dirt"
-local turf_n = "1042_nodes:turf"
-local snow_n = "1042_nodes:snow"
-local sand_n = "1042_nodes:sand"
-local stone_n = "1042_nodes:stone"
-local rock_n = "1042_nodes:rock"
-local sticks_n = "1042_nodes:sticks"
-local water_n = "1042_nodes:water_source"
-local grass_tall_n = "1042_nodes:grass_tall"
-local grass_short_n = "1042_nodes:grass_short"
-local mushroom_n = "1042_nodes:mushroom"
-local ice_n = "1042_nodes:ice"
-local grass_snowy_n = "1042_nodes:grass_snowy"
-
 
 
 
 -- Mapgen
 
 local map, cave_map
-local stone = core.get_content_id(stone_n)
-local turf = core.get_content_id(turf_n)
-local snow = core.get_content_id(snow_n)
-local sand = core.get_content_id(sand_n)
-local dirt = core.get_content_id(dirt_n)
-local sticks = core.get_content_id(sticks_n)
-local rock = core.get_content_id(rock_n)
-local water = core.get_content_id(water_n)
-local grass_tall = core.get_content_id(grass_tall_n)
-local grass_short = core.get_content_id(grass_short_n)
-local grass_snowy = core.get_content_id(grass_snowy_n)
-local mushroom = core.get_content_id(mushroom_n)
-local ice = core.get_content_id(ice_n)
+
+local stone = core.get_content_id("1042_nodes:stone")
+local dirt = core.get_content_id("1042_nodes:dirt")
+local sand = core.get_content_id("1042_nodes:sand")
+local turf = core.get_content_id("1042_nodes:turf")
+local turf_dry = core.get_content_id("1042_nodes:turf_dry")
+local snow = core.get_content_id("1042_nodes:snow")
+
+local water = core.get_content_id("1042_nodes:water_source")
+local ice = core.get_content_id("1042_nodes:ice")
+
+local rock = core.get_content_id("1042_nodes:rock")
+local sticks = core.get_content_id("1042_nodes:sticks")
+
+local grass_tall = core.get_content_id("1042_nodes:grass_tall")
+local grass_short = core.get_content_id("1042_nodes:grass_short")
+local grass_snowy = core.get_content_id("1042_nodes:grass_snowy")
+local mushroom = core.get_content_id("1042_nodes:mushroom")
 
 core.after(0,function()
     map = core.get_perlin_map({
@@ -84,24 +75,28 @@ end)
 
 local schematic_path = core.get_modpath("1042_mapgen") .. "/schematics/"
 
-local function dec(pr, x, y, z, data, area, place_list, tempv)
+local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
     local c = pr:next(1, 1000)
     
+    if cave then
+        if c <= 30 then
+            data[area:index(x, y+1, z)] = rock
+        end
+
     -- Land
-    if y > water_level then
-        if tempv > 0 then
+    elseif y > water_level then
+        if tempv > 0 and not (tempv >= 20) then
             -- Grass
             if c <= 20 then
                 data[area:index(x, y+1, z)] = grass_tall
-            elseif c <= 100 then
+            elseif c < 100 then
                 data[area:index(x, y+1, z)] = grass_short
-
-            if c == 100 then
-                data[area:index(x, y+1, z)] = rock
-            end
+                
+            elseif c == 100 and y > water_level+3 then
+                data[area:index(x, y+1, z)] = sticks
 
             -- Small tree
-            elseif c >= 995 and y > water_level+3 then
+            elseif c > 995 and y > water_level+3 then
                 place_list[#place_list+1] = 
                     function()
                         core.place_schematic({x=x-4,y=y,z=z-4}, schematic_path .. "tree_plain_1.mts", "random", nil, true)
@@ -116,6 +111,12 @@ local function dec(pr, x, y, z, data, area, place_list, tempv)
                         end
                 end
             end
+
+        elseif tempv >= 20 then
+            if c <= 10 then
+                data[area:index(x, y+1, z)] = grass_short
+            end
+
         else
             -- Snow grass
             if c >= 990 then
@@ -162,8 +163,7 @@ core.register_on_generated(function(minp, maxp, seed)
 
                 -- Get properties of land
                 local noise = noise_m[lx][lz]
-                local ny
-                local rv = nil
+                local ny, rv
                 local mountin_top = false
 
                 if noise <= 0.9 then
@@ -199,7 +199,11 @@ core.register_on_generated(function(minp, maxp, seed)
                     liquid = water
                     top = snow
                 end
-                
+
+                if tempv >= 20 then
+                    top = turf_dry
+                end
+
                 if mountin_top then
                     top = dirt
                     do_dec = false
@@ -226,8 +230,12 @@ core.register_on_generated(function(minp, maxp, seed)
                         end
 
                         if do_dec then
-                            dec(pr, x, y, z, data, area, place_list, tempv)
+                            dec(pr, x, y, z, data, area, place_list, tempv, false)
                         end
+                    end
+                else
+                    if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > -0.95 and y <= ny then
+                        dec(pr, x, y-1, z, data, area, place_list, tempv, true)
                     end
                 end
 

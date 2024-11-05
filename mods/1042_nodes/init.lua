@@ -20,14 +20,6 @@ core.register_node("1042_nodes:sand", {
     groups = {dirt = 1, falling_node = 1, breakable_by_hand = 1},
 })
 
-core.register_node("1042_nodes:snow", {
-    description = "Snow",
-    tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},
-    use_texture_alpha = "opaque",
-
-    groups = {snow = 1, falling_node = 1, melts = 1, breakable_by_hand = 1},
-})
-
 core.register_node("1042_nodes:ice", {
     description = "Ice",
     drawtype = "glasslike",
@@ -46,6 +38,22 @@ core.register_node("1042_nodes:turf", {
     groups = {dirt = 1, breakable_by_hand = 1},
 })
 
+core.register_node("1042_nodes:turf_dry", {
+    description = "Dry Turf",
+    tiles = {"1042_plain_node.png^[colorize:#578b33:168"},
+    use_texture_alpha = "opaque",
+
+    groups = {dirt = 1, breakable_by_hand = 1},
+})
+
+core.register_node("1042_nodes:snow", {
+    description = "Snow",
+    tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},
+    use_texture_alpha = "opaque",
+
+    groups = {snow = 1, melts = 1, breakable_by_hand = 1},
+})
+
 core.register_node("1042_nodes:stone", {
     description = "Stone",
     tiles = {"1042_plain_node.png^[colorize:#777777:128"},
@@ -56,12 +64,11 @@ core.register_node("1042_nodes:stone", {
 
 
 
-
 -- Plant Nodes
 
 
 core.register_node("1042_nodes:leaves_plain", {
-    description = "Plain Leaves",
+    description = "Leaves",
     tiles = {"1042_plain_node.png^[colorize:#1c770a:168"},
     use_texture_alpha = "blend",
     drawtype = "allfaces",
@@ -72,9 +79,30 @@ core.register_node("1042_nodes:leaves_plain", {
     groups = {leaves = 1, plant = 1, breakable_by_hand = 1, burns = 1},
 })
 
+core.register_node("1042_nodes:leaves_dark", {
+    description = "Dark Leaves",
+    tiles = {"1042_plain_node.png^[colorize:#1f470a:168"},
+    use_texture_alpha = "blend",
+    drawtype = "allfaces",
+    
+    paramtype = "light",
+    sunlight_propagates = true,
+
+    groups = {leaves = 1, plant = 1, breakable_by_hand = 1, burns = 1},
+})
+
+
 core.register_node("1042_nodes:tree", {
     description = "Tree",
     tiles = {"1042_plain_node.png^[colorize:#672307:200"},
+    use_texture_alpha = "opaque",
+
+    groups = {wood = 1, plant = 1, burns = 1},
+})
+
+core.register_node("1042_nodes:tree_dark", {
+    description = "Dark Tree",
+    tiles = {"1042_plain_node.png^[colorize:#371307:200"},
     use_texture_alpha = "opaque",
 
     groups = {wood = 1, plant = 1, burns = 1},
@@ -161,7 +189,6 @@ core.register_node("1042_nodes:apple", {
 
     paramtype = "light",
     sunlight_propagates = true,
-    floodable = true,
     walkable = true,
     buildable_to = false,
     
@@ -241,7 +268,6 @@ core.register_node("1042_nodes:sticks", {
 
     paramtype = "light",
     sunlight_propagates = true,
-    floodable = true,
     walkable = false,
     buildable_to = false,
     
@@ -264,6 +290,16 @@ core.register_node("1042_nodes:fire_pile", {
     
     groups = {breakable_by_hand = 1, attached_node = 3, burns = 1},
 })
+
+core.register_craft({
+    output = "1042_nodes:fire_pile",
+    recipe = {
+        {"", "1042_nodes:sticks", ""},
+        {"1042_nodes:sticks", "", "1042_nodes:sticks"}
+    }
+})
+
+
 
 --[[
 core.register_abm({
