@@ -189,7 +189,6 @@ core.register_on_generated(function(minp, maxp, seed)
                 local mid = dirt
                 local low = stone
                 local top_2 = sand
-
                 local top = turf
                 local liquid = water
                 local liquid_top = water
@@ -200,6 +199,7 @@ core.register_on_generated(function(minp, maxp, seed)
                     liquid = water
                     top = snow
                 end
+                
                 if mountin_top then
                     top = dirt
                     do_dec = false
@@ -231,7 +231,7 @@ core.register_on_generated(function(minp, maxp, seed)
                     end
                 end
 
-                if (y <= water_level and y > ny) or (noise > 0.9 and (y < rv and y > ny))then
+                if ((y <= water_level) or (mountin_top and y < rv)) and y > ny then
                     if y == water_level then
                         data[vi] = liquid_top
                     else
