@@ -26,7 +26,8 @@ core.register_on_joinplayer(function(player, last_join)
         {
             gravity = 1.5,
             jump = 1.2,
-            sneak_glitch = true
+            sneak_glitch = true,
+            liquid_sink = 2
         }
     )   
 
