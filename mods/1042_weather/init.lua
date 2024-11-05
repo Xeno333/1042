@@ -28,8 +28,7 @@ function weather.get_temp_map(x, z)
 end
 
 function weather.get_temp(pos, temp_map)
-    local noise = temp_map[pos.x][pos.z]
-    local tempv = noise * 30
+    local tempv = temp_map[pos.x][pos.z] * 30
     return tempv
 end
 

@@ -4,7 +4,8 @@ mapgen_1042 = {}
 
 local path = core.get_modpath("1042_mapgen")
 
-dofile(path.."/api.lua")
+--dofile(path.."/api.lua")
+--dofile(path.."/mapgen.lua")
 
 
 -- Settings
@@ -132,7 +133,6 @@ end
 
 
 
--- Example usage: generating terrain height
 core.register_on_generated(function(minp, maxp, seed)
     local vm, emin, emax = core.get_mapgen_object("voxelmanip")
     local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
@@ -254,4 +254,3 @@ core.register_on_generated(function(minp, maxp, seed)
 
     core.fix_light(minp, maxp)
 end)
-
