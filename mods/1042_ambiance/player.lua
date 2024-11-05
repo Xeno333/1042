@@ -20,7 +20,10 @@ core.register_on_joinplayer(function(player, last_join)
                 strength_factor = 1.0,
                 radius = 1.0
             },
-            saturation = saturation
+            saturation = saturation,
+            exposure = {
+                exposure_correction = 1
+            }
         }
     )
     player:set_sky(

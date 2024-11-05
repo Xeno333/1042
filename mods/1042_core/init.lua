@@ -8,11 +8,18 @@ if core.settings:get("1042_auto_adjust_settings") == "true" then
     core.settings:set("enable_post_processing", "true")
     core.settings:set("translucent_liquids", "true")
     core.settings:set("enable_3d_clouds", "true")
+    core.settings:set("enable_auto_exposure", "true")
 
 elseif core.settings:get("1042_ignore_required_settings") ~= "true" then
     if core.settings:get("enable_shaders") ~= "true" and core.is_singleplayer() then
         on_player_joins[#on_player_joins+1] = function(player)
             core.kick_player(player:get_player_name(), "Enable shaders to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
+        end
+    end
+
+    if core.settings:get("enable_auto_exposure") ~= "true" and core.is_singleplayer() then
+        on_player_joins[#on_player_joins+1] = function(player)
+            core.kick_player(player:get_player_name(), "Enable auto exposure to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
         end
     end
 

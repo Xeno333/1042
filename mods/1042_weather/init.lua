@@ -107,6 +107,9 @@ if core.settings:get("1042_disable_weather") ~= "true" then
                     fog_color = "#22222200"
                 }
             },
+            exposure = {
+                exposure_correction = -2
+            },
             particlespawner = 
             {
                 amount = 2000,
@@ -252,6 +255,7 @@ if core.settings:get("1042_disable_weather") ~= "true" then
             player_weather[name].weather = get_weather(player:get_pos())
             player:set_clouds(player_weather[name].weather.clouds)
             player:set_sky(player_weather[name].weather.sky)
+            player:set_lighting({exposure = (player_weather[name].weather.exposure or {exposure_correction = 0})})
 
             player_weather[name].time = math.random(player_weather[name].weather.time.min, player_weather[name].weather.time.max)
 
