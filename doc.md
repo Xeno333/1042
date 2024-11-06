@@ -12,6 +12,9 @@
 - `leafy` Leafy nodes
 - `plant` Plant (Biomass) nodes
 - `wood` Wood nodes
+
+![pre-alpha-v0.1.0](menu/background.2.png)
+
 ### Not used yet
 - `burns` Planned for burning/fire
 - `melts` Planned for melting nodes
