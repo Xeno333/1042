@@ -3,6 +3,14 @@ core_1042 = {}
 
 local on_player_joins = {}
 
+
+if core.features.hotbar_hud_element ~= true then
+    on_player_joins[#on_player_joins+1] = function(player)
+        core.kick_player(player:get_player_name(), "You must update to luanti 5.10.0 or later to play this game.")
+    end
+end
+
+
 if core.settings:get("1042_auto_adjust_settings") == "true" then
     core.settings:set("enable_shaders", "true")
     core.settings:set("enable_post_processing", "true")

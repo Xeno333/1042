@@ -62,6 +62,14 @@ core.register_node("1042_nodes:stone", {
     groups = {stone = 1},
 })
 
+core.register_node("1042_nodes:basalt", {
+    description = "Basalt",
+    tiles = {"1042_plain_node.png^[colorize:#111111:128"},
+    use_texture_alpha = "opaque",
+
+    groups = {stone = 2},
+})
+
 
 
 -- Plant Nodes
@@ -229,7 +237,7 @@ core.register_node("1042_nodes:amethyst", {
 
     light_source = 4,
     
-    groups = {breakable_by_hand = 2, attached_node = 3},
+    groups = {breakable_by_hand = 3, attached_node = 3},
 })
 
 core.register_node("1042_nodes:rock", {
