@@ -25,9 +25,13 @@ core.register_node("1042_tools:sword",{
         },
     },
 
+    stack_max = 1,
     tool_capabilities = {
         full_punch_interval = 2,
         damage_groups = {fleshy = 4},
+		groupcaps = {
+			leafy = {times = {[1] = 0.125, [2] = 0.25, [3] = 0.5, [4] = 1, [5] = 1.5, [6] = 2}, uses = 1},
+		},
         punch_attack_uses = 1
     },
     wield_scale = {x = 1.5, y = 2, z = 1.5},
