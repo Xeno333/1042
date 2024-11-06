@@ -8,4 +8,12 @@
 ## Groups
 
 - `breakable_by_hand` Player can break these items without tools. `{[1] = 0.25, [2] = 0.5, [3] = 1, [4] = 2, [5] = 3, [6] = 4}`
-- 
+- `stone` Stone nodes
+- `leafy` Leafy nodes
+- `plant` Plant (Biomass) nodes
+- `wood` Wood nodes
+### Not used yet
+- `burns` Planned for burning/fire
+- `melts` Planned for melting nodes
+- `freezes` Planned for freezing nodes
+- `cools` Planned for cooling nodes

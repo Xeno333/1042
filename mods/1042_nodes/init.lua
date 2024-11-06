@@ -76,7 +76,7 @@ core.register_node("1042_nodes:leaves_plain", {
     paramtype = "light",
     sunlight_propagates = true,
 
-    groups = {leaves = 1, plant = 1, breakable_by_hand = 1, burns = 1},
+    groups = {leafy = 1, plant = 1, breakable_by_hand = 1, burns = 1},
 })
 
 core.register_node("1042_nodes:leaves_dark", {
@@ -88,7 +88,7 @@ core.register_node("1042_nodes:leaves_dark", {
     paramtype = "light",
     sunlight_propagates = true,
 
-    groups = {leaves = 1, plant = 1, breakable_by_hand = 1, burns = 1},
+    groups = {leafy = 1, plant = 1, breakable_by_hand = 1, burns = 1},
 })
 
 
@@ -129,7 +129,7 @@ core.register_node("1042_nodes:grass_tall", {
     walkable = false,
     buildable_to = true,
 
-    groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
+    groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
 })
 
 core.register_node("1042_nodes:grass_short", {
@@ -145,7 +145,7 @@ core.register_node("1042_nodes:grass_short", {
     walkable = false,
     buildable_to = true,
 
-    groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
+    groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
 })
 
 core.register_node("1042_nodes:grass_snowy", {
@@ -161,7 +161,7 @@ core.register_node("1042_nodes:grass_snowy", {
     walkable = false,
     buildable_to = true,
 
-    groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
+    groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
 })
 
 core.register_node("1042_nodes:mushroom", {
