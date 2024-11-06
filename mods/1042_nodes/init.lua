@@ -193,7 +193,7 @@ core.register_node("1042_nodes:apple", {
     buildable_to = false,
     
     on_use = function(itemstack, user, pointed_thing)
-        return core_1042.eat(itemstack, user, pointed_thing, 1)
+        return core_1042.eat(itemstack, user, 1)
     end,
 
     groups = {plant = 1, food = 1, breakable_by_hand = 1},

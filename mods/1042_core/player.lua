@@ -2,6 +2,7 @@
 core.register_item(":", {
 	type = "none",
 	wield_image = "1042_plain_node.png^[colorize:#a9a347:128",
+    range = 4.0,
 	tool_capabilities = {
 		full_punch_interval = 1,
 		max_drop_level = 1,

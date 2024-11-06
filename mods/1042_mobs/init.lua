@@ -7,4 +7,5 @@ core.register_entity("1042_mobs:fish", {
         textures = {"1042_plain_node.png^[colorize:#ff4400:128"},
         hp_max = 1,
     },
+    groups = {fleshy = 1}
 })
