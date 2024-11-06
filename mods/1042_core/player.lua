@@ -99,11 +99,46 @@ core.register_on_joinplayer(function(player, last_join)
 
     player:hud_add({
         type = "text",
-        name = "Game",
+        name = "game",
         text = "1042",
         position = {x=0.98, y=0.02},
         number = 0x00ffff,
         style = 3
     })
 
+end)
+
+
+core.register_globalstep(function(dtime)
+    for _, player in ipairs(core.get_connected_players()) do
+        local metaref = player:get_meta()
+        local id = metaref:get_int("pointed_node")
+
+
+        if id ~= 0 then 
+            player:hud_remove(id)
+            metaref:set_int("pointed_node", 0)
+        end
+
+        local pos = player:get_pos()
+        pos.y = pos.y + player:get_properties().eye_height
+        local ray = core.raycast(vector.new(pos.x, pos.y, pos.z), vector.add(vector.new(pos.x, pos.y, pos.z), vector.multiply(player:get_look_dir(), 4)), false, false)
+
+        local node = ray:next()
+        if node and node.type == "node" then
+            local txt = core.registered_nodes[core.get_node(vector.new(node.under.x, node.under.y, node.under.z)).name].description
+            if txt then 
+                metaref:set_int("pointed_node", player:hud_add({
+                    type = "text",
+                    name = "pointed_node_hud",
+                    text = txt,
+                    position = {x=0.5, y=0.05},
+                    number = 0x00ffdd,
+                    style = 3
+                }))
+            end
+        end
+
+
+    end
 end)

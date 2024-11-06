@@ -42,8 +42,6 @@ elseif core.settings:get("1042_ignore_required_settings") ~= "true" then
     end
 end
 
-print(core.settings:get("1042_warn_players_about_settings"))
-
 if not core.is_singleplayer() and core.settings:get_bool("1042_warn_players_about_settings", true) then
     on_player_joins[#on_player_joins+1] = function(player)
         core.chat_send_player(player:get_player_name(), core.colorize("#eeee00", "It is recomended to load this game in single player to ensure proper rendering settings are on pior to using server mode. If the game does not look right or look dim/greyish, please try that."))

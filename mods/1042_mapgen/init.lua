@@ -99,7 +99,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
             elseif c > 995 and y > water_level+3 then
                 place_list[#place_list+1] = 
                     function()
-                        core.place_schematic({x=x-4,y=y,z=z-4}, schematic_path .. "tree_plain_1.mts", "random", nil, true)
+                        core.place_schematic(vector.new(x-4,y,z-4), schematic_path .. "tree_plain_1.mts", "random", nil, true)
                     end
 
             -- Big tree
@@ -107,7 +107,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
                 if c == 995 then
                     place_list[#place_list+1] = 
                         function()
-                            core.place_schematic({x=x-7,y=y,z=z-7}, schematic_path .. "big_tree_1.mts", "random", nil, true)
+                            core.place_schematic(vector.new(x-7,y,z-7), schematic_path .. "big_tree_1.mts", "random", nil, true)
                         end
                 end
             end
