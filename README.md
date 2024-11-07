@@ -24,10 +24,19 @@
 - More general gameplay
 
 
+## Settings
+
+- `1042_warn_players_about_settings` Warns players abour the requirements for settings to be enabled if they join in servermode, default: `true`
+- `1042_auto_adjust_settings` Automaticly turns on settings for player (and updates to minetest.conf) if user settings conflict, default: `false`
+
+### NOT RECOMMENDED
+- `1042_ignore_required_settings` Ignore required settings and run anyway (See Requirements), default: `false`
+- `1042_disable_weather` Disable in-game weather, default: `false`
+
 ## Requirements
 
 ### Luanti
-By default 1042 requires:
+1042 has some requirements to run. There are also some things that are recommended and will be set up if settings are left to default values or if `1042_auto_adjust_settings = true`
 
 #### Can not be overridden
 - Luanti version 5.10.0 or later
@@ -41,7 +50,7 @@ By default 1042 requires:
 - `enable_3d_clouds = true` for weather to look right
 - `exposure_compensation = 0.5` for stuff to look right
 
-### Recommended and will enable if there are left at default
+#### Recommended
 - `enable_waving_water = true`
 - `enable_water_reflections = true`
 - `smooth_lighting = true`
