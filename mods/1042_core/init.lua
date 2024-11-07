@@ -11,48 +11,57 @@ if core.features.hotbar_hud_element ~= true then
 end
 
 
+-- key = {single_player, value}
+local required_settings = {
+    -- Required
+    ["enable_shaders"] = {single_player=true, value="true", required=true},
+    ["enable_post_processing"] = {single_player=true, value="true", required=true},
+    ["translucent_liquids"] = {single_player=true, value="true", required=true},
+    ["enable_clouds"] = {single_player=true, value="true", required=true},
+    ["enable_3d_clouds"] = {single_player=true, value="true", required=true},
+    ["enable_auto_exposure"] = {single_player=true, value="true", required=true},
+    ["exposure_compensation"] = {single_player=true, value="0.5", required=true},
+
+    -- Recommended
+    ["enable_waving_water"] = {single_player=true, value="true"},
+    ["smooth_lighting"] = {single_player=true, value="true"},
+    ["enable_dynamic_shadows"] = {single_player=true, value="true"},
+    ["enable_volumetric_lighting"] = {single_player=true, value="true"},
+    ["enable_bloom"] = {single_player=true, value="true"},
+    ["enable_node_specular"] = {single_player=true, value="true"},
+    ["enable_water_reflections"] = {single_player=true, value="true"},
+    ["soft_clouds"] = {single_player=true, value="true"},
+    ["enable_fog"] = {single_player=true, value="true"},
+}
+
 if core.settings:get("1042_auto_adjust_settings") == "true" then
-    core.settings:set("enable_shaders", "true")
-    core.settings:set("enable_post_processing", "true")
-    core.settings:set("translucent_liquids", "true")
-    core.settings:set("enable_3d_clouds", "true")
-    core.settings:set("enable_auto_exposure", "true")
+    for name, value in pairs(required_settings) do
+        if core.settings:get(name) ~= value.value then
+            core.settings:set(name, value.value)
+        end
+    end
 
 elseif core.settings:get("1042_ignore_required_settings") ~= "true" then
-    if core.settings:get("enable_shaders") ~= "true" and core.is_singleplayer() then
-        on_player_joins[#on_player_joins+1] = function(player)
-            core.kick_player(player:get_player_name(), "Enable shaders to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
-        end
-    end
-
-    if core.settings:get("enable_auto_exposure") ~= "true" and core.is_singleplayer() then
-        on_player_joins[#on_player_joins+1] = function(player)
-            core.kick_player(player:get_player_name(), "Enable auto exposure to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
-        end
-    end
-
-    if core.settings:get("enable_post_processing") ~= "true" and core.is_singleplayer() then
-        on_player_joins[#on_player_joins+1] = function(player)
-            core.kick_player(player:get_player_name(), "Enable post processing to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
-        end
-    end
-
-    if core.settings:get("translucent_liquids") ~= "true" and core.is_singleplayer() then
-        on_player_joins[#on_player_joins+1] = function(player)
-            core.kick_player(player:get_player_name(), "Enable translucent liquids to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
-        end
-    end
-
-    if core.settings:get("enable_3d_clouds") ~= "true" and core.is_singleplayer() then
-        on_player_joins[#on_player_joins+1] = function(player)
-            core.kick_player(player:get_player_name(), "Enable 3d clouds to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
+    for name, value in pairs(required_settings) do
+        if value.required then
+            if value.single_player then
+                if core.is_singleplayer() and core.settings:get(name) ~= value then
+                    on_player_joins[#on_player_joins+1] = function(player)
+                        core.kick_player(player:get_player_name(), "Enable "..name.." to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
+                    end
+                end
+            elseif core.settings:get(name) ~= value then
+                on_player_joins[#on_player_joins+1] = function(player)
+                    core.kick_player(player:get_player_name(), "Enable "..name.." to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
+                end
+            end
         end
     end
 end
 
 if not core.is_singleplayer() and core.settings:get_bool("1042_warn_players_about_settings", true) then
     on_player_joins[#on_player_joins+1] = function(player)
-        core.chat_send_player(player:get_player_name(), core.colorize("#eeee00", "It is recomended to load this game in single player to ensure proper rendering settings are on pior to using server mode. If the game does not look right or look dim/greyish, please try that."))
+        core.chat_send_player(player:get_player_name(), core.colorize("#eeee00", "It is recommended to load this game in single player to ensure proper rendering settings are on pior to using server mode. If the game does not look right or look dim/greyish, please try that."))
     end
 end
 
