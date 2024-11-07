@@ -36,6 +36,10 @@ core.register_node("1042_tools:sword",{
     },
     wield_scale = {x = 1.5, y = 2, z = 1.5},
 
+    after_use = function(itemstack, user, pointed_thing)
+        -- Add dmg
+    end,
+
     damage_per_second = 128,
 
     groups = {weapon = 1, falling_node = 1, breakable_by_hand = 2},
