@@ -1,5 +1,12 @@
-# 1042, state: `pre-alpha-v0.1.1`
+# 1042
 
+## Overview
+1042 is a game placed in Europ around the year 1042 A.D. The game focuses on PvE and adventure. At the moment it is a bit limited but still playable at the basic level (See `Features` for more.)
+
+We Hope you enjoy playing it and all feedback is welcome!
+
+
+## State: `pre-alpha-v0.1.1`
 ![pre-alpha-v0.1.0](menu/background.2.png)
 
 
