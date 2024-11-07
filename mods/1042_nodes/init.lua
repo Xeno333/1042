@@ -4,9 +4,17 @@
 
 -- Land Nodes
 
+core.register_node("1042_nodes:bedrock", {
+    description = "Bedrock",
+    tiles = {"1042_plain_node.png^[colorize:#110a02:200"},
+    use_texture_alpha = "opaque",
+
+    groups = {unbreakable = 1},
+})
+
 core.register_node("1042_nodes:dirt", {
     description = "Dirt",
-    tiles = {"1042_plain_node.png^[colorize:#8B4513:128"},
+    tiles = {"1042_plain_node.png^[colorize:#8b4513:128"},
     use_texture_alpha = "opaque",
 
     groups = {dirt = 1, breakable_by_hand = 2},

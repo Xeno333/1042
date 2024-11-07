@@ -89,3 +89,12 @@ We Hope you enjoy playing it and all feedback is welcome!
 - `soft_clouds = true`
 - `connected_glass = true`
 - `enable_fog = true`
+
+
+## Contributing
+1042 is a free and open-source game and is licensed under the MIT license. If you would like to help develop you can make PRs on our github (`https://github.com/Xeno333/1042/`). You can also join our [discord](https://github.com/Xeno333/1042/) at
+
+
+## Online Resources
+- Github `https://github.com/Xeno333/1042/`
+- 1042 Discord `https://discord.gg/7YTMtyPgrD`
