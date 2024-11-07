@@ -24,6 +24,28 @@
 - More general gameplay
 
 
+## Roadmap
+
+#### pre-alpha v0.1.0 to alpha v0.2.0 goals
+- Add ores and refinement via ores and nuggets that spawn and are dropped upon breaking ores.
+- Add tools
+- Add more trees and plants, flowers maybe.
+- Add sounds
+- Add Mobs
+- Add pvp physics and more weapons (Bow and club)
+- Add achivments
+- Add lootable structures
+- Add seasons and better multi-player weather (Could be pushed to beta)
+
+#### beta v0.2.0
+- Add mapgen API
+
+#### beta v0.3.0
+- Add more structures (villages)
+- Add rivers
+- Possibly add new world(s)
+
+
 ## Settings
 
 - `1042_warn_players_about_settings` Warns players abour the requirements for settings to be enabled if they join in servermode, default: `true`

@@ -1,12 +1,19 @@
 core_1042 = {}
 
 
-local on_player_joins = {}
+local on_player_joins = {
+    function(player)
+        local name = player:get_player_name()
+        if not core.get_player_information(name).protocol_version or core.get_player_information(name).protocol_version < 46 then
+            core.disconnect_player(name, "You are on too old of a client, please update.")
+        end
+    end
+}
 
 
 if core.features.hotbar_hud_element ~= true then
     on_player_joins[#on_player_joins+1] = function(player)
-        core.kick_player(player:get_player_name(), "You must update to luanti 5.10.0 or later to play this game.")
+        core.disconnect_player(player:get_player_name(), "You must update to luanti 5.10.0 or later to play this game.")
     end
 end
 
@@ -47,12 +54,12 @@ elseif core.settings:get("1042_ignore_required_settings") ~= "true" then
             if value.single_player then
                 if core.is_singleplayer() and core.settings:get(name) ~= value.value then
                     on_player_joins[#on_player_joins+1] = function(player)
-                        core.kick_player(player:get_player_name(), "Enable "..name.." to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
+                        core.disconnect_player(player:get_player_name(), "Enable "..name.." to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
                     end
                 end
             elseif core.settings:get(name) ~= value.value then
                 on_player_joins[#on_player_joins+1] = function(player)
-                    core.kick_player(player:get_player_name(), "Enable "..name.." to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
+                    core.disconnect_player(player:get_player_name(), "Enable "..name.." to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
                 end
             end
         end
