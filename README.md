@@ -41,7 +41,7 @@ By default 1042 requires:
 - `enable_3d_clouds = true` for weather to look right
 - `exposure_compensation = 0.5` for stuff to look right
 
-### Recommended
+### Recommended and will enable if there are left at default
 - `enable_waving_water = true`
 - `enable_water_reflections = true`
 - `smooth_lighting = true`

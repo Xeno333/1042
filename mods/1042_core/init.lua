@@ -45,12 +45,12 @@ elseif core.settings:get("1042_ignore_required_settings") ~= "true" then
     for name, value in pairs(required_settings) do
         if value.required then
             if value.single_player then
-                if core.is_singleplayer() and core.settings:get(name) ~= value then
+                if core.is_singleplayer() and core.settings:get(name) ~= value.value then
                     on_player_joins[#on_player_joins+1] = function(player)
                         core.kick_player(player:get_player_name(), "Enable "..name.." to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
                     end
                 end
-            elseif core.settings:get(name) ~= value then
+            elseif core.settings:get(name) ~= value.value then
                 on_player_joins[#on_player_joins+1] = function(player)
                     core.kick_player(player:get_player_name(), "Enable "..name.." to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
                 end
