@@ -1,6 +1,5 @@
-# 1042
+# 1042, state: `pre-alpha-v0.1.1`
 
-## pre-alpha-v0.1.1
 ![pre-alpha-v0.1.0](menu/background.2.png)
 
 
