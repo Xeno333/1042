@@ -12,6 +12,8 @@ local path = core.get_modpath("1042_mapgen")
 local T_ymax = 128
 local T_ymin = -T_ymax*2
 local water_level = -3
+local lava_level = -240
+local bedrock_level = -256
 local caves_max = T_ymax-68
 
 
@@ -28,6 +30,8 @@ local sand = core.get_content_id("1042_nodes:sand")
 local turf = core.get_content_id("1042_nodes:turf")
 local turf_dry = core.get_content_id("1042_nodes:turf_dry")
 local snow = core.get_content_id("1042_nodes:snow")
+local bedrock = core.get_content_id("1042_nodes:bedrock")
+local lava = core.get_content_id("1042_nodes:lava_source")
 
 local water = core.get_content_id("1042_nodes:water_source")
 local ice = core.get_content_id("1042_nodes:ice")
@@ -150,6 +154,7 @@ core.register_on_generated(function(minp, maxp, seed)
 
     -- Add for T_ymin just do stone
 
+
     local ly = 81
     for y = maxp.y, minp.y, -1 do
         ly = ly - 1
@@ -159,8 +164,16 @@ core.register_on_generated(function(minp, maxp, seed)
             local vi = area:index(minp.x, y, z)
             local lx = 0
             for x = minp.x, maxp.x do
-                lx = lx + 1
 
+                if y <= bedrock_level then
+                    if  y == bedrock_level then
+                        data[vi] = bedrock
+                    end
+                    vi = vi + 1
+                    goto skip
+                end
+
+                lx = lx + 1
                 -- Get properties of land
                 local noise = noise_m[lx][lz]
                 local ny, rv
@@ -233,6 +246,8 @@ core.register_on_generated(function(minp, maxp, seed)
                             dec(pr, x, y, z, data, area, place_list, tempv, false)
                         end
                     end
+                elseif y <= ny and y<= lava_level then
+                    data[vi] = lava
                 else
                     if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > -0.95 and y <= ny then
                         dec(pr, x, y-1, z, data, area, place_list, tempv, true)
@@ -247,7 +262,9 @@ core.register_on_generated(function(minp, maxp, seed)
                     end
                 end
 
+
                 vi = vi + 1
+                ::skip::
             end
         end
     end
