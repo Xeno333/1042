@@ -147,12 +147,46 @@ core.register_node("1042_nodes:iorn_nugget", {
         fixed = {-0.1, -0.5, -0.1, 0.1, -0.3, 0.1}
     },
 
-    on_use = function(itemstack, user, pointed_thing)
+    on_use = function(itemstack, player, pointed_thing)
         local node = nil
         if pointed_thing.under then
             node = core.get_node(pointed_thing.under)
         end
-        if node and node.name == "1042_nodes:flint" then
+        if node and node.name == "1042_nodes:flint" then   
+            core.add_particlespawner({
+                pos = pointed_thing.under,
+                amount = 10,
+                time = 0.1,
+
+                collisiondetection = true,
+                object_collision = true,
+                collision_removal = true,
+
+                vel = {
+                    min = vector.new(-2, 1, -2),
+                    max = vector.new(2, 4, 2),
+                    bias = 0
+                },
+
+                acc = vector.new(0, -9.8, 0),
+
+                size = {
+                    min = 0.05,
+                    max = 0.3
+                },
+
+                exptime = {
+                    min = 0.2,
+                    max = 1
+                },
+
+                glow = 14,
+
+                name = player:get_player_name(),
+
+                texture = "1042_plain_node.png^[colorize:#ffcc66:144"
+            })
+
             if math.random(1, 10) == 1 then
                 local nodes = core.find_nodes_in_area_under_air(vector.add(pointed_thing.under, vector.new(-1, -1, -1)), vector.add(pointed_thing.under, vector.new(1, 1, 1)), "group:burns")
                 if #nodes > 0 then

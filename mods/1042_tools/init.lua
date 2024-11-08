@@ -83,8 +83,8 @@ core.register_node("1042_tools:pick",{
 })
 
 
-core.register_node("1042_tools:axe_stone",{
-    description = "Stone axe",
+core.register_node("1042_tools:axe_flint",{
+    description = "Flint axe",
     drawtype = "mesh",
     mesh = "axe.obj",
     tiles = {
@@ -119,7 +119,7 @@ core.register_node("1042_tools:axe_stone",{
 })
 
 core.register_craft({
-    output = "1042_tools:axe_stone",
+    output = "1042_tools:axe_flint",
     recipe = {
         {"1042_nodes:flint", "1042_nodes:flint", "1042_nodes:flint"},
         {"", "1042_nodes:sticks", ""},
