@@ -5,11 +5,11 @@
 
 -- Speacal nodes
 
-core.register_node("1042_nodes:amethyst", {
-    description = "Amethyst",
+core.register_node("1042_nodes:beryl", {
+    description = "Beryl",
     drawtype = "mesh",
     mesh = "crystal.obj",
-    tiles = {"1042_plain_node.png^[colorize:#aa66aa:128"},
+    tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
     use_texture_alpha = "blend",
 
     paramtype = "light",
@@ -27,7 +27,7 @@ core.register_node("1042_nodes:amethyst", {
         fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
     },
 
-    light_source = 4,
+    light_source = 5,
     
     groups = {breakable_by_hand = 3, attached_node = 3},
 })

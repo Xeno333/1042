@@ -15,6 +15,7 @@ local water_level = -3
 local lava_level = -240
 local bedrock_level = -256
 local caves_max = T_ymax-68
+local decorated_caves = -64
 
 
 
@@ -39,6 +40,8 @@ local ice = core.get_content_id("1042_nodes:ice")
 
 local rock = core.get_content_id("1042_nodes:rock")
 local sticks = core.get_content_id("1042_nodes:sticks")
+local iorn_nugget = core.get_content_id("1042_nodes:iorn_nugget")
+local beryl = core.get_content_id("1042_nodes:beryl")
 
 local grass_tall = core.get_content_id("1042_nodes:grass_tall")
 local grass_short = core.get_content_id("1042_nodes:grass_short")
@@ -111,6 +114,13 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
     if cave then
         if c <= 30 then
             data[area:index(x, y+1, z)] = rock
+
+        elseif c <= 45 then
+            data[area:index(x, y+1, z)] = iorn_nugget
+
+        elseif c <= 60 and y <= decorated_caves then
+            data[area:index(x, y+1, z)] = beryl
+
         end
 
     -- Land
