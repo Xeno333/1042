@@ -58,6 +58,32 @@ core.register_node("1042_nodes:rock", {
     groups = {breakable_by_hand = 2, attached_node = 3},
 })
 
+core.register_node("1042_nodes:flint", {
+    description = "Flint",
+    drawtype = "mesh",
+    mesh = "flint.obj",
+    tiles = {"1042_plain_node.png^[colorize:#07070d:128"},
+    use_texture_alpha = "opaque",
+
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.4, -0.5, -0.4, 0.4, -0.2, 0.4}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.4, -0.5, -0.4, 0.4, -0.2, 0.4}
+    },
+
+    paramtype = "light",
+    paramtype2 = "4dir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+    
+    groups = {breakable_by_hand = 2, attached_node = 3},
+})
+
 
 core.register_node("1042_nodes:iorn_nugget", {
     description = "Iorn Nugget",
@@ -125,6 +151,8 @@ core.register_craft({
         {"1042_nodes:sticks", "", "1042_nodes:sticks"}
     }
 })
+
+
 
 core.register_node("1042_nodes:anvil", {
     description = "Anvil",

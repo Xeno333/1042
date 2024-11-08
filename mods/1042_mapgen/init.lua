@@ -42,6 +42,7 @@ local rock = core.get_content_id("1042_nodes:rock")
 local sticks = core.get_content_id("1042_nodes:sticks")
 local iorn_nugget = core.get_content_id("1042_nodes:iorn_nugget")
 local beryl = core.get_content_id("1042_nodes:beryl")
+local flint = core.get_content_id("1042_nodes:flint")
 
 local grass_tall = core.get_content_id("1042_nodes:grass_tall")
 local grass_short = core.get_content_id("1042_nodes:grass_short")
@@ -137,7 +138,10 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
     local c = pr:next(1, 1000)
     
     if cave then
-        if c <= 30 then
+        if c <= 5 then
+            data[area:index(x, y+1, z)] = flint
+            
+        elseif c <= 30 then
             data[area:index(x, y+1, z)] = rock
 
         elseif c <= 45 then

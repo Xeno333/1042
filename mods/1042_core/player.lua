@@ -181,12 +181,12 @@ core.register_globalstep(function(dtime)
 
         local wield_item = player:get_wielded_item()
         if wield_item then
-            local txt = core.registered_items[wield_item:get_name()].description
-            if txt then
+            local item = core.registered_items[wield_item:get_name()]
+            if item and item.description then
                 metaref:set_int("wield_text", player:hud_add({
                     type = "text",
                     name = "wield_text_hud",
-                    text = txt,
+                    text = item.description,
                     position = {x=0.05, y=0.9},
                     number = 0x00ffdd,
                     style = 3
