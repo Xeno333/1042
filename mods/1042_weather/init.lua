@@ -73,6 +73,80 @@ if core.settings:get("1042_disable_weather") ~= "true" then
             }
         },
         {
+            name = "Hail",
+            conditions = {
+                temp = {
+                    min = -2,
+                }
+            },
+            clouds = {
+                density = 0.9,
+                color = "#333333dd",
+                ambient = "#333333",
+                shadow = "#aaaaaa",
+                thickness = 128,
+                speed = {x=2, y=2},
+                height = 120
+            },
+            time = {
+                min = 30,
+                max = 60*5
+            },
+            sky = {
+                type = "regular",
+                clouds = true,
+                sky_color = {
+                    night_sky = "#0066ff",
+                    night_horizon = "#0088ff",
+                    day_horizon = "#444444",
+                    day_sky = "#333333"
+                },
+                fog = {
+                    fog_start = 0,
+                    fog_distance = 40,
+                    fog_color = "#22222200"
+                }
+            },
+            exposure = {
+                exposure_correction = -2
+            },
+            particlespawner = 
+            {
+                amount = 500,
+                time = 1,
+
+                collisiondetection = true,
+                object_collision = true,
+
+                vel = {
+                    min = vector.new(-2, -16, -2),
+                    max = vector.new(2, -32, 2),
+                    bias = 0
+                },
+
+                acc = vector.new(0, -9.8, 0),
+
+                size = {
+                    min = 0.5,
+                    max = 4
+                },
+
+                exptime = {
+                    min = 0.5,
+                    max = 1
+                },
+
+                bounce = {
+                    min = 0,
+                    max = 0.3
+                },
+
+                glow = 2,
+
+                texture = "1042_plain_node.png^[colorize:#dddddd:144"
+            }
+        },
+        {
             name = "Storm",
             conditions = {
                 temp = {
@@ -221,7 +295,7 @@ if core.settings:get("1042_disable_weather") ~= "true" then
             }
         },
         {
-            name = "Drizle",
+            name = "Drizzle",
             conditions = {
                 temp = {
                     min = -2,
@@ -331,7 +405,7 @@ if core.settings:get("1042_disable_weather") ~= "true" then
             },
             particlespawner = 
             {
-                amount = 4000,
+                amount = 500,
                 time = 1,
 
                 collisiondetection = true,
@@ -350,8 +424,8 @@ if core.settings:get("1042_disable_weather") ~= "true" then
                 },
 
                 exptime = {
-                    min = 4.5,
-                    max = 5
+                    min = 6,
+                    max = 8
                 },
 
                 bounce = {
@@ -361,7 +435,7 @@ if core.settings:get("1042_disable_weather") ~= "true" then
 
                 glow = 8,
 
-                texture = "1042_plain_node.png^[colorize:#aaaaff:144"
+                texture = "1042_plain_node.png^[colorize:#ddddff:144"
             }
         }
     }
@@ -379,14 +453,14 @@ if core.settings:get("1042_disable_weather") ~= "true" then
         while true do
             local weather_t = weather.weathers[i]
             if not weather_t.conditions then
-                return weather_t
+                return i
             elseif weather_t.conditions.temp.max and weather_t.conditions.temp.max >= temp then
                 if not weather_t.conditions.temp.min or weather_t.conditions.temp.min >= temp then
-                    return weather_t
+                    return i
                 end
             elseif weather_t.conditions.temp.min and weather_t.conditions.temp.min <= temp then
                 if not weather_t.conditions.temp.max or weather_t.conditions.temp.max <= temp then
-                    return weather_t
+                    return i
                 end
             end
 
@@ -397,10 +471,10 @@ if core.settings:get("1042_disable_weather") ~= "true" then
         end
     end
 
-    local function change_weather(player)
+    local function change_weather(player, index)
         local name = player:get_player_name()
         if core.get_player_by_name(name) ~= nil then
-            player_weather[name].weather = get_weather(player:get_pos())
+            player_weather[name].weather = weather.weathers[index or get_weather(player:get_pos())]
             player:set_clouds(player_weather[name].weather.clouds)
             player:set_sky(player_weather[name].weather.sky)
             player:set_lighting({exposure = (player_weather[name].weather.exposure or {exposure_correction = 0})})
@@ -413,12 +487,27 @@ if core.settings:get("1042_disable_weather") ~= "true" then
 
 
     core.register_chatcommand("change_weather", {
-        privs = {
-        },
-        func = function(name)
+        params = "<weather/help>",
+        func = function(name, param)
+            if param == "help" then
+                local ret_string = "Weathers:"
+                for _, def in pairs(weather.weathers) do
+                    ret_string = ret_string .. "\n\t" .. def.name
+                end
+
+                return true, ret_string
+            end
+
+            local index = nil
+            for i, def in pairs(weather.weathers) do
+                if def.name == param then
+                    index = i
+                end
+            end
+            
             local player = core.get_player_by_name(name)
             if core_1042.is_creative(player) then
-                return true, "Set to "..change_weather(player).."."
+                return true, "Set to "..change_weather(player, index).."."
             end
         end
     })
@@ -434,7 +523,7 @@ if core.settings:get("1042_disable_weather") ~= "true" then
                 if player_weather[name] then
                     player_weather[name].time = player_weather[name].time - timer
                     if player_weather[name].time <= 0 then
-                        change_weather(player)
+                        change_weather(player, nil)
                     end
 
                     local def = player_weather[name].weather.particlespawner
@@ -459,7 +548,7 @@ if core.settings:get("1042_disable_weather") ~= "true" then
 
     core.register_on_joinplayer(function(player)
         player_weather[player:get_player_name()] = {}
-        change_weather(player)
+        change_weather(player, nil)
     end)
 
     core.register_on_leaveplayer(function(player)
