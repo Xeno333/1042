@@ -15,9 +15,37 @@ core.register_item(":", {
 })
 
 
+
+-- Spawn player
+
+local function spawn_player(player)
+    local pos = nil
+
+    while pos == nil do
+        local x = math.random(0, 20000)
+        local z = math.random(0, 20000)
+        local y = mapgen_1042.get_spawn_y(x, z) 
+
+        if y then
+            pos = vector.new(x, y+1, z)
+            break
+        end
+    end
+
+    player:set_pos(pos)
+
+    return true
+end
+
+core.register_on_respawnplayer(spawn_player)
+
 -- Join player
 
 core.register_on_joinplayer(function(player, last_join)
+    if last_join == nil then
+        spawn_player(player)
+    end
+
     player:set_properties({
         show_on_minimap = false,
         stepheight = 1.1

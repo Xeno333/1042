@@ -96,6 +96,32 @@ core.after(0,function()
 end)
 
 
+
+function mapgen_1042.get_spawn_y(x, z)
+    local noise = map:get_2d_map({z=0,y=x, x=z})[1][1]
+    local ny
+    local mountin_top = false
+
+    if noise <= 0.9 then
+        if noise > -0.5 then
+            -- Normal gen
+            ny = (noise * math.abs(noise)) * T_ymax
+            if ny < water_level then 
+                return false
+            end
+        else
+            return false
+        end
+    else
+        return false
+    end
+    
+    return math.floor(ny)
+end
+
+
+
+
 local schematic_path = core.get_modpath("1042_mapgen") .. "/schematics/"
 
 
