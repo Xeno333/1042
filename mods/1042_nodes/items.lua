@@ -59,6 +59,32 @@ core.register_node("1042_nodes:rock", {
 })
 
 
+core.register_node("1042_nodes:iorn_nugget", {
+    description = "Iorn Nugget",
+    drawtype = "mesh",
+    mesh = "nugget.obj",
+    tiles = {"1042_plain_node.png^[colorize:#551111:128"},
+    use_texture_alpha = "opaque",
+
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.1, -0.5, -0.1, 0.1, -0.3, 0.1}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.1, -0.5, -0.1, 0.1, -0.3, 0.1}
+    },
+
+    paramtype = "light",
+    paramtype2 = "4dir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+    
+    groups = {breakable_by_hand = 2, attached_node = 3},
+})
+
 
 core.register_node("1042_nodes:sticks", {
     description = "Sticks",

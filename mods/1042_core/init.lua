@@ -4,7 +4,8 @@ core_1042 = {}
 local on_player_joins = {
     function(player)
         local name = player:get_player_name()
-        if not core.get_player_information(name).protocol_version or core.get_player_information(name).protocol_version < 46 then
+        local protocol_version = core.get_player_information(name).protocol_version
+        if not protocol_version or protocol_version < 46 then
             core.disconnect_player(name, "You are on too old of a client, please update.")
         end
     end
@@ -87,5 +88,4 @@ dofile(path.."/player_inv.lua")
 dofile(path.."/player.lua")
 dofile(path.."/funcs.lua")
 dofile(path.."/privs.lua")
-dofile(path.."/group_abms.lua")
 

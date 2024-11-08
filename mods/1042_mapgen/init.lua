@@ -22,7 +22,7 @@ local caves_max = T_ymax-68
 
 -- Mapgen
 
-local map, cave_map
+local map, cave_map, ore_map
 
 local stone = core.get_content_id("1042_nodes:stone")
 local dirt = core.get_content_id("1042_nodes:dirt")
@@ -32,6 +32,7 @@ local turf_dry = core.get_content_id("1042_nodes:turf_dry")
 local snow = core.get_content_id("1042_nodes:snow")
 local bedrock = core.get_content_id("1042_nodes:bedrock")
 local lava = core.get_content_id("1042_nodes:lava_source")
+local iorn_ore = core.get_content_id("1042_nodes:iorn_ore")
 
 local water = core.get_content_id("1042_nodes:water_source")
 local ice = core.get_content_id("1042_nodes:ice")
@@ -74,10 +75,35 @@ core.after(0,function()
             defaults = false
         }
     }, {x=80, y=80, z=80})
+
+    ore_map = core.get_perlin_map({
+        offset = 0,
+        scale = 1,
+        spread = {x = 10, y = 10, z = 10},
+        seed = 26354,
+        octaves = 3,
+        persist = 0.7,
+        lacunarity = 2,
+        flags = {
+            eased = true,
+            absvalue = false,
+            defaults = false
+        }
+    }, {x=80, y=80, z=80})
 end)
 
 
 local schematic_path = core.get_modpath("1042_mapgen") .. "/schematics/"
+
+
+local function stone_gen(noise, y, data, vi)
+    if noise < -1.3 then
+        data[vi] = iorn_ore
+        return
+    end
+    
+    data[vi] = stone
+end
 
 local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
     local c = pr:next(1, 1000)
@@ -146,7 +172,9 @@ core.register_on_generated(function(minp, maxp, seed)
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
     local noise_m = map:get_2d_map({z=0,y=minp.x, x=minp.z})
-    local cave_noise_m = cave_map:get_3d_map({z=minp.x,y=minp.y,x=minp.z})
+    local m_pos = {z=minp.x,y=minp.y,x=minp.z}
+    local cave_noise_m = cave_map:get_3d_map(m_pos)
+    local ore_noise_m = ore_map:get_3d_map(m_pos)
 
     local tm = weather.get_temp_map(minp.x, minp.z)
 
@@ -225,7 +253,7 @@ core.register_on_generated(function(minp, maxp, seed)
                 -- Place and handel caves
                 if cave_noise_m[lx][ly][lz] > -0.95 or y > caves_max then
                     if y < (ny-1) then
-                        data[vi] = stone
+                        stone_gen(ore_noise_m[lx][ly][lz], y, data, vi)
 
                     elseif y == (ny-1) then
                         data[vi] = mid

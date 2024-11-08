@@ -113,8 +113,10 @@ end)
 core.register_globalstep(function(dtime)
     for _, player in ipairs(core.get_connected_players()) do
         local metaref = player:get_meta()
-        local id = metaref:get_int("pointed_node")
 
+
+        -- Pointed Item
+        local id = metaref:get_int("pointed_node")
 
         if id ~= 0 then 
             player:hud_remove(id)
@@ -140,6 +142,29 @@ core.register_globalstep(function(dtime)
             end
         end
 
+
+        -- Wield Item
+        local wield_text = metaref:get_int("wield_text")
+
+        if wield_text ~= 0 then
+            player:hud_remove(wield_text)
+            metaref:set_int("wield_text", 0)
+        end
+
+        local wield_item = player:get_wielded_item()
+        if wield_item then
+            local txt = core.registered_items[wield_item:get_name()].description
+            if txt then
+                metaref:set_int("wield_text", player:hud_add({
+                    type = "text",
+                    name = "wield_text_hud",
+                    text = txt,
+                    position = {x=0.05, y=0.9},
+                    number = 0x00ffdd,
+                    style = 3
+                }))
+            end
+        end
 
     end
 end)

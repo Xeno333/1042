@@ -73,14 +73,14 @@ if core.settings:get("1042_disable_weather") ~= "true" then
             }
         },
         {
-            name = "Light storm",
+            name = "Storm",
             conditions = {
                 temp = {
                     min = -2,
                 }
             },
             clouds = {
-                density = 0.7,
+                density = 0.9,
                 color = "#333333dd",
                 ambient = "#333333",
                 shadow = "#aaaaaa",
@@ -112,7 +112,155 @@ if core.settings:get("1042_disable_weather") ~= "true" then
             },
             particlespawner = 
             {
+                amount = 8000,
+                time = 1,
+
+                collisiondetection = true,
+                object_collision = true,
+
+                vel = {
+                    min = vector.new(-2, -10, -2),
+                    max = vector.new(2, -20, 2),
+                    bias = 0
+                },
+
+                acc = vector.new(0, -9.8, 0),
+
+                size = {
+                    min = 0.5,
+                    max = 1
+                },
+
+                exptime = {
+                    min = 0.5,
+                    max = 1
+                },
+
+                bounce = {
+                    min = 0,
+                    max = 0.3
+                },
+
+                glow = 2,
+
+                texture = "1042_plain_node.png^[colorize:#004499:144"
+            }
+        },
+        {
+            name = "Light storm",
+            conditions = {
+                temp = {
+                    min = -2,
+                }
+            },
+            clouds = {
+                density = 0.7,
+                color = "#555555dd",
+                ambient = "#555555",
+                shadow = "#aaaaaa",
+                thickness = 128,
+                speed = {x=2, y=2},
+                height = 120
+            },
+            time = {
+                min = 30,
+                max = 60*5
+            },
+            sky = {
+                type = "regular",
+                clouds = true,
+                sky_color = {
+                    night_sky = "#0066ff",
+                    night_horizon = "#0088ff",
+                    day_horizon = "#444444",
+                    day_sky = "#556666"
+                },
+                fog = {
+                    fog_start = 0,
+                    fog_distance = 40,
+                    fog_color = "#44444400"
+                }
+            },
+            exposure = {
+                exposure_correction = -1
+            },
+            particlespawner = 
+            {
                 amount = 2000,
+                time = 1,
+
+                collisiondetection = true,
+                object_collision = true,
+
+                vel = {
+                    min = vector.new(-2, -10, -2),
+                    max = vector.new(2, -20, 2),
+                    bias = 0
+                },
+
+                acc = vector.new(0, -9.8, 0),
+
+                size = {
+                    min = 0.5,
+                    max = 1
+                },
+
+                exptime = {
+                    min = 0.5,
+                    max = 1
+                },
+
+                bounce = {
+                    min = 0,
+                    max = 0.3
+                },
+
+                glow = 2,
+
+                texture = "1042_plain_node.png^[colorize:#004499:144"
+            }
+        },
+        {
+            name = "Drizle",
+            conditions = {
+                temp = {
+                    min = -2,
+                }
+            },
+            clouds = {
+                density = 0.7,
+                color = "#f0faffaa",
+                ambient = "#006699",
+                thickness = 128,
+                speed = {x=1, y=1},
+                shadow = "#cccccc",
+                height = 120
+            },
+            time = {
+                min = 30,
+                max = 60*5
+            },
+            sky = {
+                type = "regular",
+                clouds = true,
+                sky_color = {
+                    night_sky = "#0066ff",
+                    night_horizon = "#0088ff",
+                    day_horizon = "#90d3f6",
+                    day_sky = "#61b5f5"
+                },
+                fog = {
+                    fog_start = 0,
+                    fog_distance = 270,
+                    fog_color = "#ffffff00"
+                }
+            },
+            exposure = {
+                exposure_correction = -0.3
+            },
+            particlespawner = 
+            {
+                amount = 500,
                 time = 1,
 
                 collisiondetection = true,

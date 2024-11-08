@@ -33,7 +33,7 @@ core.register_node("1042_nodes:ice", {
     use_texture_alpha = "blend",
 	paramtype = "light",
 
-    groups = {falling_node = 1, float = 1, melts = 1, slippery = 3},
+    groups = {falling_node = 1, float = 1, melts = 1, slippery = 3, cools = 1},
 })
 
 core.register_node("1042_nodes:turf", {
@@ -57,7 +57,7 @@ core.register_node("1042_nodes:snow", {
     tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},
     use_texture_alpha = "opaque",
 
-    groups = {snow = 1, melts = 1, breakable_by_hand = 1},
+    groups = {cools = 1, melts = 1, breakable_by_hand = 1},
 })
 
 core.register_node("1042_nodes:stone", {
@@ -76,10 +76,32 @@ core.register_node("1042_nodes:basalt", {
     groups = {stone = 2},
 })
 
-core.register_node("1042_nodes:basalt", {
-    description = "Basalt",
-    tiles = {"1042_plain_node.png^[colorize:#111111:128"},
+core.register_node("1042_nodes:iorn_ore", {
+    description = "Iorn Ore",
+    tiles = {"1042_plain_node.png^[colorize:#551111:128"},
     use_texture_alpha = "opaque",
+
+    drop = {
+        max_items = 5,
+        items = {
+            {
+                rarity = 1,
+                items = {"1042_nodes:iorn_nugget"}
+            },
+            {
+                rarity = 2,
+                items = {"1042_nodes:iorn_nugget"}
+            },
+            {
+                rarity = 4,
+                items = {"1042_nodes:iorn_nugget"}
+            },
+            {
+                rarity = 8,
+                items = {"1042_nodes:rock"}
+            }
+        }
+    },
 
     groups = {stone = 2},
 })

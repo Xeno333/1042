@@ -38,7 +38,7 @@ core.register_node("1042_nodes:water_source", {
 	waving = 3,
 
     post_effect_color = {a = 64, r = 0x00, g = 0xbb, b = 0xcc},
-    groups = {water = 1, liquid = 1},
+    groups = {water = 1, liquid = 1, cools = 1},
 
 })
 
@@ -79,7 +79,7 @@ core.register_node("1042_nodes:water_flowing", {
 	waving = 3,
 
     post_effect_color = {a = 64, r = 0x00, g = 0xbb, b = 0xcc},
-    groups = {water = 1, liquid = 1},
+    groups = {water = 1, liquid = 1, cools = 1},
 })
 
 
@@ -170,3 +170,14 @@ core.register_node("1042_nodes:lava_flowing", {
     groups = {lava = 1, liquid = 1},
 })
 
+core.register_abm({
+    label = "Cool lava",
+    nodenames = {"1042_nodes:lava_flowing", "1042_nodes:lava_source"},
+    neighbors = {"group:cools"},
+    interval = 1,
+    chance = 1,
+    catch_up = true,
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        core.set_node(pos, {name = "1042_nodes:basalt"})
+    end
+})
