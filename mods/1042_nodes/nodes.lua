@@ -103,7 +103,7 @@ core.register_node("1042_nodes:iorn_ore", {
         }
     },
 
-    groups = {stone = 2},
+    groups = {stone = 3},
 })
 
 
@@ -122,6 +122,19 @@ core.register_node("1042_nodes:leaves_plain", {
 
     groups = {leafy = 1, plant = 1, breakable_by_hand = 1, burns = 1},
 })
+
+core.register_node("1042_nodes:leaves_light", {
+    description = "Light leaves",
+    tiles = {"1042_plain_node.png^[colorize:#99cc99:168"},
+    use_texture_alpha = "blend",
+    drawtype = "allfaces",
+    
+    paramtype = "light",
+    sunlight_propagates = true,
+
+    groups = {leafy = 1, plant = 1, breakable_by_hand = 1, burns = 1},
+})
+
 
 core.register_node("1042_nodes:leaves_dark", {
     description = "Dark Leaves",
@@ -147,6 +160,14 @@ core.register_node("1042_nodes:tree", {
 core.register_node("1042_nodes:tree_dark", {
     description = "Dark Tree",
     tiles = {"1042_plain_node.png^[colorize:#371307:200"},
+    use_texture_alpha = "opaque",
+
+    groups = {wood = 1, plant = 1, burns = 1},
+})
+
+core.register_node("1042_nodes:tree_light", {
+    description = "Light Tree",
+    tiles = {"1042_plain_node.png^[colorize:#676357:200"},
     use_texture_alpha = "opaque",
 
     groups = {wood = 1, plant = 1, burns = 1},

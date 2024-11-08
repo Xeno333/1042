@@ -126,6 +126,35 @@ core.register_craft({
     }
 })
 
+core.register_node("1042_nodes:anvil", {
+    description = "Anvil",
+    drawtype = "mesh",
+    mesh = "anvil.obj",
+    tiles = {"1042_plain_node.png^[colorize:#222222:128"},
+    use_texture_alpha = "opaque",
+
+    paramtype = "light",
+    paramtype2 = "4dir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    stack_max = 1,
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.4, -0.5, -0.4, 0.4, 0.3, 0.4}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.4, -0.5, -0.4, 0.4, 0.3, 0.4}
+    },
+
+    light_source = 5,
+    
+    groups = {breakable_by_hand = 3, attached_node = 3},
+})
+
 
 
 --[[
