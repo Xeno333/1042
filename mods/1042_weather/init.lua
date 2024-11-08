@@ -13,7 +13,7 @@ local weather_def = {
     lacunarity = 2,
     flags = {
         eased = true,
-        absvalue = true,
+        absvalue = false,
         defaults = false
     }
 }
