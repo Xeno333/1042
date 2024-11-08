@@ -125,7 +125,7 @@ core.register_node("1042_nodes:lava_source", {
     damage_per_second = 10,
 
     post_effect_color = {a = 144, r = 0xff, g = 0x22, b = 0x00},
-    groups = {lava = 1, liquid = 1},
+    groups = {lava = 1, liquid = 1, burning = 1},
 
 })
 
@@ -167,7 +167,7 @@ core.register_node("1042_nodes:lava_flowing", {
     damage_per_second = 10,
 
     post_effect_color = {a = 144, r = 0xff, g = 0x22, b = 0x00},
-    groups = {lava = 1, liquid = 1},
+    groups = {lava = 1, liquid = 1, burning = 1},
 })
 
 core.register_abm({

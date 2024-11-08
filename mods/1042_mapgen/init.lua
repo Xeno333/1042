@@ -43,6 +43,7 @@ local sticks = core.get_content_id("1042_nodes:sticks")
 local iorn_nugget = core.get_content_id("1042_nodes:iorn_nugget")
 local beryl = core.get_content_id("1042_nodes:beryl")
 local flint = core.get_content_id("1042_nodes:flint")
+local beryl_top = core.get_content_id("1042_nodes:beryl_hanging")
 
 local grass_tall = core.get_content_id("1042_nodes:grass_tall")
 local grass_short = core.get_content_id("1042_nodes:grass_short")
@@ -137,23 +138,9 @@ end
 local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
     local c = pr:next(1, 1000)
     
-    if cave then
-        if c <= 5 then
-            data[area:index(x, y+1, z)] = flint
-            
-        elseif c <= 30 then
-            data[area:index(x, y+1, z)] = rock
-
-        elseif c <= 45 then
-            data[area:index(x, y+1, z)] = iorn_nugget
-
-        elseif c <= 60 and y <= decorated_caves then
-            data[area:index(x, y+1, z)] = beryl
-
-        end
-
+    
     -- Land
-    elseif y > water_level then
+    if cave == nil and y > water_level then
         if tempv > 0 and not (tempv >= 20) then
             -- Grass
             if c <= 20 then
@@ -193,6 +180,27 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
             end
         end
 
+    elseif cave == "bottom" then
+        if c <= 5 then
+            data[area:index(x, y+1, z)] = flint
+
+        elseif c <= 30 then
+            data[area:index(x, y+1, z)] = rock
+
+        elseif c <= 45 then
+            data[area:index(x, y+1, z)] = iorn_nugget
+
+        elseif c <= 60 and y <= decorated_caves then
+            data[area:index(x, y+1, z)] = beryl
+
+        end
+
+    elseif cave == "top" then
+        if c <= 5 and y <= decorated_caves then
+            data[area:index(x, y+1, z)] = beryl_top
+
+        end
+    
     else
         if c <= 10 and y == water_level then
             data[area:index(x, y+1, z)] = rock
@@ -310,14 +318,16 @@ core.register_on_generated(function(minp, maxp, seed)
                         end
 
                         if do_dec then
-                            dec(pr, x, y, z, data, area, place_list, tempv, false)
+                            dec(pr, x, y, z, data, area, place_list, tempv, nil)
                         end
                     end
                 elseif y <= ny and y<= lava_level then
                     data[vi] = lava
                 else
                     if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > -0.95 and y <= ny then
-                        dec(pr, x, y-1, z, data, area, place_list, tempv, true)
+                        dec(pr, x, y-1, z, data, area, place_list, tempv, "bottom")
+                    elseif cave_noise_m[lx][ly+1] and cave_noise_m[lx][ly+1][lz] > -0.95 and y <= ny then
+                        dec(pr, x, y-1, z, data, area, place_list, tempv, "top")
                     end
                 end
 

@@ -64,6 +64,10 @@ core.register_node("1042_nodes:mushroom", {
     walkable = false,
     buildable_to = false,
 
+    on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 2, 10)
+    end,
+
     groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
 })
 
@@ -80,7 +84,7 @@ core.register_node("1042_nodes:apple", {
     buildable_to = false,
     
     on_use = function(itemstack, user, pointed_thing)
-        return core_1042.eat(itemstack, user, 1)
+        return core_1042.eat(itemstack, user, 2, nil)
     end,
 
     groups = {plant = 1, food = 1, breakable_by_hand = 1},

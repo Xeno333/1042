@@ -23,7 +23,7 @@ core.register_node("1042_nodes:sand", {
     tiles = {"1042_plain_node.png^[colorize:#d9a357:128"},
     use_texture_alpha = "opaque",
 
-    groups = {dirt = 1, falling_node = 1, breakable_by_hand = 1, top = 1},
+    groups = {dirt = 1, falling_node = 1, breakable_by_hand = 1},
 })
 
 core.register_node("1042_nodes:ice", {
@@ -33,7 +33,7 @@ core.register_node("1042_nodes:ice", {
     use_texture_alpha = "blend",
 	paramtype = "light",
 
-    groups = {falling_node = 1, float = 1, melts = 1, slippery = 3, cools = 1, top = 1},
+    groups = {falling_node = 1, float = 1, melts = 1, slippery = 3, cools = 1},
 })
 
 core.register_node("1042_nodes:turf", {
@@ -41,7 +41,7 @@ core.register_node("1042_nodes:turf", {
     tiles = {"1042_plain_node.png^[colorize:#278b13:168"},
     use_texture_alpha = "opaque",
 
-    groups = {dirt = 1, breakable_by_hand = 1, top = 1},
+    groups = {dirt = 1, breakable_by_hand = 1},
 })
 
 core.register_node("1042_nodes:turf_dry", {
@@ -49,7 +49,7 @@ core.register_node("1042_nodes:turf_dry", {
     tiles = {"1042_plain_node.png^[colorize:#578b33:168"},
     use_texture_alpha = "opaque",
 
-    groups = {dirt = 1, breakable_by_hand = 1, top = 1},
+    groups = {dirt = 1, breakable_by_hand = 1},
 })
 
 core.register_node("1042_nodes:snow", {
@@ -57,7 +57,7 @@ core.register_node("1042_nodes:snow", {
     tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},
     use_texture_alpha = "opaque",
 
-    groups = {cools = 1, melts = 1, breakable_by_hand = 1, top = 1},
+    groups = {cools = 1, melts = 1, breakable_by_hand = 1},
 })
 
 core.register_node("1042_nodes:stone", {

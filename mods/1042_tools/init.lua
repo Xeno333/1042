@@ -51,7 +51,10 @@ core.register_node("1042_tools:pick",{
     description = "Pick",
     drawtype = "mesh",
     mesh = "pick.obj",
-    tiles = {"1042_plain_node.png^[colorize:#444444:168"},
+    tiles = {
+        "1042_plain_node.png^[colorize:#672307:168",
+        "1042_plain_node.png^[colorize:#444444:168"
+    },
     use_texture_alpha = "opaque",
 
     paramtype2 = "facedir",
@@ -84,7 +87,10 @@ core.register_node("1042_tools:axe_stone",{
     description = "Stone axe",
     drawtype = "mesh",
     mesh = "axe.obj",
-    tiles = {"1042_plain_node.png^[colorize:#555555:168"},
+    tiles = {
+        "1042_plain_node.png^[colorize:#672307:168",
+        "1042_plain_node.png^[colorize:#07070d:168"
+    },
     use_texture_alpha = "opaque",
 
     paramtype2 = "facedir",
@@ -97,7 +103,7 @@ core.register_node("1042_tools:axe_stone",{
         full_punch_interval = 4,
         damage_groups = {fleshy = 5},
 		groupcaps = {
-			stone = {times = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}, uses = 1},
+			wood = {times = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}, uses = 1},
 		},
         punch_attack_uses = 1
     },
@@ -110,4 +116,13 @@ core.register_node("1042_tools:axe_stone",{
     damage_per_second = 128,
 
     groups = {weapon = 1, falling_node = 1, breakable_by_hand = 2},
+})
+
+core.register_craft({
+    output = "1042_tools:axe_stone",
+    recipe = {
+        {"1042_nodes:flint", "1042_nodes:flint", "1042_nodes:flint"},
+        {"", "1042_nodes:sticks", ""},
+        {"", "1042_nodes:sticks", ""},
+    }
 })
