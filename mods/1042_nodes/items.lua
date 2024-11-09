@@ -20,6 +20,7 @@ core.register_node("1042_nodes:fire", {
     paramtype = "light",
     sunlight_propagates = true,
     walkable = false,
+    floodable = true,
     buildable_to = false,
 
     light_source = 8,
