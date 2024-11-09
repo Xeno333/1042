@@ -47,9 +47,17 @@ core.register_on_joinplayer(function(player, last_join)
     end
 
     player:set_properties({
+        visual = "mesh",
+        mesh = "player.gltf",
+        textures = {"1042_plain_node.png^[colorize:#00ffff:64"},
         show_on_minimap = false,
+        visual_size = {
+            x = 4,
+            y = 4
+        },
         stepheight = 1.1
     })
+    player:set_animation({x = 0, y = 20}, 1)
 
     player:set_physics_override(
         {

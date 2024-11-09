@@ -30,6 +30,17 @@ core.register_node("1042_nodes:fire", {
 })
 
 
+core.register_abm({
+    interval = 4,
+    chance = 4,
+    nodenames = {"1042_nodes:fire"},
+    neighbors = {"group:cools"},
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        core.set_node(pos, {name = "air"})
+    end
+})
+
+
 
 -- Speacal nodes
 
@@ -95,6 +106,19 @@ core.register_node("1042_nodes:rock", {
         fixed = {-0.4, -0.5, -0.4, 0.4, -0.2, 0.4}
     },
 
+    sounds = {
+        dig = {
+            name = "stone_dig",
+            gain = 0.3,
+            pitch = 0.5
+        },
+        place = {
+            name = "stone_walk",
+            gain = 1,
+            pitch = 0.5
+        }
+    },
+
     paramtype = "light",
     paramtype2 = "4dir",
     sunlight_propagates = true,
@@ -119,6 +143,20 @@ core.register_node("1042_nodes:flint", {
     collision_box = {
         type = "fixed",
         fixed = {-0.4, -0.5, -0.4, 0.4, -0.2, 0.4}
+    },
+
+
+    sounds = {
+        dig = {
+            name = "stone_dig",
+            gain = 0.3,
+            pitch = 0.75
+        },
+        place = {
+            name = "stone_walk",
+            gain = 0.5,
+            pitch = 1.5
+        }
     },
 
     paramtype = "light",
@@ -153,7 +191,8 @@ core.register_node("1042_nodes:iorn_nugget", {
         if pointed_thing.under then
             node = core.get_node(pointed_thing.under)
         end
-        if node and node.name == "1042_nodes:flint" then   
+        if node and node.name == "1042_nodes:flint" then
+            core.sound_play("hit_flint_with_steel", {gain = 1, pos = pointed_thing.under, max_hear_distance = 16}, true)
             core.add_particlespawner({
                 pos = pointed_thing.under,
                 amount = 10,
@@ -196,6 +235,19 @@ core.register_node("1042_nodes:iorn_nugget", {
             end
         end
     end,
+    
+    sounds = {
+        dig = {
+            name = "stone_dig",
+            gain = 0.2,
+            pitch = 1
+        },
+        place = {
+            name = "stone_walk",
+            gain = 0.5,
+            pitch = 1.5
+        }
+    },
 
     paramtype = "light",
     paramtype2 = "4dir",
@@ -218,6 +270,14 @@ core.register_node("1042_nodes:sticks", {
     sunlight_propagates = true,
     walkable = false,
     buildable_to = false,
+
+    sounds = {
+        dug = {
+            name = "sticks",
+            gain = 0.2,
+            pitch = 1,
+        }
+    },
     
     groups = {breakable_by_hand = 1, attached_node = 3, burns = 1},
 })

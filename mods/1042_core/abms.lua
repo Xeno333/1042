@@ -49,3 +49,14 @@ core.register_abm({
         })
     end
 })
+
+
+core.register_abm({
+    interval = 4,
+    chance = 4,
+    nodenames = {"group:melts"},
+    neighbors = {"group:burning"},
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        core.set_node(pos, {name = "1042_nodes:water_source"})
+    end
+})

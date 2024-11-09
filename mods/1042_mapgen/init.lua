@@ -164,7 +164,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
                     function()
                         core.place_schematic(vector.new(x-7,y-1,z-7), schematic_path .. "big_tree_1.mts", "random", nil, false)
                     end
-            elseif y >= water_level+5 and tempv >= 10 and tempv < 15 and c >= 990 then
+            elseif y >= water_level+5 and tempv >= 5 and tempv < 15 and c >= 990 then
                 place_list[#place_list+1] = 
                     function()
                         core.place_schematic(vector.new(x-11,y-3,z-11), schematic_path .. "big_tree_dark_1.mts", "random", nil, true)

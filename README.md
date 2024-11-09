@@ -34,7 +34,6 @@ We Hope you enjoy playing it and all feedback is welcome!
 
 #### pre-alpha v0.1.0 to alpha v0.2.0 goals
 - Add ores and refinement via ores and nuggets that spawn and are dropped upon breaking ores.
-- Add tools
 - Add more trees and plants, flowers maybe.
 - Add sounds
 - Add Mobs

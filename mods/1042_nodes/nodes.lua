@@ -41,6 +41,19 @@ core.register_node("1042_nodes:turf", {
     tiles = {"1042_plain_node.png^[colorize:#278b13:168"},
     use_texture_alpha = "opaque",
 
+    sounds = {
+        footstep = {
+            name = "turf",
+            gain = 0.8,
+            pitch = 1.5
+        },
+        dig = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.5
+        }
+    },
+
     groups = {dirt = 1, breakable_by_hand = 1},
 })
 
@@ -48,6 +61,19 @@ core.register_node("1042_nodes:turf_dry", {
     description = "Dry Turf",
     tiles = {"1042_plain_node.png^[colorize:#578b33:168"},
     use_texture_alpha = "opaque",
+
+    sounds = {
+        footstep = {
+            name = "turf",
+            gain = 1,
+            pitch = 2
+        },
+        dig = {
+            name = "turf",
+            gain = 0.5,
+            pitch = 2
+        }
+    },
 
     groups = {dirt = 1, breakable_by_hand = 1},
 })
@@ -57,6 +83,19 @@ core.register_node("1042_nodes:snow", {
     tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},
     use_texture_alpha = "opaque",
 
+    sounds = {
+        footstep = {
+            name = "turf",
+            gain = 2,
+            pitch = 2
+        },
+        dig = {
+            name = "turf",
+            gain = 1,
+            pitch = 2
+        }
+    },
+
     groups = {cools = 1, melts = 1, breakable_by_hand = 1},
 })
 
@@ -65,6 +104,24 @@ core.register_node("1042_nodes:stone", {
     tiles = {"1042_plain_node.png^[colorize:#777777:128"},
     use_texture_alpha = "opaque",
 
+    sounds = {
+        dig = {
+            name = "stone_dig",
+            gain = 2,
+            pitch = 0.75
+        },
+        footstep = {
+            name = "stone_walk",
+            gain = 1,
+            pitch = 1.25
+        },
+        place = {
+            name = "stone_walk",
+            gain = 1,
+            pitch = 0.5
+        }
+    },
+
     groups = {stone = 1},
 })
 
@@ -72,6 +129,24 @@ core.register_node("1042_nodes:basalt", {
     description = "Basalt",
     tiles = {"1042_plain_node.png^[colorize:#111111:128"},
     use_texture_alpha = "opaque",
+
+    sounds = {
+        dig = {
+            name = "stone_dig",
+            gain = 2,
+            pitch = 0.6
+        },
+        footstep = {
+            name = "stone_walk",
+            gain = 1,
+            pitch = 1
+        },
+        place = {
+            name = "stone_walk",
+            gain = 1,
+            pitch = 0.5
+        }
+    },
 
     groups = {stone = 2},
 })
@@ -100,6 +175,24 @@ core.register_node("1042_nodes:iorn_ore", {
                 rarity = 8,
                 items = {"1042_nodes:rock"}
             }
+        }
+    },
+
+    sounds = {
+        dig = {
+            name = "stone_dig",
+            gain = 2,
+            pitch = 1
+        },
+        footstep = {
+            name = "stone_walk",
+            gain = 1,
+            pitch = 1.5
+        },
+        place = {
+            name = "stone_walk",
+            gain = 1,
+            pitch = 0.5
         }
     },
 
@@ -154,6 +247,14 @@ core.register_node("1042_nodes:tree", {
     tiles = {"1042_plain_node.png^[colorize:#672307:200"},
     use_texture_alpha = "opaque",
 
+    sounds = {
+        dig = {
+            name = "tree_dig",
+            gain = 2,
+            pitch = 1
+        }
+    },
+
     groups = {wood = 1, plant = 1, burns = 1},
 })
 
@@ -162,13 +263,29 @@ core.register_node("1042_nodes:tree_dark", {
     tiles = {"1042_plain_node.png^[colorize:#371307:200"},
     use_texture_alpha = "opaque",
 
-    groups = {wood = 1, plant = 1, burns = 1},
+    sounds = {
+        dig = {
+            name = "tree_dig",
+            gain = 2,
+            pitch = 0.75
+        }
+    },
+
+    groups = {wood = 2, plant = 1, burns = 1},
 })
 
 core.register_node("1042_nodes:tree_light", {
     description = "Light Tree",
     tiles = {"1042_plain_node.png^[colorize:#676357:200"},
     use_texture_alpha = "opaque",
+
+    sounds = {
+        dig = {
+            name = "tree_dig",
+            gain = 2,
+            pitch = 1.5
+        }
+    },
 
     groups = {wood = 1, plant = 1, burns = 1},
 })
