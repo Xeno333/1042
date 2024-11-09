@@ -260,7 +260,7 @@ core.register_on_generated(function(minp, maxp, seed)
                         ny = (noise * math.abs(noise)) * T_ymax
                     else
                         -- Deep sea Gen
-                        ny = (noise * 4) * T_ymax + (1.75 * T_ymax)
+                        ny = (noise) * math.abs(T_ymin) + (0.75*T_ymax) 
                     end
                 else
                     -- Mountin hole
