@@ -141,7 +141,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
     
     -- Land
     if cave == nil and y > water_level then
-        if tempv > 0 and not (tempv >= 20) then
+        if tempv > 0 and not (tempv > 20) then
             -- Grass
             if c <= 20 then
                 data[area:index(x, y+1, z)] = grass_tall
@@ -155,20 +155,23 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
             elseif c > 995 and y > water_level+3 then
                 place_list[#place_list+1] = 
                     function()
-                        core.place_schematic(vector.new(x-4,y,z-4), schematic_path .. "tree_plain_1.mts", "random", nil, true)
+                        core.place_schematic(vector.new(x-4,y,z-4), schematic_path .. "tree_plain_1.mts", "random", nil, false)
                     end
 
             -- Big tree
-            elseif y >= water_level+10 and tempv >= 15 and tempv <= 25 then
-                if c == 995 then
-                    place_list[#place_list+1] = 
-                        function()
-                            core.place_schematic(vector.new(x-7,y,z-7), schematic_path .. "big_tree_1.mts", "random", nil, true)
-                        end
-                end
+            elseif y >= water_level+10 and tempv >= 15 and c == 995 then
+                place_list[#place_list+1] = 
+                    function()
+                        core.place_schematic(vector.new(x-7,y-1,z-7), schematic_path .. "big_tree_1.mts", "random", nil, false)
+                    end
+            elseif y >= water_level+5 and tempv >= 10 and tempv < 15 and c >= 990 then
+                place_list[#place_list+1] = 
+                    function()
+                        core.place_schematic(vector.new(x-11,y-3,z-11), schematic_path .. "big_tree_dark_1.mts", "random", nil, true)
+                    end
             end
 
-        elseif tempv >= 20 then
+        elseif tempv > 20 then
             if c <= 10 then
                 data[area:index(x, y+1, z)] = grass_short
             end
@@ -177,6 +180,13 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
             -- Snow grass
             if c >= 990 then
                 data[area:index(x, y+1, z)] = grass_snowy
+
+            elseif y >= water_level+3 and tempv >= -15 and c >= 990+(tempv/4) then
+                place_list[#place_list+1] = 
+                    function()
+                        core.place_schematic(vector.new(x-7,y-1,z-7), schematic_path .. "big_tree_light_1.mts", "random", nil, true)
+                    end
+
             end
         end
 
