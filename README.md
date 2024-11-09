@@ -16,15 +16,15 @@ We Hope you enjoy playing it and all feedback is welcome!
 - 1 texture
 - Several nodes
 - Basic weather system
+- Working tools
+- Ores
 
 
 ## Missing/Planned
 - Crafting of items
-- Working tools
 - Mobs
 - More trees and plants
 - Goals or achivments
-- Add ores
 - Add moddable mapgen API
 - Add sounds and music
 - More general gameplay
