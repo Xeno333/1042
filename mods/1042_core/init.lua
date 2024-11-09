@@ -88,4 +88,5 @@ dofile(path.."/player_inv.lua")
 dofile(path.."/player.lua")
 dofile(path.."/funcs.lua")
 dofile(path.."/privs.lua")
+dofile(path.."/abms.lua")
 
