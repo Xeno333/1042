@@ -223,6 +223,13 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
 end
 
 
+local function life_dec(name, pos, place_list)
+    place_list[#place_list+1] = 
+        function()
+            core.add_entity(pos, name)
+        end
+end
+
 
 core.register_on_generated(function(minp, maxp, seed)
     local vm, emin, emax = core.get_mapgen_object("voxelmanip")
@@ -349,6 +356,9 @@ core.register_on_generated(function(minp, maxp, seed)
                         data[vi] = liquid_top
                     else
                         data[vi] = liquid
+                        if pr:next(1, 5000) == 1 then
+                            life_dec("1042_mobs:fish", vector.new(x, y, z), place_list)
+                        end
                     end
                 end
 
