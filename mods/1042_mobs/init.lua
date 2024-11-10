@@ -49,7 +49,7 @@ core.register_entity("1042_mobs:fish", {
                 local dir = vector.random_direction()
                 dir.x = dir.x * 0.5
                 dir.z = dir.z * 0.5
-                dir.y = -9.8
+                dir.y = -4
                 self.object:set_velocity(dir)
                 self.object:set_rotation(vector.new(0.2, math.pi/2 + math.atan2(dir.z, dir.x), math.pi/2)) -- Fish is offset by 3/4 pi for some reason, this needs fixed. #fixme
 
