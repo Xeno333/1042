@@ -25,13 +25,14 @@ core.register_entity("1042_mobs:fish", {
 
     on_activate = function(self, staticdata, dtime_s)
         self.timer = 0
+        self.rand = PseudoRandom(math.random(1, 5000))
         self.object:set_animation({x = 0, y = 40}, 4, 0, true)
     end,
 
     on_step = function(self, dtime, moveresult)
         self.timer = self.timer - dtime
         if self.timer <= 0 then
-            self.timer = 1
+            self.timer = 2
             if core.get_item_group(core.get_node(self.object:get_pos() + vector.new(0, 1, 0)).name, "water") ~= 0 then
                 local dir = vector.random_direction()
                 dir.y = dir.y / 2
@@ -46,11 +47,15 @@ core.register_entity("1042_mobs:fish", {
 
             else
                 local dir = vector.random_direction()
-                dir.x = dir.x * 0.1
-                dir.z = dir.z * 0.1
-                dir.y = -2
+                dir.x = dir.x * 0.5
+                dir.z = dir.z * 0.5
+                dir.y = -9.8
                 self.object:set_velocity(dir)
-                self.object:set_rotation(vector.new(0.2, math.pi/2 + math.atan2(dir.z, dir.x), 0)) -- Fish is offset by 3/4 pi for some reason, this needs fixed. #fixme
+                self.object:set_rotation(vector.new(0.2, math.pi/2 + math.atan2(dir.z, dir.x), math.pi/2)) -- Fish is offset by 3/4 pi for some reason, this needs fixed. #fixme
+
+                if self.rand:next(1, 4) == 1 then
+                    self.object:set_hp(self.object:get_hp() - 1)
+                end
             end
         end
     end,
