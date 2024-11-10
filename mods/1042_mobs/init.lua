@@ -83,15 +83,17 @@ core.register_entity("1042_mobs:pig", {
         damage_texture_modifier = "",
 
         collisionbox = {
-            -0.7, -0.5, -0.7,
-            0.7, 0.7, 0.7
+            -0.1, -0.5, -0.1,
+            0.1, 0.5, 0.1
         },
 
         selectionbox = {
-            -0.7, -0.5, -0.7,
-            0.7, 0.7, 0.7, 
+            -0.5, -0.5, -0.5,
+            0.5, 0.5, 0.5, 
             rotate = true
         },
+
+        stepheight = 1.1,
     },
 
     on_activate = function(self, staticdata, dtime_s)
@@ -103,15 +105,35 @@ core.register_entity("1042_mobs:pig", {
     on_step = function(self, dtime, moveresult)
         self.timer = self.timer - dtime
         if self.timer <= 0 then
-            self.timer = 2
+            self.timer = 4
 
             local dir = vector.random_direction()
             dir.y = -9.8
             dir.z = dir.z * 2
             dir.x = dir.x * 2
             self.object:set_velocity(dir)
+            self.object:set_animation({x = 0, y = 40}, (math.abs(dir.x)+math.abs(dir.y))/2, 0, true)
             self.object:set_rotation(vector.new(0, 3*math.pi/2 + math.atan2(dir.z, dir.x), 0)) -- Fish is offset by 1/4 pi for some reason, this needs fixed. #fixme
+
+        else
+            local dir = self.object:get_velocity()
+            dir.y = -9.8
+            self.object:set_velocity(dir)
+
         end
+    end,
+
+    on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir, damage)
+        self.timer = 4
+
+        local dir = vector.random_direction()
+        dir.y = -9.8
+        dir.z = dir.z * 4
+        dir.x = dir.x * 4
+        self.object:set_velocity(dir)
+        self.object:set_animation({x = 0, y = 40}, (math.abs(dir.x)+math.abs(dir.y))/2, 0, true)
+        self.object:set_rotation(vector.new(0, 3*math.pi/2 + math.atan2(dir.z, dir.x), 0)) -- Fish is offset by 1/4 pi for some reason, this needs fixed. #fixme
+
     end,
 
     groups = {fleshy = 1}
