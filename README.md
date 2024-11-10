@@ -9,6 +9,9 @@ We Hope you enjoy playing it and all feedback is welcome!
 ## State: `pre-alpha-v0.1.1`
 ![pre-alpha-v0.1.0](menu/background.2.png)
 
+### Notes on this version
+- Server mode is disabled due to multiplayer nuances, this will be fixed by beta v0.2.0
+
 
 ## Features
 - Mapgen with 4 biomes (tempeture areas) vast mountins and plains with deep oceans and caves
