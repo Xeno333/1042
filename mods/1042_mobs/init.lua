@@ -70,7 +70,7 @@ core.register_entity("1042_mobs:pig", {
     initial_properties = {
         visual = "mesh",
         mesh = "pig.gltf",
-        textures = {"1042_plain_node.png^[colorize:#444433:128"},
+        textures = {"1042_plain_node.png^[colorize:#664433:128"},
 
         hp_max = 10,
         physical = true,
@@ -105,6 +105,10 @@ core.register_entity("1042_mobs:pig", {
     on_step = function(self, dtime, moveresult)
         self.timer = self.timer - dtime
         if self.timer <= 0 then
+            if self.rand:next(1, 5) == 1 then
+                core.sound_play("pig", {gain = 1, pos = self.object:get_pos(), max_hear_distance = 32}, true)
+            end
+
             self.timer = 4
 
             local dir = vector.random_direction()
@@ -113,7 +117,7 @@ core.register_entity("1042_mobs:pig", {
             dir.x = dir.x * 2
             self.object:set_velocity(dir)
             self.object:set_animation({x = 0, y = 40}, (math.abs(dir.x)+math.abs(dir.y))/2, 0, true)
-            self.object:set_rotation(vector.new(0, 3*math.pi/2 + math.atan2(dir.z, dir.x), 0)) -- Fish is offset by 1/4 pi for some reason, this needs fixed. #fixme
+            self.object:set_rotation(vector.new(0, 3*math.pi/2 + math.atan2(dir.z, dir.x), 0)) -- Offset by 1/4 pi for some reason, this needs fixed. #fixme
 
         else
             local dir = self.object:get_velocity()
@@ -132,7 +136,7 @@ core.register_entity("1042_mobs:pig", {
         dir.x = dir.x * 4
         self.object:set_velocity(dir)
         self.object:set_animation({x = 0, y = 40}, (math.abs(dir.x)+math.abs(dir.y))/2, 0, true)
-        self.object:set_rotation(vector.new(0, 3*math.pi/2 + math.atan2(dir.z, dir.x), 0)) -- Fish is offset by 1/4 pi for some reason, this needs fixed. #fixme
+        self.object:set_rotation(vector.new(0, 3*math.pi/2 + math.atan2(dir.z, dir.x), 0)) -- Offset by 1/4 pi for some reason, this needs fixed. #fixme
 
     end,
 

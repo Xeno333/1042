@@ -51,6 +51,11 @@ core.register_node("1042_nodes:turf", {
             name = "turf",
             gain = 0.4,
             pitch = 1.5
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.5
         }
     },
 
@@ -72,6 +77,11 @@ core.register_node("1042_nodes:turf_dry", {
             name = "turf",
             gain = 0.5,
             pitch = 2
+        },
+        place = {
+            name = "turf",
+            gain = 0.5,
+            pitch = 2
         }
     },
 
@@ -90,6 +100,11 @@ core.register_node("1042_nodes:snow", {
             pitch = 2
         },
         dig = {
+            name = "turf",
+            gain = 1,
+            pitch = 2
+        },
+        place = {
             name = "turf",
             gain = 1,
             pitch = 2
