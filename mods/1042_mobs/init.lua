@@ -62,3 +62,57 @@ core.register_entity("1042_mobs:fish", {
 
     groups = {fleshy = 1}
 })
+
+
+
+
+core.register_entity("1042_mobs:pig", {
+    initial_properties = {
+        visual = "mesh",
+        mesh = "pig.gltf",
+        textures = {"1042_plain_node.png^[colorize:#444433:128"},
+
+        hp_max = 10,
+        physical = true,
+
+        visual_size = {
+            x = 3,
+            y = 3
+        },
+
+        damage_texture_modifier = "",
+
+        collisionbox = {
+            -0.7, -0.5, -0.7,
+            0.7, 0.7, 0.7
+        },
+
+        selectionbox = {
+            -0.7, -0.5, -0.7,
+            0.7, 0.7, 0.7, 
+            rotate = true
+        },
+    },
+
+    on_activate = function(self, staticdata, dtime_s)
+        self.timer = 0
+        self.rand = PseudoRandom(math.random(1, 5000))
+        self.object:set_animation({x = 0, y = 40}, 4, 0, true)
+    end,
+
+    on_step = function(self, dtime, moveresult)
+        self.timer = self.timer - dtime
+        if self.timer <= 0 then
+            self.timer = 2
+
+            local dir = vector.random_direction()
+            dir.y = -9.8
+            dir.z = dir.z * 2
+            dir.x = dir.x * 2
+            self.object:set_velocity(dir)
+            self.object:set_rotation(vector.new(0, 3*math.pi/2 + math.atan2(dir.z, dir.x), 0)) -- Fish is offset by 1/4 pi for some reason, this needs fixed. #fixme
+        end
+    end,
+
+    groups = {fleshy = 1}
+})

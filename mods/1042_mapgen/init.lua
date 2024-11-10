@@ -285,7 +285,7 @@ core.register_on_generated(function(minp, maxp, seed)
                 else
                     -- Mountin hole
                     ny = (0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/8 + 4
-                    rv = (0.9 * math.abs(0.9)) * T_ymax - 3
+                    rv = math.floor((0.9 * math.abs(0.9)) * T_ymax - 3)
                     mountin_top = true
                 end
                 
@@ -351,8 +351,8 @@ core.register_on_generated(function(minp, maxp, seed)
                     end
                 end
 
-                if ((y <= water_level) or (mountin_top and y < rv)) and y > ny then
-                    if y == water_level then
+                if ((y <= water_level) or (mountin_top and y <= rv)) and y > ny then
+                    if y == water_level or (mountin_top and y == rv) then
                         data[vi] = liquid_top
                     else
                         data[vi] = liquid
