@@ -19,3 +19,10 @@
 - `melts` Planned for melting nodes
 - `freezes` Planned for freezing nodes
 - `burning` For burning/hot nodes
+
+
+# Development
+
+## Things to fix
+
+- Things in code/content, that are known to need fixing soon can be found by greping for `#fixme`

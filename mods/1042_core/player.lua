@@ -55,7 +55,9 @@ core.register_on_joinplayer(function(player, last_join)
             x = 4,
             y = 4
         },
-        stepheight = 1.1
+        stepheight = 1.1,
+
+        nametag_color = "#00000000",
     })
     player:set_animation({x = 0, y = 20}, 1)
 

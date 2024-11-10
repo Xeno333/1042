@@ -44,9 +44,7 @@ local required_settings = {
 
 if core.settings:get("1042_auto_adjust_settings") == "true" then
     for name, value in pairs(required_settings) do
-        if core.settings:get(name) ~= value.value then
-            core.settings:set(name, value.value)
-        end
+        core.settings:set(name, value.value)
     end
 
 elseif core.settings:get("1042_ignore_required_settings") ~= "true" then
@@ -69,7 +67,7 @@ end
 
 if not core.is_singleplayer() and core.settings:get_bool("1042_warn_players_about_settings", true) then
     on_player_joins[#on_player_joins+1] = function(player)
-        core.chat_send_player(player:get_player_name(), core.colorize("#eeee00", "It is recommended to load this game in single player to ensure proper rendering settings are on pior to using server mode. If the game does not look right or look dim/greyish, please try that."))
+        core.chat_send_player(player:get_player_name(), core.colorize("#eeee00", "It is recommended to load this game in single player with the setting 1042>1042_auto_adjust_settings turned on, to ensure proper rendering settings are on pior to using server mode. If the game does not look right or look dim/greyish, please try that."))
     end
 end
 
