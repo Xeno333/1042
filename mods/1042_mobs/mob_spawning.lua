@@ -16,3 +16,18 @@ core.register_lbm({
         end
     end,
 })
+
+core.register_lbm({
+    label = "Spawning pigs",
+    name = "1042_mobs:pig_spawning",
+    run_at_every_load = true,
+    nodenames = {"1042_nodes:turf"},
+
+    bulk_action = function(pos_list, dtime_s)
+        for _, pos in ipairs(pos_list) do
+            if pr:next(1, 10000) == 1 then
+                core.add_entity(vector.new(pos.x, pos.y+1, pos.z), "1042_mobs:pig")
+            end
+        end
+    end,
+})
