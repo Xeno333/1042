@@ -24,11 +24,10 @@ We Hope you enjoy playing it and all feedback is welcome!
 
 
 ## Missing/Planned
+- Add moddable mapgen API
 - Crafting of items
-- Mobs
 - More trees and plants
 - Goals or achivments
-- Add moddable mapgen API
 - Add sounds and music
 - More general gameplay
 

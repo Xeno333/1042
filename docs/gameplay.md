@@ -11,7 +11,7 @@ Some nodes, like dirt and plants, can be broken easily by hand. Some nodes, like
 
 ## Mining
 ### WARNING NOT COMPLEATE
-Ores are worthless in their natrual state, they must be broken into nuggets in order to be processed.
+Ores are worthless in their natrual state, they must be broken into nuggets in order to be processed. This is done by mining them with a pick.
 
 ## Starting fires
 This is a fairly simple task, find some an iorn nugget and some flint. When you have found some flint, take it and put it right next to the node you want to light. After doing this you start to beat the flint with the iorn nugget. This should produce a lot of sparks and the fire should ignite after a few attempts. It can take a while sometimes so don't give up to quickly.

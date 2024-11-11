@@ -13,12 +13,12 @@
 - `plant` Plant (Biomass) nodes
 - `wood` Wood nodes
 - `cools` Planned for cooling nodes
+- `burning` For burning/hot nodes
+- `melts` Melts to water
 
 ### Not used yet
 - `burns` Planned for burning/fire
-- `melts` Planned for melting nodes
 - `freezes` Planned for freezing nodes
-- `burning` For burning/hot nodes
 
 
 # Development

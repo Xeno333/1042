@@ -5,3 +5,4 @@
 - Mapgen improvements -Xeno333
 - Sounds -Xeno333 & Lone_Star_Miner
 - More trees -Lone_Star_Miner & TX_Warrior
+- Fix mapgen onto dedicated thread -Xeno333
