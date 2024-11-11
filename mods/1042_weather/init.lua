@@ -1,43 +1,8 @@
--- init.lua
-weather = {}
-
-local temp_m
-
-local weather_def = {
-    offset = 0,
-    scale = 1,
-    spread = {x = 600, y = 600, z = 600},
-    seed = 33464573,
-    octaves = 3,
-    persist = 0.3,
-    lacunarity = 2,
-    flags = {
-        eased = true,
-        absvalue = false,
-        defaults = false
-    }
-}
-
-core.after(0,function()
-    temp_m = core.get_perlin_map(weather_def, {x=80, y=80})
-end)
-
-
-function weather.get_temp_map(x, z)
-    return temp_m:get_2d_map({z=0,y=x, x=z})
-end
-
-function weather.get_temp(pos, temp_map)
-    local tempv = temp_map[pos.x][pos.z] * 30
-    return tempv
-end
-
-
+dofile(core.get_modpath("1042_weather") .. "/weather_api.lua")
 
 
 -- Skip weather
 if core.settings:get("1042_disable_weather") ~= "true" then
-
 
 
     weather.weathers = {

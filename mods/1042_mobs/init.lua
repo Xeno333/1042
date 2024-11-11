@@ -8,6 +8,7 @@ core.register_entity("1042_mobs:fish", {
 
         hp_max = 4,
         physical = true,
+        static_save = false,
 
         damage_texture_modifier = "",
 
@@ -71,6 +72,7 @@ core.register_entity("1042_mobs:pig", {
         visual = "mesh",
         mesh = "pig.gltf",
         textures = {"1042_plain_node.png^[colorize:#664433:128"},
+        static_save = false,
 
         hp_max = 10,
         physical = true,
@@ -142,3 +144,7 @@ core.register_entity("1042_mobs:pig", {
 
     groups = {fleshy = 1}
 })
+
+
+
+dofile(core.get_modpath("1042_mobs") .. "/mob_spawning.lua")
