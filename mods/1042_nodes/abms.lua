@@ -40,8 +40,10 @@ core.register_abm({
         if rand:next(1, core.get_item_group(node.name, "burns")) == 1 then 
             if (core.get_item_group(node.name, "wood") or 0) > 0 and rand:next(1, 4) == 1 then
                 core.set_node(pos, {name = "1042_nodes:charcoal"})
+                
             else
                 core.set_node(pos, {name = "1042_nodes:fire"})
+                
             end
         end
     end
