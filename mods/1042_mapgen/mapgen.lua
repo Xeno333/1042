@@ -1,4 +1,7 @@
 -- mapgen.lua
+
+-- Todo Make modable using normal mapgen definitions for biomes and schematics #fixme
+
 dofile(core.get_modpath("1042_mapgen") .. "/mapgen_api.lua")
 
 -- Weather api

@@ -1,3 +1,10 @@
+local player_huds = {} -- Needs moved to api of player tabless #fixme
+
+
+
+
+
+
 
 core.register_item(":", {
 	type = "none",
@@ -145,20 +152,28 @@ core.register_on_joinplayer(function(player, last_join)
         style = 3
     })
 
+
+    player_huds[player:get_player_name()] = {}
 end)
+
+
+
+core.register_on_leaveplayer(function(player)
+    player_huds[player:get_player_name()] = nil
+end)
+
 
 
 core.register_globalstep(function(dtime)
     for _, player in ipairs(core.get_connected_players()) do
-        local metaref = player:get_meta()
-
+        local player_huds = player_huds[player:get_player_name()]
 
         -- Pointed Item
-        local id = metaref:get_int("pointed_node")
+        local id = player_huds.pointed_thing
 
-        if id ~= 0 then 
+        if id then 
             player:hud_remove(id)
-            metaref:set_int("pointed_node", 0)
+            player_huds.pointed_thing = nil
         end
 
         local pos = player:get_pos()
@@ -169,38 +184,38 @@ core.register_globalstep(function(dtime)
         if node and node.type == "node" then
             local txt = core.registered_nodes[core.get_node(vector.new(node.under.x, node.under.y, node.under.z)).name].description
             if txt then 
-                metaref:set_int("pointed_node", player:hud_add({
+                player_huds.pointed_thing =  player:hud_add({
                     type = "text",
                     name = "pointed_node_hud",
                     text = txt,
                     position = {x=0.5, y=0.05},
                     number = 0x00ffdd,
                     style = 3
-                }))
+                })
             end
         end
 
 
         -- Wield Item
-        local wield_text = metaref:get_int("wield_text")
+        local wield_text = player_huds.wield_text
 
-        if wield_text ~= 0 then
+        if wield_text then
             player:hud_remove(wield_text)
-            metaref:set_int("wield_text", 0)
+            player_huds.wield_text = nil
         end
 
         local wield_item = player:get_wielded_item()
         if wield_item then
             local item = core.registered_items[wield_item:get_name()]
             if item and item.description then
-                metaref:set_int("wield_text", player:hud_add({
+                player_huds.wield_text = player:hud_add({
                     type = "text",
                     name = "wield_text_hud",
                     text = item.description,
                     position = {x=0.05, y=0.9},
                     number = 0x00ffdd,
                     style = 3
-                }))
+                })
             end
         end
 
