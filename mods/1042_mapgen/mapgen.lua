@@ -170,9 +170,9 @@ core.register_on_generated(function(vm, minp, maxp, seed)
     -- Add for T_ymin just do stone
 
 
-    local ly = 81
-    for y = maxp.y, minp.y, -1 do
-        ly = ly - 1
+    local ly = 0
+    for y = minp.y, maxp.y do
+        ly = ly + 1
         local lz = 0
         for z = minp.z, maxp.z do
             lz = lz + 1
