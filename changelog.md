@@ -10,3 +10,4 @@
 - Migrate `core_1042` "game storage" functions to using json and discard old settings (We can do this since we are in pre-alpha) -Xeno333
 - Add achievement API -Xeno333
 - Improve documentation -Xeno333
+- Add fire mechanics -Xeno333

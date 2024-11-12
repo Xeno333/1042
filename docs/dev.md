@@ -20,14 +20,13 @@ This is documentation for development and modding for the game `1042` on the *Lu
 - `leafy` Leafy nodes.
 - `plant` Plant (Biomass) nodes.
 - `wood` Wood nodes.
-- `cools` Planned for cooling nodes.
+- `cools` Nodes that cool hot nodes.
 - `burning` For burning/hot nodes.
 - `melts` Melts to water.
+- `burns` Nodes that can catch on fire.
 
 
-## Not used yet
-
-- `burns` Planned for burning/fire.
+## Not used yet but maybe by beta if at all
 - `freezes` Planned for freezing nodes.
 
 

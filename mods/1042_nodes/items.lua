@@ -30,18 +30,6 @@ core.register_node("1042_nodes:fire", {
 })
 
 
-core.register_abm({
-    interval = 4,
-    chance = 4,
-    nodenames = {"1042_nodes:fire"},
-    neighbors = {"group:cools"},
-    action = function(pos, node, active_object_count, active_object_count_wider)
-        core.set_node(pos, {name = "air"})
-    end
-})
-
-
-
 -- Speacal nodes
 
 core.register_node("1042_nodes:beryl", {

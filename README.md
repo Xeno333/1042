@@ -1,12 +1,15 @@
 # 1042
 
 ## Overview
+
 1042 is a game placed in Europ around the year 1042 A.D. The game focuses on PvE and adventure. At the moment it is a bit limited but still playable at the basic level (See `Features` for more.)
 
 We Hope you enjoy playing it and all feedback is welcome!
 
 
-## State: `pre-alpha-v0.1.1`
+
+## State: `pre-alpha-v0.1.1` **WARNING** Some systems may have problems running this game!
+
 ![pre-alpha-v0.1.0](menu/background.2.png)
 
 ### Notes on this version
@@ -15,7 +18,7 @@ We Hope you enjoy playing it and all feedback is welcome!
 
 ## Features
 - Mapgen with 4 biomes (tempeture areas) vast mountins and plains with deep oceans and caves
-- Unique UI with custom HUD and Invintory and in-game settings on a per-player basis
+- Unique UI with custom HUD and Invintory and in-game settings (on a per-player basis)
 - 1 texture
 - Several nodes
 - Basic weather system
@@ -62,6 +65,7 @@ We Hope you enjoy playing it and all feedback is welcome!
 ### NOT RECOMMENDED
 - `1042_ignore_required_settings` Ignore required settings and run anyway (See Requirements), default: `false`
 - `1042_disable_weather` Disable in-game weather, default: `false`
+
 
 ## Requirements
 
