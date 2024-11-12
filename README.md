@@ -21,14 +21,16 @@ We Hope you enjoy playing it and all feedback is welcome!
 - Basic weather system
 - Working tools
 - Ores
+- Achivments API
+- Some sounds
+- Basic mobs (Fish mainly)
 
 
-## Missing/Planned
+## Planned
 - Add moddable mapgen API
 - Crafting of items
 - More trees and plants
-- Goals or achivments
-- Add sounds and music
+- Add More sounds and music
 - More general gameplay
 
 
@@ -40,7 +42,6 @@ We Hope you enjoy playing it and all feedback is welcome!
 - Add sounds
 - Add Mobs
 - Add pvp physics and more weapons (Bow and club)
-- Add achivments
 - Add lootable structures
 - Add seasons and better multi-player weather (Could be pushed to beta)
 
