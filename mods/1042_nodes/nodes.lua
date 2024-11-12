@@ -270,7 +270,7 @@ core.register_node("1042_nodes:tree", {
         }
     },
 
-    groups = {wood = 1, plant = 1, burns = 1},
+    groups = {wood = 1, plant = 1, burns = 3},
 })
 
 core.register_node("1042_nodes:tree_dark", {
@@ -286,7 +286,7 @@ core.register_node("1042_nodes:tree_dark", {
         }
     },
 
-    groups = {wood = 2, plant = 1, burns = 1},
+    groups = {wood = 2, plant = 1, burns = 4},
 })
 
 core.register_node("1042_nodes:tree_light", {
@@ -302,5 +302,20 @@ core.register_node("1042_nodes:tree_light", {
         }
     },
 
-    groups = {wood = 1, plant = 1, burns = 1},
+    groups = {wood = 1, plant = 1, burns = 2},
+})
+
+
+
+
+
+-- Charcoal
+
+
+core.register_node("1042_nodes:charcoal", {
+    description = "Charcoal",
+    tiles = {"1042_plain_node.png^[colorize:#221111:168"},
+    use_texture_alpha = "opaque",
+
+    groups = {plant = 1, burns = 6},
 })

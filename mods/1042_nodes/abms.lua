@@ -1,6 +1,9 @@
 
 -- Fire ABMs
 
+local rand = PcgRandom(math.random())
+
+
 core.register_abm({
     label = "Fire put out",
     catch_up = true,
@@ -28,12 +31,19 @@ core.register_abm({
 core.register_abm({
     label = "Spread Fire",
     catch_up = true,
-    interval = 16,
+    interval = 8,
     chance = 4,
     nodenames = {"group:burns"},
     neighbors = {"group:burning"},
+
     action = function(pos, node, active_object_count, active_object_count_wider)
-        core.set_node(pos, {name = "1042_nodes:fire"})
+        if rand:next(1, core.get_item_group(node.name, "burns")) == 1 then 
+            if (core.get_item_group(node.name, "wood") or 0) > 0 and rand:next(1, 4) == 1 then
+                core.set_node(pos, {name = "1042_nodes:charcoal"})
+            else
+                core.set_node(pos, {name = "1042_nodes:fire"})
+            end
+        end
     end
 })
 
