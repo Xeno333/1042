@@ -21,12 +21,12 @@ We Hope you enjoy playing it and all feedback is welcome!
 - Unique UI with custom HUD and Invintory and in-game settings (on a per-player basis)
 - 1 texture
 - Several nodes
-- Basic weather system
+- Working weather system
 - Working tools
 - Ores
 - Achivments API
 - Some sounds
-- Basic mobs (Fish mainly)
+- Basic mobs (Fish and pigs, as of last update)
 - Basic smelting and crafting recipies.
 
 
@@ -41,13 +41,10 @@ We Hope you enjoy playing it and all feedback is welcome!
 ## Roadmap
 
 #### pre-alpha v0.1.0 to alpha v0.2.0 goals
-- Add ores and refinement via ores and nuggets that spawn and are dropped upon breaking ores.
 - Add more trees and plants, flowers maybe.
 - Add sounds
-- Add Mobs
 - Add pvp physics and more weapons (Bow and club)
 - Add lootable structures
-- Add seasons and better multi-player weather (Could be pushed to beta)
 
 #### beta v0.2.0
 - Add mapgen API

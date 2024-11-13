@@ -13,3 +13,4 @@
 - Add fire mechanics -Xeno333
 - Add smelting mechanics -Xeno333
 - Add more crafting -Xeno333
+- Add proper multiplayer weather system -Xeno333
