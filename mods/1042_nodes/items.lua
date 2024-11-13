@@ -345,6 +345,10 @@ core.register_node("1042_nodes:iorn_ingot", {
             pitch = 2
         }
     },
+
+    after_dig_node = function(pos, oldnode, oldmetadata, digger)
+        achievements_1042.achieve(digger, "smelter")
+    end,
     
     groups = {breakable_by_hand = 1, falling_node = 1},
 })

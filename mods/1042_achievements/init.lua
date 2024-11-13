@@ -25,7 +25,7 @@ function achievements_1042.achieve(player, achievement_name)
         local id2 = player:hud_add({
             type = "text",
             name = "achievement_"..achievement_name.."_txt",
-            text = core.colorize("#ffdd00", "Achievement:\n\n")..achievement_definition.achievement,
+            text = achievement_definition.achievement,
             position = {x=0.2, y=0.85},
         })
 
@@ -56,11 +56,16 @@ end
 
 
 achievements_1042.register_achievement("first_life", {
-    achievement = core.colorize("#ffffff", "First life"),
+    achievement = core.colorize("#ddffdd", "First life"),
     colour = "#00ffaa"
+})
+
+achievements_1042.register_achievement("smelter", {
+    achievement = core.colorize("#ddcc55", "Smelter"),
+    colour = "#ffddaa"
 })
 
 
 core.register_on_joinplayer(function(player, last_join)
-        achievements_1042.achieve(player, "first_life")
+    achievements_1042.achieve(player, "first_life")
 end)

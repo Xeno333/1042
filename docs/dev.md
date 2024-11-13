@@ -72,6 +72,7 @@ There are a few APIs built into the game, and more planned for the beta release.
 ## Core achievements
 
 - `first_life` This is the achievement for first spawn of a player.
+- `smelter` This is the achievement for first ingot broken.
 
 
 
