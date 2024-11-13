@@ -77,6 +77,93 @@ There are a few APIs built into the game, and more planned for the beta release.
 
 
 
+# Weather API
+
+Weathers are registered by appending to the end of `weather.weathers` with a weather definition. Tempetures across the map vary in range of ~-30 to ~30, though they may be slightly above or below these.
+
+
+## API functions
+
+The weather API is avalible in both the asynch mapgen enviorment and main via import from file (as done in mapgen.)
+
+-`function weather.get_temp_map(x, z)` Get a temp map starting at `x, z`. The map is a mapblock, thus 80x80.
+-`function weather.get_temp(pos, temp_map)` Get temp from temp map with coords on that temp map.
+-`function weather.get_temp_single(pos)` Get temp at a position, this is faster than using the other two for single coords.
+
+
+## Weather Definition
+
+```lua
+    {
+        name = "Light snow",
+        conditions = {
+            temp = {
+                max = 0
+            }
+        },
+        clouds = {
+            density = 0.35,
+            color = "#f0faffaa",
+            ambient = "#006699",
+            thickness = 128,
+            speed = {x=1, y=1},
+            shadow = "#cccccc",
+            height = 120
+        },
+        sky = {
+            type = "regular",
+            clouds = true,
+            sky_color = {
+                night_sky = "#0066ff",
+                night_horizon = "#0088ff",
+                day_horizon = "#90d3f6",
+                day_sky = "#61b5f5"
+            },
+            fog = {
+                fog_start = 0,
+                fog_distance = 90,
+                fog_color = "#ddddddaa"
+            }
+        },
+        particlespawner = 
+        {
+            amount = 500,
+            time = 1,
+
+            collisiondetection = true,
+            object_collision = true,
+            collision_removal = true,
+
+            vel = {
+                min = vector.new(-2, -1, -2),
+                max = vector.new(2, -4, 2),
+                bias = 0
+            },
+
+            size = {
+                min = 0.5,
+                max = 1
+            },
+
+            exptime = {
+                min = 6,
+                max = 8
+            },
+
+            bounce = {
+                min = 0,
+                max = 0.3
+            },
+
+            glow = 8,
+
+            texture = "1042_plain_node.png^[colorize:#ddddff:144"
+        }
+    }
+```
+
+
+
 # Development
 
 ## Things to fix
