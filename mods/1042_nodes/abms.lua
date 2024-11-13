@@ -5,7 +5,7 @@ local rand = PcgRandom(math.random())
 
 
 core.register_abm({
-    label = "Fire put out",
+    label = "Fire Put Out",
     catch_up = true,
     interval = 4,
     chance = 4,
@@ -17,7 +17,7 @@ core.register_abm({
 })
 
 core.register_abm({
-    label = "Fire dies",
+    label = "Fire Dies",
     catch_up = true,
     interval = 4,
     chance = 1,
@@ -43,27 +43,12 @@ core.register_abm({
                 
             else
                 core.set_node(pos, {name = "1042_nodes:fire"})
-                
+
             end
         end
     end
 })
 
-
-
--- Melt
-
-core.register_abm({
-    label = "Node melts",
-    catch_up = true,
-    interval = 4,
-    chance = 4,
-    nodenames = {"group:melts"},
-    neighbors = {"group:burning"},
-    action = function(pos, node, active_object_count, active_object_count_wider)
-        core.set_node(pos, {name = "1042_nodes:water_source"})
-    end
-})
 
 
 
@@ -72,6 +57,7 @@ core.register_abm({
 
 
 core.register_abm({
+    label = "Burning Particles",
     interval = 4,
     chance = 1,
     nodenames = {"group:burning"},
@@ -117,5 +103,114 @@ core.register_abm({
 
             texture = "1042_plain_node.png^[colorize:#ffdd88:144"
         })
+    end
+})
+
+
+
+
+
+-- Melt/Cool
+
+
+
+core.register_abm({
+    label = "Node Melts",
+    catch_up = true,
+    interval = 4,
+    chance = 4,
+    nodenames = {"group:melts"},
+    neighbors = {"group:burning"},
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        local def = core.registered_nodes[node.name]
+        if def._1042_melts_to then
+            core.set_node(pos, {name = def._1042_melts_to})
+        end
+    end
+})
+
+
+core.register_abm({
+    label = "Cool Molten Nodes",
+    nodenames = {"group:molten",},
+    neighbors = {"group:cools"},
+    catch_up = true,
+    interval = 1,
+    chance = 1,
+    catch_up = true,
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        local def = core.registered_nodes[node.name]
+        if def._1042_cools_to then
+            core.set_node(pos, {name = def._1042_cools_to})
+        end
+    end
+})
+
+
+
+
+
+-- Iorn Smithing
+
+
+core.register_abm({
+    label = "Cool Molten Iorn (source)",
+    nodenames = {"1042_nodes:molten_iorn_source"},
+    catch_up = true,
+    interval = 32,
+    chance = 2,
+    catch_up = true,
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        core.set_node(pos, {name = "1042_nodes:iorn_slag"})
+    end
+})
+
+core.register_abm({
+    label = "Cool Molten Iorn (flowing)",
+    nodenames = {"1042_nodes:molten_iorn_flowing"},
+    catch_up = true,
+    interval = 8,
+    chance = 4,
+    catch_up = true,
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        if rand:next(1, 4) == 1 then
+            core.set_node(pos, {name = "1042_nodes:iorn_ingot"})
+        else
+            core.set_node(pos, {name = "1042_nodes:iorn_slag"})
+        end
+    end
+})
+
+core.register_abm({
+    label = "Melt Iorn",
+    catch_up = true,
+    interval = 8,
+    chance = 4,
+    nodenames = {"1042_nodes:iorn_nugget_block"},
+    neighbors = {"1042_nodes:charcoal_burning"},
+
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        core.set_node(pos, {name = "1042_nodes:molten_iorn_source"})
+    end
+})
+
+
+-- Charcoal
+
+--[[
+    Notes:
+        This compeates with "Spread Fire"
+        This adds the challenge of having to watch it to make sure it burns
+]]
+core.register_abm({
+    label = "Light Charcoal",
+    catch_up = true,
+    interval = 8,
+    chance = 4,
+    nodenames = {"1042_nodes:charcoal"},
+    neighbors = {"group:burning"},
+
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        core.set_node(pos, {name = "1042_nodes:charcoal_burning"})
     end
 })

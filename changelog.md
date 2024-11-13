@@ -11,3 +11,5 @@
 - Add achievement API -Xeno333
 - Improve documentation -Xeno333
 - Add fire mechanics -Xeno333
+- Add smelting mechanics -Xeno333
+- Add more crafting -Xeno333

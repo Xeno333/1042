@@ -33,6 +33,7 @@ core.register_node("1042_nodes:ice", {
     use_texture_alpha = "blend",
 	paramtype = "light",
 
+    _1042_melts_to = "1042_nodes:water_source",
     groups = {falling_node = 1, float = 1, melts = 1, slippery = 3, cools = 1},
 })
 
@@ -111,6 +112,7 @@ core.register_node("1042_nodes:snow", {
         }
     },
 
+    _1042_melts_to = "1042_nodes:water_source",
     groups = {cools = 1, melts = 1, breakable_by_hand = 1},
 })
 
@@ -214,8 +216,6 @@ core.register_node("1042_nodes:iorn_ore", {
     groups = {stone = 3},
 })
 
-
-
 -- Plant Nodes
 
 
@@ -309,6 +309,10 @@ core.register_node("1042_nodes:tree_light", {
 
 
 
+
+
+
+
 -- Charcoal
 
 
@@ -317,5 +321,85 @@ core.register_node("1042_nodes:charcoal", {
     tiles = {"1042_plain_node.png^[colorize:#221111:168"},
     use_texture_alpha = "opaque",
 
-    groups = {plant = 1, burns = 6},
+    groups = {wood = 1, burns = 6, breakable_by_hand = 4},
+})
+
+core.register_node("1042_nodes:charcoal_burning", {
+    description = "Burning Charcoal",
+    tiles = {"1042_plain_node.png^[colorize:#441111:168"},
+    use_texture_alpha = "opaque",
+
+    drop = "",
+
+    light_source = 6,
+    groups = {wood = 1, burning = 1, burns = 6, breakable_by_hand = 4},
+})
+
+
+
+
+
+-- Iorn
+
+core.register_node("1042_nodes:iorn_slag", {
+    description = "Iorn Slag",
+    tiles = {"1042_plain_node.png^[colorize:#331111:128"},
+    use_texture_alpha = "opaque",
+
+    sounds = {
+        dig = {
+            name = "stone_dig",
+            gain = 2,
+            pitch = 0.3
+        },
+        footstep = {
+            name = "stone_walk",
+            gain = 1,
+            pitch = 0.5
+        },
+        place = {
+            name = "stone_walk",
+            gain = 0.5,
+            pitch = 0.5
+        }
+    },
+
+    groups = {stone = 3},
+})
+
+
+
+core.register_node("1042_nodes:iorn_nugget_block", {
+    description = "Iorn Nugget Block",
+    tiles = {"1042_plain_node.png^[colorize:#664444:128"},
+    use_texture_alpha = "opaque",
+
+    sounds = {
+        dig = {
+            name = "stone_dig",
+            gain = 2,
+            pitch = 1
+        },
+        footstep = {
+            name = "stone_walk",
+            gain = 1,
+            pitch = 1.5
+        },
+        place = {
+            name = "stone_walk",
+            gain = 1,
+            pitch = 0.5
+        }
+    },
+
+    groups = {stone = 3},
+})
+
+core.register_craft({
+    output = "1042_tools:iorn_nugget_block",
+    recipe = {
+        {"1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget"},
+        {"1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget"},
+        {"1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget"},
+    }
 })

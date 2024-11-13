@@ -157,6 +157,31 @@ core.register_node("1042_nodes:flint", {
 })
 
 
+core.register_node("1042_nodes:sticks", {
+    description = "Sticks",
+    drawtype = "mesh",
+    mesh = "sticks.obj",
+    tiles = {"1042_plain_node.png^[colorize:#672307:172"},
+    use_texture_alpha = "opaque",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    walkable = false,
+    buildable_to = false,
+
+    sounds = {
+        dug = {
+            name = "sticks",
+            gain = 0.2,
+            pitch = 1,
+        }
+    },
+    
+    groups = {breakable_by_hand = 1, attached_node = 3, burns = 1},
+})
+
+
+
 core.register_node("1042_nodes:iorn_nugget", {
     description = "Iorn Nugget",
     drawtype = "mesh",
@@ -247,56 +272,6 @@ core.register_node("1042_nodes:iorn_nugget", {
 })
 
 
-core.register_node("1042_nodes:sticks", {
-    description = "Sticks",
-    drawtype = "mesh",
-    mesh = "sticks.obj",
-    tiles = {"1042_plain_node.png^[colorize:#672307:172"},
-    use_texture_alpha = "opaque",
-
-    paramtype = "light",
-    sunlight_propagates = true,
-    walkable = false,
-    buildable_to = false,
-
-    sounds = {
-        dug = {
-            name = "sticks",
-            gain = 0.2,
-            pitch = 1,
-        }
-    },
-    
-    groups = {breakable_by_hand = 1, attached_node = 3, burns = 1},
-})
-
-
-core.register_node("1042_nodes:fire_pile", {
-    description = "Fire Pile",
-    drawtype = "mesh",
-    mesh = "fire_pile.obj",
-    tiles = {"1042_plain_node.png^[colorize:#672307:172"},
-    use_texture_alpha = "opaque",
-
-    paramtype = "light",
-    sunlight_propagates = true,
-    floodable = true,
-    walkable = false,
-    buildable_to = false,
-    
-    groups = {breakable_by_hand = 1, attached_node = 3, burns = 1},
-})
-
-core.register_craft({
-    output = "1042_nodes:fire_pile",
-    recipe = {
-        {"", "1042_nodes:sticks", ""},
-        {"1042_nodes:sticks", "", "1042_nodes:sticks"}
-    }
-})
-
-
-
 core.register_node("1042_nodes:anvil", {
     description = "Anvil",
     drawtype = "mesh",
@@ -328,51 +303,48 @@ core.register_node("1042_nodes:anvil", {
 
 
 
---[[
-core.register_abm({
-    interval = 4,
-    chance = 1,
-    nodenames = {"1042_nodes:fire_pile"},
-    action = function(pos, node, active_object_count, active_object_count_wider)
-        core.add_particlespawner({
-            amount = 128,
-            time = 4,
+core.register_node("1042_nodes:iorn_ingot", {
+    description = "Iorn Ingot",
+    drawtype = "nodebox",
+    mesh = "crystal.obj",
+    tiles = {"1042_plain_node.png^[colorize:#998888:200"},
 
-            collisiondetection = true,
-            object_collision = true,
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
 
-            vel = {
-                min = vector.new(-1, 0.5, -1),
-                max = vector.new(1, 2, 1),
-                bias = 0
-            },
+    node_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
+    },
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
+    },
 
-            acc = vector.new(0, 1, 0),
-
-            size = {
-                min = 0.5,
-                max = 1
-            },
-
-            exptime = {
-                min = 0.2,
-                max = 0.5
-            },
-
-            bounce = {
-                min = 0,
-                max = 0.3
-            },
-
-            glow = 14,
-
-            pos = {
-                min = vector.new(pos.x-0.3,pos.y-0.5,pos.z-0.3),
-                max = vector.new(pos.x+0.3,pos.y,pos.z+0.3),
-                bias = 0
-            },
-
-            texture = "1042_plain_node.png^[colorize:#ff0000:144"
-        })
-    end
-})]]
+    sounds = {
+        dig = {
+            name = "stone_dig",
+            gain = 2,
+            pitch = 2
+        },
+        footstep = {
+            name = "stone_walk",
+            gain = 0.3,
+            pitch = 2
+        },
+        place = {
+            name = "stone_dig",
+            gain = 1,
+            pitch = 2
+        }
+    },
+    
+    groups = {breakable_by_hand = 1, falling_node = 1},
+})

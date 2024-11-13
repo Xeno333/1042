@@ -45,6 +45,15 @@ core.register_node("1042_tools:sword",{
     groups = {weapon = 1, falling_node = 1, breakable_by_hand = 2},
 })
 
+core.register_craft({
+    output = "1042_tools:sword",
+    recipe = {
+        {"", "1042_nodes:iorn_ingot", ""},
+        {"", "1042_nodes:iorn_ingot", ""},
+        {"", "1042_nodes:sticks", ""},
+    }
+})
+
 
 
 core.register_node("1042_tools:pick",{
@@ -81,6 +90,17 @@ core.register_node("1042_tools:pick",{
 
     groups = {weapon = 1, falling_node = 1, breakable_by_hand = 2},
 })
+
+core.register_craft({
+    output = "1042_tools:pick",
+    recipe = {
+        {"1042_nodes:iorn_ingot", "1042_nodes:iorn_ingot", "1042_nodes:iorn_ingot"},
+        {"", "1042_nodes:sticks", ""},
+        {"", "1042_nodes:sticks", ""},
+    }
+})
+
+
 
 
 core.register_node("1042_tools:axe_flint",{

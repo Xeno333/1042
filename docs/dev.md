@@ -15,19 +15,27 @@ This is documentation for development and modding for the game `1042` on the *Lu
 
 # Groups
 
-- `breakable_by_hand` Player can break these items without tools. `{[1] = 0.25, [2] = 0.5, [3] = 1, [4] = 2, [5] = 3, [6] = 4}`
-- `stone` Stone nodes.
+- `breakable_by_hand` Player can break these items without tools. value is for break-time `{[1] = 0.25, [2] = 0.5, [3] = 1, [4] = 2, [5] = 3, [6] = 4}`
+- `stone` Stone nodes. Value is for tools like pick, for break-time. `{[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}`
 - `leafy` Leafy nodes.
 - `plant` Plant (Biomass) nodes.
-- `wood` Wood nodes.
+- `wood` Wood nodes. Value is for tools like axe, for break-time. `{[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}`
 - `cools` Nodes that cool hot nodes.
 - `burning` For burning/hot nodes.
-- `melts` Melts to water.
-- `burns` Nodes that can catch on fire.
+- `burns` Nodes that can catch on fire. Value is chance from `1` to `<group value>` chance or burning.
+- `molten` Uses `_1042_cools_to` for node.
+- `melts` Uses `_1042_melts_to` for node.
 
 
-## Not used yet but maybe by beta if at all
-- `freezes` Planned for freezing nodes.
+
+
+
+# Node definition fields
+
+There are a few new node definition fields for ABMs and such:
+
+- `_1042_cools_to=<node>` Node cools to given node.
+- `_1042_melts_to=<node>` Node melts to given node.
 
 
 
