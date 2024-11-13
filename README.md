@@ -27,6 +27,7 @@ We Hope you enjoy playing it and all feedback is welcome!
 - Achivments API
 - Some sounds
 - Basic mobs (Fish mainly)
+- Basic smelting and crafting recipies.
 
 
 ## Planned
