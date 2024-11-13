@@ -1,6 +1,6 @@
 mapgen_1042 = {}
 
-mapgen_1042.map = PerlinNoiseMap({
+local map_noise_params = {
     offset = 0,
     scale = 1,
     spread = {x = 800, y = 800, z = 800},
@@ -13,7 +13,10 @@ mapgen_1042.map = PerlinNoiseMap({
         absvalue = false,
         defaults = false
     }
-}, {x=80, y=80})
+}
+
+mapgen_1042.map = PerlinNoiseMap(map_noise_params, {x=80, y=80})
+mapgen_1042.map_single = PerlinNoise(map_noise_params)
 
 mapgen_1042.cave_map = PerlinNoiseMap({
     offset = 0,
@@ -57,7 +60,7 @@ mapgen_1042.decorated_caves = -64
 
 
 function mapgen_1042.get_spawn_y(x, z)
-    local noise = mapgen_1042.map:get_2d_map({z=0,y=x, x=z})[1][1]
+    local noise = mapgen_1042.map_single:get_2d(vector.new(z, x, 0))
     local ny
 
     if noise <= 0.9 then

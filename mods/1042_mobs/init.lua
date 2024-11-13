@@ -4,7 +4,11 @@ core.register_entity("1042_mobs:fish", {
     initial_properties = {
         visual = "mesh",
         mesh = "fish.gltf",
-        textures = {"1042_plain_node.png^[colorize:#ff4400:128"},
+        textures = {
+            "1042_plain_node.png^[colorize:#ff4400:128",
+            "1042_plain_node.png^[colorize:#ff4400:128",
+            "1042_plain_node.png^[colorize:#ff4400:128"
+        },
 
         hp_max = 4,
         physical = true,
