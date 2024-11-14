@@ -11,7 +11,7 @@ function achievements_1042.achieve(player, achievement_name)
     if not achievement_definition then return nil end
 
     local metaref = player:get_meta()
-    if metaref:get_string("1042_achievements_achievement_"..achievement_name) ~= "true" then
+    if metaref:get_string("1042_achievements_achievement_"..achievement_name) == "true" then
         metaref:set_string("1042_achievements_achievement_"..achievement_name, "true")
 
         local id = player:hud_add({
@@ -56,12 +56,17 @@ end
 
 
 achievements_1042.register_achievement("first_life", {
-    achievement = core.colorize("#ddffdd", "First life"),
+    achievement = core.colorize("#ddffdd", "First life!"),
     colour = "#00ffaa"
 })
 
+achievements_1042.register_achievement("oooo_fire", {
+    achievement = core.colorize("#ff7755", "Oooo, Fire!"),
+    colour = "#ffccaa"
+})
+
 achievements_1042.register_achievement("smelter", {
-    achievement = core.colorize("#ddcc55", "Smelter"),
+    achievement = core.colorize("#ddcc55", "Smelter!"),
     colour = "#ffddaa"
 })
 

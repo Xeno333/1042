@@ -1,6 +1,66 @@
 
 
 
+local function hit_flint_with_iron(itemstack, player, pointed_thing)
+    local node = nil
+    if pointed_thing.under then
+        node = core.get_node(pointed_thing.under)
+    end
+    if node and node.name == "1042_nodes:flint" then
+        core.sound_play("hit_flint_with_iron", {gain = 1, pos = pointed_thing.under, max_hear_distance = 16}, true)
+        core.add_particlespawner({
+            pos = pointed_thing.under,
+            amount = 10,
+            time = 0.1,
+
+            collisiondetection = true,
+            object_collision = true,
+            collision_removal = true,
+
+            vel = {
+                min = vector.new(-2, 1, -2),
+                max = vector.new(2, 4, 2),
+                bias = 0
+            },
+
+            acc = vector.new(0, -9.8, 0),
+
+            size = {
+                min = 0.05,
+                max = 0.3
+            },
+
+            exptime = {
+                min = 0.2,
+                max = 1
+            },
+
+            glow = 14,
+
+            name = player:get_player_name(),
+
+            texture = "1042_plain_node.png^[colorize:#ffcc66:144"
+        })
+
+        if math.random(1, 10) == 1 then
+            local nodes = core.find_nodes_in_area_under_air(vector.add(pointed_thing.under, vector.new(-1, -1, -1)), vector.add(pointed_thing.under, vector.new(1, 1, 1)), "group:burns")
+            if #nodes > 0 then
+                achievements_1042.achieve(player, "oooo_fire")
+                core.set_node(vector.add(nodes[math.random(1, #nodes)], vector.new(0, 1, 0)), {name="1042_nodes:fire"})
+            end
+        end
+    end
+end
+
+
+
+
+
+
+
+
+
+
 core.register_node("1042_nodes:fire", {
     description = "Fire",
     drawtype = "firelike",
@@ -198,56 +258,6 @@ core.register_node("1042_nodes:iorn_nugget", {
         type = "fixed",
         fixed = {-0.1, -0.5, -0.1, 0.1, -0.3, 0.1}
     },
-
-    on_use = function(itemstack, player, pointed_thing)
-        local node = nil
-        if pointed_thing.under then
-            node = core.get_node(pointed_thing.under)
-        end
-        if node and node.name == "1042_nodes:flint" then
-            core.sound_play("hit_flint_with_steel", {gain = 1, pos = pointed_thing.under, max_hear_distance = 16}, true)
-            core.add_particlespawner({
-                pos = pointed_thing.under,
-                amount = 10,
-                time = 0.1,
-
-                collisiondetection = true,
-                object_collision = true,
-                collision_removal = true,
-
-                vel = {
-                    min = vector.new(-2, 1, -2),
-                    max = vector.new(2, 4, 2),
-                    bias = 0
-                },
-
-                acc = vector.new(0, -9.8, 0),
-
-                size = {
-                    min = 0.05,
-                    max = 0.3
-                },
-
-                exptime = {
-                    min = 0.2,
-                    max = 1
-                },
-
-                glow = 14,
-
-                name = player:get_player_name(),
-
-                texture = "1042_plain_node.png^[colorize:#ffcc66:144"
-            })
-
-            if math.random(1, 10) == 1 then
-                local nodes = core.find_nodes_in_area_under_air(vector.add(pointed_thing.under, vector.new(-1, -1, -1)), vector.add(pointed_thing.under, vector.new(1, 1, 1)), "group:burns")
-                if #nodes > 0 then
-                    core.set_node(vector.add(nodes[math.random(1, #nodes)], vector.new(0, 1, 0)), {name="1042_nodes:fire"})
-                end
-            end
-        end
-    end,
     
     sounds = {
         dig = {
@@ -261,6 +271,8 @@ core.register_node("1042_nodes:iorn_nugget", {
             pitch = 1.5
         }
     },
+
+    on_use = hit_flint_with_iron,
 
     paramtype = "light",
     paramtype2 = "4dir",
@@ -345,6 +357,8 @@ core.register_node("1042_nodes:iorn_ingot", {
             pitch = 2
         }
     },
+
+    on_use = hit_flint_with_iron,
 
     after_dig_node = function(pos, oldnode, oldmetadata, digger)
         achievements_1042.achieve(digger, "smelter")
