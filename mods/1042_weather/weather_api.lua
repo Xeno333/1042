@@ -28,8 +28,8 @@ local v = vector.new(0, 0, 0)
 
 
 function weather.get_temp_map(x, z)
-    v.z = x
     v.x = z
+    v.y = x
     return temp_m:get_2d_map(v)
 end
 
@@ -39,8 +39,8 @@ end
 
 
 function weather.get_temp_single(pos)
-    v.z = pos.x
     v.x = pos.z
+    v.y = pos.x
     local tempv = temp_s:get_2d(v) * 30
     return tempv
 end
