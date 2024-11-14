@@ -76,15 +76,15 @@ core.register_entity("1042_mobs:pig", {
         visual = "mesh",
         mesh = "pig.gltf",
         textures = {
-            "1042_plain_node.png^[colorize:#664433:128",
-            "1042_plain_node.png^[colorize:#664433:128",
-            "1042_plain_node.png^[colorize:#664433:128",
-            "1042_plain_node.png^[colorize:#664433:128",
-            "1042_plain_node.png^[colorize:#664433:128",
-            "1042_plain_node.png^[colorize:#664433:128",
-            "1042_plain_node.png^[colorize:#664433:128",
-            "1042_plain_node.png^[colorize:#664433:128",
-            "1042_plain_node.png^[colorize:#664433:128"
+            "1042_plain_node.png^[colorize:#664433:128", -- Foot
+            "1042_plain_node.png^[colorize:#664433:128", -- Foot
+            "1042_plain_node.png^[colorize:#664433:128", -- Foot
+            "1042_plain_node.png^[colorize:#664433:128", -- Foot
+            "1042_plain_node.png^[colorize:#774433:128", -- Body
+            "1042_plain_node.png^[colorize:#664433:128", -- Head
+            "1042_plain_node.png^[colorize:#994433:128", -- Nose
+            "1042_plain_node.png^[colorize:#000000:128", -- Eye
+            "1042_plain_node.png^[colorize:#000000:128"  -- Eye
         },
         static_save = false,
 

@@ -56,7 +56,17 @@ core.register_on_joinplayer(function(player, last_join)
     player:set_properties({
         visual = "mesh",
         mesh = "player.gltf",
-        textures = {"1042_plain_node.png^[colorize:#00ffff:64"},
+        textures = {
+            "1042_plain_node.png^[colorize:#442211:168", -- Shoe
+            "1042_plain_node.png^[colorize:#442211:144", -- Leg
+            "1042_plain_node.png^[colorize:#442211:144", -- Leg
+            "1042_plain_node.png^[colorize:#442211:200", -- Shoe
+            "1042_plain_node.png^[colorize:#553311:168", -- Shirt
+            "1042_plain_node.png^[colorize:#aa8877:144", -- Neck
+            "1042_plain_node.png^[colorize:#aa8877:144",  -- Head
+            "1042_plain_node.png^[colorize:#aa8877:144", -- Arm
+            "1042_plain_node.png^[colorize:#aa8877:144"  -- Arm
+        },
         show_on_minimap = false,
         visual_size = {
             x = 4,
@@ -66,7 +76,7 @@ core.register_on_joinplayer(function(player, last_join)
 
         nametag_color = "#00000000",
     })
-    player:set_animation({x = 0, y = 20}, 1)
+    player:set_animation({x = 0, y = 40}, 3)
 
     player:set_physics_override(
         {
