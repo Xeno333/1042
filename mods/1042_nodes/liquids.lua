@@ -81,7 +81,7 @@ core.register_node("1042_nodes:water_flowing", {
 	waving = 3,
 
     post_effect_color = {a = 64, r = 0x00, g = 0xbb, b = 0xcc},
-    groups = {water = 1, liquid = 1, cools = 1},
+    groups = {water = 1, liquid = 1, cools = 1, not_in_creative_inventory = 1},
 })
 
 
@@ -174,7 +174,7 @@ core.register_node("1042_nodes:lava_flowing", {
 
     _1042_cools_to = "1042_nodes:basalt",
     post_effect_color = {a = 144, r = 0xff, g = 0x22, b = 0x00},
-    groups = {molten = 1, liquid = 1, burning = 1},
+    groups = {molten = 1, liquid = 1, burning = 1, not_in_creative_inventory = 1},
 })
 
 
@@ -267,5 +267,5 @@ core.register_node("1042_nodes:molten_iorn_flowing", {
 
     _1042_cools_to = "1042_nodes:iorn_slag",
     post_effect_color = {a = 144, r = 0xff, g = 0x22, b = 0x00},
-    groups = {molten = 1, liquid = 1, burning = 1},
+    groups = {molten = 1, liquid = 1, burning = 1, not_in_creative_inventory = 1},
 })

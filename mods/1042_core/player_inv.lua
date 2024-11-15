@@ -15,6 +15,7 @@ core.register_on_mods_loaded(function()
     local lists = {core.registered_nodes, core.registered_items, core.registered_tools, core.registered_craftitems}
 
     local added = {}
+    local items_to_reg = {}
 
     for _, list in ipairs(lists) do
         for name, def in pairs(list) do
@@ -22,14 +23,23 @@ core.register_on_mods_loaded(function()
                 added[name] = true
                 if not def.groups.not_in_creative_inventory then
                     size = size + 1
-                    inv:set_size("main", size)
-                    local is = ItemStack(name)
-                    is:set_count(def.stack_max)
-                    inv:set_stack("main", size, is)
+                    items_to_reg[#items_to_reg+1] = def
                 end
             end
         end
     end
+
+    table.sort(items_to_reg, function(a, b)
+        return a.name > b.name
+    end)
+
+    inv:set_size("main", size)
+    for i, def in ipairs(items_to_reg) do
+        local is = ItemStack(def.name)
+        is:set_count(def.stack_max)
+        inv:set_stack("main", i, is)
+    end
+    
 
     inv_row_count = (size / 8)
     if size % 8 > 0 then
