@@ -403,3 +403,23 @@ core.register_craft({
         {"1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget"},
     }
 })
+
+
+
+
+
+core.register_node("1042_nodes:chest", {
+    description = "Chest",
+    tiles = {"1042_plain_node.png^[colorize:#672307:200"},
+    use_texture_alpha = "opaque",
+
+    sounds = {
+        dig = {
+            name = "tree_dig",
+            gain = 2,
+            pitch = 1
+        }
+    },
+
+    groups = {wood = 1},
+})

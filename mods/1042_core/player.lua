@@ -76,7 +76,6 @@ core.register_on_joinplayer(function(player, last_join)
 
         nametag_color = "#00000000",
     })
-    player:set_animation({x = 0, y = 40}, 3)
 
     player:set_physics_override(
         {
@@ -176,6 +175,24 @@ end)
 
 core.register_globalstep(function(dtime)
     for _, player in ipairs(core.get_connected_players()) do
+
+        -- Move code for animations and such
+        local player_controls = player:get_player_control()
+        local player_meta = player:get_meta()
+
+        if player_controls.movement_y ~= 0 and player_meta:get_string("moving") == "false" then
+            player:set_animation({x = 0, y = 40}, 3)
+            player_meta:set_string("moving", "true")
+        elseif player_controls.movement_y == 0 and player_meta:get_string("moving") ~= "false" then
+            player:set_animation({x = 0, y = 0}, 1)
+            player_meta:set_string("moving", "false")
+        end
+
+
+
+
+        -- Hud code
+
         local player_huds = player_huds[player:get_player_name()]
 
         -- Pointed Item

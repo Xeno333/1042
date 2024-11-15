@@ -24,7 +24,7 @@ core.register_on_mods_loaded(function()
                     size = size + 1
                     inv:set_size("main", size)
                     local is = ItemStack(name)
-                    is:set_count(99)
+                    is:set_count(def.stack_max)
                     inv:set_stack("main", size, is)
                 end
             end
