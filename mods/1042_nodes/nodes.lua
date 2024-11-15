@@ -396,7 +396,7 @@ core.register_node("1042_nodes:iorn_nugget_block", {
 })
 
 core.register_craft({
-    output = "1042_tools:iorn_nugget_block",
+    output = "1042_nodes:iorn_nugget_block",
     recipe = {
         {"1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget"},
         {"1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget"},
@@ -444,11 +444,40 @@ core.register_node("1042_nodes:chest", {
             "listring[current_player;main]"..
             "listring[context;main]"
         )
+
+        meta:set_string("init", "true")
     end,
 
     on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+        local meta = core.get_meta(pos)
+        
+        if meta:get_string("init") ~= "true" then 
+            local inv = meta:get_inventory()
+    
+            inv:set_size("main", 10)
+    
+            meta:set_string("formspec",
+                "formspec_version[8]size[14,9,false]"..
+                "list[context;main;1,1;10,1;]"..
+                "list[current_player;main;1,3;10,4;]"..
+                "listring[current_player;main]"..
+                "listring[context;main]"
+            )
+
+            meta:set_string("init", "true")
+        end
+
         core.show_formspec(player:get_player_name(), "chest_inv", core.get_meta(pos):get_string("formspec"))
     end,
 
     groups = {wood = 1},
+})
+
+core.register_craft({
+    output = "1042_nodes:chest",
+    recipe = {
+        {"group:wood", "group:wood", "group:wood"},
+        {"group:wood", "", "group:wood"},
+        {"group:wood", "group:wood", "group:wood"}
+    }
 })
