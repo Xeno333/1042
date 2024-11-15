@@ -162,7 +162,6 @@ core.register_on_generated(function(vm, minp, maxp, seed)
     local m_pos = {z=minp.x,y=minp.y,x=minp.z}
     local cave_noise_m = mapgen_1042.cave_map:get_3d_map(m_pos)
     local ore_noise_m = mapgen_1042.ore_map:get_3d_map(m_pos)
-    local cave_noise = -0.95
 
     local tm = weather.get_temp_map(minp.x, minp.z)
 
@@ -239,7 +238,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                 end
 
                 -- Place and handel caves
-                if cave_noise_m[lx][ly][lz] > cave_noise or y > caves_max then
+                if cave_noise_m[lx][ly][lz] > -0.95 or y > caves_max then
                     if y < (ny-1) then
                         stone_gen(ore_noise_m[lx][ly][lz], y, data, vi)
 
@@ -265,9 +264,9 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                 elseif y <= ny and y<= lava_level then
                     data[vi] = lava
                 else
-                    if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > cave_noise and y <= ny then
+                    if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > -0.95 and y <= ny then
                         dec(pr, x, y-1, z, data, area, place_list, tempv, "bottom")
-                    elseif cave_noise_m[lx][ly+1] and cave_noise_m[lx][ly+1][lz] > cave_noise and y <= ny then
+                    elseif cave_noise_m[lx][ly+1] and cave_noise_m[lx][ly+1][lz] > -0.95 and y <= ny then
                         dec(pr, x, y-1, z, data, area, place_list, tempv, "top")
                     end
                 end
