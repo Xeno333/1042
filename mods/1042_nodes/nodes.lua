@@ -412,8 +412,16 @@ core.register_craft({
 
 core.register_node("1042_nodes:chest", {
     description = "Chest",
-    tiles = {"1042_plain_node.png^[colorize:#672307:200"},
-    use_texture_alpha = "opaque",
+    drawtype = "mesh",
+    mesh = "chest.obj",
+    tiles = {
+        "1042_plain_node.png^[colorize:#572307:200", 
+        "1042_plain_node.png^[colorize:#bbaa37:200"
+    },
+    
+    paramtype2 = "facedir",
+    paramtype = "light",
+    sunlight_propagates = true,
 
     sounds = {
         dig = {
