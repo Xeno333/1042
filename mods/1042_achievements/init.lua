@@ -11,7 +11,7 @@ function achievements_1042.achieve(player, achievement_name)
     if not achievement_definition then return nil end
 
     local metaref = player:get_meta()
-    if metaref:get_string("1042_achievements_achievement_"..achievement_name) == "true" then
+    if metaref:get_string("1042_achievements_achievement_"..achievement_name) ~= "true" then
         metaref:set_string("1042_achievements_achievement_"..achievement_name, "true")
 
         local id = player:hud_add({
