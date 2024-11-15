@@ -419,7 +419,7 @@ core.register_node("1042_nodes:chest", {
         "1042_plain_node.png^[colorize:#bbaa37:200"
     },
     
-    paramtype2 = "facedir",
+    paramtype2 = "4dir",
     paramtype = "light",
     sunlight_propagates = true,
 
