@@ -40,7 +40,7 @@ weather.weathers = {
         name = "Hail",
         conditions = {
             temp = {
-                min = -2,
+                min = -5,
             }
         },
         clouds = {
@@ -110,7 +110,7 @@ weather.weathers = {
         name = "Storm",
         conditions = {
             temp = {
-                min = -2,
+                min = 5,
             }
         },
         clouds = {
@@ -180,7 +180,7 @@ weather.weathers = {
         name = "Light storm",
         conditions = {
             temp = {
-                min = -2,
+                min = 0,
             }
         },
         clouds = {
@@ -250,7 +250,7 @@ weather.weathers = {
         name = "Drizzle",
         conditions = {
             temp = {
-                min = -2,
+                min = 0,
             }
         },
         clouds = {
@@ -297,8 +297,8 @@ weather.weathers = {
             acc = vector.new(0, -9.8, 0),
 
             size = {
-                min = 0.5,
-                max = 1
+                min = 0.2,
+                max = 0.5
             },
 
             exptime = {
@@ -476,7 +476,28 @@ end)
 
 
 core.register_chatcommand("change_weather", {
-    func = function(name)
-        weather_index = weather.rand:next(1, #weather.weathers)
+    func = function(name, param)
+        local index = weather.rand:next(1, #weather.weathers)
+
+        if param then
+            if param == "help" then
+                local retsrting = ""
+                for _, def in ipairs(weather.weathers) do
+                    retsrting = retsrting .. def.name .. "\n"
+                end
+
+                return true, retsrting
+
+            else
+                for i, def in ipairs(weather.weathers) do
+                    if def.name == param then
+                        index = i
+                    end
+                end
+            end
+        end
+
+        weather_index = index
+        return true, "Setting weather to " .. weather.weathers[weather_index].name
     end
 })
