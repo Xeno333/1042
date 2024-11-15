@@ -77,6 +77,7 @@ core.register_node("1042_tools:pick",{
         damage_groups = {fleshy = 1},
 		groupcaps = {
 			stone = {times = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}, uses = 1},
+            frozen = {times = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}, uses = 1},
 		},
         punch_attack_uses = 1
     },
