@@ -30,7 +30,7 @@ Nugget blocks can be melted by placing them beside a block of burning charcoal, 
 
 
 ## Starting fires
-This is a fairly simple task, find some an iorn nugget and some flint. When you have found some flint, take it and put it right next to the node you want to light. After doing this you start to beat the flint with the iorn nugget. This should produce a lot of sparks and the fire should ignite after a few attempts. It can take a while sometimes so don't give up to quickly. Some things like wood burn to charcoal, this can be used to melt metals.
+This is a fairly simple task, find some an iron nugget and some flint. When you have found some flint, take it and put it right next to the node you want to light. After doing this you start to beat the flint with the iron nugget. This should produce a lot of sparks and the fire should ignite after a few attempts. It can take a while sometimes so don't give up to quickly. Some things like wood burn to charcoal, this can be used to melt metals.
 
 
 ## Tools
@@ -43,8 +43,8 @@ Axe is made with three flint on top and two sticks for handle.
 
 ### Pick
 
-Pick is made with three and two sticks for handle.
+Pick is made with three iron and two sticks for handle.
 
 ### Sword
 
-Sword is made with two iorn ingots for a blade and one stick for a handle.
+Sword is made with two iron ingots for a blade and one stick for a handle.

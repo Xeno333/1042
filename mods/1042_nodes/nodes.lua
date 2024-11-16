@@ -168,8 +168,8 @@ core.register_node("1042_nodes:basalt", {
     groups = {stone = 2},
 })
 
-core.register_node("1042_nodes:iorn_ore", {
-    description = "Iorn Ore",
+core.register_node("1042_nodes:iron_ore", {
+    description = "Iron Ore",
     tiles = {"1042_plain_node.png^[colorize:#551111:128"},
     use_texture_alpha = "opaque",
 
@@ -178,15 +178,15 @@ core.register_node("1042_nodes:iorn_ore", {
         items = {
             {
                 rarity = 1,
-                items = {"1042_nodes:iorn_nugget"}
+                items = {"1042_nodes:iron_nugget"}
             },
             {
                 rarity = 2,
-                items = {"1042_nodes:iorn_nugget"}
+                items = {"1042_nodes:iron_nugget"}
             },
             {
                 rarity = 4,
-                items = {"1042_nodes:iorn_nugget"}
+                items = {"1042_nodes:iron_nugget"}
             },
             {
                 rarity = 8,
@@ -339,10 +339,10 @@ core.register_node("1042_nodes:charcoal_burning", {
 
 
 
--- Iorn
+-- Iron
 
-core.register_node("1042_nodes:iorn_slag", {
-    description = "Iorn Slag",
+core.register_node("1042_nodes:iron_slag", {
+    description = "Iron Slag",
     tiles = {"1042_plain_node.png^[colorize:#331111:128"},
     use_texture_alpha = "opaque",
 
@@ -369,8 +369,8 @@ core.register_node("1042_nodes:iorn_slag", {
 
 
 
-core.register_node("1042_nodes:iorn_nugget_block", {
-    description = "Iorn Nugget Block",
+core.register_node("1042_nodes:iron_nugget_block", {
+    description = "Iron Nugget Block",
     tiles = {"1042_plain_node.png^[colorize:#664444:128"},
     use_texture_alpha = "opaque",
 
@@ -396,11 +396,11 @@ core.register_node("1042_nodes:iorn_nugget_block", {
 })
 
 core.register_craft({
-    output = "1042_nodes:iorn_nugget_block",
+    output = "1042_nodes:iron_nugget_block",
     recipe = {
-        {"1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget"},
-        {"1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget"},
-        {"1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget", "1042_nodes:iorn_nugget"},
+        {"1042_nodes:iron_nugget", "1042_nodes:iron_nugget", "1042_nodes:iron_nugget"},
+        {"1042_nodes:iron_nugget", "1042_nodes:iron_nugget", "1042_nodes:iron_nugget"},
+        {"1042_nodes:iron_nugget", "1042_nodes:iron_nugget", "1042_nodes:iron_nugget"},
     }
 })
 

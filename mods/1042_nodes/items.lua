@@ -242,8 +242,8 @@ core.register_node("1042_nodes:sticks", {
 
 
 
-core.register_node("1042_nodes:iorn_nugget", {
-    description = "Iorn Nugget",
+core.register_node("1042_nodes:iron_nugget", {
+    description = "Iron Nugget",
     drawtype = "mesh",
     mesh = "nugget.obj",
     tiles = {"1042_plain_node.png^[colorize:#551111:128"},
@@ -315,8 +315,8 @@ core.register_node("1042_nodes:anvil", {
 
 
 
-core.register_node("1042_nodes:iorn_ingot", {
-    description = "Iorn Ingot",
+core.register_node("1042_nodes:iron_ingot", {
+    description = "Iron Ingot",
     drawtype = "nodebox",
     mesh = "crystal.obj",
     tiles = {"1042_plain_node.png^[colorize:#998888:200"},

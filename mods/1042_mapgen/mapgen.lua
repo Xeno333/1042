@@ -39,14 +39,14 @@ local turf_dry = core.get_content_id("1042_nodes:turf_dry")
 local snow = core.get_content_id("1042_nodes:snow")
 local bedrock = core.get_content_id("1042_nodes:bedrock")
 local lava = core.get_content_id("1042_nodes:lava_source")
-local iorn_ore = core.get_content_id("1042_nodes:iorn_ore")
+local iron_ore = core.get_content_id("1042_nodes:iron_ore")
 
 local water = core.get_content_id("1042_nodes:water_source")
 local ice = core.get_content_id("1042_nodes:ice")
 
 local rock = core.get_content_id("1042_nodes:rock")
 local sticks = core.get_content_id("1042_nodes:sticks")
-local iorn_nugget = core.get_content_id("1042_nodes:iorn_nugget")
+local iron_nugget = core.get_content_id("1042_nodes:iron_nugget")
 local beryl = core.get_content_id("1042_nodes:beryl")
 local flint = core.get_content_id("1042_nodes:flint")
 local beryl_top = core.get_content_id("1042_nodes:beryl_hanging")
@@ -67,7 +67,7 @@ local schematic_path = core.get_modpath("1042_mapgen") .. "/schematics/"
 
 local function stone_gen(noise, y, data, vi)
     if noise < -1.3 then
-        data[vi] = iorn_ore
+        data[vi] = iron_ore
         return
     end
     
@@ -89,6 +89,9 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
                 
             elseif c == 100 and y > water_level+3 then
                 data[area:index(x, y+1, z)] = sticks
+
+            elseif c == 101 and y > water_level+9 then
+                data[area:index(x, y+1, z)] = mushroom
 
             -- Small tree
             elseif c > 995 and y > water_level+3 and tempv >= 3 then
@@ -126,7 +129,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
             data[area:index(x, y+1, z)] = rock
 
         elseif c <= 45 then
-            data[area:index(x, y+1, z)] = iorn_nugget
+            data[area:index(x, y+1, z)] = iron_nugget
 
         elseif c <= 60 and y <= decorated_caves then
             data[area:index(x, y+1, z)] = beryl

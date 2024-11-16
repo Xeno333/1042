@@ -48,8 +48,8 @@ core.register_node("1042_tools:sword",{
 core.register_craft({
     output = "1042_tools:sword",
     recipe = {
-        {"", "1042_nodes:iorn_ingot", ""},
-        {"", "1042_nodes:iorn_ingot", ""},
+        {"", "1042_nodes:iron_ingot", ""},
+        {"", "1042_nodes:iron_ingot", ""},
         {"", "1042_nodes:sticks", ""},
     }
 })
@@ -95,7 +95,7 @@ core.register_node("1042_tools:pick",{
 core.register_craft({
     output = "1042_tools:pick",
     recipe = {
-        {"1042_nodes:iorn_ingot", "1042_nodes:iorn_ingot", "1042_nodes:iorn_ingot"},
+        {"1042_nodes:iron_ingot", "1042_nodes:iron_ingot", "1042_nodes:iron_ingot"},
         {"", "1042_nodes:sticks", ""},
         {"", "1042_nodes:sticks", ""},
     }

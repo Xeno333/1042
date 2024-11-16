@@ -183,8 +183,8 @@ core.register_node("1042_nodes:lava_flowing", {
 
 
 
-core.register_node("1042_nodes:molten_iorn_source", {
-    description = "Molten Iorn Source",
+core.register_node("1042_nodes:molten_iron_source", {
+    description = "Molten Iron Source",
 
     drawtype = "liquid",
     tiles = {
@@ -212,8 +212,8 @@ core.register_node("1042_nodes:molten_iorn_source", {
 
 
     liquidtype = "source",
-    liquid_alternative_flowing = "1042_nodes:molten_iorn_flowing",
-    liquid_alternative_source = "1042_nodes:molten_iorn_source",
+    liquid_alternative_flowing = "1042_nodes:molten_iron_flowing",
+    liquid_alternative_source = "1042_nodes:molten_iron_source",
     drop = "",
 
     drowning = 10,
@@ -221,14 +221,14 @@ core.register_node("1042_nodes:molten_iorn_source", {
     liquid_range = 1,
     damage_per_second = 10,
 
-    _1042_cools_to = "1042_nodes:iorn_slag",
+    _1042_cools_to = "1042_nodes:iron_slag",
     post_effect_color = {a = 144, r = 0xff, g = 0x22, b = 0x00},
     groups = {molten = 1, liquid = 1, burning = 1},
 
 })
 
-core.register_node("1042_nodes:molten_iorn_flowing", {
-    description = "Flowing Molten Iorn",
+core.register_node("1042_nodes:molten_iron_flowing", {
+    description = "Flowing Molten Iron",
 
     drawtype = "flowingliquid",
     tiles = {"1042_plain_node.png^[colorize:#cc3300:144"},
@@ -256,8 +256,8 @@ core.register_node("1042_nodes:molten_iorn_flowing", {
     is_ground_content = false,
 
     liquidtype = "flowing",
-    liquid_alternative_flowing = "1042_nodes:molten_iorn_flowing",
-    liquid_alternative_source = "1042_nodes:molten_iorn_source",
+    liquid_alternative_flowing = "1042_nodes:molten_iron_flowing",
+    liquid_alternative_source = "1042_nodes:molten_iron_source",
     drop = "",
 
     drowning = 10,
@@ -265,7 +265,7 @@ core.register_node("1042_nodes:molten_iorn_flowing", {
     liquid_range = 1,
     damage_per_second = 10,
 
-    _1042_cools_to = "1042_nodes:iorn_slag",
+    _1042_cools_to = "1042_nodes:iron_slag",
     post_effect_color = {a = 144, r = 0xff, g = 0x22, b = 0x00},
     groups = {molten = 1, liquid = 1, burning = 1, not_in_creative_inventory = 1},
 })
