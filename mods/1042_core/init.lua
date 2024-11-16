@@ -1,4 +1,8 @@
-core_1042 = {}
+core_1042 = {
+    info = core.get_game_info()
+}
+
+
 
 
 local on_player_joins = {
@@ -82,8 +86,8 @@ end
 local path = core.get_modpath("1042_core")
 
 dofile(path.."/game_storage.lua")
+dofile(path.."/funcs.lua")
 dofile(path.."/player_inv.lua")
 dofile(path.."/player.lua")
-dofile(path.."/funcs.lua")
 dofile(path.."/privs.lua")
 

@@ -14,3 +14,4 @@
 - Add smelting mechanics -Xeno333
 - Add more crafting -Xeno333
 - Add proper multiplayer weather system -Xeno333
+- Improve UI add new function to core_1042 -Xeno333

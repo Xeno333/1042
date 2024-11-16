@@ -100,5 +100,5 @@ We Hope you enjoy playing it and all feedback is welcome!
 
 
 ## Online Resources
-- Github `https://github.com/Xeno333/1042/`
-- 1042 Discord `https://discord.gg/7YTMtyPgrD`
+- [1042 Github](https://github.com/Xeno333/1042/): `https://github.com/Xeno333/1042/`
+- [1042 Discord](https://discord.gg/7YTMtyPgrD) `https://discord.gg/7YTMtyPgrD`

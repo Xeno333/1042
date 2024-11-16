@@ -10,3 +10,17 @@ function core_1042.eat(itemstack, user, value, p_chance)
 
     return itemstack
 end
+
+function core_1042.read_file(filename)
+    local file = io.open(filename)
+    
+    if not file then
+        return nil
+    end
+    
+    local str = file:read("*a")
+    
+    file:close()
+
+    return str
+end

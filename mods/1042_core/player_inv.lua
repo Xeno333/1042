@@ -60,6 +60,38 @@ core.register_on_mods_loaded(function()
 
 end)
 
+-- Load gameplay.md
+local fn = core_1042.info.path .. "/docs/gameplay.md"
+local gamplay_md = core_1042.read_file(fn)
+
+if not gamplay_md then
+    error("Could not open \"" .. fn .. "\", this is needed for gameplay!")
+end
+
+-- Load README.md
+fn = core_1042.info.path .. "/README.md"
+local README_md = core_1042.read_file(fn)
+
+if not README_md then
+    error("Could not open \"" .. fn .. "\", this is needed for gameplay!")
+end
+
+-- Load LICENSE
+fn = core_1042.info.path .. "/LICENSE"
+local LICENSE = core_1042.read_file(fn)
+
+if not LICENSE then
+    error("Could not open \"" .. fn .. "\", this is needed for gameplay!")
+end
+
+-- Load credits.txt
+fn = core_1042.info.path .. "/credits.txt"
+local credits_txt = core_1042.read_file(fn)
+
+if not credits_txt then
+    error("Could not open \"" .. fn .. "\", this is needed for gameplay!")
+end
+
 
 
 function core_1042.make_inv_formspec(player)
@@ -75,6 +107,8 @@ function core_1042.make_inv_formspec(player)
 
     local inv_formspec = 
         "formspec_version[8]size[32,17,false]position["..position.."]"..
+        "listcolors[#00ffff40;#00ffff80;#00aaaaff;#00444480;#00ffffff]"..
+        "bgcolor[#00223320;;]"..
 
         "model[13,-2.2;4,4;logo;1042.obj;1042_plain_node.png^[colorize:#672307:168;0,90;true;true;;]"..
         "image_button[29,0.3;2.7,1;1042_plain_node.png^[colorize:#ff2200:144;leave_game;Leave Game]"..
@@ -96,6 +130,12 @@ function core_1042.make_inv_formspec(player)
         "scroll_container_end[]"..
         "scrollbar[1,2;0.5,4;vertical;setting_box_scrollbar;0]"..
 
+        "label[1.5,7.5;Docs]"..
+        "image_button[2,8;2,1;1042_plain_node.png^[colorize:#22ff44:144;doc_gameplay_md;gameplay.md]"..
+        "image_button[5,8;2,1;1042_plain_node.png^[colorize:#22ffff:144;README_md;README.md]"..
+        "image_button[8,8;2,1;1042_plain_node.png^[colorize:#88ffff:144;LICENSE;LICENSE]"..
+        "image_button[11,8;2,1;1042_plain_node.png^[colorize:#448888:144;credits_txt;credits.txt]"..
+
         "list[current_player;main;1,11;10,4;]"..
         "listring[current_player;main]"..
         "listring[current_player;craft]"..
@@ -113,7 +153,7 @@ function core_1042.make_inv_formspec(player)
         inv_formspec = inv_formspec ..
         "scroll_container[21,11;10,5;creative_inv;vertical;0.1;true]"..
 
-            "list[detached:creative;main;0,0;8," .. inv_row_count .. ";]"..
+            "list[detached:creative;main;0.1,0.1;8," .. inv_row_count .. ";]"..
             "listring[detached:creative;main]"..
             "lstring[current_player;main]"..
 
@@ -170,6 +210,19 @@ core.register_on_player_receive_fields(function(player, form, fields)
         elseif fields.setting_hide_creative_inv then
             core_1042.set("playersetting_"..player:get_player_name().."_hide_creative_inv", fields.setting_hide_creative_inv)
             player:set_inventory_formspec(core_1042.make_inv_formspec(player))
+
+        elseif fields.doc_gameplay_md then
+            core.show_formspec(player:get_player_name(), "doc_gameplay_md", "formspec_version[8]size[14,9,false]textarea[0,0;14,9;gameplay_md_text;;" .. core.formspec_escape(gamplay_md) .. "]")
+
+        elseif fields.README_md then
+            core.show_formspec(player:get_player_name(), "README_md", "formspec_version[8]size[14,9,false]textarea[0,0;14,9;README_md_text;;" .. core.formspec_escape(README_md) .. "]")
+            
+        elseif fields.LICENSE then
+            core.show_formspec(player:get_player_name(), "LICENSE", "formspec_version[8]size[14,9,false]textarea[0,0;14,9;LICENSE_text;;" .. core.formspec_escape(LICENSE) .. "]")
+
+        elseif fields.credits_txt then
+            core.show_formspec(player:get_player_name(), "credits_txt", "formspec_version[8]size[14,9,false]textarea[0,0;14,9;credits_txt_text;;" .. core.formspec_escape(credits_txt) .. "]")
+
         end
     end
 end)
