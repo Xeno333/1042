@@ -364,7 +364,7 @@ core.register_node("1042_nodes:iorn_slag", {
         }
     },
 
-    groups = {stone = 3},
+    groups = {stone = 3, breakable_by_hand = 3},
 })
 
 
