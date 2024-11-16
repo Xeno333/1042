@@ -111,8 +111,8 @@ function core_1042.make_inv_formspec(player)
         "bgcolor[#00223320;;]"..
 
         "model[13,-2.2;4,4;logo;1042.obj;1042_plain_node.png^[colorize:#672307:168;0,90;true;true;;]"..
+        "set_focus[leave_game;true]"..
         "image_button[29,0.3;2.7,1;1042_plain_node.png^[colorize:#ff2200:144;leave_game;Leave Game]"..
-        "set_focus[leave_game;false]"..
 
         "label[1.5,1.5;Settings]"..
         "scroll_container[2,2;28,4;setting_box_scrollbar;vertical;0.1;true]"..
