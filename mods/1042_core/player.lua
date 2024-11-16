@@ -46,6 +46,23 @@ end
 
 core.register_on_respawnplayer(spawn_player)
 
+
+-- Die player
+
+core.register_on_dieplayer(function(player, reason)
+    local inv = player:get_inventory()
+    local pos = player:get_pos()
+
+    for listname, list in pairs(inv:get_lists()) do
+        for i, itemstack in ipairs(list) do
+            core.item_drop(itemstack, player, pos)
+            inv:set_stack(listname, i, ItemStack(""))
+        end
+    end
+end)
+
+
+
 -- Join player
 
 core.register_on_joinplayer(function(player, last_join)
@@ -170,19 +187,6 @@ end)
 core.register_on_leaveplayer(function(player)
     player_huds[player:get_player_name()] = nil
 end)
-
-core.register_on_dieplayer(function(player, reason)
-    local inv = player:get_inventory()
-    local pos = player:get_pos()
-
-    for listname, list in pairs(inv:get_lists()) do
-        for i, itemstack in ipairs(list) do
-            core.item_drop(itemstack, player, pos)
-            inv:set_stack(listname, i, ItemStack(""))
-        end
-    end
-end)
-
 
 core.register_globalstep(function(dtime)
     for _, player in ipairs(core.get_connected_players()) do

@@ -171,7 +171,6 @@ core.register_abm({
     catch_up = true,
     interval = 8,
     chance = 4,
-    catch_up = true,
     action = function(pos, node, active_object_count, active_object_count_wider)
         if rand:next(1, 4) == 1 then
             core.set_node(pos, {name = "1042_nodes:iron_ingot"})
@@ -212,5 +211,27 @@ core.register_abm({
 
     action = function(pos, node, active_object_count, active_object_count_wider)
         core.set_node(pos, {name = "1042_nodes:charcoal_burning"})
+    end
+})
+
+
+
+-- Cooking
+
+core.register_abm({
+    label = "Cook",
+    nodenames = {"group:cooks"},
+    neighbors = {"group:burning"},
+    catch_up = true,
+    interval = 8,
+    chance = 4,
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        local def = core.registered_nodes[node.name]
+        if rand:next(1, def.groups.cooks) == 1 then
+            local cooks_to = def._1042_cooks_to
+            if cooks_to then
+                core.set_node(pos, {name = cooks_to})
+            end
+        end
     end
 })

@@ -366,3 +366,55 @@ core.register_node("1042_nodes:iron_ingot", {
     
     groups = {breakable_by_hand = 1, falling_node = 1},
 })
+
+
+core.register_node("1042_nodes:pork_raw", {
+    description = "Raw Pork",
+    drawtype = "mesh",
+    mesh = "pork.obj",
+    tiles = {
+        "1042_plain_node.png^[colorize:#ffbb88:128",
+        "1042_plain_node.png^[colorize:#ffaa77:144",
+        "1042_plain_node.png^[colorize:#ff9966:128"
+    },
+    use_texture_alpha = "opaque",
+
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+    
+    on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 4, 2)
+    end,
+
+    _1042_cooks_to = "1042_nodes:pork_cooked",
+
+    groups = {food = 1, breakable_by_hand = 1, attached_node = 3, cooks = 3},
+})
+
+core.register_node("1042_nodes:pork_cooked", {
+    description = "Cooked Pork",
+    drawtype = "mesh",
+    mesh = "pork.obj",
+    tiles = {
+        "1042_plain_node.png^[colorize:#dd4422:128",
+        "1042_plain_node.png^[colorize:#cc3311:144",
+        "1042_plain_node.png^[colorize:#993322:128"
+    },
+    use_texture_alpha = "opaque",
+
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+    
+    on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 8, nil)
+    end,
+
+
+    groups = {food = 1, breakable_by_hand = 1, attached_node = 3},
+})

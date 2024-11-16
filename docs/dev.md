@@ -8,7 +8,7 @@ This is documentation for development and modding for the game `1042` on the *Lu
 # Core interface
 
 ## `core_1042` is the namespace for all core_1042 functions
-- `core_1042.eat(itemstack, user, food_value, p_chance)` This removes one item from itemstack from the player `user` and adds `value` to `user`'s HP, `p_chance` is chance of taking damage of `food_value` while eating item.
+- `core_1042.eat(itemstack, user, food_value, p_chance)` This removes one item from itemstack from the player `user` and adds `value` to `user`'s HP, `p_chance` is chance of taking damage of 2 times `food_value` while eating item.
 - `core_1042.read_file(filename)` Read a file and return its contense as a string. Returns `nil` if no data is read.
 - `core_1042.info` Game info table.
 
@@ -24,9 +24,10 @@ This is documentation for development and modding for the game `1042` on the *Lu
 - `wood` Wood nodes. Value is for tools like axe, for break-time. `{[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}`
 - `cools` Nodes that cool hot nodes.
 - `burning` For burning/hot nodes.
-- `burns` Nodes that can catch on fire. Value is chance from `1` to `<group value>` chance or burning.
+- `burns` Nodes that can catch on fire. Value is chance from `1` to `<group value>` chance of burning.
 - `molten` Uses `_1042_cools_to` for node.
 - `melts` Uses `_1042_melts_to` for node.
+- `cooks` Uses `_1042_cooks_to` for node. Value is chance from 1 to `<group value>` of cooking per check.
 
 
 
@@ -38,6 +39,7 @@ There are a few new node definition fields for ABMs and such:
 
 - `_1042_cools_to = <node>` Node cools to given node.
 - `_1042_melts_to = <node>` Node melts to given node.
+- `_1042_cooks_to = <node>` Node cooks to given node.
 
 
 

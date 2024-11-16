@@ -19,6 +19,16 @@ Stone nodes must be broken with a pick
 Wood nodes must be broken with an axe
 
 
+## Crafting
+
+Crafting is done in the 3x3 slots in the inventory. There is not a crafting guid in this phase, though I would like to add it soon.
+
+
+## Cooking
+
+If you get some raw food, like pork from a pig, you can cook it. Cooking is done by placing raw food near a burning node. After a given ionterval the food will cook.
+
+
 ## Mining
 
 Ores are worthless in their natrual state, they must be broken into nuggets in order to be processed. This is done by mining them with a pick. Once mined they can be aranged into a 3x3 square in the crafting slots in your invintory to make a nugget block.

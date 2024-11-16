@@ -112,6 +112,15 @@ core.register_entity("1042_mobs:pig", {
         stepheight = 1.1,
     },
 
+    on_death = function(self, killer)
+        local pos = self.object:get_pos()
+        if core.get_node(pos).name == "air" then
+            core.set_node(pos, {name = "1042_nodes:pork_raw"})
+        else
+            core.item_drop(ItemStack("1042_nodes:pork_raw"), self.object, pos)
+        end
+    end,
+
     on_activate = function(self, staticdata, dtime_s)
         self.timer = 0
         self.rand = PseudoRandom(math.random(1, 5000))
