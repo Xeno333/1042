@@ -112,7 +112,9 @@ core.register_entity("1042_mobs:pig", {
         stepheight = 1.1,
     },
 
-    on_death = function(self, killer)
+    on_death = function(self, player)
+        achievements_1042.achieve(player, "hog_slayer")
+
         local pos = self.object:get_pos()
         if core.get_node(pos).name == "air" then
             core.set_node(pos, {name = "1042_nodes:pork_raw"})
@@ -153,6 +155,8 @@ core.register_entity("1042_mobs:pig", {
     end,
 
     on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir, damage)
+        core.sound_play("pig", {gain = 1, pitch = 1.5, pos = self.object:get_pos(), max_hear_distance = 32}, true)
+
         self.timer = 4
 
         local dir = vector.random_direction()

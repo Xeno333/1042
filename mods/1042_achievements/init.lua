@@ -60,6 +60,11 @@ achievements_1042.register_achievement("first_life", {
     colour = "#00ffaa"
 })
 
+achievements_1042.register_achievement("hog_slayer", {
+    achievement = core.colorize("#ff7755", "Hog Slayer!"),
+    colour = "#ffccaa"
+})
+
 achievements_1042.register_achievement("oooo_fire", {
     achievement = core.colorize("#ff7755", "Oooo, Fire!"),
     colour = "#ffccaa"
