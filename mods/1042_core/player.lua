@@ -243,7 +243,7 @@ core.register_globalstep(function(dtime)
 
         -- Hud code
 
-        local player_huds = player_huds[player:get_player_name()]
+        local player_huds = player_huds[name]
 
         -- Pointed Item
         local id = player_huds.pointed_thing
