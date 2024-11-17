@@ -226,7 +226,7 @@ core.register_abm({
     interval = 8,
     chance = 4,
     action = function(pos, node, active_object_count, active_object_count_wider)
-        local def = core.registered_nodes[node.name]
+        local def = core.registered_items[node.name]
         if rand:next(1, def.groups.cooks) == 1 then
             local cooks_to = def._1042_cooks_to
             if cooks_to then

@@ -6,6 +6,11 @@
 - The game machanics in 1042 are not the same as most games on the luanti engine, thus I will write a gameplay manual.
 
 
+## Controles
+
+Controles are slightly different in 1042. To eat/use some items you use the `aux1` key insted of rightclick/leftclick this is so you can still treat items as nodes.
+
+
 ## Breaking nodes
 
 Some nodes can be broken by hand, others require tools

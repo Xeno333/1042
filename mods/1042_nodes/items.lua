@@ -3,7 +3,7 @@
 
 local function hit_flint_with_iron(itemstack, player, pointed_thing)
     local node = nil
-    if pointed_thing.under then
+    if pointed_thing and pointed_thing.under then
         node = core.get_node(pointed_thing.under)
     end
     if node and node.name == "1042_nodes:flint" then
@@ -272,7 +272,7 @@ core.register_node("1042_nodes:iron_nugget", {
         }
     },
 
-    on_use = hit_flint_with_iron,
+    _1042_on_use = hit_flint_with_iron,
 
     paramtype = "light",
     paramtype2 = "4dir",
@@ -358,7 +358,7 @@ core.register_node("1042_nodes:iron_ingot", {
         }
     },
 
-    on_use = hit_flint_with_iron,
+    _1042_on_use = hit_flint_with_iron,
 
     after_dig_node = function(pos, oldnode, oldmetadata, digger)
         achievements_1042.achieve(digger, "smelter")
@@ -385,7 +385,7 @@ core.register_node("1042_nodes:pork_raw", {
     walkable = true,
     buildable_to = false,
     
-    on_use = function(itemstack, user, pointed_thing)
+    _1042_on_use = function(itemstack, user)
         return core_1042.eat(itemstack, user, 4, 2)
     end,
 
@@ -411,7 +411,7 @@ core.register_node("1042_nodes:pork_cooked", {
     walkable = true,
     buildable_to = false,
     
-    on_use = function(itemstack, user, pointed_thing)
+    _1042_on_use = function(itemstack, user)
         return core_1042.eat(itemstack, user, 8, nil)
     end,
 

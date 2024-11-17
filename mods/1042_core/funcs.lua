@@ -1,3 +1,4 @@
+local reach_distance = 4
 
 
 function core_1042.eat(itemstack, user, value, p_chance)
@@ -9,6 +10,14 @@ function core_1042.eat(itemstack, user, value, p_chance)
     end
 
     return itemstack
+end
+
+function core_1042.get_pointed_thing(player)
+    local pos = player:get_pos()
+    pos.y = pos.y + player:get_properties().eye_height
+    local ray = core.raycast(vector.new(pos.x, pos.y, pos.z), vector.add(vector.new(pos.x, pos.y, pos.z), vector.multiply(player:get_look_dir(), reach_distance)), false, false)
+
+    return ray:next()
 end
 
 function core_1042.read_file(filename)

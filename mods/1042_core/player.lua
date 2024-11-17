@@ -1,5 +1,5 @@
 local player_huds = {} -- Needs moved to API for player tabless #fixme
-
+local aux1_cooldown = {}
 
 
 
@@ -66,6 +66,9 @@ end)
 -- Join player
 
 core.register_on_joinplayer(function(player, last_join)
+    local name = player:get_player_name()
+
+
     if last_join == nil then
         spawn_player(player)
     end
@@ -179,19 +182,36 @@ core.register_on_joinplayer(function(player, last_join)
     })
 
 
-    player_huds[player:get_player_name()] = {}
+    player_huds[name] = {}
+    aux1_cooldown[name] = 0
 end)
+
+
 
 
 
 core.register_on_leaveplayer(function(player)
-    player_huds[player:get_player_name()] = nil
+    local name = player:get_player_name()
+
+    player_huds[name] = nil
+    aux1_cooldown[name] = nil
 end)
+
+
+
+
+
 
 core.register_globalstep(function(dtime)
     for _, player in ipairs(core.get_connected_players()) do
+        local name = player:get_player_name()
+        local pointed_thing = core_1042.get_pointed_thing(player)
+    
+        if aux1_cooldown[name] > 0 then
+            aux1_cooldown[name] = aux1_cooldown[name] - dtime
+        end
 
-        -- Move code for animations and such
+        -- Controles
         local player_controls = player:get_player_control()
         local player_meta = player:get_meta()
 
@@ -201,6 +221,21 @@ core.register_globalstep(function(dtime)
         elseif player_controls.movement_y == 0 and player_meta:get_string("moving") ~= "false" then
             player:set_animation({x = 0, y = 0}, 1)
             player_meta:set_string("moving", "false")
+        end
+
+
+        -- _1042_use
+        if player_controls.aux1 then
+            local itemstack = player:get_wielded_item()
+            local def = core.registered_items[itemstack:get_name()]
+
+            if def._1042_on_use and aux1_cooldown[name] <= 0 then
+                local ret_itemstack = def._1042_on_use(itemstack, player, pointed_thing)
+                if ret_itemstack then
+                    player:set_wielded_item(ret_itemstack)
+                end
+                aux1_cooldown[name] = 0.5
+            end
         end
 
 
@@ -218,13 +253,8 @@ core.register_globalstep(function(dtime)
             player_huds.pointed_thing = nil
         end
 
-        local pos = player:get_pos()
-        pos.y = pos.y + player:get_properties().eye_height
-        local ray = core.raycast(vector.new(pos.x, pos.y, pos.z), vector.add(vector.new(pos.x, pos.y, pos.z), vector.multiply(player:get_look_dir(), 4)), false, false)
-
-        local node = ray:next()
-        if node and node.type == "node" then
-            local txt = core.registered_nodes[core.get_node(vector.new(node.under.x, node.under.y, node.under.z)).name].description
+        if pointed_thing and pointed_thing.type == "node" then
+            local txt = core.registered_nodes[core.get_node(vector.new(pointed_thing.under.x, pointed_thing.under.y, pointed_thing.under.z)).name].description
             if txt then 
                 player_huds.pointed_thing =  player:hud_add({
                     type = "text",

@@ -476,6 +476,7 @@ end)
 
 
 core.register_chatcommand("change_weather", {
+    privs = {["creative"] = true},
     func = function(name, param)
         local index = weather.rand:next(1, #weather.weathers)
 

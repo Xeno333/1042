@@ -64,7 +64,7 @@ core.register_node("1042_nodes:mushroom", {
     walkable = false,
     buildable_to = false,
 
-    on_use = function(itemstack, user, pointed_thing)
+    _1042_on_use = function(itemstack, user, pointed_thing)
         return core_1042.eat(itemstack, user, 2, 10)
     end,
 
@@ -83,7 +83,7 @@ core.register_node("1042_nodes:apple", {
     walkable = true,
     buildable_to = false,
     
-    on_use = function(itemstack, user, pointed_thing)
+    _1042_on_use = function(itemstack, user, pointed_thing)
         return core_1042.eat(itemstack, user, 2, nil)
     end,
 

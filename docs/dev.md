@@ -10,6 +10,7 @@ This is documentation for development and modding for the game `1042` on the *Lu
 ## `core_1042` is the namespace for all core_1042 functions
 - `core_1042.eat(itemstack, user, food_value, p_chance)` This removes one item from itemstack from the player `user` and adds `value` to `user`'s HP, `p_chance` is chance of taking damage of 2 times `food_value` while eating item.
 - `core_1042.read_file(filename)` Read a file and return its contense as a string. Returns `nil` if no data is read.
+- `core_1042.get_pointed_thing(player)` Gets player pointed thing, in form of raycast.
 - `core_1042.info` Game info table.
 
 
@@ -40,6 +41,10 @@ There are a few new node definition fields for ABMs and such:
 - `_1042_cools_to = <node>` Node cools to given node.
 - `_1042_melts_to = <node>` Node melts to given node.
 - `_1042_cooks_to = <node>` Node cooks to given node.
+
+
+## Callbacks
+- `_1042_on_use = function(itemstack, player, pointed_thing)` on_use but for aux1. Uses `raycast` object.
 
 
 
