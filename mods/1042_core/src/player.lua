@@ -186,6 +186,7 @@ core.register_on_joinplayer(function(player, last_join)
         
     else
         core.chat_send_player(name, "It is day " .. core.get_day_count() .. " of being lost.")
+
     end
 
     player:set_fov(100, false, zoom_time)

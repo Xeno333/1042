@@ -11,6 +11,8 @@ This is documentation for development and modding for the game `1042` on the *Lu
 - `core_1042.eat(itemstack, user, food_value, p_chance)` This removes one item from itemstack from the player `user` and adds `value` to `user`'s HP, `p_chance` is chance of taking damage of 2 times `food_value` while eating item.
 - `core_1042.read_file(filename)` Read a file and return its contense as a string. Returns `nil` if no data is read.
 - `core_1042.get_pointed_thing(player)` Gets player pointed thing, in form of raycast.
+- `core_1042.set(key, value)` Sets a game stored value to key.
+- `core_1042.get(value)` Gets a game stored value from key.
 - `core_1042.info` Game info table.
 
 
