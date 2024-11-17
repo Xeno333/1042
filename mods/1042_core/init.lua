@@ -85,9 +85,10 @@ end
 
 local path = core.get_modpath("1042_core")
 
-dofile(path.."/game_storage.lua")
-dofile(path.."/funcs.lua")
-dofile(path.."/player_inv.lua")
-dofile(path.."/player.lua")
-dofile(path.."/privs.lua")
+dofile(path.."/src/game_storage.lua")
+dofile(path.."/src/funcs.lua")
+dofile(path.."/src/player_inv.lua")
+dofile(path.."/src/player.lua")
+dofile(path.."/src/privs.lua")
+dofile(path.."/src/achievements.lua")
 
