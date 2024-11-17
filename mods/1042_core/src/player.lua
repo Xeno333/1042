@@ -63,10 +63,6 @@ end)
 
 
 
--- Open player
-core.register_on_rightclickplayer(function(player, clicker)
-
-end)
 
 
 
