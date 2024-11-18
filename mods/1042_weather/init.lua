@@ -432,9 +432,14 @@ core.register_globalstep(function(dtime)
 
             -- Only run if player changed weathers
             if players_weather[name] ~= the_weather then
+                -- Set sound loop
+
                 player:set_clouds(the_weather.clouds)
                 player:set_sky(the_weather.sky)
                 player:set_lighting({exposure = (the_weather.exposure or {exposure_correction = 0})})
+
+                -- Set
+                players_weather[name] = the_weather
             end
 
             local def = the_weather.particlespawner
