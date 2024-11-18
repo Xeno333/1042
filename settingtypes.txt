@@ -6,6 +6,10 @@
 #   Recomended for novice players
 1042_auto_adjust_settings (Automaticly adjust settings) bool false
 
+#   Hardcore Mode
+#
+#   Not recomended for novice players
+1042_enable_hardcore (Enable Hardcore Mode) bool false
 
 [Server settings]
 

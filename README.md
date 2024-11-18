@@ -28,11 +28,12 @@ We Hope you enjoy playing it and all feedback is welcome!
 - Some sounds
 - Basic mobs (Fish and pigs, as of last update)
 - Basic smelting and crafting recipies.
+- Working hardcore mode.
+- Crafting of items
 
 
 ## Planned
 - Add moddable mapgen API
-- Crafting of items
 - More trees and plants
 - Add More sounds and music
 - More general gameplay
@@ -42,7 +43,6 @@ We Hope you enjoy playing it and all feedback is welcome!
 
 #### pre-alpha v0.1.0 to alpha v0.2.0 goals
 - Add more trees and plants, flowers maybe.
-- Add sounds
 - Add pvp physics and more weapons (Bow and club)
 - Add lootable structures
 

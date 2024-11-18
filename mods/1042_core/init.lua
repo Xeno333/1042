@@ -22,6 +22,13 @@ if core.features.hotbar_hud_element ~= true then
     end
 end
 
+if core.settings:get("1042_enable_hardcore") == "true" then
+    core.register_on_dieplayer(function(player, reason)
+        local name = player:get_player_name()
+        core.kick_player(name, "You died in 1042 while playing in hardcore mode.", false)
+        core.ban_player(name)
+    end)
+end
 
 -- key = {single_player, value}
 local required_settings = {
