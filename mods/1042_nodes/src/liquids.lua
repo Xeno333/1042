@@ -27,6 +27,13 @@ core.register_node("1042_nodes:water_source", {
     buildable_to = true,
     is_ground_content = false,
 
+    sounds = {
+        footstep = {
+            name = "water",
+            gain = 1,
+            pitch = 1
+        },
+    },
 
     liquidtype = "source",
     liquid_alternative_flowing = "1042_nodes:water_flowing",
@@ -69,6 +76,14 @@ core.register_node("1042_nodes:water_flowing", {
     diggable = false,
     buildable_to = true,
     is_ground_content = false,
+
+    sounds = {
+        footstep = {
+            name = "water",
+            gain = 1,
+            pitch = 1
+        },
+    },
 
     liquidtype = "flowing",
     liquid_alternative_flowing = "1042_nodes:water_flowing",
