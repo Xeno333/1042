@@ -30,7 +30,7 @@ core.register_node("1042_nodes:water_source", {
     sounds = {
         footstep = {
             name = "water",
-            gain = 1,
+            gain = 0.5,
             pitch = 1
         },
     },
@@ -80,7 +80,7 @@ core.register_node("1042_nodes:water_flowing", {
     sounds = {
         footstep = {
             name = "water",
-            gain = 1,
+            gain = 0.5,
             pitch = 1
         },
     },
