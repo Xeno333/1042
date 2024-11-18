@@ -38,6 +38,11 @@ weather.weathers = {
     },
     {
         name = "Hail",
+        sound = {
+            name = "storm",
+            gain = 1,
+            pitch = 0.5
+        },
         conditions = {
             temp = {
                 min = -5,
@@ -108,6 +113,10 @@ weather.weathers = {
     },
     {
         name = "Storm",
+        sound = {
+            name = "storm",
+            gain = 0.75
+        },
         conditions = {
             temp = {
                 min = 5,
@@ -178,6 +187,10 @@ weather.weathers = {
     },
     {
         name = "Light storm",
+        sound = {
+            name = "rain",
+            gain = 0.5
+        },
         conditions = {
             temp = {
                 min = 0,
@@ -248,6 +261,10 @@ weather.weathers = {
     },
     {
         name = "Drizzle",
+        sound = {
+            name = "rain",
+            gain = 0.25
+        },
         conditions = {
             temp = {
                 min = 0,
@@ -431,15 +448,38 @@ core.register_globalstep(function(dtime)
             local the_weather = weather.weathers[get_weather(player:get_pos())]
 
             -- Only run if player changed weathers
-            if players_weather[name] ~= the_weather then
-                -- Set sound loop
+            if players_weather[name].weather ~= the_weather then
+                -- Something seems off here #FIXME
+                if the_weather.sound then
+                    -- Kill current
+                    if players_weather[name].sound_handle then
+                        core.sound_fade(players_weather[name].sound_handle, 0.25, 0)
+                    end
+
+                    players_weather[name].sound_handle = core.sound_play(the_weather.sound.name, 
+                    {
+                        loop = true,
+                        to_player = name,
+                        gain = 0,
+                        pitch = the_weather.sound.pitch or 1
+                    })
+                    -- Fade in new
+                    core.sound_fade(players_weather[name].sound_handle, 0.1, the_weather.sound.gain)
+
+                else
+                    -- Kill current
+                    if players_weather[name].sound_handle then
+                        core.sound_fade(players_weather[name].sound_handle, 0.25, 0)
+                    end
+                end
+
 
                 player:set_clouds(the_weather.clouds)
                 player:set_sky(the_weather.sky)
                 player:set_lighting({exposure = (the_weather.exposure or {exposure_correction = 0})})
 
                 -- Set
-                players_weather[name] = the_weather
+                players_weather[name].weather = the_weather
             end
 
             local def = the_weather.particlespawner

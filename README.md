@@ -30,6 +30,7 @@ We Hope you enjoy playing it and all feedback is welcome!
 - Basic smelting and crafting recipies.
 - Working hardcore mode.
 - Crafting of items
+- Weather sounds
 
 
 ## Planned

@@ -18,3 +18,4 @@
 - Add cooking and improve food API -Xeno333
 - Add aux1 uses via _1042_on_use -Xeno333
 - Add sounds and hardcore setting -Xeno333
+- Add weather sounds -Xeno333
