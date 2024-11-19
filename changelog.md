@@ -1,4 +1,4 @@
-## Alpha v0.2.0 (In progresss)
+## Alpha v0.2.0
 
 - Add fish and pigs -Xeno333
 - Add tools  -Xeno333

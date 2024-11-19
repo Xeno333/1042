@@ -8,9 +8,9 @@ We Hope you enjoy playing it and all feedback is welcome!
 
 
 
-## State: `pre-alpha-v0.1.1` **WARNING** Some systems may have problems running this game!
+## State: `alpha-v0.2.0` **WARNING** Some systems may have problems running this game!
 
-![pre-alpha-v0.1.0](menu/background.2.png)
+![alpha-v0.2.0](menu/background.0.png)
 
 ### Notes on this version
 - Server mode is disabled due to multiplayer nuances, this will be fixed by beta v0.2.0
@@ -42,13 +42,11 @@ We Hope you enjoy playing it and all feedback is welcome!
 
 ## Roadmap
 
-#### pre-alpha v0.1.0 to alpha v0.2.0 goals
+#### beta v0.2.0
+- Add mapgen APIls
 - Add more trees and plants, flowers maybe.
 - Add pvp physics and more weapons (Bow and club)
 - Add lootable structures
-
-#### beta v0.2.0
-- Add mapgen API
 
 #### beta v0.3.0
 - Add more structures (villages)
