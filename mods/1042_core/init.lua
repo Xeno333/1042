@@ -1,5 +1,6 @@
 core_1042 = {
-    info = core.get_game_info()
+    info = core.get_game_info(),
+    rand = PcgRandom(math.random(1, 2048)) -- Good for all random needed
 }
 
 

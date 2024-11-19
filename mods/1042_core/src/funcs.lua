@@ -1,5 +1,30 @@
-local reach_distance = 4
+core_1042.reach_distance = 4
 local storage = core.get_mod_storage()
+
+
+
+-- Loot
+core_1042.loots = {}
+
+
+function core_1042.register_loot(def)
+    core_1042.loots[#core_1042.loots+1] = {
+        name = def.name,
+        max_count = def.max_count
+    }
+end
+
+
+function core_1042.get_loot()
+    local ret = nil
+    if #core_1042.loots > 0 then
+        local def = core_1042.loots[core_1042.rand:next(1, #core_1042.loots)]
+        ret = ItemStack(def.name .. " " .. core_1042.rand:next(1, (def.max_count or 1)))
+    end
+    return ret
+end
+
+
 
 
 
@@ -32,7 +57,7 @@ end
 function core_1042.get_pointed_thing(player)
     local pos = player:get_pos()
     pos.y = pos.y + player:get_properties().eye_height
-    local ray = core.raycast(vector.new(pos.x, pos.y, pos.z), vector.add(vector.new(pos.x, pos.y, pos.z), vector.multiply(player:get_look_dir(), reach_distance)), false, false)
+    local ray = core.raycast(vector.new(pos.x, pos.y, pos.z), vector.add(vector.new(pos.x, pos.y, pos.z), vector.multiply(player:get_look_dir(), core_1042.reach_distance)), false, false)
 
     return ray:next()
 end

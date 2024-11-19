@@ -23,6 +23,7 @@ local lava_level = mapgen_1042.lava_level
 local bedrock_level = mapgen_1042.bedrock_level
 local caves_max = mapgen_1042.caves_max
 local decorated_caves = mapgen_1042.decorated_caves
+local treasure_y = mapgen_1042.water_level - 10
 
 
 
@@ -55,6 +56,8 @@ local grass_tall = core.get_content_id("1042_nodes:grass_tall")
 local grass_short = core.get_content_id("1042_nodes:grass_short")
 local grass_snowy = core.get_content_id("1042_nodes:grass_snowy")
 local mushroom = core.get_content_id("1042_nodes:mushroom")
+
+local chest = core.get_content_id("1042_nodes:chest")
 
 
 
@@ -124,7 +127,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
     elseif cave == "bottom" then
         if c <= 5 then
             data[area:index(x, y+1, z)] = flint
-
+            
         elseif c <= 30 then
             data[area:index(x, y+1, z)] = rock
 
@@ -134,6 +137,11 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
         elseif c <= 60 and y <= decorated_caves then
             data[area:index(x, y+1, z)] = beryl
 
+        elseif c == 100 and y <= treasure_y then
+            if pr:next(1, 5) == 1 then
+                data[area:index(x, y+1, z)] = chest
+            end
+            
         end
 
     elseif cave == "top" then

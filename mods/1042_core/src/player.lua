@@ -234,6 +234,7 @@ core.register_on_joinplayer(function(player, last_join)
         hotbar.direction = 2
         hotbar.position = {x=0.05, y=0.5}
     end
+    -- #FIXME
     core.hud_replace_builtin("hotbar", hotbar)
 
 

@@ -19,3 +19,9 @@
 - Add aux1 uses via _1042_on_use -Xeno333
 - Add sounds and hardcore setting -Xeno333
 - Add weather sounds -Xeno333
+
+
+
+## Alpha v0.2.1
+
+- Loot -Xeno333

@@ -14,6 +14,21 @@ This is documentation for development and modding for the game `1042` on the *Lu
 - `core_1042.set(key, value)` Sets a game stored value to key.
 - `core_1042.get(value)` Gets a game stored value from key.
 - `core_1042.info` Game info table.
+- `core_1042.rand` Core random a `PcgRandom(math.random(1, 2048))` object. This can be used by anything.
+- `core_1042.register_loot(def)` Register loot as defined by `Loot table`
+- `core_1042.get_loot()` Returns a random `ItemStack` from the loot that is registered.
+
+
+## Tables
+
+### `Loot table`
+
+```lua
+{
+    name = <name>,
+    max_count = <maxcount>
+}
+```
 
 
 

@@ -282,6 +282,7 @@ core.register_node("1042_nodes:iron_nugget", {
     
     groups = {breakable_by_hand = 2, attached_node = 3},
 })
+core_1042.register_loot({name = "1042_nodes:iron_nugget", max_count = 16})
 
 
 core.register_node("1042_nodes:anvil", {
@@ -366,6 +367,7 @@ core.register_node("1042_nodes:iron_ingot", {
     
     groups = {breakable_by_hand = 1, falling_node = 1},
 })
+core_1042.register_loot({name = "1042_nodes:iron_ingot", max_count = 6})
 
 
 core.register_node("1042_nodes:pork_raw", {

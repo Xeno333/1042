@@ -167,6 +167,7 @@ core.register_node("1042_nodes:basalt", {
 
     groups = {stone = 2},
 })
+core_1042.register_loot({name = "1042_nodes:basalt"})
 
 core.register_node("1042_nodes:iron_ore", {
     description = "Iron Ore",
@@ -215,6 +216,7 @@ core.register_node("1042_nodes:iron_ore", {
 
     groups = {stone = 3},
 })
+core_1042.register_loot({name = "1042_nodes:iron_ore"})
 
 -- Plant Nodes
 
@@ -323,6 +325,8 @@ core.register_node("1042_nodes:charcoal", {
 
     groups = {wood = 1, burns = 6, breakable_by_hand = 4},
 })
+
+core_1042.register_loot({name = "1042_nodes:charcoal"})
 
 core.register_node("1042_nodes:charcoal_burning", {
     description = "Burning Charcoal",
@@ -445,7 +449,6 @@ core.register_node("1042_nodes:chest", {
             "listring[context;main]"
         )
 
-        meta:set_string("init", "true")
     end,
 
     on_rightclick = function(pos, node, player, itemstack, pointed_thing)
@@ -465,6 +468,14 @@ core.register_node("1042_nodes:chest", {
             )
 
             meta:set_string("init", "true")
+
+            for i = 1, 10 do
+                if core_1042.rand:next(1, 4) == 1 then
+                    inv:set_stack("main", i, core_1042.get_loot())
+                end
+            end
+
+            -- Add loot
         end
 
         core.show_formspec(player:get_player_name(), "chest_inv", core.get_meta(pos):get_string("formspec"))
