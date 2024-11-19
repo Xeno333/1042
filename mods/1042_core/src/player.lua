@@ -107,7 +107,8 @@ core.register_on_joinplayer(function(player, last_join)
             minimap = false,
             minimap_radar = false,
             crosshair = false,
-            basic_debug = false
+            basic_debug = false,
+            --hotbar = false
         }
     )
 
@@ -195,10 +196,6 @@ core.register_on_joinplayer(function(player, last_join)
 
     -- Hud
 
-    player:hud_set_hotbar_itemcount(10)
-    player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:64")
-    player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ffff:128")
-
     core.hud_replace_builtin("breath", {
         type = "statbar",
         name = "breath",
@@ -209,6 +206,7 @@ core.register_on_joinplayer(function(player, last_join)
         position = {x=0.98, y=0.6},
         size = {x=20,y=20}
     })
+
     
     core.hud_replace_builtin("health", {
         type = "statbar",
@@ -256,6 +254,16 @@ core.register_on_joinplayer(function(player, last_join)
         style = 3
     })
 
+    --[[player:hud_add({
+        type = "hotbar",
+        name = "hotbar",
+        direction = 2,
+        position = {x=0.05, y=0.5}
+    })]]
+
+    player:hud_set_hotbar_itemcount(10)
+    player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:64")
+    player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ffff:128")
 
     player_huds[name] = {}
     aux1_cooldown[name] = 0
