@@ -1,4 +1,5 @@
-local player_huds = {} -- Needs moved to API for player tabless #fixme
+core_1042.player_huds = {} -- Needs moved to API for player tabless #fixme
+local  player_huds = core_1042.player_huds
 local aux1_cooldown = {}
 
 
@@ -71,6 +72,9 @@ end)
 core.register_on_joinplayer(function(player, last_join)
     local name = player:get_player_name()
 
+    player_huds[name] = {}
+    aux1_cooldown[name] = 0
+
     player:set_properties({
         visual = "mesh",
         mesh = "player.gltf",
@@ -108,7 +112,7 @@ core.register_on_joinplayer(function(player, last_join)
             minimap_radar = false,
             crosshair = false,
             basic_debug = false,
-            --hotbar = false
+            hotbar = false -- We use custom one
         }
     )
 
@@ -232,9 +236,8 @@ core.register_on_joinplayer(function(player, last_join)
         hotbar.direction = 2
         hotbar.position = {x=0.05, y=0.5}
     end
-    -- #FIXME
-    core.hud_replace_builtin("hotbar", hotbar)
 
+    player_huds[name].hotbar = player:hud_add(hotbar)
 
 
     player:hud_add({
@@ -254,19 +257,10 @@ core.register_on_joinplayer(function(player, last_join)
         style = 3
     })
 
-    --[[player:hud_add({
-        type = "hotbar",
-        name = "hotbar",
-        direction = 2,
-        position = {x=0.05, y=0.5}
-    })]]
-
     player:hud_set_hotbar_itemcount(10)
     player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:64")
     player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ffff:128")
 
-    player_huds[name] = {}
-    aux1_cooldown[name] = 0
 end)
 
 
