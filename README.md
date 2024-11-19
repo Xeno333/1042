@@ -43,7 +43,7 @@ We Hope you enjoy playing it and all feedback is welcome!
 ## Roadmap
 
 #### beta v0.2.0
-- Add mapgen APIls
+- Add mapgen APIs
 - Add more trees and plants, flowers maybe.
 - Add pvp physics and more weapons (Bow and club)
 - Add lootable structures
