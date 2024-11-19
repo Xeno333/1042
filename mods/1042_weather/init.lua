@@ -6,6 +6,9 @@ if core.settings:get("1042_disable_weather") == "true" then
     return
 end
 
+core.register_alias("mapgen_stone", "air")
+core.register_alias("mapgen_water_source", "air")
+core.register_alias("mapgen_river_water_source", "air")
 
 
 weather.weathers = {
