@@ -127,7 +127,7 @@ Present if `weather.is_loaded` is set to `true`.
 - `weather.players_weather` A table of player weather data, index with player name.
 - `weather.weathers` All registered weather definitions.
 - `weather.default_on_change(player, name, players_weather)` Default `on_change` call back, called between every change to try to clean up.
-- `weather.register_weather(def)` Regsiter a `Weather Definition`. Note: If a on_change sets a sound it must store the handle for it in `players_weather.sound_handle` before returning. Also this function should NOT modify things that are not restored in `weather.default_on_change` (See source code.)
+- `weather.register_weather(def)` Regsiter a `Weather Definition`. Note: If a on_change sets a sound it must store the handle for it in `players_weather.sound_handle` before returning. This should not modify sky paramiters other than using: `player:set_sun()`, `player:set_clouds()`, `player:set_sky()` and `player:set_lighting()`. For more info see `on_change` usage down further.
 - `weather.get_weather_at_pos(pos)` Return the index to weather in `weather.weathers` that matches the current global weather and local weather.
 - `weather.weather_hight` Hight of spawning for weather particles.
 
@@ -143,6 +143,7 @@ Present if `weather.is_loaded` is set to `true`.
         },
         on_change = function(player, players_weather) end, -- Code can only modify things that will be restored in weather.default_on_change or sounds.
         on_step = function(player), -- Code that is run once per weather step (1 second)
+        on_end = function(player, name, players_weather), -- Code run at end defaults to weather.default_on_change if not used, otherwise you must undo ALL changes made in on_change
         particlespawner = 
         {
             amount = 500,
@@ -179,6 +180,15 @@ Present if `weather.is_loaded` is set to `true`.
         }
     }
 ```
+
+
+### `on_change(player, name, players_weather)`
+
+This call back is called once per weather change after the defaults are reset. This function can set sounds but the sounds must be stored in `players_weather.sound_handle`. Anything changed here, excluding sounds, must be reverted with `on_end(player, name, players_weather)` or if not present the defaults of `weather.default_on_change`. 
+
+### `the_weather.on_end(player, name, players_weather)`
+
+If `the_weather.on_end(player, name, players_weather)` is defined then all things changed in `on_change` MUST be reverted, this does not include the sound set with `players_weather.sound_handle` but all other things, as the default handler will not be run.
 
 
 

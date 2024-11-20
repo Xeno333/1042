@@ -22,6 +22,7 @@ end)
 
 
 
+-- Add default sky, clouds, lighting, sun AND add moon definitions so they can be re-used by mods. #fixme
 
 
 

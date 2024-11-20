@@ -33,7 +33,12 @@ core.register_globalstep(function(dtime)
             -- Only run if player changed weathers
             if players_weather.weather ~= the_weather then
                 -- Reset weather defaults
-                weather.default_on_change(player, name, players_weather)
+                if the_weather.on_end then
+                    the_weather.on_end(player, name, players_weather)
+                else
+                    weather.default_on_change(player, name, players_weather)
+                end
+
 
                 if players_weather.sound_handle then
                     core.sound_fade(players_weather.sound_handle, 0.25, 0)
