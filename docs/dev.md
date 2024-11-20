@@ -108,14 +108,27 @@ There are a few APIs built into the game, and more planned for the beta release.
 Weathers are registered by appending to the end of `weather.weathers` with a weather definition. Tempetures across the map vary in range of ~-30 to ~30, though they may be slightly above or below these.
 
 
-## API functions
+## Weather API
 
 The weather API is avalible in both the asynch mapgen enviorment and main via import from file (as done in mapgen.)
 
 -`function weather.get_temp_map(x, z)` Get a temp map starting at `x, z`. The map is a mapblock, thus 80x80.
 -`function weather.get_temp(pos, temp_map)` Get temp from temp map with coords on that temp map.
 -`function weather.get_temp_single(pos)` Get temp at a position, this is faster than using the other two for single coords.
+- `weather.rand` A `PcgRandom` object.
 
+
+## Weathers API
+
+Present if `weather.is_loaded` is set to `true`.
+
+### Functions and talbes
+
+- `weather.players_weather` A table of player weather data, index with player name.
+- `weather.weathers` All registered weather definitions.
+- `weather.default_on_change(player, name, players_weather)` Default `on_change` call back, called between every change to try to clean up.
+- `weather.register_weather(def)` Regsiter a `Weather Definition`. Note: If a on_change sets a sound it must store the handle for it in `players_weather.sound_handle` before returning. Also this function should NOT modify things that are not restored in `weather.default_on_change` (See source code.)
+- `weather.get_weather_at_pos(pos)` Return the index to weather in `weather.weathers` that matches the current global weather and local weather.
 
 ## Weather Definition
 
@@ -127,30 +140,7 @@ The weather API is avalible in both the asynch mapgen enviorment and main via im
                 max = 0
             }
         },
-        clouds = {
-            density = 0.35,
-            color = "#f0faffaa",
-            ambient = "#006699",
-            thickness = 128,
-            speed = {x=1, y=1},
-            shadow = "#cccccc",
-            height = 120
-        },
-        sky = {
-            type = "regular",
-            clouds = true,
-            sky_color = {
-                night_sky = "#0066ff",
-                night_horizon = "#0088ff",
-                day_horizon = "#90d3f6",
-                day_sky = "#61b5f5"
-            },
-            fog = {
-                fog_start = 0,
-                fog_distance = 90,
-                fog_color = "#ddddddaa"
-            }
-        },
+        on_change = function(player, name, players_weather) end, -- Code can only modify things that will be restored in weather.default_on_change or sounds.
         particlespawner = 
         {
             amount = 500,

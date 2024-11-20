@@ -1,4 +1,7 @@
 -- weather_api.lua
+--[[
+    Core API meant to be shared in both mapgen enviorment and main.
+]]
 weather = {}
 
 weather.rand = PcgRandom(math.random(1, 2048))
@@ -21,7 +24,6 @@ local weather_def = {
 
 local temp_m = PerlinNoiseMap(weather_def, {x=80, y=80})
 local temp_s = PerlinNoise(weather_def)
-
 
 -- Single vector to be used once so as to not make a whole bunch
 local v = vector.new(0, 0, 0)

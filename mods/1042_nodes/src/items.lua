@@ -285,8 +285,9 @@ core.register_node("1042_nodes:iron_nugget", {
 core_1042.register_loot({name = "1042_nodes:iron_nugget", max_count = 16})
 
 
+-- #FIXME
 core.register_node("1042_nodes:anvil", {
-    description = "Anvil",
+    description = "Anvil (WIP)",
     drawtype = "mesh",
     mesh = "anvil.obj",
     tiles = {"1042_plain_node.png^[colorize:#222222:128"},

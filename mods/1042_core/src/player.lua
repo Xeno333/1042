@@ -155,12 +155,6 @@ core.register_on_joinplayer(function(player, last_join)
             }
         }
     )
-    player:set_sun(
-        {
-            texture = "1042_plain_node.png^[colorize:#ddaa66:144",
-            scale = 0.5
-        }
-    )
     player:set_moon(
         {
             texture = "1042_plain_node.png^[colorize:#aaaaaa:144",

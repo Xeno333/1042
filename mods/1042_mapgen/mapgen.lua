@@ -180,121 +180,123 @@ core.register_on_generated(function(vm, minp, maxp, seed)
 
     -- Add for T_ymin just do stone
 
+    if minp.y >= bedrock_level then
+        local ly = 0
+        for y = minp.y, maxp.y do
+            ly = ly + 1
+            local lz = 0
+            for z = minp.z, maxp.z do
+                lz = lz + 1
+                local vi = area:index(minp.x, y, z)
+                local lx = 0
+                for x = minp.x, maxp.x do
 
-    local ly = 0
-    for y = minp.y, maxp.y do
-        ly = ly + 1
-        local lz = 0
-        for z = minp.z, maxp.z do
-            lz = lz + 1
-            local vi = area:index(minp.x, y, z)
-            local lx = 0
-            for x = minp.x, maxp.x do
-
-                if y <= bedrock_level then
-                    if  y == bedrock_level then
-                        data[vi] = bedrock
+                    if y <= bedrock_level then
+                        if  y == bedrock_level then
+                            data[vi] = bedrock
+                        end
+                        vi = vi + 1
+                        goto skip
                     end
-                    vi = vi + 1
-                    goto skip
-                end
 
-                lx = lx + 1
-                -- Get properties of land
-                local noise = noise_m[lx][lz]
-                local ny, rv
-                local mountin_top = false
+                    lx = lx + 1
+                    -- Get properties of land
+                    local noise = noise_m[lx][lz]
+                    local ny, rv
+                    local mountin_top = false
 
-                if noise <= 0.9 then
-                    if noise > -0.5 then
-                        -- Normal gen
-                        ny = (noise * math.abs(noise)) * T_ymax
+                    if noise <= 0.9 then
+                        if noise > -0.5 then
+                            -- Normal gen
+                            ny = (noise * math.abs(noise)) * T_ymax
+                        else
+                            -- Deep sea Gen
+                            ny = (noise) * math.abs(T_ymin) + (0.75*T_ymax) 
+                        end
                     else
-                        -- Deep sea Gen
-                        ny = (noise) * math.abs(T_ymin) + (0.75*T_ymax) 
+                        -- Mountin hole
+                        ny = (0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/8 + 4
+                        rv = math.floor((0.9 * math.abs(0.9)) * T_ymax - 3)
+                        mountin_top = true
                     end
-                else
-                    -- Mountin hole
-                    ny = (0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/8 + 4
-                    rv = math.floor((0.9 * math.abs(0.9)) * T_ymax - 3)
-                    mountin_top = true
-                end
-                
-                ny = math.floor(ny)
+                    
+                    ny = math.floor(ny)
 
 
-                local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
+                    local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
 
-                local mid = dirt
-                local low = stone
-                local top_2 = sand
-                local top = turf
-                local liquid = water
-                local liquid_top = water
-                local do_dec = true
+                    local mid = dirt
+                    local low = stone
+                    local top_2 = sand
+                    local top = turf
+                    local liquid = water
+                    local liquid_top = water
+                    local do_dec = true
 
-                if tempv <= 0 then
-                    liquid_top = ice
-                    liquid = water
-                    top = snow
-                end
+                    if tempv <= 0 then
+                        liquid_top = ice
+                        liquid = water
+                        top = snow
+                    end
 
-                if tempv >= 20 then
-                    top = turf_dry
-                end
+                    if tempv >= 20 then
+                        top = turf_dry
+                    end
 
-                if mountin_top then
-                    top = dirt
-                    do_dec = false
-                end
+                    if mountin_top then
+                        top = dirt
+                        do_dec = false
+                    end
 
-                -- Place and handel caves
-                if cave_noise_m[lx][ly][lz] > -0.95 or y > caves_max then
-                    if y < (ny-1) then
-                        stone_gen(ore_noise_m[lx][ly][lz], y, data, vi)
+                    -- Place and handel caves
+                    if cave_noise_m[lx][ly][lz] > -0.95 or y > caves_max then
+                        if y < (ny-1) then
+                            stone_gen(ore_noise_m[lx][ly][lz], y, data, vi)
 
-                    elseif y == (ny-1) then
-                        data[vi] = mid
-
-                    elseif y == ny then
-                        if y > water_level then
-                            data[vi] = top
-
-                        elseif y < water_level then
+                        elseif y == (ny-1) then
                             data[vi] = mid
 
-                        else
-                            data[vi] = top_2
+                        elseif y == ny then
+                            if y > water_level then
+                                data[vi] = top
 
+                            elseif y < water_level then
+                                data[vi] = mid
+
+                            else
+                                data[vi] = top_2
+
+                            end
+
+                            if do_dec then
+                                dec(pr, x, y, z, data, area, place_list, tempv, nil)
+                            end
                         end
-
-                        if do_dec then
-                            dec(pr, x, y, z, data, area, place_list, tempv, nil)
-                        end
-                    end
-                elseif y <= ny and y<= lava_level then
-                    data[vi] = lava
-                else
-                    if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > -0.95 and y <= ny then
-                        dec(pr, x, y-1, z, data, area, place_list, tempv, "bottom")
-                    elseif cave_noise_m[lx][ly+1] and cave_noise_m[lx][ly+1][lz] > -0.95 and y <= ny then
-                        dec(pr, x, y-1, z, data, area, place_list, tempv, "top")
-                    end
-                end
-
-                if ((y <= water_level) or (mountin_top and y <= rv)) and y > ny then
-                    if y == water_level or (mountin_top and y == rv) then
-                        data[vi] = liquid_top
+                    elseif y <= ny and y<= lava_level then
+                        data[vi] = lava
                     else
-                        data[vi] = liquid
+                        if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > -0.95 and y <= ny then
+                            dec(pr, x, y-1, z, data, area, place_list, tempv, "bottom")
+                        elseif cave_noise_m[lx][ly+1] and cave_noise_m[lx][ly+1][lz] > -0.95 and y <= ny then
+                            dec(pr, x, y-1, z, data, area, place_list, tempv, "top")
+                        end
                     end
+
+                    if ((y <= water_level) or (mountin_top and y <= rv)) and y > ny then
+                        if y == water_level or (mountin_top and y == rv) then
+                            data[vi] = liquid_top
+                        else
+                            data[vi] = liquid
+                        end
+                    end
+
+
+                    vi = vi + 1
+                    ::skip::
                 end
-
-
-                vi = vi + 1
-                ::skip::
             end
         end
+        
     end
 
     vm:set_data(data)
