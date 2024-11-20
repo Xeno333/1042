@@ -1,4 +1,4 @@
-core_1042.player_huds = {} -- Needs moved to API for player tabless #fixme
+core_1042.player_huds = {}
 local  player_huds = core_1042.player_huds
 local aux1_cooldown = {}
 

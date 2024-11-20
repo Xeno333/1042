@@ -26,3 +26,4 @@
 
 - Loot -Xeno333
 - Weather API -Xeno333
+- Hail damage -Xeno333

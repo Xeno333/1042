@@ -129,6 +129,7 @@ Present if `weather.is_loaded` is set to `true`.
 - `weather.default_on_change(player, name, players_weather)` Default `on_change` call back, called between every change to try to clean up.
 - `weather.register_weather(def)` Regsiter a `Weather Definition`. Note: If a on_change sets a sound it must store the handle for it in `players_weather.sound_handle` before returning. Also this function should NOT modify things that are not restored in `weather.default_on_change` (See source code.)
 - `weather.get_weather_at_pos(pos)` Return the index to weather in `weather.weathers` that matches the current global weather and local weather.
+- `weather.weather_hight` Hight of spawning for weather particles.
 
 ## Weather Definition
 
@@ -140,7 +141,8 @@ Present if `weather.is_loaded` is set to `true`.
                 max = 0
             }
         },
-        on_change = function(player, name, players_weather) end, -- Code can only modify things that will be restored in weather.default_on_change or sounds.
+        on_change = function(player, players_weather) end, -- Code can only modify things that will be restored in weather.default_on_change or sounds.
+        on_step = function(player), -- Code that is run once per weather step (1 second)
         particlespawner = 
         {
             amount = 500,

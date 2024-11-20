@@ -20,6 +20,7 @@ dofile(core.get_modpath("1042_weather") .. "/weathers.lua")
 local time_between_changes = 60*5
 local time_to_next_change = 0
 local timer = 0
+local weather_hight = weather.weather_hight
 
 core.register_globalstep(function(dtime)
     timer = timer + dtime
@@ -47,12 +48,16 @@ core.register_globalstep(function(dtime)
                 players_weather.weather = the_weather
             end
 
+            if the_weather.on_step then
+                the_weather.on_step(player)
+            end
+
             local def = the_weather.particlespawner
             if def then
                 local pos = player:get_pos()
                 def.pos = {
-                    min = vector.new(pos.x-16,pos.y+16,pos.z-16),
-                    max = vector.new(pos.x+16,pos.y+16,pos.z+16),
+                    min = vector.new(pos.x-16,pos.y+weather_hight,pos.z-16),
+                    max = vector.new(pos.x+16,pos.y+weather_hight,pos.z+16),
                     bias = 0
                 }
                 def.playername = name
@@ -78,6 +83,8 @@ end)
 
 core.register_chatcommand("change_weather", {
     privs = {["creative"] = true},
+    params = "<weather/help>",
+    description = "Change the global weather selection to param or random if none is supplied. May not be the weather desired as that depends on biome.",
     func = function(name, param)
         local index = weather.rand:next(1, #weather.weathers)
 
@@ -101,5 +108,12 @@ core.register_chatcommand("change_weather", {
 
         weather.weather_index = index
         return true, "Setting weather to " .. weather.weathers[weather.weather_index].name
+    end
+})
+
+core.register_chatcommand("weather", {
+    description = "Show current global weather.",
+    func = function()
+        return true, "Global weather is " .. weather.weathers[weather.weather_index].name
     end
 })

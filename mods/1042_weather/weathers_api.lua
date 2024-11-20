@@ -10,6 +10,7 @@
 
 
 weather.players_weather = {}
+weather.weather_hight = 16
 
 core.register_on_joinplayer(function(player)
     weather.players_weather[player:get_player_name()] = {}

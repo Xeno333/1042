@@ -41,6 +41,15 @@ weather.register_weather({
 
         texture = "1042_plain_node.png^[colorize:#dddddd:144"
     },
+    on_step = function(player)
+        local pos = player:get_pos()
+        local ray = core.raycast(vector.new(pos.x, pos.y+1, pos.z), vector.new(pos.x, pos.y+weather.weather_hight, pos.z), false, false)
+
+        local node = ray:next()
+        if not node then
+            player:set_hp(player:get_hp()-1, "Hail")
+        end
+    end,
     on_change = function(player, name, players_weather)
         -- Sky changes
         player:set_sun(
