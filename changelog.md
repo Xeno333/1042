@@ -25,3 +25,4 @@
 ## Alpha v0.2.1
 
 - Loot -Xeno333
+- Weather API -Xeno333

@@ -64,7 +64,32 @@ function weather.default_on_change(player, name, players_weather)
             scale = 0.5
         }
     )
-    player:set_lighting({exposure = {exposure_correction = 0}})
+    
+    local saturation = 1.8
+    if core_1042.get("playersetting_"..name.."_greyscale") == "true" then
+        saturation = 0
+    end
+
+    player:set_lighting(
+        {
+            volumetric_light = {
+                strength = 0.1
+            },
+            shadows = {
+                intensity = 0.4,
+                tint = {r=0x99, g=0x99, b=0x99}
+            },
+            bloom = {
+                intensity = 0.07,
+                strength_factor = 1.0,
+                radius = 1.0
+            },
+            saturation = saturation,
+            exposure = {
+                exposure_correction = 0.75
+            }
+        }
+    )
 end
 
 

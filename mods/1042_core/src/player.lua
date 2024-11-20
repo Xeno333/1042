@@ -138,20 +138,7 @@ core.register_on_joinplayer(function(player, last_join)
             },
             saturation = saturation,
             exposure = {
-                exposure_correction = 1
-            }
-        }
-    )
-    player:set_sky(
-        {
-            type = "regular",
-            clouds = true,
-            sky_color = {
-                night_sky = "#0066ff",
-                night_horizon = "#0088ff"
-            },
-            fog = {
-                fog_start = 0
+                exposure_correction = 0.75
             }
         }
     )
