@@ -31,3 +31,6 @@
 ## Alpha v0.2.2
 
 - Add basic Lightning -Xeno333
+## Alpha v0.2.2
+
+- Add basic Lightning -Xeno333
