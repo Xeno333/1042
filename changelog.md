@@ -27,3 +27,7 @@
 - Loot -Xeno333
 - Weather API -Xeno333
 - Hail damage -Xeno333
+
+## Alpha v0.2.2
+
+- Add basic Lightning -Xeno333

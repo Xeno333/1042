@@ -49,6 +49,13 @@ weather.register_weather({
         if not node then
             player:set_hp(player:get_hp()-1, "Hail")
         end
+
+        if core_1042.rand:next(1, 10) == 1 then
+            player:set_lighting({exposure = {exposure_correction = core_1042.rand:next(10, 20)*0.1}})
+            core.after(0.1, function()
+                player:set_lighting({exposure = {exposure_correction = -2}})
+            end)
+        end
     end,
     on_change = function(player, name, players_weather)
         -- Sky changes
@@ -144,6 +151,14 @@ weather.register_weather({
 
         texture = "1042_plain_node.png^[colorize:#004499:144"
     },
+    on_step = function(player)
+        if core_1042.rand:next(1, 40) == 1 then
+            player:set_lighting({exposure = {exposure_correction = core_1042.rand:next(10, 20)*0.1}})
+            core.after(0.1, function()
+                player:set_lighting({exposure = {exposure_correction = -2}})
+            end)
+        end
+    end,
     on_change = function(player, name, players_weather)
         -- Sky changes
         player:set_sun(
