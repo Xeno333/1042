@@ -137,8 +137,8 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
         elseif c <= 60 and y <= decorated_caves then
             data[area:index(x, y+1, z)] = beryl
 
-        elseif c == 100 and y <= treasure_y then
-            if pr:next(1, 5) == 1 then
+        elseif y <= treasure_y then
+            if pr:next(1, 2) == 1 then
                 data[area:index(x, y+1, z)] = chest
             end
             

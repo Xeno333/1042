@@ -83,6 +83,8 @@ core.register_node("1042_nodes:fire", {
     floodable = true,
     buildable_to = false,
 
+    drop = "",
+
     light_source = 8,
     damage_per_second = 5,
     
