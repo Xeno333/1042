@@ -36,3 +36,9 @@
 ## Alpha v0.2.2
 
 - Add basic Lightning -Xeno333
+
+
+## Alpha v0.3-dev
+
+- Add basic Lightning -Xeno333
+- Fix fire drop
