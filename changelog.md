@@ -42,3 +42,4 @@
 
 - Add basic Lightning -Xeno333
 - Fix fire drop
+- Added unlocking chests so that they don't have problems anymore

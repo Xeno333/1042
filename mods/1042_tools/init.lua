@@ -44,7 +44,7 @@ core.register_node("1042_tools:sword",{
 
     groups = {weapon = 1, falling_node = 1, breakable_by_hand = 2},
 })
-core_1042.register_loot({name = "1042_1042_toolsnodes:sword"})
+core_1042.register_loot({name = "1042_tools:sword"})
 
 core.register_craft({
     output = "1042_tools:sword",
@@ -92,7 +92,7 @@ core.register_node("1042_tools:pick",{
 
     groups = {weapon = 1, falling_node = 1, breakable_by_hand = 2},
 })
-core_1042.register_loot({name = "1042_1042_toolsnodes:pick"})
+core_1042.register_loot({name = "1042_tools:pick"})
 
 core.register_craft({
     output = "1042_tools:pick",

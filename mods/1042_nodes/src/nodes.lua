@@ -449,6 +449,7 @@ core.register_node("1042_nodes:chest", {
             "listring[context;main]"
         )
 
+        meta:set_string("init", "true")
     end,
 
     on_rightclick = function(pos, node, player, itemstack, pointed_thing)
@@ -475,7 +476,8 @@ core.register_node("1042_nodes:chest", {
                 end
             end
 
-            -- Add loot
+            core.chat_send_player(player:get_player_name(), core.colorize("#00ff00", "Chest unlocked!"))
+            return
         end
 
         core.show_formspec(player:get_player_name(), "chest_inv", core.get_meta(pos):get_string("formspec"))
