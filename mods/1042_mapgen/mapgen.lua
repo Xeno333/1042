@@ -86,7 +86,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
         if tempv > 0 and not (tempv > 20) then
             -- Grass
             if c <= 20 then
-                data[area:index(x, y+1, z)] = chest
+                data[area:index(x, y+1, z)] = grass_tall
             elseif c < 100 then
                 data[area:index(x, y+1, z)] = grass_short
                 
