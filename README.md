@@ -2,9 +2,9 @@
 
 ## Overview
 
-1042 is a game placed in Europ around the year 1042 A.D. The game focuses on PvE and adventure. At the moment it is a bit limited but still playable at the basic level (See `Features` for more.)
+1042 is a game placed in Europe around the year 1042 A.D. The game focuses on PvE and adventure. At the moment it is a bit limited but still playable at the basic level (See `Features` for more.)
 
-We Hope you enjoy playing it and all feedback is welcome!
+We Hope you enjoy playing it and any feedback is welcome!
 
 
 
