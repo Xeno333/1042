@@ -180,7 +180,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
 
     -- Add for T_ymin just do stone
 
-    if minp.y >= bedrock_level then
+    if maxp.y >= bedrock_level then
         local ly = 0
         for y = minp.y, maxp.y do
             ly = ly + 1
