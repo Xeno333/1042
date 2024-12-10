@@ -7,8 +7,7 @@ local aux1_cooldown = {}
 
 
 
-core.register_item(":", {
-	type = "none",
+core.override_item("", {
 	wield_image = "1042_plain_node.png^[colorize:#a9a347:128",
     range = 4.0,
 	tool_capabilities = {
