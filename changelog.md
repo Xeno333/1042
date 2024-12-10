@@ -41,5 +41,7 @@
 ## Alpha v0.3-dev
 
 - Add basic Lightning -Xeno333
-- Fix fire drop
-- Added unlocking chests so that they don't have problems anymore
+- Fix fire drop -Xeno333
+- Added unlocking chests so that they don't have problems anymore -Xeno333
+- Add breaking animation -SuperStarSonic
+- Fix some doc typos -SuperStarSonic

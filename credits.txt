@@ -1,5 +1,5 @@
-Textures - Xeno333 (aka TX_Miner)
+Textures - Xeno333 (aka TX_Miner), SuperStarSonic
 Code - Xeno333 (aka TX_Miner)
-Models - Xeno333 (aka TX_Miner)
+Models - Xeno333 (aka TX_Miner), SuperStarSonic
 
 Schematics - TX_Warrior, Lone_Star_Miner
