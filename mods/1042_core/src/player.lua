@@ -8,7 +8,9 @@ local aux1_cooldown = {}
 
 
 core.override_item("", {
-	wield_image = "1042_plain_node.png^[colorize:#a9a347:128",
+	wield_image = "[combine:2x4:0,0=1042_plain_node.png\\^[colorize\\:#ffffff\\:0:0,2=1042_plain_node.png\\^[transformR90\\^[colorize\\:#aa8877\\:144",
+    wield_scale = {x = 0.35, y = 4, z = 4},
+    
     range = 4.0,
 	tool_capabilities = {
 		full_punch_interval = 1,
