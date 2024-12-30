@@ -32,7 +32,7 @@ local treasure_y = mapgen_1042.water_level - 10
 -- Mapgen
 
 
-local stone = core.get_content_id("1042_nodes:stone")
+local stone = core.get_content_id("mapgen_stone")
 local dirt = core.get_content_id("1042_nodes:dirt")
 local sand = core.get_content_id("1042_nodes:sand")
 local turf = core.get_content_id("1042_nodes:turf")
@@ -42,7 +42,7 @@ local bedrock = core.get_content_id("1042_nodes:bedrock")
 local lava = core.get_content_id("1042_nodes:lava_source")
 local iron_ore = core.get_content_id("1042_nodes:iron_ore")
 
-local water = core.get_content_id("1042_nodes:water_source")
+local water = core.get_content_id("mapgen_water_source")
 local ice = core.get_content_id("1042_nodes:ice")
 
 local rock = core.get_content_id("1042_nodes:rock")

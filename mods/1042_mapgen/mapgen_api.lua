@@ -21,7 +21,7 @@ mapgen_1042.map_single = PerlinNoise(map_noise_params)
 mapgen_1042.cave_map = PerlinNoiseMap({
     offset = 0,
     scale = 1,
-    spread = {x = 50, y = 20, z = 50},
+    spread = {x = 50, y = 30, z = 50},
     seed = core.get_mapgen_setting("seed") + 34634,
     octaves = 3,
     persist = 0.7,

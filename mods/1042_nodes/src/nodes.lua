@@ -487,7 +487,7 @@ core.register_node("1042_nodes:chest", {
 })
 
 core.register_craft({
-    output = "1042_nodes:chest",
+    output = "1042_nodes:chest 2",
     recipe = {
         {"group:wood", "group:wood", "group:wood"},
         {"group:wood", "", "group:wood"},

@@ -35,13 +35,14 @@ We strive to maintain a simple base texturepack for the game.
 ### Weather
 
 - Make weather have affects on the enviorment, like hail damage the player, and rain put out fires.
+- Add feature where transitions between weathers is clean.
 
 
 ### Mapgen
 
 - Improve cave generation
-- Make treasures spawn
-- Move mapgen to no-longer use a single mapgen file.
+- Make treasures spawn. Done
+- Move mapgen to no-longer use a single mapgen file. Done
 
 
 ### UI

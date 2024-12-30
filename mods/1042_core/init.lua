@@ -94,9 +94,11 @@ end
 local path = core.get_modpath("1042_core")
 
 dofile(path.."/src/funcs.lua")
+dofile(path.."/src/invs.lua")
 dofile(path.."/src/player_inv.lua")
 dofile(path.."/src/player.lua")
 dofile(path.."/src/privs.lua")
 dofile(path.."/src/achievements.lua")
 dofile(path.."/src/chat_commands.lua")
+dofile(path.."/src/node_wear.lua")
 

@@ -1,6 +1,6 @@
 
 
-core.register_node("1042_tools:sword",{
+item_wear.register_complex_node("1042_tools:sword",{
     description = "Sword",
     drawtype = "mesh",
     mesh = "sword.obj",
@@ -36,9 +36,7 @@ core.register_node("1042_tools:sword",{
     },
     wield_scale = {x = 1.5, y = 2, z = 1.5},
 
-    after_use = function(itemstack, user, pointed_thing)
-        -- Add dmg
-    end,
+    uses = 150,
 
     damage_per_second = 128,
 
@@ -57,7 +55,7 @@ core.register_craft({
 
 
 
-core.register_node("1042_tools:pick",{
+item_wear.register_complex_node("1042_tools:pick",{
     description = "Pick",
     drawtype = "mesh",
     mesh = "pick.obj",
@@ -84,9 +82,7 @@ core.register_node("1042_tools:pick",{
     },
     wield_scale = {x = 1.5, y = 2, z = 1.5},
 
-    after_use = function(itemstack, user, pointed_thing)
-        -- Add dmg
-    end,
+    uses = 10,
 
     damage_per_second = 128,
 
@@ -106,7 +102,7 @@ core.register_craft({
 
 
 
-core.register_node("1042_tools:axe_flint",{
+item_wear.register_complex_node("1042_tools:axe_flint",{
     description = "Flint axe",
     drawtype = "mesh",
     mesh = "axe.obj",
@@ -132,9 +128,7 @@ core.register_node("1042_tools:axe_flint",{
     },
     wield_scale = {x = 1.5, y = 2, z = 1.5},
 
-    after_use = function(itemstack, user, pointed_thing)
-        -- Add dmg
-    end,
+    uses = 25,
 
     damage_per_second = 128,
 

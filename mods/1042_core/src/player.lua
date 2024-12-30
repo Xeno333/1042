@@ -8,7 +8,7 @@ local aux1_cooldown = {}
 
 
 core.override_item("", {
-	wield_image = "[combine:2x4:0,0=1042_plain_node.png\\^[colorize\\:#ffffff\\:0:0,2=1042_plain_node.png\\^[transformR90\\^[colorize\\:#aa8877\\:144",
+	wield_image = "[combine:2x4:0,0=1042_plain_node.png\\^[colorize\\:#ffffff\\:0:0,2=1042_plain_node.png\\^[transformR90\\^[colorize\\:#aa8877\\:168",
     wield_scale = {x = 0.35, y = 4, z = 4},
     
     range = 4.0,
@@ -111,7 +111,7 @@ core.register_on_joinplayer(function(player, last_join)
         {
             minimap = false,
             minimap_radar = false,
-            crosshair = false,
+            crosshair = false, -- We use custom one
             basic_debug = false,
             hotbar = false -- We use custom one
         }
@@ -266,7 +266,7 @@ core.register_globalstep(function(dtime)
         local name = player:get_player_name()
         local pointed_thing = core_1042.get_pointed_thing(player)
     
-        if aux1_cooldown[name] > 0 then
+        if aux1_cooldown[name] and aux1_cooldown[name] > 0 then
             aux1_cooldown[name] = aux1_cooldown[name] - dtime
         end
 
@@ -288,7 +288,7 @@ core.register_globalstep(function(dtime)
             local itemstack = player:get_wielded_item()
             local def = core.registered_items[itemstack:get_name()]
 
-            if def._1042_on_use and aux1_cooldown[name] <= 0 then
+            if def._1042_on_use and aux1_cooldown[name] and aux1_cooldown[name] <= 0 then
                 local ret_itemstack = def._1042_on_use(itemstack, player, pointed_thing)
                 if ret_itemstack then
                     player:set_wielded_item(ret_itemstack)
@@ -302,7 +302,7 @@ core.register_globalstep(function(dtime)
 
         -- Hud code
 
-        local player_huds = player_huds[name]
+        local player_huds = player_huds[name] or {}
 
         -- Pointed Item
         local id = player_huds.pointed_thing
