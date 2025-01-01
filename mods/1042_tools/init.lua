@@ -82,7 +82,7 @@ item_wear.register_complex_node("1042_tools:pick",{
     },
     wield_scale = {x = 1.5, y = 2, z = 1.5},
 
-    uses = 10,
+    uses = 100,
 
     damage_per_second = 128,
 
