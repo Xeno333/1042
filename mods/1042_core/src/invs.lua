@@ -119,7 +119,7 @@ core.register_on_joinplayer(function(player)
     local craft_inv = core.create_detached_inventory(player:get_player_name() .. "_crafts", {
         allow_move = function() return 0 end,
         allow_put = function() return 0 end,
-        allow_take = function(inv, listname, index, stack, player)
+        allow_take = function(_, _, _, stack, player)
             local inv = player:get_inventory()
             local items_needed_to_craft = core.deserialize(stack:get_meta():get_string("items_needed_to_craft") or {})
 
@@ -132,7 +132,7 @@ core.register_on_joinplayer(function(player)
             return -1
         end,
 
-        on_take = function(inv, listname, index, stack, player)
+        on_take = function(_, _, _, stack, player)
             local inv = player:get_inventory()
             local items_needed_to_craft = core.deserialize(stack:get_meta():get_string("items_needed_to_craft") or {})
 
