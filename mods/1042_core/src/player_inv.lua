@@ -79,10 +79,10 @@ function core_1042.make_inv_formspec(player)
         "scrollbar[1,2;0.5,4;vertical;setting_box_scrollbar;0]"..
 
         "label[1.5,7.5;Docs]"..
-        "image_button[2,8;2,1;1042_plain_node.png^[colorize:#22ff44:144;doc_gameplay_md;gameplay.md]"..
-        "image_button[5,8;2,1;1042_plain_node.png^[colorize:#22ffff:144;README_md;README.md]"..
-        "image_button[8,8;2,1;1042_plain_node.png^[colorize:#88ffff:144;LICENSE;LICENSE]"..
-        "image_button[11,8;2,1;1042_plain_node.png^[colorize:#448888:144;credits_txt;credits.txt]"..
+        "image_button[2,8;2,1;1042_plain_node.png^[colorize:#22ff44:144;doc_gameplay_md;Guide]"..
+        "image_button[5,8;2,1;1042_plain_node.png^[colorize:#22ffff:144;README_md;README]"..
+        "image_button[8,8;2,1;1042_plain_node.png^[colorize:#88ffff:144;LICENSE;©]"..
+        "image_button[11,8;2,1;1042_plain_node.png^[colorize:#448888:144;credits_txt;Credits]"..
 
         "list[current_player;main;1,11;10,4;]"..
         "listring[current_player;main]"

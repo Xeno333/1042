@@ -45,3 +45,5 @@
 - Added unlocking chests so that they don't have problems anymore -Xeno333
 - Add breaking animation -SuperStarSonic
 - Fix some doc typos -SuperStarSonic
+- Add tool wear system -Xeno333
+- Add crafting system and improve inventory -Xeno333

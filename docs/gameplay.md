@@ -24,11 +24,6 @@ Stone nodes must be broken with a pick
 Wood nodes must be broken with an axe
 
 
-## Crafting
-
-Crafting is done in the 3x3 slots in the inventory. There is not a crafting guid in this phase, though I would like to add it soon.
-
-
 ## Cooking
 
 If you get some raw food, like pork from a pig, you can cook it. Cooking is done by placing raw food near a burning node. After a given ionterval the food will cook.
@@ -50,16 +45,4 @@ This is a fairly simple task, find some iron nuggets and some flint. When you ha
 
 ## Tools
 
-Tools can be crafted as follows:
-
-### Axe
-
-Axe is made with three flint on top and two sticks for handle.
-
-### Pick
-
-Pick is made with three iron and two sticks for handle.
-
-### Sword
-
-Sword is made with two iron ingots for a blade and one stick for a handle.
+Tools are used to do some tasks, like mine or cut wood.
