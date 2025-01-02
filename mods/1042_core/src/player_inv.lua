@@ -88,13 +88,14 @@ function core_1042.make_inv_formspec(player)
         "listring[current_player;main]"
 
         if craft_count > 0 then
+            local h = craft_count / 4 + ((craft_count % 4 > 0) and 1 or 0)
             inv_formspec = inv_formspec..
-            "scroll_container[15,11;10,5;craft;vertical;0.1;true]"..
-            "list[detached:" .. player:get_player_name() .. "_crafts;main;0,0;4," .. craft_count / 4 + ((craft_count % 4 > 0) and 1 or 0) .. ";]"..
-            "listring[detached:" .. player:get_player_name() .. "_crafts;main]"..
-            "listring[current_player;main]"..
-            "scroll_container_end[]"..
-            "scrollbar[14.3,11;0.5,5;vertical;craft;0]"
+                "scroll_container[15,11;5," .. h + (h * 0.2) .. ";craft;vertical;0.1;true]"..
+                "list[detached:" .. player:get_player_name() .. "_crafts;main;0,0;4," .. h .. ";]"..
+                "listring[detached:" .. player:get_player_name() .. "_crafts;main]"..
+                "listring[current_player;main]"..
+                "scroll_container_end[]"..
+                "scrollbar[14.3,11;0.5,5;vertical;craft;0]"
         end
         
         inv_formspec = inv_formspec..
