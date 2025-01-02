@@ -63,7 +63,6 @@ end)
 
 
 
--- #fixme needs finished
 
 function core_1042.update_player_crafts(player)
     local inv = player:get_inventory()
