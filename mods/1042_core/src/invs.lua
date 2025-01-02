@@ -71,17 +71,18 @@ function core_1042.update_player_crafts(player)
 
     local table_of_crafts = {}
 
-    for _, def in ipairs(core_1042.all_registered_items) do
+    for _, def in pairs(core_1042.all_registered_items) do
         if def.name and def.name ~= "" then
             local recipe = core.get_craft_recipe(def.name)
 
             if recipe and recipe.method == "normal" then
-                local req_items = {}
-                for _, v in ipairs(recipe.items) do
-                    req_items[#req_items+1] = v
+                local item_stacks = {}
+
+                for _, stack in pairs(recipe.items) do
+                    item_stacks[stack] = (item_stacks[stack] or 0) + 1
                 end
 
-                table_of_crafts[#table_of_crafts+1] = {recipe = recipe, output = core.get_craft_result(recipe), req_items = req_items}
+                table_of_crafts[#table_of_crafts+1] = {recipe = recipe, output = core.get_craft_result(recipe), req_items = item_stacks}
             end
         end
     end
@@ -89,7 +90,6 @@ function core_1042.update_player_crafts(player)
     craft_inv:set_size("main", #table_of_crafts)
 
     for i, craft in ipairs(table_of_crafts) do
-        -- Add craft req thing here
         craft.output.item:get_meta():set_string("items_needed_to_craft", core.serialize(craft.req_items))
         craft_inv:set_stack("main", i, craft.output.item)
     end
@@ -124,11 +124,23 @@ core.register_on_joinplayer(function(player)
             local inv = player:get_inventory()
             local items_needed_to_craft = core.deserialize(stack:get_meta():get_string("items_needed_to_craft") or {})
 
-            -- take from inv
+            for item, count in pairs(items_needed_to_craft) do
+                if not inv:contains_item("main", ItemStack(item .. " " .. count)) then
+                    return 0
+                end
+            end
             
-            return 0
+            return -1
         end,
-        -- Add part that does take items from inv when crafting
+
+        on_take = function(inv, listname, index, stack, player)
+            local inv = player:get_inventory()
+            local items_needed_to_craft = core.deserialize(stack:get_meta():get_string("items_needed_to_craft") or {})
+
+            for item, count in pairs(items_needed_to_craft) do
+                inv:remove_item("main", ItemStack(item .. " " .. count))
+            end
+        end
     })
 
     craft_inv:set_size("main", 0)
