@@ -63,7 +63,7 @@ end)
 
 
 
-
+-- #fixme Add a part to return the replacements things from crafting
 function core_1042.update_player_crafts(player)
     local inv = player:get_inventory()
     local craft_inv = core.get_inventory({type="detached", name=player:get_player_name() .. "_crafts"})

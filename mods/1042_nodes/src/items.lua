@@ -242,6 +242,17 @@ core.register_node("1042_nodes:sticks", {
     groups = {breakable_by_hand = 1, attached_node = 3, burns = 1},
 })
 
+core_1042.register_loot({name = "1042_nodes:sticks", max_count = 32})
+
+core.register_craft({
+    output = "1042_tools:sticks 6",
+    type = "shapeless",
+    recipe = {
+        "group:wood"
+    }
+})
+
+
 
 
 core.register_node("1042_nodes:iron_nugget", {
