@@ -16,6 +16,11 @@
 - Mobs API
 
 
+### Player
+
+- Add player API and hunger/thirst mechanic.
+- Add weather mechanic with seasons.
+
 
 ### Textures
 
