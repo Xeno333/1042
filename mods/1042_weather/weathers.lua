@@ -43,10 +43,9 @@ weather.register_weather({
     },
     on_step = function(player)
         local pos = player:get_pos()
-        local ray = core.raycast(vector.new(pos.x, pos.y+1, pos.z), vector.new(pos.x, pos.y+weather.weather_hight, pos.z), false, false)
+        local clear, pos = core.line_of_sight(vector.new(pos.x, pos.y+1, pos.z), vector.new(pos.x, pos.y+weather.weather_hight, pos.z))
 
-        local node = ray:next()
-        if not node then
+        if clear then
             player:set_hp(player:get_hp()-1, "Hail")
         end
 

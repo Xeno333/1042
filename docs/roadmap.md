@@ -66,3 +66,10 @@ Normal world
 ## Void (Planned)
 
 A demension with low gravity and dark skies that slowly change color with few nodes, but colorful life.
+
+
+
+# New features
+
+- Torches
+- Fix wear perstintance when node
