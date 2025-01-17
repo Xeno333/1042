@@ -8,12 +8,14 @@ end
 
 function item_wear.register_complex_node(name, def)
     def._item_wear_old_after_use = def.after_use -- save old function
+    def._item_wear_old_on_dig = def.on_dig -- save old function
+    def._item_wear_old_after_place_node = def.after_place_node
     def._item_wear_uses = def.uses
     def.uses = nil
 
     def.after_use = function(itemstack, user, node, digparams)
         local meta = itemstack:get_meta()
-        local uses = meta:get_int("item_uses")
+        local uses = meta:get_int("_item_uses")
         local defl = core.registered_items[itemstack:get_name()] or {}
 
         if uses == 0 then
@@ -42,7 +44,7 @@ function item_wear.register_complex_node(name, def)
             itemstack:take_item(1)
             return itemstack
         else
-            meta:set_int("item_uses", uses)
+            meta:set_int("_item_uses", uses)
         end
 
         if defl._item_wear_old_after_use then
@@ -50,6 +52,32 @@ function item_wear.register_complex_node(name, def)
         end
         
         return itemstack
+    end
+
+
+    def.after_place_node = function(pos, placer, itemstack, pointed_thing)
+        local defl = core.registered_items[itemstack:get_name()] or {}
+
+        local node_meta = core.get_meta(pos)
+        node_meta:set_string("_itemstack", itemstack:to_string())
+
+        if defl._item_wear_old_after_place_node then
+            defl._item_wear_old_after_place_node(pos, placer, itemstack, pointed_thing)
+        end
+    end
+
+    def.on_dig = function(pos, node, digger)
+        local defl = core.registered_items[node.name] or {}
+
+        if defl._item_wear_old_on_destruct then
+            defl._item_wear_old_on_destruct(pos, node, digger)
+        end
+
+        local node_meta = core.get_meta(pos)
+        local itemstack = ItemStack(node_meta:get_string("_itemstack"))
+
+        core.set_node(pos, {name = "air"})
+        core.add_item(pos, itemstack)
     end
 
     core.register_node(name, def)
