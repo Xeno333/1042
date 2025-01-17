@@ -140,6 +140,7 @@ weather.register_weather({
 
         collisiondetection = true,
         object_collision = true,
+        vertical = true,
 
         vel = {
             min = vector.new(-2, -10, -2),
@@ -246,6 +247,7 @@ weather.register_weather({
 
         collisiondetection = true,
         object_collision = true,
+        vertical = true,
 
         vel = {
             min = vector.new(-2, -10, -2),
@@ -338,6 +340,7 @@ weather.register_weather({
 
         collisiondetection = true,
         object_collision = true,
+        vertical = true,
 
         vel = {
             min = vector.new(-2, -10, -2),
