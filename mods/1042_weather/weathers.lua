@@ -39,7 +39,11 @@ weather.register_weather({
 
         glow = 2,
 
-        texture = "1042_plain_node.png^[colorize:#dddddd:144"
+        texture = {
+            name = "hail.png",
+            scale = 1,
+            blend = "clip"
+        }
     },
     on_step = function(player)
         local pos = player:get_pos()
@@ -148,7 +152,10 @@ weather.register_weather({
 
         glow = 2,
 
-        texture = "1042_plain_node.png^[colorize:#004499:144"
+        texture = {
+            name = "1042_plain_node.png^[colorize:#0044aa:144",
+            scale = {x=0.25, y=1}
+        }
     },
     on_step = function(player)
         if core_1042.rand:next(1, 40) == 1 then
@@ -251,7 +258,10 @@ weather.register_weather({
 
         glow = 2,
 
-        texture = "1042_plain_node.png^[colorize:#004499:144"
+        texture = {
+            name = "1042_plain_node.png^[colorize:#004499:144",
+            scale = {x=0.25, y=1}
+        }
     },
     on_change = function(player, name, players_weather)
         -- Sky changes
@@ -340,7 +350,10 @@ weather.register_weather({
 
         glow = 2,
 
-        texture = "1042_plain_node.png^[colorize:#004499:144"
+        texture = {
+            name = "1042_plain_node.png^[colorize:#004499:144",
+            scale = {x=0.25, y=1}
+        }
     },
     on_change = function(player, name, players_weather)
         -- Sky changes
@@ -426,9 +439,26 @@ weather.register_weather({
             max = 0.3
         },
 
-        glow = 8,
+        glow = 10,
 
-        texture = "1042_plain_node.png^[colorize:#ddddff:144"
+        texpool = {
+            {
+                name = "snowflake1.png",
+                blend = "clip"
+            },
+            {
+                name = "snowflake2.png",
+                blend = "clip"
+            },
+            {
+                name = "snowflake3.png",
+                blend = "clip"
+            },
+            {
+                name = "snowflake4.png",
+                blend = "clip"
+            }
+        }
     },
     on_change = function(player, name, players_weather)
         -- Sky changes

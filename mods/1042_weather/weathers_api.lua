@@ -44,8 +44,8 @@ function weather.default_on_change(player, name, players_weather)
         sky_color = {
             night_sky = "#0066ff",
             night_horizon = "#0088ff",
-            day_horizon = "#90d3f6",
-            day_sky = "#61b5f5",
+            day_horizon = "#70d3f6",
+            day_sky = "#41b5f5",
             dawn_sky = "#b4bafa",
             dawn_horizon = "#bac1f0",
             indoors = "#646464",
