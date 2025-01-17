@@ -505,7 +505,7 @@ weather.register_weather({
             },
             fog = {
                 fog_start = 0,
-                fog_distance = 90,
+                fog_distance = 270,
                 fog_color = "#ddddddaa"
             }
         })

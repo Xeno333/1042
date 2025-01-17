@@ -166,6 +166,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
     local emin, emax = vm:get_emerged_area()
     local area = VoxelArea(emin, emax)
     local data = vm:get_data()
+    local param2_data = vm:get_param2_data()
 
     local pr = PseudoRandom(seed)
 
@@ -236,11 +237,6 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                     if tempv <= 0 then
                         liquid_top = ice
                         liquid = water
-                        top = snow
-                    end
-
-                    if tempv >= 20 then
-                        top = turf_dry
                     end
 
                     if mountin_top then
@@ -259,6 +255,10 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                         elseif y == ny then
                             if y > water_level then
                                 data[vi] = top
+
+                                if top == turf then
+                                    param2_data[vi] = math.floor(((tempv / 30) + 1) * 8 * 16)
+                                end
 
                             elseif y < water_level then
                                 data[vi] = mid
@@ -300,6 +300,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
     end
 
     vm:set_data(data)
+    vm:set_param2_data(param2_data)
     vm:update_liquids()
 
     for _, def in ipairs(place_list) do

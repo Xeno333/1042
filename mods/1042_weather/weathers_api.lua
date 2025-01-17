@@ -55,7 +55,7 @@ function weather.default_on_change(player, name, players_weather)
         },
         fog = {
             fog_start = 0,
-            fog_distance = 270,
+            fog_distance = 360,
             fog_color = "#ffffff00"
         }
     })

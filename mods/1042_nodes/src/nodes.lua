@@ -39,8 +39,11 @@ core.register_node("1042_nodes:ice", {
 
 core.register_node("1042_nodes:turf", {
     description = "Turf",
-    tiles = {"1042_plain_node.png^[colorize:#278b13:168"},
+    tiles = {"1042_plain_node.png"},
     use_texture_alpha = "opaque",
+
+    paramtype2 = "color",
+    palette = "turf_palette.png",
 
     sounds = {
         footstep = {
