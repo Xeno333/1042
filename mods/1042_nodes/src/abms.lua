@@ -101,7 +101,38 @@ core.register_abm({
                 bias = 0
             },
 
-            texture = "1042_plain_node.png^[colorize:#ffdd88:144"
+            texpool = {
+                {
+                    name = "1042_plain_node.png^[colorize:#ffee77:255",
+                    scale = 0.5,
+                    alpha_tween = {
+                        0.5, 1,
+                        style = "pulse",
+                        reps = 2,
+
+                    }
+                },
+                {
+                    name = "1042_plain_node.png^[colorize:#ffee77:255",
+                    scale = 0.25,
+                    alpha_tween = {
+                        0.5, 1,
+                        style = "pulse",
+                        reps = 2,
+
+                    }
+                },
+                {
+                    name = "1042_plain_node.png^[colorize:#ffdd88:255",
+                    scale = 0.1,
+                    alpha_tween = {
+                        0.5, 1,
+                        style = "pulse",
+                        reps = 2,
+
+                    }
+                }
+            }
         })
     end
 })

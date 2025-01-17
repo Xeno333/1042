@@ -7,11 +7,11 @@ core.register_node("1042_nodes:water_source", {
     drawtype = "liquid",
     tiles = {
 		{
-			name = "1042_plain_node.png^[colorize:#00bbcc:144",
+			name = "water.png",
 			backface_culling = false,
 		},
 		{
-			name = "1042_plain_node.png^[colorize:#00bbcc:144",
+			name = "water.png",
 			backface_culling = true,
 		},
     },
@@ -45,7 +45,7 @@ core.register_node("1042_nodes:water_source", {
     liquid_range = 5,
 	waving = 3,
 
-    post_effect_color = {a = 64, r = 0x00, g = 0xbb, b = 0xcc},
+    post_effect_color = {a = 64, r = 0x00, g = 0x6e, b = 0xa9},
     groups = {water = 1, liquid = 1, cools = 1},
 
 })
@@ -54,14 +54,14 @@ core.register_node("1042_nodes:water_flowing", {
     description = "Flowing Water",
 
     drawtype = "flowingliquid",
-    tiles = {"1042_plain_node.png^[colorize:#00bbcc:144"},
+    tiles = {"water.png"},
     special_tiles = {
 		{
-			name = "1042_plain_node.png^[colorize:#00bbcc:144",
+			name = "water.png",
 			backface_culling = false,
 		},
 		{
-			name = "1042_plain_node.png^[colorize:#00bbcc:144",
+			name = "water.png",
 			backface_culling = true,
 		},
     },
@@ -95,7 +95,7 @@ core.register_node("1042_nodes:water_flowing", {
     liquid_range = 5,
 	waving = 3,
 
-    post_effect_color = {a = 64, r = 0x00, g = 0xbb, b = 0xcc},
+    post_effect_color = {a = 64, r = 0x00, g = 0x6e, b = 0xa9},
     groups = {water = 1, liquid = 1, cools = 1, not_in_creative_inventory = 1},
 })
 
