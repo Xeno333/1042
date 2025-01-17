@@ -39,10 +39,22 @@ weather.register_weather({
 
         glow = 2,
 
-        texture = {
-            name = "hail.png",
-            scale = 1,
-            blend = "clip"
+        texpool = {
+            {
+                name = "hail.png",
+                scale = 1,
+                blend = "clip"
+            },
+            {
+                name = "hail.png",
+                scale = 0.5,
+                blend = "clip"
+            },
+            {
+                name = "hail.png",
+                scale = 0.25,
+                blend = "clip"
+            }
         }
     },
     on_step = function(player)
@@ -50,7 +62,9 @@ weather.register_weather({
         local clear, pos = core.line_of_sight(vector.new(pos.x, pos.y+1, pos.z), vector.new(pos.x, pos.y+weather.weather_hight, pos.z))
 
         if clear then
-            player:set_hp(player:get_hp()-1, "Hail")
+            if core_1042.rand:next(1, 4) == 1 then
+                player:set_hp(player:get_hp()-1, "Hail")
+            end
         end
 
         if core_1042.rand:next(1, 10) == 1 then
