@@ -35,14 +35,16 @@ function weather.get_temp_map(x, z)
     return temp_m:get_2d_map(v)
 end
 
+-- max temp = 30, min = -10
+
 function weather.get_temp(pos, temp_map)
-    return temp_map[pos.x][pos.z] * 30
+    return math.max(math.min(temp_map[pos.x][pos.z] * 20 + 10, 30), -10)
 end
 
 
 function weather.get_temp_single(pos)
     v.x = pos.z
     v.y = pos.x
-    local tempv = temp_s:get_2d(v) * 30
+    local tempv = math.max(math.min(temp_s:get_2d(v) * 20 + 10, 30), -10)
     return tempv
 end

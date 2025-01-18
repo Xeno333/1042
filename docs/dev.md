@@ -110,7 +110,7 @@ Weathers are registered by appending to the end of `weather.weathers` with a wea
 
 ## Weather API
 
-The weather API is avalible in both the asynch mapgen enviorment and main via import from file (as done in mapgen.)
+The weather API is avalible in both the asynch mapgen enviorment and main via import from file (as done in mapgen.) Temps can be from -10 C to 30 C.
 
 -`function weather.get_temp_map(x, z)` Get a temp map starting at `x, z`. The map is a mapblock, thus 80x80.
 -`function weather.get_temp(pos, temp_map)` Get temp from temp map with coords on that temp map.

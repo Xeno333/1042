@@ -36,7 +36,6 @@ local stone = core.get_content_id("mapgen_stone")
 local dirt = core.get_content_id("1042_nodes:dirt")
 local sand = core.get_content_id("1042_nodes:sand")
 local turf = core.get_content_id("1042_nodes:turf")
-local turf_dry = core.get_content_id("1042_nodes:turf_dry")
 local snow = core.get_content_id("1042_nodes:snow")
 local bedrock = core.get_content_id("1042_nodes:bedrock")
 local lava = core.get_content_id("1042_nodes:lava_source")
@@ -97,7 +96,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
                 data[area:index(x, y+1, z)] = mushroom
 
             -- Small tree
-            elseif c > 995 and y > water_level+3 and tempv >= 3 then
+            elseif c > 995 and y > water_level+3 and tempv >= 12 then
                 place_list[#place_list+1] = {vector.new(x-4,y,z-4), schematic_path .. "tree_plain_1.mts", "random", nil, false}
 
             -- Big tree
@@ -114,11 +113,14 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
             end
 
         else
+            if tempv <= -3 then
+                data[area:index(x, y+1, z)] = snow
+            end
             -- Snow grass
-            if c >= 990 then
+            if tempv > -3 and c >= 990 then
                 data[area:index(x, y+1, z)] = grass_snowy
 
-            elseif y >= water_level+3 and tempv >= -15 and c >= 990+(tempv/4) then
+            elseif y >= water_level+3 and c >= 999+(tempv/8) then
                 place_list[#place_list+1] = {vector.new(x-7,y-1,z-7), schematic_path .. "big_tree_light_1.mts", "random", nil, false}
 
             end
@@ -257,7 +259,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                                 data[vi] = top
 
                                 if top == turf then
-                                    param2_data[vi] = math.floor(((tempv / 30) + 1) * 8 * 16)
+                                    param2_data[vi] = math.floor(((tempv / 30) + 1) * 8 * 16) - 1
                                 end
 
                             elseif y < water_level then

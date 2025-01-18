@@ -29,9 +29,11 @@ core.register_node("1042_nodes:sand", {
 core.register_node("1042_nodes:ice", {
     description = "Ice",
     drawtype = "glasslike",
-    tiles = {"1042_plain_node.png^[colorize:#bbbbff:72"},
+    tiles = {"water.png"},
     use_texture_alpha = "blend",
 	paramtype = "light",
+
+    color = "#ee0000",
 
     _1042_melts_to = "1042_nodes:water_source",
     groups = {falling_node = 1, float = 1, melts = 1, slippery = 3, cools = 1, frozen = 1},
@@ -60,32 +62,6 @@ core.register_node("1042_nodes:turf", {
             name = "turf",
             gain = 0.4,
             pitch = 1.5
-        }
-    },
-
-    groups = {dirt = 1, breakable_by_hand = 1},
-})
-
-core.register_node("1042_nodes:turf_dry", {
-    description = "Dry Turf",
-    tiles = {"1042_plain_node.png^[colorize:#578b33:168"},
-    use_texture_alpha = "opaque",
-
-    sounds = {
-        footstep = {
-            name = "turf",
-            gain = 1,
-            pitch = 2
-        },
-        dig = {
-            name = "turf",
-            gain = 0.5,
-            pitch = 2
-        },
-        place = {
-            name = "turf",
-            gain = 0.5,
-            pitch = 2
         }
     },
 

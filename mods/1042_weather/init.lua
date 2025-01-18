@@ -29,6 +29,24 @@ core.register_globalstep(function(dtime)
             local name = player:get_player_name()
             local the_weather = weather.weathers[weather.get_weather_at_pos(player:get_pos())]
 
+            -- Temp hud:
+            local player_huds = core_1042.player_huds[name] or {}
+            local id = player_huds.pos_temp
+            if id then
+                player:hud_remove(id)
+                player_huds.pos_temp = nil
+            end
+            player_huds.pos_temp = player:hud_add({
+                type = "text",
+                name = "pos_temp",
+                text = weather.get_temp_single(player:get_pos()) .. " C",
+                position = {x=0.8, y=0.9},
+                number = 0x00ffdd,
+                style = 3
+            })
+
+
+
             local players_weather = weather.players_weather[name]
             -- Only run if player changed weathers
             if players_weather.weather ~= the_weather then
