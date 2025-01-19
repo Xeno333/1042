@@ -95,16 +95,13 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
             elseif c == 101 and y > water_level+9 then
                 data[area:index(x, y+1, z)] = mushroom
 
-            -- Small tree
-            elseif c > 995 and y > water_level+3 and tempv >= 12 then
-                place_list[#place_list+1] = {vector.new(x-4,y,z-4), schematic_path .. "tree_plain_1.mts", "random", nil, false}
-
             -- Big tree
             elseif y >= water_level+10 and tempv >= 15 and c == 995 then
-                place_list[#place_list+1] = {vector.new(x-7,y-1,z-7), schematic_path .. "big_tree_1.mts", "random", nil, false}
+                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematic_path .. "big_tree_1.mts", rotation="random", replacements=nil, force_placement=false, flags=nil}
 
-            elseif y >= water_level+5 and tempv >= 5 and tempv < 15 and c >= 990 then
-                place_list[#place_list+1] = {vector.new(x-11,y-3,z-11), schematic_path .. "big_tree_dark_1.mts", "random", nil, true}
+            elseif y >= water_level+5 and tempv >= 5 and c == 999 then
+                place_list[#place_list+1] = {pos=vector.new(x-11,y-3,z-11), schematic=schematic_path .. "big_tree_dark_1.mts", rotation="random", replacements=nil, force_placement=true, flags=nil}
+
             end
 
         elseif tempv > 20 then
@@ -121,7 +118,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
                 data[area:index(x, y+1, z)] = grass_snowy
 
             elseif y >= water_level+3 and c >= 999+(tempv/8) then
-                place_list[#place_list+1] = {vector.new(x-7,y-1,z-7), schematic_path .. "big_tree_light_1.mts", "random", nil, false}
+                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematic_path .. "big_tree_light_1.mts", rotation="random", replacements=nil, force_placement=false, flags=nil}
 
             end
         end
@@ -306,6 +303,6 @@ core.register_on_generated(function(vm, minp, maxp, seed)
     vm:update_liquids()
 
     for _, def in ipairs(place_list) do
-        core.place_schematic_on_vmanip(vm, def[1], def[2], def[3], def[4], def[5])
+        core.place_schematic_on_vmanip(vm, def.pos, def.schematic, def.rotation, def.replacements, def.force_placement, def.flags)
     end
 end)
