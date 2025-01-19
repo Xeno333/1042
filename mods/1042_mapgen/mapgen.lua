@@ -300,9 +300,24 @@ core.register_on_generated(function(vm, minp, maxp, seed)
 
     vm:set_data(data)
     vm:set_param2_data(param2_data)
-    vm:update_liquids()
 
+
+    -- #fixme this just skips chunks with overlaps, probably should make my own format and API for this to allow checking for fits
+    --[[
+        format_voxel_manip_data = {}
+        format_voxel_manip_data:fits_in(<format_voxel_manip_data>)
+        format_voxel_manip_data:add(<format_voxel_manip_data>)
+        etc.
+    ]]
+
+    local light_data = vm:get_light_data()
     for _, def in ipairs(place_list) do
-        core.place_schematic_on_vmanip(vm, def.pos, def.schematic, def.rotation, def.replacements, def.force_placement, def.flags)
+        if not core.place_schematic_on_vmanip(vm, def.pos, def.schematic, def.rotation, def.replacements, def.force_placement, def.flags) then
+            vm:set_data(data)
+            vm:set_light_data(light_data)
+            vm:set_param2_data(param2_data)
+        end
     end
+    
+    vm:update_liquids()
 end)
