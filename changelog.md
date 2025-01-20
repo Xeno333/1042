@@ -51,3 +51,4 @@
 - Improve mapgen code and plan for further improvements -Xeno333
 - Redesign biomes -Xeno333
 - Improve textures -Xeno333 & SuperStarSonic
+- Fix grass in trees

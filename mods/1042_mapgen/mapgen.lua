@@ -97,7 +97,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
 
             -- Big tree
             elseif y >= water_level+10 and tempv >= 15 and c == 995 then
-                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematic_path .. "big_tree_1.mts", rotation="random", replacements=nil, force_placement=false, flags=nil}
+                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematic_path .. "big_tree_1.mts", rotation="random", replacements=nil, force_placement=true, flags=nil}
 
             elseif y >= water_level+5 and tempv >= 5 and c == 999 then
                 place_list[#place_list+1] = {pos=vector.new(x-11,y-3,z-11), schematic=schematic_path .. "big_tree_dark_1.mts", rotation="random", replacements=nil, force_placement=true, flags=nil}
@@ -118,7 +118,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
                 data[area:index(x, y+1, z)] = grass_snowy
 
             elseif y >= water_level+3 and c >= 999+(tempv/8) then
-                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematic_path .. "big_tree_light_1.mts", rotation="random", replacements=nil, force_placement=false, flags=nil}
+                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematic_path .. "big_tree_light_1.mts", rotation="random", replacements=nil, force_placement=true, flags=nil}
 
             end
         end
