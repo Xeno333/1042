@@ -65,6 +65,15 @@ core.register_node("1042_nodes:turf", {
         }
     },
 
+    on_construct = function(pos)
+        local node = core.get_node(pos)
+
+        if node then
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            core.swap_node(pos, node)
+        end
+    end,
+
     groups = {dirt = 1, breakable_by_hand = 1},
 })
 

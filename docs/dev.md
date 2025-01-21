@@ -116,6 +116,7 @@ The weather API is avalible in both the asynch mapgen enviorment and main via im
 -`function weather.get_temp(pos, temp_map)` Get temp from temp map with coords on that temp map.
 -`function weather.get_temp_single(pos)` Get temp at a position, this is faster than using the other two for single coords.
 - `weather.rand` A `PcgRandom` object.
+- `weather.get_biome_palette_index(temp)` Returns the index in a palette conforming to the biome color palette format from a tempeture.
 
 
 ## Weathers API

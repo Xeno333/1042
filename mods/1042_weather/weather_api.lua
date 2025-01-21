@@ -48,3 +48,9 @@ function weather.get_temp_single(pos)
     local tempv = math.max(math.min(temp_s:get_2d(v) * 20 + 10, 30), -10)
     return tempv
 end
+
+
+-- This equation is hard coded in mapgen!
+function weather.get_biome_palette_index(temp)
+    return math.floor(((temp / 30) + 1) * 8 * 16) - 1
+end
