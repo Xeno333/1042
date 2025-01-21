@@ -5,6 +5,10 @@ weather.register_weather({
     conditions = {
         temp = {
             min = -5,
+        },
+        y_level = {
+            max = core_1042.shared_lib.consts.plain_world_y_levels.max,
+            min = core_1042.shared_lib.consts.plain_world_y_levels.min
         }
     },
     particlespawner = {
@@ -132,6 +136,10 @@ weather.register_weather({
     conditions = {
         temp = {
             min = 5,
+        },
+        y_level = {
+            max = core_1042.shared_lib.consts.plain_world_y_levels.max,
+            min = core_1042.shared_lib.consts.plain_world_y_levels.min
         }
     },
     particlespawner = {
@@ -239,6 +247,10 @@ weather.register_weather({
     conditions = {
         temp = {
             min = 0,
+        },
+        y_level = {
+            max = core_1042.shared_lib.consts.plain_world_y_levels.max,
+            min = core_1042.shared_lib.consts.plain_world_y_levels.min
         }
     },
     particlespawner = {
@@ -332,6 +344,10 @@ weather.register_weather({
     conditions = {
         temp = {
             min = 0,
+        },
+        y_level = {
+            max = core_1042.shared_lib.consts.plain_world_y_levels.max,
+            min = core_1042.shared_lib.consts.plain_world_y_levels.min
         }
     },
     particlespawner = {
@@ -425,6 +441,10 @@ weather.register_weather({
     conditions = {
         temp = {
             max = 0
+        },
+        y_level = {
+            max = core_1042.shared_lib.consts.plain_world_y_levels.max,
+            min = core_1042.shared_lib.consts.plain_world_y_levels.min
         }
     },
     particlespawner = {

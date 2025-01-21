@@ -18,6 +18,19 @@ This is documentation for development and modding for the game `1042` on the *Lu
 - `core_1042.register_loot(def)` Register loot as defined by `Loot table`
 - `core_1042.get_loot()` Returns a random `ItemStack` from the loot that is registered.
 
+## `core_1042.shared_lib` is a library that can be loaded into any place with `dofile(core.get_modpath("1042_core").."/src/shared_lib.lua")` if it isnt already loaded (it should be)
+
+```lua 
+core_1042.shared_lib = {
+    consts = {
+        plain_world_y_levels = {
+            max = 128,
+            min = -256
+        }
+    }
+}
+```
+
 
 ## Tables
 

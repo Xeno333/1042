@@ -101,6 +101,12 @@ end
 weather.weathers = {
     {
         name = "Plain",
+        conditions = {
+            y_level = {
+                max = core_1042.shared_lib.consts.plain_world_y_levels.max,
+                min = core_1042.shared_lib.consts.plain_world_y_levels.min
+            }
+        },
         on_change = weather.default_on_change
     }
 }
@@ -128,12 +134,21 @@ function weather.get_weather_at_pos(pos)
         local weather_t = weather.weathers[i]
         if not weather_t.conditions then
             return i
-        elseif weather_t.conditions.temp.max and weather_t.conditions.temp.max >= temp then
-            if not weather_t.conditions.temp.min or weather_t.conditions.temp.min >= temp then
-                return i
-            end
-        elseif weather_t.conditions.temp.min and weather_t.conditions.temp.min <= temp then
-            if not weather_t.conditions.temp.max or weather_t.conditions.temp.max <= temp then
+        end
+
+        -- If there is no value then skip it but other wise make sure in range
+        if (not weather_t.conditions.y_level) or (((not weather_t.conditions.y_level.max) or weather_t.conditions.y_level.max >= pos.y) and ((not weather_t.conditions.y_level.max) or weather_t.conditions.y_level.max >= pos.y)) then
+            if weather_t.conditions.temp then
+                if weather_t.conditions.temp.max and weather_t.conditions.temp.max >= temp then
+                    if not weather_t.conditions.temp.min or weather_t.conditions.temp.min >= temp then
+                        return i
+                    end
+                elseif weather_t.conditions.temp.min and weather_t.conditions.temp.min <= temp then
+                    if not weather_t.conditions.temp.max or weather_t.conditions.temp.max <= temp then
+                        return i
+                    end
+                end
+            else
                 return i
             end
         end
