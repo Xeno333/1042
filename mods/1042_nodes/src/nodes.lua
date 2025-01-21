@@ -29,11 +29,11 @@ core.register_node("1042_nodes:sand", {
 core.register_node("1042_nodes:ice", {
     description = "Ice",
     drawtype = "glasslike",
-    tiles = {"water.png"},
+    tiles = {"ice.png"},
     use_texture_alpha = "blend",
 	paramtype = "light",
 
-    color = "#ee0000",
+    color = "#333333",
 
     _1042_melts_to = "1042_nodes:water_source",
     groups = {falling_node = 1, float = 1, melts = 1, slippery = 3, cools = 1, frozen = 1},
@@ -41,7 +41,7 @@ core.register_node("1042_nodes:ice", {
 
 core.register_node("1042_nodes:turf", {
     description = "Turf",
-    tiles = {"1042_plain_node.png"},
+    tiles = {"1042_plain_node.png^[noalpha"},
     use_texture_alpha = "opaque",
 
     paramtype2 = "color",

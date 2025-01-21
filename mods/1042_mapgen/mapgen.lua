@@ -9,7 +9,7 @@ dofile(core.get_modpath("1042_weather") .. "/weather_api.lua")
 
 
 
-local path = core.get_modpath("1042_mapgen")
+--local path = core.get_modpath("1042_mapgen")
 
 --dofile(path.."/api.lua")
 --dofile(path.."/mapgen.lua")
@@ -67,14 +67,11 @@ local schematic_path = core.get_modpath("1042_mapgen") .. "/schematics/"
 
 
 
-local function stone_gen(noise, y, data, vi)
-    if noise < -1.3 then
-        data[vi] = iron_ore
-        return
-    end
-    
-    data[vi] = stone
-end
+
+
+
+
+
 
 local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
     local c = pr:next(1, 1000)
@@ -225,49 +222,38 @@ core.register_on_generated(function(vm, minp, maxp, seed)
 
                     local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
 
-                    local mid = dirt
-                    local low = stone
-                    local top_2 = sand
-                    local top = turf
-                    local liquid = water
-                    local liquid_top = water
-                    local do_dec = true
-
-                    if tempv <= 0 then
-                        liquid_top = ice
-                        liquid = water
-                    end
-
-                    if mountin_top then
-                        top = dirt
-                        do_dec = false
-                    end
 
                     -- Place and handel caves
                     if cave_noise_m[lx][ly][lz] > -0.95 or y > caves_max then
                         if y < (ny-1) then
-                            stone_gen(ore_noise_m[lx][ly][lz], y, data, vi)
+                            if noise < -1.3 then
+                                data[vi] = iron_ore
+                            else
+                                data[vi] = stone
+                            end
+                            
 
                         elseif y == (ny-1) then
-                            data[vi] = mid
+                            data[vi] = dirt
 
                         elseif y == ny then
                             if y > water_level then
-                                data[vi] = top
-
-                                if top == turf then
+                                if mountin_top then
+                                    data[vi] = dirt
+                                else
+                                    data[vi] = turf
                                     param2_data[vi] = math.floor(((tempv / 30) + 1) * 8 * 16) - 1
                                 end
 
                             elseif y < water_level then
-                                data[vi] = mid
+                                data[vi] = dirt
 
                             else
-                                data[vi] = top_2
+                                data[vi] = sand
 
                             end
 
-                            if do_dec then
+                            if not mountin_top then
                                 dec(pr, x, y, z, data, area, place_list, tempv, nil)
                             end
                         end
@@ -283,9 +269,13 @@ core.register_on_generated(function(vm, minp, maxp, seed)
 
                     if ((y <= water_level) or (mountin_top and y <= rv)) and y > ny then
                         if y == water_level or (mountin_top and y == rv) then
-                            data[vi] = liquid_top
+                            if tempv <= 0 then
+                                data[vi] = ice
+                            else
+                                data[vi] = water
+                            end
                         else
-                            data[vi] = liquid
+                            data[vi] = water
                         end
                     end
 
