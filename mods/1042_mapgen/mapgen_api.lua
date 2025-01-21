@@ -1,5 +1,11 @@
 mapgen_1042 = {}
 
+
+if not core_1042 then core_1042 = {} end
+if not core_1042.shared_lib then
+    dofile(core.get_modpath("1042_core").."/src/shared_lib.lua")
+end
+
 local map_noise_params = {
     offset = 0,
     scale = 1,
@@ -49,8 +55,8 @@ mapgen_1042.ore_map = PerlinNoiseMap({
 }, {x=80, y=80, z=80})
 
 
-mapgen_1042.ymax = 128
-mapgen_1042.ymin = -mapgen_1042.ymax*2
+mapgen_1042.ymax = core_1042.shared_lib.consts.plain_world_y_levels.max
+mapgen_1042.ymin = core_1042.shared_lib.consts.plain_world_y_levels.min
 mapgen_1042.water_level = -3
 mapgen_1042.lava_level = -240
 mapgen_1042.bedrock_level = -256

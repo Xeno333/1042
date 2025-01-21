@@ -18,6 +18,19 @@ This is documentation for development and modding for the game `1042` on the *Lu
 - `core_1042.register_loot(def)` Register loot as defined by `Loot table`
 - `core_1042.get_loot()` Returns a random `ItemStack` from the loot that is registered.
 
+## `core_1042.shared_lib` is a library that can be loaded into any place with `dofile(core.get_modpath("1042_core").."/src/shared_lib.lua")` if it isnt already loaded (it should be)
+
+```lua 
+core_1042.shared_lib = {
+    consts = {
+        plain_world_y_levels = {
+            max = 128,
+            min = -256
+        }
+    }
+}
+```
+
 
 ## Tables
 
@@ -110,12 +123,13 @@ Weathers are registered by appending to the end of `weather.weathers` with a wea
 
 ## Weather API
 
-The weather API is avalible in both the asynch mapgen enviorment and main via import from file (as done in mapgen.)
+The weather API is avalible in both the asynch mapgen enviorment and main via import from file (as done in mapgen.) Temps can be from -10 C to 30 C.
 
 -`function weather.get_temp_map(x, z)` Get a temp map starting at `x, z`. The map is a mapblock, thus 80x80.
 -`function weather.get_temp(pos, temp_map)` Get temp from temp map with coords on that temp map.
 -`function weather.get_temp_single(pos)` Get temp at a position, this is faster than using the other two for single coords.
 - `weather.rand` A `PcgRandom` object.
+- `weather.get_biome_palette_index(temp)` Returns the index in a palette conforming to the biome color palette format from a tempeture.
 
 
 ## Weathers API

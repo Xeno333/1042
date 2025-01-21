@@ -102,4 +102,5 @@ dofile(path.."/src/privs.lua")
 dofile(path.."/src/achievements.lua")
 dofile(path.."/src/chat_commands.lua")
 dofile(path.."/src/node_wear.lua")
+dofile(path.."/src/shared_lib.lua")
 

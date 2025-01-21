@@ -26,8 +26,27 @@ core.register_globalstep(function(dtime)
     timer = timer + dtime
     if timer > 1 then
         for _, player in ipairs(core.get_connected_players()) do
+            local pos = player:get_pos()
             local name = player:get_player_name()
-            local the_weather = weather.weathers[weather.get_weather_at_pos(player:get_pos())]
+            local the_weather = weather.weathers[weather.get_weather_at_pos(pos)]
+
+            -- Temp hud:
+            local player_huds = core_1042.player_huds[name] or {}
+            local id = player_huds.pos_temp
+            if id then
+                player:hud_remove(id)
+                player_huds.pos_temp = nil
+            end
+            player_huds.pos_temp = player:hud_add({
+                type = "text",
+                name = "pos_temp",
+                text = weather.get_temp_single(pos) .. " C",
+                position = {x=0.8, y=0.9},
+                number = 0x00ffdd,
+                style = 3
+            })
+
+
 
             local players_weather = weather.players_weather[name]
             -- Only run if player changed weathers
@@ -59,7 +78,6 @@ core.register_globalstep(function(dtime)
 
             local def = the_weather.particlespawner
             if def then
-                local pos = player:get_pos()
                 def.pos = {
                     min = vector.new(pos.x-16,pos.y+weather_hight,pos.z-16),
                     max = vector.new(pos.x+16,pos.y+weather_hight,pos.z+16),

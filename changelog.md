@@ -47,3 +47,9 @@
 - Fix some doc typos -SuperStarSonic
 - Add tool wear system -Xeno333
 - Add crafting system and improve inventory -Xeno333
+- Persist tool wear -Xeno333
+- Improve mapgen code and plan for further improvements -Xeno333
+- Redesign biomes -Xeno333
+- Improve textures -Xeno333 & SuperStarSonic
+- Fix grass in trees
+- Improve turf

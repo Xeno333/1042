@@ -7,11 +7,11 @@ core.register_node("1042_nodes:water_source", {
     drawtype = "liquid",
     tiles = {
 		{
-			name = "water.png",
+			name = "water.png^[makealpha:1,1,1",
 			backface_culling = false,
 		},
 		{
-			name = "water.png",
+			name = "water.png^[makealpha:1,1,1",
 			backface_culling = true,
 		},
     },
@@ -47,7 +47,6 @@ core.register_node("1042_nodes:water_source", {
 
     post_effect_color = {a = 64, r = 0x00, g = 0x6e, b = 0xa9},
     groups = {water = 1, liquid = 1, cools = 1},
-
 })
 
 core.register_node("1042_nodes:water_flowing", {
@@ -57,11 +56,11 @@ core.register_node("1042_nodes:water_flowing", {
     tiles = {"water.png"},
     special_tiles = {
 		{
-			name = "water.png",
+			name = "water.png^[makealpha:1,1,1",
 			backface_culling = false,
 		},
 		{
-			name = "water.png",
+			name = "water.png^[makealpha:1,1,1",
 			backface_culling = true,
 		},
     },

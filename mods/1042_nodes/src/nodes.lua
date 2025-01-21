@@ -29,9 +29,11 @@ core.register_node("1042_nodes:sand", {
 core.register_node("1042_nodes:ice", {
     description = "Ice",
     drawtype = "glasslike",
-    tiles = {"1042_plain_node.png^[colorize:#bbbbff:72"},
+    tiles = {"ice.png"},
     use_texture_alpha = "blend",
 	paramtype = "light",
+
+    color = "#333333",
 
     _1042_melts_to = "1042_nodes:water_source",
     groups = {falling_node = 1, float = 1, melts = 1, slippery = 3, cools = 1, frozen = 1},
@@ -39,8 +41,11 @@ core.register_node("1042_nodes:ice", {
 
 core.register_node("1042_nodes:turf", {
     description = "Turf",
-    tiles = {"1042_plain_node.png^[colorize:#278b13:168"},
+    tiles = {"1042_plain_node.png^[noalpha"},
     use_texture_alpha = "opaque",
+
+    paramtype2 = "color",
+    palette = "turf_palette.png",
 
     sounds = {
         footstep = {
@@ -60,31 +65,14 @@ core.register_node("1042_nodes:turf", {
         }
     },
 
-    groups = {dirt = 1, breakable_by_hand = 1},
-})
+    on_construct = function(pos)
+        local node = core.get_node(pos)
 
-core.register_node("1042_nodes:turf_dry", {
-    description = "Dry Turf",
-    tiles = {"1042_plain_node.png^[colorize:#578b33:168"},
-    use_texture_alpha = "opaque",
-
-    sounds = {
-        footstep = {
-            name = "turf",
-            gain = 1,
-            pitch = 2
-        },
-        dig = {
-            name = "turf",
-            gain = 0.5,
-            pitch = 2
-        },
-        place = {
-            name = "turf",
-            gain = 0.5,
-            pitch = 2
-        }
-    },
+        if node then
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            core.swap_node(pos, node)
+        end
+    end,
 
     groups = {dirt = 1, breakable_by_hand = 1},
 })
