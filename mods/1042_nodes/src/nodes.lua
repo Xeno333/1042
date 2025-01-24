@@ -41,8 +41,7 @@ core.register_node("1042_nodes:ice", {
 
 core.register_node("1042_nodes:turf", {
     description = "Turf",
-    tiles = {"1042_plain_node.png^[noalpha"},
-    use_texture_alpha = "opaque",
+    tiles = {"turf.png"},
 
     paramtype2 = "color",
     palette = "turf_palette.png",
