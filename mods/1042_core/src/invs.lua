@@ -62,10 +62,9 @@ core.register_on_mods_loaded(function()
 end)
 
 
-
--- #fixme Add a part to return the replacements things from crafting
+-- #fixme Add a part to return the replacements things from crafting and part that updates when there inv updates so only things they have items for show
 function core_1042.update_player_crafts(player)
-    local inv = player:get_inventory()
+    --local inv = player:get_inventory()
     local craft_inv = core.get_inventory({type="detached", name=player:get_player_name() .. "_crafts"})
 
     local table_of_crafts = {}
@@ -81,7 +80,7 @@ function core_1042.update_player_crafts(player)
                     item_stacks[stack] = (item_stacks[stack] or 0) + 1
                 end
 
-                table_of_crafts[#table_of_crafts+1] = {recipe = recipe, output = core.get_craft_result(recipe), req_items = item_stacks}
+                table_of_crafts[#table_of_crafts+1], _ = {recipe = recipe, output = core.get_craft_result(recipe), req_items = item_stacks}
             end
         end
     end
@@ -89,8 +88,19 @@ function core_1042.update_player_crafts(player)
     craft_inv:set_size("main", #table_of_crafts)
 
     for i, craft in ipairs(table_of_crafts) do
-        craft.output.item:get_meta():set_string("items_needed_to_craft", core.serialize(craft.req_items))
-        craft_inv:set_stack("main", i, craft.output.item)
+        local item = craft.output.item
+        local meta = item:get_meta()
+        local rec = ""
+
+        meta:set_string("items_needed_to_craft", core.serialize(craft.req_items))
+
+        for stack, c in pairs(craft.req_items) do
+            rec = rec .. "\n" .. ItemStack(stack):get_short_description() .. " x " .. c
+        end
+
+        meta:set_string("description", item:get_description() .. "\n" .. core.colorize("#00ff00", rec))
+
+        craft_inv:set_stack("main", i, item)
     end
 end
 
@@ -98,18 +108,21 @@ end
 
 
 
--- Triggers to update
-core.register_on_player_inventory_action(function(player, action, inventory, inventory_info)
+-- Triggers to update (for on updates to make achivement based but probably a bad idea)
+--[[core.register_on_player_inventory_action(function(player, action, inventory, inventory_info)
     if ((action == "put" or action == "take") and inventory_info.listname == "main") or action == "move" then
         core_1042.update_player_crafts(player)
     end
 end)
 core.register_on_item_pickup(function(_, player)
     core_1042.update_player_crafts(player)
-end)
+end)]]
 
 
 
+
+-- Temp holder for a few strings of meta data while player crafts item
+local swap_meta_data
 
 
 core.register_on_joinplayer(function(player)
@@ -119,26 +132,42 @@ core.register_on_joinplayer(function(player)
     local craft_inv = core.create_detached_inventory(player:get_player_name() .. "_crafts", {
         allow_move = function() return 0 end,
         allow_put = function() return 0 end,
-        allow_take = function(_, _, _, stack, player)
+        allow_take = function(orginv, orglistname, orgindex, stack, player)
             local inv = player:get_inventory()
-            local items_needed_to_craft = core.deserialize(stack:get_meta():get_string("items_needed_to_craft") or {})
+            local items_needed_to_craft = core.deserialize(stack:get_meta():get_string("items_needed_to_craft") or "")
 
             for item, count in pairs(items_needed_to_craft) do
                 if not inv:contains_item("main", ItemStack(item .. " " .. count)) then
                     return 0
                 end
             end
+
+            -- temp swap out of inv data so that it doesnt end up with meta on the stack for player
+            local meta = stack:get_meta()
+            swap_meta_data = {
+                items_needed_to_craft = meta:get_string("items_needed_to_craft"),
+                description = meta:get_string("description")
+            }
+            meta:set_string("items_needed_to_craft", "")
+            meta:set_string("description", "")
+            orginv:set_stack(orglistname, orgindex, stack)
             
             return -1
         end,
 
-        on_take = function(_, _, _, stack, player)
+        on_take = function(orginv, orglistname, orgindex, stack, player)
             local inv = player:get_inventory()
-            local items_needed_to_craft = core.deserialize(stack:get_meta():get_string("items_needed_to_craft") or {})
+            local items_needed_to_craft = core.deserialize(swap_meta_data.items_needed_to_craft or "")
 
             for item, count in pairs(items_needed_to_craft) do
                 inv:remove_item("main", ItemStack(item .. " " .. count))
             end
+
+            -- swap back of inv data so that it doesnt end up with meta on the stack for player
+            local meta = stack:get_meta()
+            meta:set_string("items_needed_to_craft", swap_meta_data.items_needed_to_craft)
+            meta:set_string("description", swap_meta_data.description)
+            orginv:set_stack(orglistname, orgindex, stack)
         end
     })
 
