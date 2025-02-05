@@ -73,7 +73,7 @@ local schematic_path = core.get_modpath("1042_mapgen") .. "/schematics/"
 
 
 
-local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
+local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data)
     local c = pr:next(1, 1000)
     
     
@@ -108,7 +108,9 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave)
 
         else
             if tempv <= -3 then
-                data[area:index(x, y+1, z)] = snow
+                local vi = area:index(x, y+1, z)
+                data[vi] = snow
+                param2_data[vi] = pr:next(8, 16)
             end
             -- Snow grass
             if tempv > -3 and c >= 990 then
@@ -254,16 +256,16 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                             end
 
                             if not mountin_top then
-                                dec(pr, x, y, z, data, area, place_list, tempv, nil)
+                                dec(pr, x, y, z, data, area, place_list, tempv, nil, param2_data)
                             end
                         end
                     elseif y <= ny and y<= lava_level then
                         data[vi] = lava
                     else
                         if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > -0.95 and y <= ny then
-                            dec(pr, x, y-1, z, data, area, place_list, tempv, "bottom")
+                            dec(pr, x, y-1, z, data, area, place_list, tempv, "bottom", param2_data)
                         elseif cave_noise_m[lx][ly+1] and cave_noise_m[lx][ly+1][lz] > -0.95 and y <= ny then
-                            dec(pr, x, y-1, z, data, area, place_list, tempv, "top")
+                            dec(pr, x, y-1, z, data, area, place_list, tempv, "top", param2_data)
                         end
                     end
 

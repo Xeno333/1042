@@ -84,6 +84,10 @@ core.register_node("1042_nodes:snow", {
     
 	paramtype = "light",
     sunlight_propagates = true,
+    
+    paramtype2 = "leveled",
+    leveled = 8,
+    leveled_max = 64,
 
     sounds = {
         footstep = {
@@ -103,8 +107,23 @@ core.register_node("1042_nodes:snow", {
         }
     },
 
+    on_place = function(itemstack, placer, pointed_thing)
+        if pointed_thing.type == "node" then
+            local pos = pointed_thing.under
+            local node = core.get_node(pos)
+            if node.name == "1042_nodes:snow" then
+                if core.get_node_level(pos) < core.get_node_max_level(pos) then
+                    core.add_node_level(pos, 8)
+                    return
+                end
+            end
+        end
+
+        core.item_place(itemstack, placer, pointed_thing)
+    end,
+
     node_box = {
-        type = "fixed",
+        type = "leveled",
         fixed = {
             -0.5, -0.5, -0.5,
             0.5, 0.0, 0.5
