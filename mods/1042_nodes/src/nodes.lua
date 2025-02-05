@@ -80,6 +80,10 @@ core.register_node("1042_nodes:snow", {
     description = "Snow",
     tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},
     use_texture_alpha = "opaque",
+    drawtype = "nodebox",
+    
+	paramtype = "light",
+    sunlight_propagates = true,
 
     sounds = {
         footstep = {
@@ -96,6 +100,14 @@ core.register_node("1042_nodes:snow", {
             name = "turf",
             gain = 1,
             pitch = 2
+        }
+    },
+
+    node_box = {
+        type = "fixed",
+        fixed = {
+            -0.5, -0.5, -0.5,
+            0.5, 0.0, 0.5
         }
     },
 
