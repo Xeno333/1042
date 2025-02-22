@@ -97,6 +97,7 @@ core.register_node("1042_nodes:sapling", {
     description = "Sapling",
     drawtype = "mesh",
     mesh = "sapling.obj",
+    wield_scale = {x = 0.1, y = 0.1, z = 0.1},
     tiles = {
 		"1042_plain_node.png^[colorize:#672307:200",
 		"1042_plain_node.png^[colorize:#278b13:168"
