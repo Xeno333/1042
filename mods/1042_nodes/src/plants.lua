@@ -90,15 +90,15 @@ core.register_node("1042_nodes:apple", {
     groups = {plant = 1, food = 1, breakable_by_hand = 1},
 })
 
-core.register_node("1042_nodes:sapling ", {
+core.register_node("1042_nodes:sapling", {
     description = "Sapling",
     drawtype = "mesh",
-    mesh = "sapling .obj",
+    mesh = "sapling.obj",
     tiles = {
-		"1042_plain_node.png^[colorize:#672307:200",
-		"1042_plain_node.png^[colorize:#278b13:168"
+		"1042_plain_node.png^[colorize:#278b13:168",
+		"1042_plain_node.png^[colorize:#672307:200"
 	},
-    use_texture_alpha = "blend",
+    use_texture_alpha = "opaque",
 
     paramtype = "light",
     sunlight_propagates = true,
