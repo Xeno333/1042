@@ -93,8 +93,8 @@ core.register_node("1042_nodes:apple", {
 
 
 -- WIP
-core.register_node("1042_nodes:sapling", {
-    description = "Sapling",
+core.register_node("1042_nodes:sapling_plain", {
+    description = "Plain Sapling",
     drawtype = "mesh",
     mesh = "sapling.obj",
     wield_scale = {x = 0.1, y = 0.1, z = 0.1},
