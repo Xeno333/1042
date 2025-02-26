@@ -109,6 +109,5 @@ core.register_node("1042_nodes:sapling", {
     walkable = true,
     buildable_to = false,
 
-    -- Remove not_in_creative_inventory when done
     groups = {plant = 1, breakable_by_hand = 1, not_in_creative_inventory = 1},
 })
