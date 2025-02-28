@@ -28,3 +28,12 @@
 #
 #   ***THIS IS NOT RECOMENDED***
 1042_disable_weather (Disable in-game weather) bool false
+
+
+[Testing/Debug]
+
+#   Enable and run the intigrated tests mod (WIP)
+#
+#   ***THIS IS NOT RECOMENDED***
+1042_enable_intigrated_tests (Enable intigrated tests) bool false
+

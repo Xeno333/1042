@@ -34,6 +34,11 @@ function schematics_1042.get_schematic(name, schem)
 end
 
 function schematics_1042.is_schamatic(schem)
+    if type(schem.replacements) ~= "table" then return false end
+    if type(schem.data) ~= "table" then return false end
+    if type(schem.size) ~= "table" then return false end
+    if type(schem.center) ~= "boolean" then return false end
+
     return true
 end
 
@@ -44,8 +49,9 @@ function schematics_1042.place_schematic(pos, schem)
     local pos_min
     local pos_max
 
+    local mid_point = vector.new(schem.size.x/2, schem.size.y/2, schem.size.z/2)
 
-    local vm = core.get_voxel_manip(pos - (schem.size/2), pos + (schem.size/2))
+    local vm = core.get_voxel_manip(pos - mid_point, pos + mid_point)
 end
 
 
