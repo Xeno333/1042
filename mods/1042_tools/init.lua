@@ -1,3 +1,4 @@
+core.log("action", "Loading 1042_tools...")
 
 
 item_wear.register_complex_node("1042_tools:sword",{
@@ -143,3 +144,6 @@ core.register_craft({
         {"", "1042_nodes:sticks", ""},
     }
 })
+
+
+core.log("action", "1042_tools loaded.")
