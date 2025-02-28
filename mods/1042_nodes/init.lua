@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 local path = core.get_modpath("1042_nodes")
 
 dofile(path.."/src/items.lua")
