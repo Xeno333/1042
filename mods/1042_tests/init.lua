@@ -1,5 +1,13 @@
 testing_1042 = false
 
+tests_1042 = {}
+
+function tests_1042.print(text)
+    if testing_1042 then core.log("warning", "1042_tests: " .. tostring(text)) end
+end
+
+
+
 if not core.settings:get_bool("1042_enable_intigrated_tests", false) then 
     return
 
@@ -8,12 +16,6 @@ else
     local version = core.get_version()
     core.log("action", "Loading 1042_tests (" .. version.project .. " " .. version.string .. ")...")
 
-end
-
-tests_1042 = {}
-
-function tests_1042.print(text)
-    core.log("warning", "1042_tests: " .. tostring(text))
 end
 
 
