@@ -49,6 +49,7 @@
 - Add Flowers -SuperStarSonic
 - Work on tree Saplings -Futuray && Xeno333
 - Add intigrated tests mod -Xeno333
+- Add `admin` priv and migrate `change_weather` to use it insted of `creative` along with other priv fixes -Xeno333
 
 ### WIP
 
