@@ -20,7 +20,7 @@ core.register_privilege("creative",
 
 
 function core_1042.is_creative(player)
-    return core.check_player_privs(player, "creative") or core.is_creative_enabled(player:get_player_name()) 
+    return core.check_player_privs(player, "creative") or core.is_creative_enabled(player:get_player_name())
 end
 
 

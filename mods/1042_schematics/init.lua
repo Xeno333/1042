@@ -57,6 +57,11 @@ end
 
 
 
+tests_1042.register_test("1042_schematics:test_1", function()
+    local schem = schematics_1042.new_schematic()
+    return schematics_1042.is_schamatic(schem)
+end)
+
 
 
 core.log("action", "1042_schematics loaded.")
