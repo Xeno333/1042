@@ -1,22 +1,21 @@
 
-core.register_privilege("creative",
-    {
-        description = "Creative",
-        give_to_singleplayer = false,
-        on_grant = function(name, granter_name) 
-            local player = core.get_player_by_name(name)
-            if player then
-                player:set_inventory_formspec(core_1042.make_inv_formspec(player))
-            end
-        end,
-        on_revoke = function(name, granter_name) 
-            local player = core.get_player_by_name(name)
-            if player then
-                player:set_inventory_formspec(core_1042.make_inv_formspec(player))
-            end
+core.register_privilege("creative", {
+    description = "Creative",
+    give_to_admin = true,
+    give_to_singleplayer = false,
+    on_grant = function(name, granter_name) 
+        local player = core.get_player_by_name(name)
+        if player then
+            player:set_inventory_formspec(core_1042.make_inv_formspec(player))
         end
-    }
-)
+    end,
+    on_revoke = function(name, granter_name) 
+        local player = core.get_player_by_name(name)
+        if player then
+            player:set_inventory_formspec(core_1042.make_inv_formspec(player))
+        end
+    end
+})
 
 
 function core_1042.is_creative(player)
@@ -31,3 +30,12 @@ core.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, po
         end
     end
 end)
+
+
+
+
+core.register_privilege("admin", {
+    description = "Admin",
+    give_to_admin = true,
+    give_to_singleplayer = false
+})

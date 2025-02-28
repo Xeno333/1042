@@ -219,6 +219,13 @@ If `the_weather.on_end(player, name, players_weather)` is defined then all thing
 
 
 
+
+# Privs
+
+- `admin` This gives user the ability to manipulate things in the game.
+- `creative` This gives user the unlimited items.
+
+
 # Development
 
 ## Things to fix

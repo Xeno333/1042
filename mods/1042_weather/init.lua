@@ -108,7 +108,7 @@ end)
 
 
 core.register_chatcommand("change_weather", {
-    privs = {["creative"] = true},
+    privs = {["admin"] = true},
     params = "<weather/help>",
     description = "Change the global weather selection to param or random if none is supplied. May not be the weather desired as that depends on biome.",
     func = function(name, param)
