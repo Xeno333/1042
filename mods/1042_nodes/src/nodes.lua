@@ -121,6 +121,11 @@ core.register_node("1042_nodes:snow", {
 
         core.item_place(itemstack, placer, pointed_thing)
     end,
+    
+    on_dig = function(pos, node, digger)
+        player_api.add_item_to_player_inventory(digger, "main", ItemStack("1042_nodes:snow " .. tostring((math.floor(core.get_node_level(pos) or 8)/8))), pos)
+        core.set_node(pos, {name = "air"})
+    end,
 
     node_box = {
         type = "leveled",

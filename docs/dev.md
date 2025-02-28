@@ -114,6 +114,13 @@ There are a few APIs built into the game, and more planned for the beta release.
 - `smelter` This is the achievement for first ingot broken.
 
 
+## Player API
+
+### Functions
+
+- `player_api.add_item_to_player_inventory(player, list, itemstack, drop_overflow_pos)` Add itemstack to player inv and drop remains, returns count droped at `drop_overflow_pos`. If player is not a player node the itemstack is just dropped.
+
+
 
 
 # Weather API

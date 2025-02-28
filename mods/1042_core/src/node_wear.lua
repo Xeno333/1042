@@ -77,7 +77,7 @@ function item_wear.register_complex_node(name, def)
         local itemstack = ItemStack(node_meta:get_string("_itemstack"))
 
         core.set_node(pos, {name = "air"})
-        core.add_item(pos, itemstack)
+        player_api.add_item_to_player_inventory(digger, "main", itemstack, pos)
     end
 
     core.register_node(name, def)
