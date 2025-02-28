@@ -1,10 +1,32 @@
 testing_1042 = false
 
-tests_1042 = {}
+tests_1042 = {
+    registered_tests = {},
 
-function tests_1042.print(text)
-    if testing_1042 then core.log("warning", "1042_tests: " .. tostring(text)) end
-end
+    print = function(text)
+        if testing_1042 then
+            core.log("warning", "1042_tests: " .. tostring(text))
+
+            return true
+        end
+
+        return false
+    end,
+
+    register_test = function(namein, func)
+        local name = tostring(namein)
+
+        if testing_1042 and not registered_tests[name] then
+            registered_tests[name] = func
+
+            tests_1042.print("Registered: '" .. name .. "' to run on mods loaded...")
+            
+            return true
+        end
+
+        return false
+    end
+}
 
 
 
@@ -20,19 +42,12 @@ end
 
 
 
-tests_1042.print("Registering tests to run on mods loaded...")
 
-core.register_on_mods_loaded(
-    function()
-        local schem = schematics_1042.new_schematic()
-        tests_1042.print("1042 schematic validation test: " .. tostring(schematics_1042.is_schamatic(schem)))
-
+core.register_on_mods_loaded(function()registered_tests
+    for name, func = pairs(tests_1042.registered_tests) do
+        tests_1042.print("Result of test '" .. name .. "': " .. tostring(func()))
     end
-)
-
-tests_1042.print("1042_tests: Registered tests will run on mods loaded.")
-
-
+end)
 
 
 core.log("action", "1042_tests loaded.")

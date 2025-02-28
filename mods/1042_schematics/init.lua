@@ -57,6 +57,9 @@ end
 
 
 
+local schem = schematics_1042.new_schematic()
+tests_1042.print("1042 schematic validation test: " .. tostring(schematics_1042.is_schamatic(schem)))
+
 
 
 core.log("action", "1042_schematics loaded.")
