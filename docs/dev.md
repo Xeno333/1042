@@ -207,6 +207,17 @@ If `the_weather.on_end(player, name, players_weather)` is defined then all thing
 
 
 
+# Intigrated Testing Mod
+
+`1042_tests` is a mod with a system of tests in game that are run whith the game setting `1042_enable_intigrated_tests = true`. It has an API for easy testing in mods and new game components. This mod does not function when `1042_enable_intigrated_tests = false` but all function calls are still valid, but they will just return `false`.
+
+## API
+
+- `function tests_1042.print(text)` Prints debug data when runs in the intigrated tests are enabled. Is the same as `core.log("warning", "1042_tests: " .. tostring(text))`. Returns `true` on success.
+- `function tests_1042.register_test(namein, func)` Register a test to run when all mods are loaded and testing starts. It is highly recommended to use the name format of `<mod name>:<test name>[_<test number>]>`. Returns `true` on success and `false` if already registered or intigrated tests are disabled.
+
+
+
 # Development
 
 ## Things to fix

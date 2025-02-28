@@ -1,3 +1,6 @@
+core.log("action", "Loading 1042_weather...")
+
+
 dofile(core.get_modpath("1042_weather") .. "/weather_api.lua")
 
 -- Skip weather
@@ -140,3 +143,8 @@ core.register_chatcommand("weather", {
         return true, "Global weather is " .. weather.weathers[weather.weather_index].name
     end
 })
+
+
+
+
+core.log("action", "1042_weather loaded.")

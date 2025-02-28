@@ -96,7 +96,7 @@ core.register_node("1042_nodes:apple", {
 core.register_node("1042_nodes:sapling_plain", {
     description = "Plain Sapling",
     drawtype = "mesh",
-    mesh = "sapling.obj",
+    mesh = "fruit.obj", -- Filler for now
     wield_scale = {x = 0.1, y = 0.1, z = 0.1},
     tiles = {
 		"1042_plain_node.png^[colorize:#672307:200",

@@ -1,4 +1,4 @@
-
+core.log("action", "Loading 1042_mobs...")
 
 core.register_entity("1042_mobs:fish", {
     initial_properties = {
@@ -175,3 +175,5 @@ core.register_entity("1042_mobs:pig", {
 
 
 dofile(core.get_modpath("1042_mobs") .. "/mob_spawning.lua")
+
+core.log("action", "1042_mobs loaded.")
