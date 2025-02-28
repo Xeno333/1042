@@ -33,11 +33,6 @@
 - Add basic Lightning -Xeno333
 
 
-## Alpha v0.2.2
-
-- Add basic Lightning -Xeno333
-
-
 ## Alpha v0.3-dev
 
 - Add basic Lightning -Xeno333
@@ -48,8 +43,16 @@
 - Add tool wear system -Xeno333
 - Add crafting system and improve inventory -Xeno333
 - Persist tool wear -Xeno333
-- Improve mapgen code and plan for further improvements -Xeno333
 - Redesign biomes -Xeno333
-- Improve textures -Xeno333 & SuperStarSonic
 - Fix grass in trees -Xeno333
 - Improve turf -Xeno333 & SuperStarSonic
+- Add Flowers -SuperStarSonic
+- Work on tree Saplings -Futuray && Xeno333
+- Add intigrated tests mod -Xeno333
+
+### WIP
+
+- Adding custom schematics -Xeno333
+- Improve textures -Xeno333 & SuperStarSonic
+- Improve mapgen code -Xeno333
+- Improve and orginize documentation -Xeno333

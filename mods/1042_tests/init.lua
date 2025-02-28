@@ -16,8 +16,8 @@ tests_1042 = {
     register_test = function(namein, func)
         local name = tostring(namein)
 
-        if testing_1042 and not registered_tests[name] then
-            registered_tests[name] = func
+        if namein and func and testing_1042 and not tests_1042.registered_tests[name] then
+            tests_1042.registered_tests[name] = func
 
             tests_1042.print("Registered: '" .. name .. "' to run on mods loaded...")
             
@@ -43,9 +43,10 @@ end
 
 
 
-core.register_on_mods_loaded(function()registered_tests
-    for name, func = pairs(tests_1042.registered_tests) do
-        tests_1042.print("Result of test '" .. name .. "': " .. tostring(func()))
+core.register_on_mods_loaded(function()
+    for name, func in pairs(tests_1042.registered_tests) do
+        local ret = func() or "NO RETURN"
+        tests_1042.print("Result of test '" .. name .. "': " .. tostring(ret))
     end
 end)
 
