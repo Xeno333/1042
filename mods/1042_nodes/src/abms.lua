@@ -40,7 +40,7 @@ core.register_abm({
         if rand:next(1, core.get_item_group(node.name, "burns")) == 1 then 
             if (core.get_item_group(node.name, "wood") or 0) > 0 and rand:next(1, 4) == 1 then
                 core.set_node(pos, {name = "1042_nodes:charcoal"})
-                
+
             else
                 core.set_node(pos, {name = "1042_nodes:fire"})
 
@@ -51,9 +51,24 @@ core.register_abm({
 
 
 
+-- Plant growth
+core.register_abm({
+    label = "Plant growth",
+    catch_up = true,
+    interval = 8,
+    chance = 4,
+    nodenames = {"group:growth"},
+    neighbors = {"group:bio_mass", "air"},
+
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        print("Test plant growth")
+    end
+})
 
 
--- Affects
+
+
+-- Effects
 
 
 core.register_abm({

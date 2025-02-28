@@ -73,12 +73,15 @@ core.register_node("1042_nodes:turf", {
         end
     end,
 
-    groups = {dirt = 1, breakable_by_hand = 1},
+    groups = {dirt = 1, breakable_by_hand = 1, bio_mass = 8},
 })
 
 core.register_node("1042_nodes:snow", {
     description = "Snow",
     tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},
+    inventory_image = "snowflake1.png",
+    wield_image = "snowflake1.png",
+    wield_scale = {x = 0.5, y = 0.5, z = 0.5},
     use_texture_alpha = "opaque",
     drawtype = "nodebox",
     

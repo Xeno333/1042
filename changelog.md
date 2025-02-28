@@ -55,6 +55,6 @@
 ### WIP
 
 - Adding custom schematics -Xeno333
-- Improve textures -Xeno333 & SuperStarSonic
+- Improve textures and models -Xeno333 & SuperStarSonic
 - Improve mapgen code -Xeno333
 - Improve and orginize documentation -Xeno333
