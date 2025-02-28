@@ -43,7 +43,7 @@ core.register_chatcommand("run_test", {
     func = function(name, testname)
         local test = tests_1042.registered_tests[testname]
         if test then
-            local ret = "Result of test '" .. testname .. "': " .. tostring(ret)
+            local ret = "Result of test '" .. testname .. "': " .. tostring(test.func() or "NO RETURN")
             tests_1042.print(ret)
             return true, ret
         end
@@ -81,8 +81,7 @@ core.log("action", "Loading 1042_tests (" .. version.project .. " " .. version.s
 core.register_on_mods_loaded(function()
     for name, test in pairs(tests_1042.registered_tests) do
         if test.run_on_loaded then
-            local ret = test.func() or "NO RETURN"
-            tests_1042.print("Result of test '" .. name .. "': " .. tostring(ret))
+            tests_1042.print("Result of test '" .. name .. "': " .. tostring(test.func() or "NO RETURN"))
         end
     end
 end)
