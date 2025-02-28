@@ -90,8 +90,10 @@ core.register_node("1042_nodes:apple", {
     groups = {plant = 1, food = 1, breakable_by_hand = 1},
 })
 
-core.register_node("1042_nodes:sapling", {
-    description = "Sapling",
+
+-- WIP
+core.register_node("1042_nodes:sapling_plain", {
+    description = "Plain Sapling",
     drawtype = "mesh",
     mesh = "sapling.obj",
     tiles = {
@@ -107,6 +109,9 @@ core.register_node("1042_nodes:sapling", {
 
     groups = {plant = 1, breakable_by_hand = 1},
 })
+
+
+
 
 
 -- Flowers
