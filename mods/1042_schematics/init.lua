@@ -30,17 +30,19 @@ tests_1042.register_test("1042_schematics:test_3", function()
     return dump({rc, val})
 end, false)
 
-tests_1042.register_test("1042_schematics:test_4", function()
+tests_1042.register_test("1042_schematics:test_4", function(name)
     local path = core.get_worldpath() .. "/1042_schematics_exports/"
     local rc, schem = schematics_1042.load_schematic(path.."1042_schematics__test_2_result")
 
     if rc then
-        schematics_1042.place_schematic(vector.new(9795,7,18419), schem)
+        schem.center = true
+        schematics_1042.place_schematic(core.get_player_by_name(name):get_pos(), schem)
     else
         return "Somethign went wrong loading schem."
     end
     
 end, false)
+
 
 
 

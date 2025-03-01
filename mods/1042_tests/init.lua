@@ -43,7 +43,7 @@ core.register_chatcommand("run_test", {
     func = function(name, testname)
         local test = tests_1042.registered_tests[testname]
         if test then
-            local ret = "Result of test '" .. testname .. "': " .. tostring(test.func() or "NO RETURN")
+            local ret = "Result of test '" .. testname .. "': " .. tostring(test.func(name) or "NO RETURN")
             tests_1042.print(ret)
             return true, ret
         end
