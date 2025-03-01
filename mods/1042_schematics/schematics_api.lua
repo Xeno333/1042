@@ -76,26 +76,41 @@ function schematics_1042.load_schematic(path)
 end
 
 
-function schematics_1042.place_schematic(pos, schematic)
-    local pos1 = pos
-    local pos2 = vector.new(pos.x + schematic.size.x-1, pos.y + schematic.size.y-1, pos.z + schematic.size.z-1)
+local function get_sign(n)
+    return n/math.abs(n)
+end
 
-    core.emerge_area(pos1, pos2, function()
-        local vm = VoxelManip(pos1, pos2)
-        local emin, emax = vm:read_from_map(pos1, pos2)
+function schematics_1042.place_schematic(posin, schematic)
+    -- #fixme broken calculation
+    local size = schematic.size
+    local pos = vector.new(math.floor(posin.x), math.floor(posin.y), math.floor(posin.z))
+    local pos_min
+    local pos_max
+
+    if schematic.center == true then
+        pos_min = vector.new(pos.x-math.floor(size.x/2), pos.y-math.floor(size.y/2), pos.z-math.floor(size.z/2))
+        pos_max = vector.new(pos.x+math.floor(size.x/2), pos.y+math.floor(size.y/2), pos.z+math.floor(size.z/2))
+    else
+        pos_min = pos
+        pos_max = vector.new(pos.x+math.floor(size.x)-1, pos.y+math.floor(size.y)-1, pos.z+math.floor(size.z)-1)
+    end
+
+    core.emerge_area(pos_min, pos_max, function()
+        local vm = VoxelManip(pos_min, pos_max)
+        local emin, emax = vm:read_from_map(pos_min, pos_max)
         local data = vm:get_data()
         local area = VoxelArea(emin, emax)
 
         local ly = 0
-        for y=pos1.y,pos2.y do
+        for y=pos_min.y,pos_max.y do
             ly = ly + 1
 
             local lz = 0
-            for z=pos1.z,pos2.z do
+            for z=pos_min.z,pos_max.z do
                 lz = lz + 1
 
                 local lx = 0
-                for x=pos1.x,pos2.x do
+                for x=pos_min.x,pos_max.x do
                     lx = lx + 1
                     data[area:index(x,y,z)] = schematic.data[ly][lz][lx]
                 end
