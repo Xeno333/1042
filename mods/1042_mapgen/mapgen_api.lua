@@ -57,7 +57,7 @@ mapgen_1042.ore_map = PerlinNoiseMap({
 
 mapgen_1042.ymax = core_1042.shared_lib.consts.plain_world_y_levels.max
 mapgen_1042.ymin = core_1042.shared_lib.consts.plain_world_y_levels.min
-mapgen_1042.water_level = -3
+mapgen_1042.water_level = 0
 mapgen_1042.lava_level = -240
 mapgen_1042.bedrock_level = -256
 mapgen_1042.caves_max = mapgen_1042.ymax-68
