@@ -91,6 +91,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data
 
             elseif c == 101 and y > water_level+9 then
                 data[area:index(x, y+1, z)] = mushroom
+                param2_data[area:index(x, y+1, z)] = 1
 
             -- Big tree
             elseif y >= water_level+10 and tempv >= 15 and c == 995 then
