@@ -48,7 +48,7 @@ core_1042.shared_lib = {
 
 # Groups
 
-- `breakable_by_hand` Player can break these items without tools. value is for break-time `{[1] = 0.25, [2] = 0.5, [3] = 1, [4] = 2, [5] = 3, [6] = 4}`
+- `breakable_by_hand` Player can break these items without tools. value is for break-time `{[1] = 0.1, [2] = 0.25, [3] = 0.5, [4] = 1, [5] = 2, [6] = 3, [7] = 4}`
 - `stone` Stone nodes. Value is for tools like pick, for break-time. `{[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}`
 - `leafy` Leafy nodes.
 - `plant` Plant (Biomass) nodes.
@@ -59,6 +59,9 @@ core_1042.shared_lib = {
 - `molten` Uses `_1042_cools_to` for node.
 - `melts` Uses `_1042_melts_to` for node.
 - `cooks` Uses `_1042_cooks_to` for node. Value is chance from 1 to `<group value>` of cooking per check.
+- `biomass` Amount of biomass this node contains, values: 1-255. WARNING: This is WIP and is subject to change.
+- `growth_bio_mass` Amount of biomass required to support its spreading, values: 1-255. WARNING: This is WIP and is subject to change.
+- `growth` Is part of the growth ABM and will spread based on the growth type. Value of 1 means it uses fungal growth paterns. WARNING: This is WIP and is subject to change.
 
 
 
@@ -112,6 +115,13 @@ There are a few APIs built into the game, and more planned for the beta release.
 
 - `first_life` This is the achievement for first spawn of a player.
 - `smelter` This is the achievement for first ingot broken.
+
+
+## Player API
+
+### Functions
+
+- `player_api.add_item_to_player_inventory(player, list, itemstack, drop_overflow_pos)` Add itemstack to player inv and drop remains, returns count droped at `drop_overflow_pos`. If player is not a player node the itemstack is just dropped.
 
 
 
