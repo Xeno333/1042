@@ -47,17 +47,17 @@ weather.register_weather({
             {
                 name = "hail.png",
                 scale = 1,
-                blend = "clip"
+                blend = "alpha"
             },
             {
                 name = "hail.png",
                 scale = 0.5,
-                blend = "clip"
+                blend = "alpha"
             },
             {
                 name = "hail.png",
                 scale = 0.25,
-                blend = "clip"
+                blend = "alpha"
             }
         }
     },
@@ -481,19 +481,19 @@ weather.register_weather({
         texpool = {
             {
                 name = "snowflake1.png",
-                blend = "clip"
+                blend = "alpha"
             },
             {
                 name = "snowflake2.png",
-                blend = "clip"
+                blend = "alpha"
             },
             {
                 name = "snowflake3.png",
-                blend = "clip"
+                blend = "alpha"
             },
             {
                 name = "snowflake4.png",
-                blend = "clip"
+                blend = "alpha"
             }
         }
     },

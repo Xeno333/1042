@@ -1,3 +1,6 @@
+core.log("action", "Loading 1042_weather...")
+
+
 dofile(core.get_modpath("1042_weather") .. "/weather_api.lua")
 
 -- Skip weather
@@ -105,7 +108,7 @@ end)
 
 
 core.register_chatcommand("change_weather", {
-    privs = {["creative"] = true},
+    privs = {["admin"] = true},
     params = "<weather/help>",
     description = "Change the global weather selection to param or random if none is supplied. May not be the weather desired as that depends on biome.",
     func = function(name, param)
@@ -140,3 +143,8 @@ core.register_chatcommand("weather", {
         return true, "Global weather is " .. weather.weathers[weather.weather_index].name
     end
 })
+
+
+
+
+core.log("action", "1042_weather loaded.")

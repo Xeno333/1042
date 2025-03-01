@@ -16,7 +16,7 @@ core.override_item("", {
 		full_punch_interval = 1,
 		max_drop_level = 1,
 		groupcaps = {
-			breakable_by_hand = {times = {[1] = 0.25, [2] = 0.5, [3] = 1, [4] = 2, [5] = 3, [6] = 4}, uses = 0},
+			breakable_by_hand = {times = {[1] = 0.1, [2] = 0.25, [3] = 0.5, [4] = 1, [5] = 2, [6] = 3, [7] = 4}, uses = 0},
 		},
 		damage_groups = {fleshy = 1},
 	},
@@ -106,7 +106,7 @@ core.register_on_joinplayer(function(player, last_join)
             sneak_glitch = true,
             liquid_sink = 2
         }
-    )   
+    )
     player:hud_set_flags(
         {
             minimap = false,
@@ -166,7 +166,7 @@ core.register_on_joinplayer(function(player, last_join)
         zoom_time = 1
 
         core.chat_send_player(name, core.colorize("#00ff00", "It is the year 1042 and you are lost."))
-        
+
     else
         core.chat_send_player(name, "It is day " .. core.get_day_count() .. " of being lost.")
 
