@@ -1,5 +1,5 @@
 Textures - Xeno333 (aka TX_Miner), SuperStarSonic
-Code - Xeno333 (aka TX_Miner)
-Models - Xeno333 (aka TX_Miner), SuperStarSonic
+Code - Xeno333 (aka TX_Miner), Futuray-pgm
+Models - Xeno333 (aka TX_Miner), SuperStarSonic, Futuray-pgm
 
 Schematics - TX_Warrior, Lone_Star_Miner

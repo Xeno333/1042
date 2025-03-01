@@ -34,8 +34,11 @@ function schematics_1042.get_schematic(name, schem)
 end
 
 
+
+
+
 function schematics_1042.is_schamatic(schem)
-    if type(schem.replacements) ~= "table" then return false end
+    if schem.replacements ~= nil and type(schem.replacements) ~= "table" then return false end
     if type(schem.data) ~= "table" then return false end
     if type(schem.size) ~= "table" then return false end
     if type(schem.center) ~= "boolean" then return false end
@@ -53,6 +56,27 @@ end
 
 -- WIP
 
+-- Load a schamtic from a file
+function schematics_1042.load_schematic(path)
+    local file = io.open(path, "r")
+    if not file then return false, nil end
+
+    local schem = core.parse_json(file:read("*all") or "{}") or {}
+    file:close()
+
+    if not schematics_1042.is_schamatic(schem) then return false, nil end
+
+    for i1, l1 in pairs(schem.data) do
+        for i2, l2 in pairs(l1) do
+            for i3, name in pairs(l2) do
+                schem.data[i1][i2][i3] = core.get_content_id(name)
+            end
+        end
+    end
+
+    return true, schem
+end
+
 
 function schematics_1042.place_schematic(pos, schem)
     if not schematics_1042.is_schamatic(schem) then return false end
@@ -68,7 +92,7 @@ function schematics_1042.place_schematic(pos, schem)
 end
 
 
-
+-- Save schematic to file
 function schematics_1042.save_schematic(pos1, pos2, path)
     core.emerge_area(pos1, pos2, function()
         local vm = VoxelManip(pos1, pos2)
@@ -118,6 +142,11 @@ tests_1042.register_test("1042_schematics:test_2", function()
     return schematics_1042.save_schematic(vector.new(-2,-2,-2), vector.new(2,2,2), path.."1042_schematics__test_2_result")
 end, false)
 
+tests_1042.register_test("1042_schematics:test_3", function()
+    local path = core.get_worldpath() .. "/1042_schematics_exports/"
+    local rc, val = schematics_1042.load_schematic(path.."1042_schematics__test_2_result")
+    return dump({rc, val})
+end, false)
 
 
 
