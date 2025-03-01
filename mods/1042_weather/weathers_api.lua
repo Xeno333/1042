@@ -102,6 +102,10 @@ weather.weathers = {
     {
         name = "Plain",
         conditions = {
+            y_level = {
+                max = core_1042.shared_lib.consts.plain_world_y_levels.max,
+                min = core_1042.shared_lib.consts.plain_world_y_levels.min
+            }
         },
         on_change = weather.default_on_change
     }
@@ -126,7 +130,7 @@ function weather.get_weather_at_pos(pos)
     local i = weather.weather_index
     local temp = weather.get_temp_single(pos)
 
-    while true do
+    for n=1,#weather.weathers do
         local weather_t = weather.weathers[i]
         if not weather_t.conditions then
             return i
@@ -154,5 +158,8 @@ function weather.get_weather_at_pos(pos)
             i = 1
         end
     end
+
+    -- If none found leave as is
+    return weather.weather_index
 end
 
