@@ -1,4 +1,5 @@
 ToDo:
     Xeno- Add a system of dynamic custom schematic strutures for mapgen and move to that format.
-    
+
     Anyone- Add torch
+    Anyone- Move to using get_bool in core with defaults

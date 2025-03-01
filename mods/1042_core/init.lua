@@ -1,3 +1,5 @@
+core.log("action", "Loading 1042_core...")
+
 core_1042 = {
     info = core.get_game_info(),
     rand = PcgRandom(math.random(1, 2048)) -- Good for all random needed
@@ -104,3 +106,5 @@ dofile(path.."/src/chat_commands.lua")
 dofile(path.."/src/node_wear.lua")
 dofile(path.."/src/shared_lib.lua")
 
+
+core.log("action", "1042_core loaded.")
