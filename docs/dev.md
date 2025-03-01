@@ -59,6 +59,9 @@ core_1042.shared_lib = {
 - `molten` Uses `_1042_cools_to` for node.
 - `melts` Uses `_1042_melts_to` for node.
 - `cooks` Uses `_1042_cooks_to` for node. Value is chance from 1 to `<group value>` of cooking per check.
+- `biomass` Amount of biomass this node contains, values: 1-255. WARNING: This is WIP and is subject to change.
+- `growth_bio_mass` Amount of biomass required to support its spreading, values: 1-255. WARNING: This is WIP and is subject to change.
+- `growth` Is part of the growth ABM and will spread based on the growth type. Value of 1 means it uses fungal growth paterns. WARNING: This is WIP and is subject to change.
 
 
 

@@ -54,14 +54,41 @@ core.register_abm({
 -- Plant growth
 core.register_abm({
     label = "Plant growth",
-    catch_up = true,
-    interval = 8,
-    chance = 4,
+    interval = 60,
+    chance = 8,
     nodenames = {"group:growth"},
     neighbors = {"group:bio_mass", "air"},
 
     action = function(pos, node, active_object_count, active_object_count_wider)
-        print("Test plant growth")
+        -- Biome mass based growth
+        if core.get_item_group(node.name, "growth") == 1 then
+            local rq_biomass = core.get_item_group(node.name, "growth_bio_mass")
+            local nodes = core.find_nodes_in_area(vector.new(pos.x-3, pos.y-2, pos.z-3), vector.new(pos.x+3, pos.y+1, pos.z+3), {"group:bio_mass"}, true)
+
+            for name, pos_s in pairs(nodes) do
+                if core.get_item_group(name, "bio_mass") >= rq_biomass then
+                    local rand = PseudoRandom(math.random())
+                    for i=1, #pos_s*2 do
+                        local p1 = rand:next(1, #pos_s)
+                        local p2 = rand:next(1, #pos_s)
+                        local temp = pos_s[p1]
+                        pos_s[p1] = pos_s[p2]
+                        pos_s[p2] = temp
+                    end
+
+                    for _, pos_l in pairs(pos_s) do
+                        local new_pos = vector.new(pos_l.x, pos_l.y+1, pos_l.z)
+                        local upper_node_name = core.get_node(new_pos).name
+                        if upper_node_name == "air" or core.get_item_group(node.name, "bio_mass") > 0 then
+                            if math.random(1, 20) == 1 then
+                                core.set_node(new_pos, node) -- #fixme This makes some plants grow upside down and stuff if the rotation isnt right, we need to make it snap to the point it sides.
+                                return
+                            end
+                        end
+                    end
+                end
+            end
+        end
     end
 })
 

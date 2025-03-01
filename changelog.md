@@ -51,6 +51,7 @@
 - Add intigrated tests mod -Xeno333
 - Add `admin` priv and migrate `change_weather` to use it insted of `creative` along with other priv fixes -Xeno333
 - Add `player_api.add_item_to_player_inventory(player, list, itemstack, drop_overflow_pos)` and improve node dropping for tools and snow -Xeno333
+- Add foundational growth mechanics -Xeno333
 
 ### WIP
 
