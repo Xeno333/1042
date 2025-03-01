@@ -4,7 +4,7 @@ core.log("action", "Loading 1042_weather...")
 dofile(core.get_modpath("1042_weather") .. "/weather_api.lua")
 
 -- Skip weather
-if core.settings:get("1042_disable_weather") == "true" then
+if core.settings:get("1042_disable_weather", false) then
     weather.is_loaded = false
     return
 end

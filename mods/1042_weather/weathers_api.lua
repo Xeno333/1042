@@ -102,10 +102,6 @@ weather.weathers = {
     {
         name = "Plain",
         conditions = {
-            y_level = {
-                max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-                min = core_1042.shared_lib.consts.plain_world_y_levels.min
-            }
         },
         on_change = weather.default_on_change
     }
