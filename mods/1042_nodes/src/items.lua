@@ -21,7 +21,7 @@ local function hit_flint_with_iron(itemstack, player, pointed_thing)
                 min = vector.new(-2, 1, -2),
                 max = vector.new(2, 4, 2),
                 bias = 0
-            },3
+            },
 
             acc = vector.new(0, -9.8, 0),
 
