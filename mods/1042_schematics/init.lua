@@ -78,17 +78,38 @@ function schematics_1042.load_schematic(path)
 end
 
 
-function schematics_1042.place_schematic(pos, schem)
-    if not schematics_1042.is_schamatic(schem) then return false end
+function schematics_1042.place_schematic(pos, schematic)
+    local pos1 = pos
+    local pos2 = vector.new(pos.x + schematic.size.x-1, pos.y + schematic.size.y-1, pos.z + schematic.size.z-1)
 
-    local pos_min
-    local pos_max
+    core.emerge_area(pos1, pos2, function()
+        local vm = VoxelManip(pos1, pos2)
+        local emin, emax = vm:read_from_map(pos1, pos2)
+        local data = vm:get_data()
+        local area = VoxelArea(emin, emax)
 
-    local mid_point = vector.new(schem.size.x/2, schem.size.y/2, schem.size.z/2)
+        local ly = 0
+        for y=pos1.y,pos2.y do
+            ly = ly + 1
 
-    local vm = core.get_voxel_manip(pos - mid_point, pos + mid_point)
+            local lz = 0
+            for z=pos1.z,pos2.z do
+                lz = lz + 1
 
-    -- Add more
+                local lx = 0
+                for x=pos1.x,pos2.x do
+                    lx = lx + 1
+                    data[area:index(x,y,z)] = schematic.data[ly][lz][lx]
+                end
+            end
+        end
+
+        vm:set_data(data)
+        vm:write_to_map()
+
+    end)
+
+    return "Qeued..."
 end
 
 
@@ -146,6 +167,18 @@ tests_1042.register_test("1042_schematics:test_3", function()
     local path = core.get_worldpath() .. "/1042_schematics_exports/"
     local rc, val = schematics_1042.load_schematic(path.."1042_schematics__test_2_result")
     return dump({rc, val})
+end, false)
+
+tests_1042.register_test("1042_schematics:test_4", function()
+    local path = core.get_worldpath() .. "/1042_schematics_exports/"
+    local rc, schem = schematics_1042.load_schematic(path.."1042_schematics__test_2_result")
+
+    if rc then
+        schematics_1042.place_schematic(vector.new(9795,7,18419), schem)
+    else
+        return "Somethign went wrong loading schem."
+    end
+    
 end, false)
 
 
