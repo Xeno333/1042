@@ -76,10 +76,6 @@ function schematics_1042.load_schematic(path)
 end
 
 
-local function get_sign(n)
-    return n/math.abs(n)
-end
-
 function schematics_1042.place_schematic(posin, schematic)
     -- #fixme broken calculation
     local size = schematic.size
