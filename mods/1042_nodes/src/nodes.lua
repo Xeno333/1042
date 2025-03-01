@@ -15,7 +15,7 @@ core.register_node("1042_nodes:dirt", {
     tiles = {"1042_plain_node.png^[colorize:#8b4513:128"},
     use_texture_alpha = "opaque",
 
-    groups = {dirt = 1, breakable_by_hand = 2},
+    groups = {dirt = 1, breakable_by_hand = 3},
 })
 
 core.register_node("1042_nodes:sand", {
@@ -23,7 +23,7 @@ core.register_node("1042_nodes:sand", {
     tiles = {"1042_plain_node.png^[colorize:#d9a357:128"},
     use_texture_alpha = "opaque",
 
-    groups = {dirt = 1, falling_node = 1, breakable_by_hand = 1},
+    groups = {dirt = 1, falling_node = 1, breakable_by_hand = 3},
 })
 
 core.register_node("1042_nodes:ice", {
@@ -73,7 +73,7 @@ core.register_node("1042_nodes:turf", {
         end
     end,
 
-    groups = {dirt = 1, breakable_by_hand = 1, bio_mass = 8},
+    groups = {dirt = 1, breakable_by_hand = 3, bio_mass = 8},
 })
 
 core.register_node("1042_nodes:snow", {
@@ -139,7 +139,7 @@ core.register_node("1042_nodes:snow", {
     },
 
     _1042_melts_to = "1042_nodes:water_source",
-    groups = {cools = 1, melts = 1, breakable_by_hand = 1},
+    groups = {cools = 1, melts = 1, breakable_by_hand = 2},
 })
 
 core.register_node("1042_nodes:stone", {
@@ -349,7 +349,7 @@ core.register_node("1042_nodes:charcoal", {
     tiles = {"1042_plain_node.png^[colorize:#221111:168"},
     use_texture_alpha = "opaque",
 
-    groups = {wood = 1, burns = 6, breakable_by_hand = 4},
+    groups = {wood = 1, burns = 6, breakable_by_hand = 5},
 })
 
 core_1042.register_loot({name = "1042_nodes:charcoal"})
@@ -362,7 +362,7 @@ core.register_node("1042_nodes:charcoal_burning", {
     drop = "",
 
     light_source = 6,
-    groups = {wood = 1, burning = 1, burns = 6, breakable_by_hand = 4},
+    groups = {wood = 1, burning = 1, burns = 6, breakable_by_hand = 5},
 })
 
 
@@ -394,7 +394,7 @@ core.register_node("1042_nodes:iron_slag", {
         }
     },
 
-    groups = {stone = 3, breakable_by_hand = 3},
+    groups = {stone = 3, breakable_by_hand = 4},
 })
 
 

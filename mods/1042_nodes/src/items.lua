@@ -21,7 +21,7 @@ local function hit_flint_with_iron(itemstack, player, pointed_thing)
                 min = vector.new(-2, 1, -2),
                 max = vector.new(2, 4, 2),
                 bias = 0
-            },
+            },3
 
             acc = vector.new(0, -9.8, 0),
 
@@ -175,7 +175,7 @@ core.register_node("1042_nodes:rock", {
     walkable = true,
     buildable_to = false,
     
-    groups = {breakable_by_hand = 2, attached_node = 3},
+    groups = {breakable_by_hand = 3, attached_node = 3},
 })
 
 core.register_node("1042_nodes:flint", {
@@ -215,7 +215,7 @@ core.register_node("1042_nodes:flint", {
     walkable = true,
     buildable_to = false,
     
-    groups = {breakable_by_hand = 2, attached_node = 3},
+    groups = {breakable_by_hand = 3, attached_node = 3},
 })
 
 
@@ -239,7 +239,7 @@ core.register_node("1042_nodes:sticks", {
         }
     },
     
-    groups = {breakable_by_hand = 1, attached_node = 3, burns = 1},
+    groups = {breakable_by_hand = 2, attached_node = 3, burns = 1},
 })
 
 core_1042.register_loot({name = "1042_nodes:sticks", max_count = 32})
@@ -432,5 +432,5 @@ core.register_node("1042_nodes:pork_cooked", {
     end,
 
 
-    groups = {food = 1, breakable_by_hand = 1, attached_node = 3},
+    groups = {food = 1, breakable_by_hand = 2, attached_node = 3},
 })

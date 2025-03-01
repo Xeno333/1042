@@ -16,6 +16,19 @@ core.register_node("1042_nodes:grass_tall", {
     walkable = false,
     buildable_to = true,
 
+    sounds = {
+        dig = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.6
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
     groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
 })
 
@@ -32,6 +45,19 @@ core.register_node("1042_nodes:grass_short", {
     walkable = false,
     buildable_to = true,
 
+    sounds = {
+        dig = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
     groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
 })
 
@@ -47,6 +73,19 @@ core.register_node("1042_nodes:grass_snowy", {
     floodable = true,
     walkable = false,
     buildable_to = true,
+
+    sounds = {
+        dig = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 2
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 2
+        }
+    },
 
     groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
 })
@@ -153,6 +192,19 @@ core.register_node("1042_nodes:digitalis", {
     floodable = true,
     walkable = false,
     buildable_to = false,
+
+    sounds = {
+        dig = {
+            name = "turf",
+            gain = 0.8,
+            pitch = 3
+        },
+        place = {
+            name = "turf",
+            gain = 0.8,
+            pitch = 2
+        }
+    },
 
     _1042_on_use = function(itemstack, user, pointed_thing)
         return core_1042.eat(itemstack, user, 9, 1)

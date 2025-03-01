@@ -52,6 +52,7 @@
 - Add `admin` priv and migrate `change_weather` to use it insted of `creative` along with other priv fixes -Xeno333
 - Add `player_api.add_item_to_player_inventory(player, list, itemstack, drop_overflow_pos)` and improve node dropping for tools and snow -Xeno333
 - Add foundational growth mechanics -Xeno333
+- Work on sounds and lower item break times with hand for some things -Xeno333
 
 ### WIP
 

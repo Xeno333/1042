@@ -48,7 +48,7 @@ core_1042.shared_lib = {
 
 # Groups
 
-- `breakable_by_hand` Player can break these items without tools. value is for break-time `{[1] = 0.25, [2] = 0.5, [3] = 1, [4] = 2, [5] = 3, [6] = 4}`
+- `breakable_by_hand` Player can break these items without tools. value is for break-time `{[1] = 0.1, [2] = 0.25, [3] = 0.5, [4] = 1, [5] = 2, [6] = 3, [7] = 4}`
 - `stone` Stone nodes. Value is for tools like pick, for break-time. `{[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}`
 - `leafy` Leafy nodes.
 - `plant` Plant (Biomass) nodes.
