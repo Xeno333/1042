@@ -65,8 +65,7 @@ function core_1042.make_inv_formspec(player)
         "label[1.5,1.5;Settings]"..
         "scroll_container[2,2;28,4;setting_box_scrollbar;vertical;0.1;true]"..
 
-            "checkbox[0,0.5;setting_greyscale;Greyscale;"..greyscale.."]"..
-            "checkbox[0,1.5;setting_hud_at_bottom;Hud at bottom;"..hud_at_bottom.."]"
+            "checkbox[0,0.5;setting_greyscale;Greyscale;"..greyscale.."]"
 
             if show_creative then
                 hide_creative_inv = core_1042.get("playersetting_"..player:get_player_name().."_hide_creative_inv") or "false"
@@ -74,7 +73,12 @@ function core_1042.make_inv_formspec(player)
                 "checkbox[0,1;setting_hide_creative_inv;Hide creative inv;"..hide_creative_inv.."]"
             end
 
-        inv_formspec = inv_formspec..
+            inv_formspec = inv_formspec..
+            "checkbox[0,1.5;setting_hud_at_bottom;Hud at bottom;"..hud_at_bottom.."]"..
+            --"label[0,2.5;HUD Stats]"..
+            --"checkbox[1,3;setting_hud_stats_default;Enable default HUD stats;false]"..
+            --"checkbox[1,3.5;setting_hud_stats_default;Enable advanced HUD stats;false]"..
+
         "scroll_container_end[]"..
         "scrollbar[1,2;0.5,4;vertical;setting_box_scrollbar;0]"..
 
@@ -126,7 +130,7 @@ core.register_on_player_receive_fields(function(player, form, fields)
 
         elseif fields.setting_greyscale then
             core_1042.set("playersetting_"..player:get_player_name().."_greyscale", fields.setting_greyscale)
-            
+
             if fields.setting_greyscale == "true" then
                 player:set_lighting(
                     {
