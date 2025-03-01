@@ -130,7 +130,7 @@ function weather.get_weather_at_pos(pos)
     local i = weather.weather_index
     local temp = weather.get_temp_single(pos)
 
-    while true do
+    for n=1,#weather.weathers do
         local weather_t = weather.weathers[i]
         if not weather_t.conditions then
             return i
@@ -158,5 +158,8 @@ function weather.get_weather_at_pos(pos)
             i = 1
         end
     end
+
+    -- If none found leave as is
+    return weather.weather_index
 end
 
