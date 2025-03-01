@@ -106,7 +106,7 @@ core.register_on_joinplayer(function(player, last_join)
             sneak_glitch = true,
             liquid_sink = 2
         }
-    )   
+    )
     player:hud_set_flags(
         {
             minimap = false,
@@ -166,7 +166,7 @@ core.register_on_joinplayer(function(player, last_join)
         zoom_time = 1
 
         core.chat_send_player(name, core.colorize("#00ff00", "It is the year 1042 and you are lost."))
-        
+
     else
         core.chat_send_player(name, "It is day " .. core.get_day_count() .. " of being lost.")
 
