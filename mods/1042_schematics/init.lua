@@ -1,34 +1,6 @@
 core.log("action", "Loading 1042_schematics...")
 
 
-
-
-
-core.register_node("1042_schematics:schematic_ignore", {
-    description = "Schematic Ignore",
-    drawtype = "nodebox",
-    tiles = {"1042_plain_node.png^[colorize:#ff00ff:200"},
-
-    paramtype = "light",
-    sunlight_propagates = true,
-    walkable = false,
-    buildable_to = true,
-
-    node_box = {
-        type = "fixed",
-        fixed = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1}
-    },
-    selection_box = {
-        type = "fixed",
-        fixed = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1}
-    },
-
-    
-    groups = {dig_immediate = 1},
-})
-
-
-
 -- API
 local path = core.get_modpath("1042_schematics")
 dofile(path.."/schematics_api.lua")
@@ -66,7 +38,7 @@ tests_1042.register_test("1042_schematics:test_4", function(name)
         schem.center = true
         schematics_1042.place_schematic(core.get_player_by_name(name):get_pos(), schem)
     else
-        return "Something went wrong loading schem."
+        return "Somethign went wrong loading schem."
     end
     
 end, false)
