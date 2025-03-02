@@ -12,7 +12,6 @@ core.register_node("1042_schematics:schematic_ignore", {
     paramtype = "light",
     sunlight_propagates = true,
     walkable = false,
-    buildable_to = true,
 
     node_box = {
         type = "fixed",
