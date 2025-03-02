@@ -25,7 +25,7 @@ if core.features.hotbar_hud_element ~= true then
     end
 end
 
-if core.settings:get("1042_enable_hardcore") == "true" then
+if core.settings:get_bool("1042_enable_hardcore", false) then
     core.register_on_dieplayer(function(player, reason)
         local name = player:get_player_name()
         core.kick_player(name, "You died in 1042 while playing in hardcore mode.", false)
@@ -56,12 +56,12 @@ local required_settings = {
     ["enable_fog"] = {single_player=true, value="true"},
 }
 
-if core.settings:get("1042_auto_adjust_settings") == "true" then
+if core.settings:get_bool("1042_auto_adjust_settings", false) then
     for name, value in pairs(required_settings) do
         core.settings:set(name, value.value)
     end
 
-elseif core.settings:get("1042_ignore_required_settings") ~= "true" then
+elseif not core.settings:get_bool("1042_ignore_required_settings", false) then
     for name, value in pairs(required_settings) do
         if value.required then
             if value.single_player then
@@ -105,6 +105,7 @@ dofile(path.."/src/achievements.lua")
 dofile(path.."/src/chat_commands.lua")
 dofile(path.."/src/node_wear.lua")
 dofile(path.."/src/shared_lib.lua")
+dofile(path.."/src/abms.lua")
 
 
 core.log("action", "1042_core loaded.")

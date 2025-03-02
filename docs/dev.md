@@ -224,7 +224,7 @@ If `the_weather.on_end(player, name, players_weather)` is defined then all thing
 ## API
 
 - `function tests_1042.print(text)` Prints debug data when runs in the intigrated tests are enabled. Is the same as `core.log("warning", "1042_tests: " .. tostring(text))`. Returns `true` on success.
-- `function tests_1042.register_test(namein, func, run_on_loaded)` Register a test to run when all mods are loaded and testing starts. It is highly recommended to use the name format of `<mod name>:<test name>[_<test number>]>`. `run_on_loaded` runs the test as soon as all mods are loaded, other wise it is just set as a test that must be run, `false` by default. Returns `true` on success and `false` if already registered or intigrated tests are disabled.
+- `function tests_1042.register_test(namein, func(name), run_on_loaded)` Register a test to run when all mods are loaded and testing starts. It is highly recommended to use the name format of `<mod name>:<test name>[_<test number>]>`. `run_on_loaded` runs the test as soon as all mods are loaded, other wise it is just set as a test that must be run, `false` by default. Returns `true` on success and `false` if already registered or intigrated tests are disabled. If `run_on_loaded` is `false` then when a player runs the test, the players name will be passed as `name`.
 - `testing_1042` A boolean set based on the value of 1042_enable_intigrated_tests, this is to be used internaly to enable WIP features or tests/experiments. This can be set internaly but should be avoided unless needed for testing, for this reason the `run_test` chat-command is always valid.
 
 

@@ -60,22 +60,6 @@ achievements_1042.register_achievement("first_life", {
     colour = "#00ffaa"
 })
 
-achievements_1042.register_achievement("hog_slayer", {
-    achievement = core.colorize("#ff7755", "Hog Slayer!"),
-    colour = "#ffccaa"
-})
-
-achievements_1042.register_achievement("oooo_fire", {
-    achievement = core.colorize("#ff7755", "Oooo, Fire!"),
-    colour = "#ffccaa"
-})
-
-achievements_1042.register_achievement("smelter", {
-    achievement = core.colorize("#ddcc55", "Smelter!"),
-    colour = "#ffddaa"
-})
-
-
 core.register_on_joinplayer(function(player, last_join)
     achievements_1042.achieve(player, "first_life")
 end)
