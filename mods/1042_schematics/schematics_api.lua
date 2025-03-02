@@ -155,5 +155,5 @@ function schematics_1042.save_schematic(pos1, pos2, path)
         core.safe_file_write(path..".1042_schem", core.write_json(schematic, true))
     end)
 
-    return "Qeued..."
+    return "Queued..."
 end
