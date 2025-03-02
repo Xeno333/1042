@@ -3,6 +3,9 @@ schematics_1042 = {
 }
 
 
+local schematic_ignore_node = core.get_content_id("1042_schematics:schematic_ignore")
+
+
 function schematics_1042.new_schematic(x, y, z)
     return {
         replacements = {},
@@ -76,10 +79,6 @@ function schematics_1042.load_schematic(path)
 end
 
 
-local function get_sign(n)
-    return n/math.abs(n)
-end
-
 function schematics_1042.place_schematic(posin, schematic)
     -- #fixme broken calculation
     local size = schematic.size
@@ -112,7 +111,11 @@ function schematics_1042.place_schematic(posin, schematic)
                 local lx = 0
                 for x=pos_min.x,pos_max.x do
                     lx = lx + 1
-                    data[area:index(x,y,z)] = schematic.data[ly][lz][lx]
+                    
+                    local node = schematic.data[ly][lz][lx]
+                    if node ~= schematic_ignore_node then
+                        data[area:index(x,y,z)] = node
+                    end
                 end
             end
         end
@@ -159,5 +162,5 @@ function schematics_1042.save_schematic(pos1, pos2, path)
         core.safe_file_write(path..".1042_schem", core.write_json(schematic, true))
     end)
 
-    return "Qeued..."
+    return "Queued..."
 end

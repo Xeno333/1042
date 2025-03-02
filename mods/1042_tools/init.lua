@@ -28,8 +28,8 @@ item_wear.register_complex_node("1042_tools:sword",{
 
     stack_max = 1,
     tool_capabilities = {
-        full_punch_interval = 2,
-        damage_groups = {fleshy = 4},
+        full_punch_interval = 1,
+        damage_groups = {fleshy = 3},
 		groupcaps = {
 			leafy = {times = {[1] = 0.125, [2] = 0.25, [3] = 0.5, [4] = 1, [5] = 1.5, [6] = 2}, uses = 1},
 		},
@@ -121,7 +121,7 @@ item_wear.register_complex_node("1042_tools:axe_flint",{
     stack_max = 1,
     tool_capabilities = {
         full_punch_interval = 4,
-        damage_groups = {fleshy = 5},
+        damage_groups = {fleshy = 4},
 		groupcaps = {
 			wood = {times = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}, uses = 1},
 		},

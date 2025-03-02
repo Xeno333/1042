@@ -53,6 +53,7 @@
 - Add `player_api.add_item_to_player_inventory(player, list, itemstack, drop_overflow_pos)` and improve node dropping for tools and snow -Xeno333
 - Add foundational growth mechanics -Xeno333
 - Work on sounds and lower item break times with hand for some things -Xeno333
+- Re-order code and make smelting mod -Xeno333
 
 ### WIP
 
