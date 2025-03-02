@@ -271,7 +271,7 @@ core.register_globalstep(function(dtime)
             aux1_cooldown[name] = aux1_cooldown[name] - dtime
         end
 
-        -- Controls
+        -- Controles
         local player_controls = player:get_player_control()
         local player_meta = player:get_meta()
 

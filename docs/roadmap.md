@@ -54,8 +54,8 @@ We strive to maintain a simple base texturepack for the game.
 
 - Add API for modding the inventory (I TX_Miner plan on making a new API + inventory for Luanti in general and might merge that here)
 - Fix `hotbar` for multiplayer
-- Add HUD Modes and settings in the inventory
-- Add a cycle keybind to cycle between HUD modes
+
+
 
 ## Demensions
 
@@ -66,6 +66,8 @@ Normal world
 ## Void (Planned)
 
 A demension with low gravity and dark skies that slowly change color with few nodes, but colorful life.
+
+
 
 # New features
 
