@@ -1,6 +1,34 @@
 core.log("action", "Loading 1042_schematics...")
 
 
+
+
+
+core.register_node("1042_schematics:schematic_ignore", {
+    description = "Schematic Ignore",
+    drawtype = "nodebox",
+    tiles = {"1042_plain_node.png^[colorize:#ff00ff:200"},
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    walkable = false,
+    buildable_to = true,
+
+    node_box = {
+        type = "fixed",
+        fixed = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1}
+    },
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1}
+    },
+
+    
+    groups = {dig_immediate = 1},
+})
+
+
+
 -- API
 local path = core.get_modpath("1042_schematics")
 dofile(path.."/schematics_api.lua")

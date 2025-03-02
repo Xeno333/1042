@@ -333,7 +333,6 @@ core.register_node("1042_nodes:anvil", {
 core.register_node("1042_nodes:iron_ingot", {
     description = "Iron Ingot",
     drawtype = "nodebox",
-    mesh = "crystal.obj",
     tiles = {"1042_plain_node.png^[colorize:#998888:200"},
 
     paramtype = "light",

@@ -3,6 +3,9 @@ schematics_1042 = {
 }
 
 
+local schematic_ignore_node = core.get_content_id("1042_schematics:schematic_ignore")
+
+
 function schematics_1042.new_schematic(x, y, z)
     return {
         replacements = {},
@@ -108,7 +111,11 @@ function schematics_1042.place_schematic(posin, schematic)
                 local lx = 0
                 for x=pos_min.x,pos_max.x do
                     lx = lx + 1
-                    data[area:index(x,y,z)] = schematic.data[ly][lz][lx]
+                    
+                    local node = schematic.data[ly][lz][lx]
+                    if node ~= schematic_ignore_node then
+                        data[area:index(x,y,z)] = node
+                    end
                 end
             end
         end
