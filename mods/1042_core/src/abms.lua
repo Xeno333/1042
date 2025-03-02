@@ -1,7 +1,7 @@
 
 local rand = PcgRandom(math.random())
 
-print("A")
+
 -- Plant growth
 core.register_abm({
     label = "Plant growth",
