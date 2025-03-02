@@ -52,6 +52,10 @@ local function hit_flint_with_iron(itemstack, player, pointed_thing)
     end
 end
 
+achievements_1042.register_achievement("oooo_fire", {
+    achievement = core.colorize("#ff7755", "Oooo, Fire!"),
+    colour = "#ffccaa"
+})
 
 
 
@@ -333,7 +337,6 @@ core.register_node("1042_nodes:anvil", {
 core.register_node("1042_nodes:iron_ingot", {
     description = "Iron Ingot",
     drawtype = "nodebox",
-    mesh = "crystal.obj",
     tiles = {"1042_plain_node.png^[colorize:#998888:200"},
 
     paramtype = "light",
@@ -382,6 +385,12 @@ core.register_node("1042_nodes:iron_ingot", {
     groups = {breakable_by_hand = 1, falling_node = 1},
 })
 core_1042.register_loot({name = "1042_nodes:iron_ingot", max_count = 6})
+
+achievements_1042.register_achievement("smelter", {
+    achievement = core.colorize("#ddcc55", "Smelter!"),
+    colour = "#ffddaa"
+})
+
 
 
 core.register_node("1042_nodes:pork_raw", {
