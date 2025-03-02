@@ -172,6 +172,10 @@ core.register_entity("1042_mobs:pig", {
     groups = {fleshy = 1}
 })
 
+achievements_1042.register_achievement("hog_slayer", {
+    achievement = core.colorize("#ff7755", "Hog Slayer!"),
+    colour = "#ffccaa"
+})
 
 
 dofile(core.get_modpath("1042_mobs") .. "/mob_spawning.lua")
