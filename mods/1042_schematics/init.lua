@@ -38,7 +38,7 @@ tests_1042.register_test("1042_schematics:test_4", function(name)
         schem.center = true
         schematics_1042.place_schematic(core.get_player_by_name(name):get_pos(), schem)
     else
-        return "Somethign went wrong loading schem."
+        return "Something went wrong loading schem."
     end
     
 end, false)
