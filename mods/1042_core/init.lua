@@ -105,6 +105,7 @@ dofile(path.."/src/achievements.lua")
 dofile(path.."/src/chat_commands.lua")
 dofile(path.."/src/node_wear.lua")
 dofile(path.."/src/shared_lib.lua")
+dofile(path.."/src/abms.lua")
 
 
 core.log("action", "1042_core loaded.")
