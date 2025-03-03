@@ -53,7 +53,6 @@ local beryl_top = core.get_content_id("1042_nodes:beryl_hanging")
 
 local grass_tall = core.get_content_id("1042_nodes:grass_tall")
 local grass_short = core.get_content_id("1042_nodes:grass_short")
-local grass_snowy = core.get_content_id("1042_nodes:grass_snowy")
 local mushroom = core.get_content_id("1042_nodes:mushroom")
 
 local chest = core.get_content_id("1042_nodes:chest")
@@ -73,20 +72,23 @@ local schematic_path = core.get_modpath("1042_mapgen") .. "/schematics/"
 
 
 
-local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data)
+local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data, grass_color)
     local c = pr:next(1, 1000)
     
     
     -- Land
     if cave == nil and y > water_level then
+        if c <= 20 then
+            data[area:index(x, y+1, z)] = grass_tall
+            param2_data[area:index(x, y+1, z)] = grass_color
+        elseif c < 100 then
+            data[area:index(x, y+1, z)] = grass_short
+            param2_data[area:index(x, y+1, z)] = grass_color
+        end
+
         if tempv > 0 and not (tempv > 20) then
-            -- Grass
-            if c <= 20 then
-                data[area:index(x, y+1, z)] = grass_tall
-            elseif c < 100 then
-                data[area:index(x, y+1, z)] = grass_short
                 
-            elseif c == 100 and y > water_level+3 then
+            if c == 100 and y > water_level+3 then
                 data[area:index(x, y+1, z)] = sticks
 
             elseif c == 101 and y > water_level+9 then
@@ -113,11 +115,8 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data
                 data[vi] = snow
                 param2_data[vi] = pr:next(8, 16)
             end
-            -- Snow grass
-            if tempv > -3 and c >= 990 then
-                data[area:index(x, y+1, z)] = grass_snowy
 
-            elseif y >= water_level+3 and c >= 999+(tempv/8) then
+            if y >= water_level+3 and c >= 999+(tempv/8) then
                 place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematic_path .. "big_tree_light_1.mts", rotation="random", replacements=nil, force_placement=true, flags=nil}
 
             end
@@ -240,12 +239,13 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                             data[vi] = dirt
 
                         elseif y == ny then
+                            local grass_color = math.floor(((tempv / 30) + 1) * 8 * 16) - 1
                             if y > water_level then
                                 if mountin_top then
                                     data[vi] = dirt
                                 else
                                     data[vi] = turf
-                                    param2_data[vi] = math.floor(((tempv / 30) + 1) * 8 * 16) - 1
+                                    param2_data[vi] = grass_color
                                 end
 
                             elseif y < water_level then
@@ -257,7 +257,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                             end
 
                             if not mountin_top then
-                                dec(pr, x, y, z, data, area, place_list, tempv, nil, param2_data)
+                                dec(pr, x, y, z, data, area, place_list, tempv, nil, param2_data, grass_color)
                             end
                         end
                     elseif y <= ny and y<= lava_level then
