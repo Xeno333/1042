@@ -7,7 +7,7 @@ core.register_node("1042_nodes:grass_tall", {
     description = "Tall Grass",
     drawtype = "mesh",
     mesh = "grass_tall.obj",
-    tiles = {"1042_plain_node.png^[colorize:#278b13:168"},
+    tiles = {"1042_plain_node.png"},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -15,6 +15,9 @@ core.register_node("1042_nodes:grass_tall", {
     floodable = true,
     walkable = false,
     buildable_to = true,
+
+    paramtype2 = "color",
+    palette = "turf_palette.png",
 
     sounds = {
         dig = {
@@ -36,7 +39,7 @@ core.register_node("1042_nodes:grass_short", {
     description = "Short Grass",
     drawtype = "mesh",
     mesh = "grass_short.obj",
-    tiles = {"1042_plain_node.png^[colorize:#278b13:168"},
+    tiles = {"1042_plain_node.png"},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -44,6 +47,9 @@ core.register_node("1042_nodes:grass_short", {
     floodable = true,
     walkable = false,
     buildable_to = true,
+
+    paramtype2 = "color",
+    palette = "turf_palette.png",
 
     sounds = {
         dig = {
@@ -55,35 +61,6 @@ core.register_node("1042_nodes:grass_short", {
             name = "turf",
             gain = 0.4,
             pitch = 1.7
-        }
-    },
-
-    groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
-})
-
-core.register_node("1042_nodes:grass_snowy", {
-    description = "Snowy Grass",
-    drawtype = "mesh",
-    mesh = "grass_short.obj",
-    tiles = {"1042_plain_node.png^[colorize:#278b13:144^[colorize:#ffffff:168"},
-    use_texture_alpha = "opaque",
-
-    paramtype = "light",
-    sunlight_propagates = true,
-    floodable = true,
-    walkable = false,
-    buildable_to = true,
-
-    sounds = {
-        dig = {
-            name = "turf",
-            gain = 0.4,
-            pitch = 2
-        },
-        place = {
-            name = "turf",
-            gain = 0.4,
-            pitch = 2
         }
     },
 
