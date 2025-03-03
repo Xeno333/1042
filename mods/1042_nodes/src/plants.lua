@@ -32,6 +32,15 @@ core.register_node("1042_nodes:grass_tall", {
         }
     },
 
+    on_construct = function(pos)
+        local node = core.get_node(pos)
+
+        if node then
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            core.swap_node(pos, node)
+        end
+    end,
+
     groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
 })
 
@@ -63,6 +72,15 @@ core.register_node("1042_nodes:grass_short", {
             pitch = 1.7
         }
     },
+
+    on_construct = function(pos)
+        local node = core.get_node(pos)
+
+        if node then
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            core.swap_node(pos, node)
+        end
+    end,
 
     groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
 })
