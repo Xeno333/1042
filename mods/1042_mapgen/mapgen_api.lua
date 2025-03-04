@@ -71,14 +71,14 @@ function mapgen_1042.get_spawn_y(x, z)
     local ny
 
     local r = math.sqrt(x^2+z^2)
-    
+
     if noise <= 0.9 and noise > -0.5 then
         -- Normal gen
         ny = (noise * math.abs(noise)) * mapgen_1042.ymax
 
         -- Border
         if r > mapgen_1042.continent_radius then
-            local offset = math.max(0, math.min(T_ymax, (1/3)*(r-mapgen_1042.continent_radius)))
+            local offset = math.max(0, math.min(mapgen_1042.ymax, (1/3)*(r-mapgen_1042.continent_radius)))
             ny = ny - offset
         end
 
