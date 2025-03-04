@@ -49,3 +49,21 @@ core.register_abm({
     end
 })
 
+
+--[[
+    Notes:
+        This compeates with "Spread Fire"
+        This adds the challenge of having to watch it to make sure it burns
+]]
+core.register_abm({
+    label = "Light Charcoal",
+    catch_up = true,
+    interval = 8,
+    chance = 4,
+    nodenames = {"1042_nodes:charcoal"},
+    neighbors = {"group:burning"},
+
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        core.set_node(pos, {name = "1042_nodes:charcoal_burning"})
+    end
+})

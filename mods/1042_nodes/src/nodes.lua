@@ -434,8 +434,12 @@ core.register_craft({
         {"1042_nodes:iron_nugget", "1042_nodes:iron_nugget", "1042_nodes:iron_nugget"},
     }
 })
-
-
+core.register_craft({
+    output = "1042_nodes:iron_nugget 9",
+    recipe = {
+        {"1042_nodes:iron_nugget_block"},
+    }
+})
 
 
 

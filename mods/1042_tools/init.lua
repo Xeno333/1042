@@ -147,6 +147,13 @@ core.register_craft({
 
 
 
+
+
+
+-- Chisel
+
+
+
 chiselable_nodes = {
 	{
 		check = function(pos)
@@ -176,12 +183,12 @@ chiselable_nodes = {
 
 
 
-core.register_node("1042_tools:chisel_flint", {
-    description = "Flint chisel",
+core.register_node("1042_tools:chisel_iron", {
+    description = "Iron chisel",
     drawtype = "mesh",
     mesh = "chisel.obj",
     tiles = {
-        "1042_plain_node.png^[colorize:#07070d:168",
+        "1042_plain_node.png^[colorize:#444444:168",
         "1042_plain_node.png^[colorize:#672307:168"
     },
     use_texture_alpha = "opaque",
@@ -222,14 +229,16 @@ core.register_node("1042_tools:chisel_flint", {
 		core.show_formspec(user:get_player_name(), "1042_tools:chisel_select", formspec)
 	end
 })
-core_1042.register_loot({name = "1042_tools:chisel_flint"})
+core_1042.register_loot({name = "1042_tools:crude_iron"})
 
 core.register_craft({
-    output = "1042_tools:chisel_flint",
+    output = "1042_tools:chisel_iron",
     recipe = {
-        {"1042_nodes:flint", "1042_nodes:sticks"}
+        {"1042_nodes:crude_iron", "1042_nodes:sticks"}
     }
 })
+
+
 
 function chisel_cuting_formspec(node, player, seconds)
 	local phase = math.floor(seconds/(node.duration/2)) * 2
