@@ -10,7 +10,7 @@ weather.rand = PcgRandom(math.random(1, 2048))
 local weather_def = {
     offset = 0,
     scale = 1,
-    spread = {x = 600, y = 600, z = 600},
+    spread = {x = 1000, y = 1000, z = 1000},
     seed = core.get_mapgen_setting("seed") + 253643,
     octaves = 3,
     persist = 0.3,
@@ -38,14 +38,14 @@ end
 -- max temp = 30, min = -10
 
 function weather.get_temp(pos, temp_map)
-    return math.max(math.min(temp_map[pos.x][pos.z] * 20 + 10, 30), -10)
+    return math.max(math.min(temp_map[pos.x][pos.z] * 30, 30), -30)
 end
 
 
 function weather.get_temp_single(pos)
     v.x = pos.z
     v.y = pos.x
-    local tempv = math.max(math.min(temp_s:get_2d(v) * 20 + 10, 30), -10)
+    local tempv = math.max(math.min(temp_s:get_2d(v) * 30, 30), -30)
     return tempv
 end
 
