@@ -333,6 +333,60 @@ core.register_node("1042_nodes:anvil", {
 })
 
 
+achievements_1042.register_achievement("smelter", {
+    achievement = core.colorize("#ddcc55", "Smelter!"),
+    colour = "#ffddaa"
+})
+
+core.register_node("1042_nodes:crude_iron", {
+    description = "Crude Iron",
+    drawtype = "mesh",
+    mesh = "flint.obj",
+    tiles = {"1042_plain_node.png^[colorize:#886666:200"},
+
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.4, -0.5, -0.4, 0.4, -0.2, 0.4}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.4, -0.5, -0.4, 0.4, -0.2, 0.4}
+    },
+
+    sounds = {
+        dig = {
+            name = "stone_dig",
+            gain = 2,
+            pitch = 2
+        },
+        footstep = {
+            name = "stone_walk",
+            gain = 0.3,
+            pitch = 2
+        },
+        place = {
+            name = "stone_dig",
+            gain = 1,
+            pitch = 2
+        }
+    },
+
+    _1042_on_use = hit_flint_with_iron,
+
+    after_dig_node = function(pos, oldnode, oldmetadata, digger)
+        achievements_1042.achieve(digger, "smelter")
+    end,
+    
+    groups = {breakable_by_hand = 1, falling_node = 1},
+})
+core_1042.register_loot({name = "1042_nodes:crude_iron", max_count = 6})
+
 
 core.register_node("1042_nodes:iron_ingot", {
     description = "Iron Ingot",
@@ -385,12 +439,6 @@ core.register_node("1042_nodes:iron_ingot", {
     groups = {breakable_by_hand = 1, falling_node = 1},
 })
 core_1042.register_loot({name = "1042_nodes:iron_ingot", max_count = 6})
-
-achievements_1042.register_achievement("smelter", {
-    achievement = core.colorize("#ddcc55", "Smelter!"),
-    colour = "#ffddaa"
-})
-
 
 
 core.register_node("1042_nodes:pork_raw", {

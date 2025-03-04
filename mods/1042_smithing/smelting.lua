@@ -23,7 +23,7 @@ core.register_abm({
     chance = 4,
     action = function(pos, node, active_object_count, active_object_count_wider)
         if rand:next(1, 4) == 1 then
-            core.set_node(pos, {name = "1042_nodes:iron_ingot"})
+            core.set_node(pos, {name = "1042_nodes:crude_iron"})
         else
             core.set_node(pos, {name = "1042_nodes:iron_slag"})
         end
@@ -46,20 +46,3 @@ core.register_abm({
 
 -- Charcoal
 
---[[
-    Notes:
-        This compeates with "Spread Fire"
-        This adds the challenge of having to watch it to make sure it burns
-]]
-core.register_abm({
-    label = "Light Charcoal",
-    catch_up = true,
-    interval = 8,
-    chance = 4,
-    nodenames = {"1042_nodes:charcoal"},
-    neighbors = {"group:burning"},
-
-    action = function(pos, node, active_object_count, active_object_count_wider)
-        core.set_node(pos, {name = "1042_nodes:charcoal_burning"})
-    end
-})
