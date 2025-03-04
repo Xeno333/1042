@@ -3,11 +3,13 @@
 -- Plants
 
 
+-- Grasses are an extension of turf
+
 core.register_node("1042_nodes:grass_tall", {
     description = "Tall Grass",
     drawtype = "mesh",
     mesh = "grass_tall.obj",
-    tiles = {"1042_plain_node.png"},
+    tiles = {"turf.png"},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -16,6 +18,7 @@ core.register_node("1042_nodes:grass_tall", {
     walkable = false,
     buildable_to = true,
 
+    color = "#309913ff",
     paramtype2 = "color",
     palette = "turf_palette.png",
 
@@ -48,7 +51,7 @@ core.register_node("1042_nodes:grass_short", {
     description = "Short Grass",
     drawtype = "mesh",
     mesh = "grass_short.obj",
-    tiles = {"1042_plain_node.png"},
+    tiles = {"turf.png"},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -57,6 +60,7 @@ core.register_node("1042_nodes:grass_short", {
     walkable = false,
     buildable_to = true,
 
+    color = "#309913ff",
     paramtype2 = "color",
     palette = "turf_palette.png",
 
@@ -84,6 +88,14 @@ core.register_node("1042_nodes:grass_short", {
 
     groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
 })
+
+
+
+
+
+
+
+
 
 core.register_node("1042_nodes:mushroom", {
     description = "Mushroom",

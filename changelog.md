@@ -56,12 +56,13 @@
 - Re-order code and make smelting mod -Xeno333
 
 ### WIP
-
-#### Very WIP (needs changes)
-- Color grasses by biome with same system as turf -Xeno333
-- Start tree generation and growth mod -Xeno333
-
+- Adding contenent border to mapgen and spawing -Xeno333
 - Adding custom schematics -Xeno333
 - Improve textures and models -Xeno333 & SuperStarSonic
 - Improve mapgen code -Xeno333
 - Improve and orginize documentation -Xeno333 & SuperStarSonic
+
+
+#### Very WIP (needs changes)
+- Color grasses by biome with same system as turf -Xeno333
+- Start tree generation and growth mod -Xeno333
