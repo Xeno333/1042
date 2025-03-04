@@ -43,6 +43,7 @@ core.register_node("1042_nodes:turf", {
     description = "Turf",
     tiles = {"turf.png"},
 
+    color = "#309913ff",
     paramtype2 = "color",
     palette = "turf_palette.png",
 
