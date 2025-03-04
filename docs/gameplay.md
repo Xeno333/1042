@@ -26,8 +26,16 @@ Wood nodes must be broken with an axe
 
 ## Cooking
 
-If you get some raw food, like pork from a pig, you can cook it. Cooking is done by placing raw food near a burning node. After a given ionterval the food will cook.
+If you get some raw food, like pork from a pig, you can cook it:
 
+ * either near near a fire
+ * or on a campfire
+
+After a given interval, the food will cook.
+
+If you get something that need to be heated to a higher temperature, you'll need to use an oven or placing the item beside a [block of burning charcoal](#starting-fires).
+
+If you want to use an oven, you must [create one](#oven) and [create a mold](#mold). Right-click the mold with the item to cook, and pick un the filled mold. You can now place it in the oven and wait for it to finish cooking!
 
 ## Mining
 
@@ -36,13 +44,36 @@ Ores are worthless in their natrual state, they must be broken into nuggets in o
 
 ## Refining metals
 
-Nugget blocks can be melted by placing them beside a block of burning charcoal, when they start flowing they will form blocks of slag, this must be mined so it continues to flow. Some of the flowing metal should form into ingots, if they do not you just had bad luck and should try again.
-
+> See [Cooking](#cooking)
 
 ## Starting fires
+
 This is a fairly simple task, find some iron nuggets and some flint. When you have found some flint, take it and put it right next to the node you want to light. After doing this you start to beat (`aux1`) the flint with the iron nugget. This should produce a lot of sparks and the fire should ignite after a few attempts. It can take a while sometimes so don't give up to quickly. Some things like wood burn to charcoal, this can be used to melt metals.
 
 
 ## Tools
 
 Tools are used to do some tasks, like mine or cut wood.
+
+### Chisel
+
+The chisel is used to… chisel blocs! There are:
+
+| Final node |   Requirement  | Durration |
+|:-----------|:--------------:|----------:|
+| Oven	   | 2 stone blocks |	  16 s |
+| Mold	   |	 a rock	 |	   8 s |
+
+## Usefull nodes
+
+### The Oven
+
+An oven is used to cook pretty everything at hight temperature, see [Cooking](#cooking).
+
+To create one, find 2 stone blocks one on top of the other and by right-clicking on the bottom one with a [chisel](#chisel), you'll be able to choose it. Then, use a campfire to give it everything he needs to work.
+
+### The Mold
+
+The mold is used to prepare items like raw ores before cooking them in an oven. (see [Cooking](#cooking) and [Oven](#the-oven))
+
+Creating one is easy, just find a rock, right-click on it with a [chisel](#chisel) and select the mold.

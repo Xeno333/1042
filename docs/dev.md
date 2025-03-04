@@ -22,12 +22,12 @@ This is documentation for development and modding for the game `1042` on the *Lu
 
 ```lua 
 core_1042.shared_lib = {
-    consts = {
-        plain_world_y_levels = {
-            max = 128,
-            min = -256
-        }
-    }
+	consts = {
+		plain_world_y_levels = {
+			max = 128,
+			min = -256
+		}
+	}
 }
 ```
 
@@ -38,8 +38,8 @@ core_1042.shared_lib = {
 
 ```lua
 {
-    name = <name>,
-    max_count = <maxcount>
+	name = <name>,
+	max_count = <maxcount>
 }
 ```
 
@@ -105,8 +105,8 @@ There are a few APIs built into the game, and more planned for the beta release.
 ## Achievement definition
 ```lua
 {
-    achievement = core.colorize("#ffffff", "First life"),
-    colour = "#00ffaa"
+	achievement = core.colorize("#ffffff", "First life"),
+	colour = "#00ffaa"
 }
 ```
 
@@ -124,7 +124,55 @@ There are a few APIs built into the game, and more planned for the beta release.
 - `player_api.add_item_to_player_inventory(player, list, itemstack, drop_overflow_pos)` Add itemstack to player inv and drop remains, returns count droped at `drop_overflow_pos`. If player is not a player node the itemstack is just dropped.
 
 
+## Cooking pseudo-API
 
+To add cookable items, it's depends on the method to be used.
+
+### Campfire
+
+Campfire is used for things that cooks at low temperature *(< 200 °C)*, like foods. On a campfire, an item can be cooked either above or on the side of the fire. To add a new cookable item in the campfire, go in `1042_smithing/campfire/init.lua` and append the `cookable_things` table with a table like this one:
+```lua
+{
+	id = "", -- the name of the item to cook
+	hanging = true, -- if the item is cooked above (true) or on the side (false) of the campfire
+	name = "", -- an unique identifier found at the end of the entity name
+	drop = "", -- the name of the cooked item
+	model = "", -- the model of the entity while cooking
+	textures = {} -- the list of the textures of the entity
+}
+```
+
+### Oven
+
+Oven is used for things that cooks at (very)high temperature *(> 1000 °C)*, like iron. To be cooked on an oven, the item must first be placed in a mold. To add a new cookable item in the oven, go in `1042_smithing/campfire/mold.lua` and append the `moldable_things` table with a table like this one:
+```lua
+{
+	id = "", -- the name of the item to cook
+	color = "", -- the luanti colorstring of the item in the mold
+	name = "", -- an unique identifier found at the end of the entity name
+	drop = "" -- the name of the cooked item
+}
+```
+
+## Chiseling pseudo-API
+
+The chisel is used to create some complex nodes, *like oven or molds*, from more basic one, *like stone or rocks*. To add a new block to be chiseld, go in `1042_tools/init.lua` and append the `chiselable_nodes` table with a table like this one:
+```lua
+{
+	check = function(pos)
+		return -- condition to test if the node at 'pos' can be chiseled 
+	end,
+	place = function(pos)
+		-- usualy just a 'core.set_node' function
+	end,
+	node = "", -- final node obtained
+	display_name = "", -- name on the button
+	cuting_formspec_image = "", -- waiting formspec image without extention
+	duration = 10 -- time, in seconds, to finish the chiseling
+}
+```
+
+The waiting formspec image is made of 4 different images to create 2 tow-frames animations.
 
 # Weather API
 
@@ -158,51 +206,51 @@ Present if `weather.is_loaded` is set to `true`.
 ## Weather Definition
 
 ```lua
-    {
-        name = "Light snow",
-        conditions = {
-            temp = {
-                max = 0
-            }
-        },
-        on_change = function(player, players_weather) end, -- Code can only modify things that will be restored in weather.default_on_change or sounds.
-        on_step = function(player), -- Code that is run once per weather step (1 second)
-        on_end = function(player, name, players_weather), -- Code run at end defaults to weather.default_on_change if not used, otherwise you must undo ALL changes made in on_change
-        particlespawner = 
-        {
-            amount = 500,
-            time = 1,
+	{
+		name = "Light snow",
+		conditions = {
+			temp = {
+				max = 0
+			}
+		},
+		on_change = function(player, players_weather) end, -- Code can only modify things that will be restored in weather.default_on_change or sounds.
+		on_step = function(player), -- Code that is run once per weather step (1 second)
+		on_end = function(player, name, players_weather), -- Code run at end defaults to weather.default_on_change if not used, otherwise you must undo ALL changes made in on_change
+		particlespawner = 
+		{
+			amount = 500,
+			time = 1,
 
-            collisiondetection = true,
-            object_collision = true,
-            collision_removal = true,
+			collisiondetection = true,
+			object_collision = true,
+			collision_removal = true,
 
-            vel = {
-                min = vector.new(-2, -1, -2),
-                max = vector.new(2, -4, 2),
-                bias = 0
-            },
+			vel = {
+				min = vector.new(-2, -1, -2),
+				max = vector.new(2, -4, 2),
+				bias = 0
+			},
 
-            size = {
-                min = 0.5,
-                max = 1
-            },
+			size = {
+				min = 0.5,
+				max = 1
+			},
 
-            exptime = {
-                min = 6,
-                max = 8
-            },
+			exptime = {
+				min = 6,
+				max = 8
+			},
 
-            bounce = {
-                min = 0,
-                max = 0.3
-            },
+			bounce = {
+				min = 0,
+				max = 0.3
+			},
 
-            glow = 8,
+			glow = 8,
 
-            texture = "1042_plain_node.png^[colorize:#ddddff:144"
-        }
-    }
+			texture = "1042_plain_node.png^[colorize:#ddddff:144"
+		}
+	}
 ```
 
 
