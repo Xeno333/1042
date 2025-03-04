@@ -130,6 +130,16 @@ core.register_abm({
     end
 })
 
+core.register_abm({
+	label = "Burning Sound",
+	nodenames = {"group:burning"},
+	interval = 30,
+	chance = 1,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		core.sound_play("fire", {pos = pos, gain = .1, max_hear_distance = 10})
+	end
+})
+
 
 
 
