@@ -21,6 +21,7 @@ core.register_node("1042_nodes:grass_tall", {
     color = "#309913ff",
     paramtype2 = "color",
     palette = "turf_palette.png",
+    node_placement_prediction = "",
 
     sounds = {
         dig = {
