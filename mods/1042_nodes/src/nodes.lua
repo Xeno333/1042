@@ -46,6 +46,7 @@ core.register_node("1042_nodes:turf", {
     color = "#309913ff",
     paramtype2 = "color",
     palette = "turf_palette.png",
+    node_placement_prediction = "",
 
     sounds = {
         footstep = {
@@ -92,6 +93,7 @@ core.register_node("1042_nodes:snow", {
     paramtype2 = "leveled",
     leveled = 8,
     leveled_max = 64,
+    node_placement_prediction = "",
 
     sounds = {
         footstep = {
