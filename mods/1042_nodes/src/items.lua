@@ -291,6 +291,8 @@ core.register_node("1042_nodes:iron_nugget", {
 
     _1042_on_use = hit_flint_with_iron,
 
+    _1042_moldable = {color = "#551111", name = "iron", drop = "1042_nodes:iron_ingot"},
+
     paramtype = "light",
     paramtype2 = "4dir",
     sunlight_propagates = true,

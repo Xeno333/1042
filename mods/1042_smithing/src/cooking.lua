@@ -14,7 +14,7 @@ cookable_things = {
 	}
 }
 
-core.register_entity("1042_smithing:campfire_fire", {
+core.register_entity("1042_cooking:campfire_fire", {
 	initial_properties = {
 		physical = false,
 		pointable = false,
@@ -32,7 +32,7 @@ core.register_entity("1042_smithing:campfire_fire", {
 })
 
 for i, thing in ipairs(cookable_things) do
-	core.register_entity("1042_smithing:campfire_cooking_"  .. thing.name, {
+	core.register_entity("1042_cooking:campfire_cooking_"  .. thing.name, {
 		initial_properties = {
 			hp_max = 1000,
 			physical = false,
@@ -57,7 +57,7 @@ for i, thing in ipairs(cookable_things) do
 	})
 end
 
-core.register_node("1042_smithing:campfire", {
+core.register_node("1042_cooking:campfire", {
 	description = "Campfire",
 	drawtype = "mesh",
 	mesh = "campfire.obj",
@@ -87,14 +87,14 @@ core.register_node("1042_smithing:campfire", {
 	},
 
 	on_construct = function(pos)
-		core.add_entity(pos, "1042_smithing:campfire_fire", nil)
+		core.add_entity(pos, "1042_cooking:campfire_fire", nil)
 	end,
 	
 	on_destruct = function(pos)
 		for object in core.objects_inside_radius(pos, 1) do
 			local entity = object:get_luaentity()
 			if entity then
-				if entity.name == "1042_smithing:campfire_fire" then
+				if entity.name == "1042_cooking:campfire_fire" then
 					entity.object:remove()
 				end
 			end
@@ -110,9 +110,9 @@ core.register_node("1042_smithing:campfire", {
 		for object in core.objects_inside_radius(pos, 1) do
 			local entity = object:get_luaentity()
 			if entity then
-				if string.find(entity.name, "1042_smithing:campfire_cooking_") then
+				if string.find(entity.name, "1042_cooking:campfire_cooking_") then
 					for i, thing in ipairs(cookable_things) do
-						if "1042_smithing:campfire_cooking_" .. thing.name == entity.name then
+						if "1042_cooking:campfire_cooking_" .. thing.name == entity.name then
 							if thing.hanging then
 								has_hanging = true
 							else
@@ -136,11 +136,11 @@ core.register_node("1042_smithing:campfire", {
 			if name == thing.id then
 				if (not has_hanging) and thing.hanging then
 					itemstack:take_item()
-					core.add_entity(pos, "1042_smithing:campfire_cooking_" .. thing.name, nil)
+					core.add_entity(pos, "1042_cooking:campfire_cooking_" .. thing.name, nil)
 				elseif (not thing.hanging) and has_side < 4 then
 					itemstack:take_item()
 					moved_pos = {x = pos.x-.25+(.5*(has_side%2)), y = pos.y+.2, z = pos.z-.25+(.5*math.floor(has_side/2))}
-					core.add_entity(moved_pos, "1042_smithing:campfire_cooking_" .. thing.name, nil)
+					core.add_entity(moved_pos, "1042_cooking:campfire_cooking_" .. thing.name, nil)
 				end
 			end
 		end
@@ -149,7 +149,7 @@ core.register_node("1042_smithing:campfire", {
 	groups = {burning = 1, stone = 1},
 })
 core.register_craft({
-	output = "1042_smithing:campfire 1",
+	output = "1042_cooking:campfire 1",
 	type = "shapeless",
 	recipe = {
 		"1042_nodes:rock", "1042_nodes:rock", "1042_nodes:rock",
@@ -157,8 +157,3 @@ core.register_craft({
 		"1042_nodes:flint",
 	},
 })
-
-
-local path = core.get_modpath("1042_smithing")
-dofile(path .. "/campfire/oven.lua")
-dofile(path .. "/campfire/mold.lua")

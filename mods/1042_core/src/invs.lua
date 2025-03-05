@@ -25,7 +25,7 @@ core_1042.creative_inv = core.create_detached_inventory("creative",
 
 
 -- Generate the inv
-core.register_on_mods_loaded(function()
+core.after(0,function() -- use after to ensure compleate initalization
     local size = 0
     local lists = {core.registered_nodes, core.registered_items, core.registered_tools, core.registered_craftitems}
 
