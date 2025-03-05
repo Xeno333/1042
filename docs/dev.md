@@ -82,7 +82,7 @@ There are a few new node definition fields for ABMs and such:
 
 
 
-# APIs
+# `core_1042` APIs
 
 There are a few APIs built into the game, and more planned for the beta release.
 
@@ -124,11 +124,17 @@ There are a few APIs built into the game, and more planned for the beta release.
 - `player_api.add_item_to_player_inventory(player, list, itemstack, drop_overflow_pos)` Add itemstack to player inv and drop remains, returns count droped at `drop_overflow_pos`. If player is not a player node the itemstack is just dropped.
 
 
-## Cooking pseudo-API
+
+
+
+
+
+
+# Cooking API(s) (`1042_cooking`) (WIP)
 
 To add cookable items, it's depends on the method to be used.
 
-### Campfire
+### Campfire (WIP)
 
 Campfire is used for things that cooks at low temperature *(< 200 °C)*, like foods. On a campfire, an item can be cooked either above or on the side of the fire. To add a new cookable item in the campfire, go in `1042_smithing/campfire/init.lua` and append the `cookable_things` table with a table like this one:
 ```lua
@@ -142,19 +148,20 @@ Campfire is used for things that cooks at low temperature *(< 200 °C)*, like fo
 }
 ```
 
-### Oven
+### Oven (WIP)
 
-Oven is used for things that cooks at (very)high temperature *(> 1000 °C)*, like iron. To be cooked on an oven, the item must first be placed in a mold. To add a new cookable item in the oven, go in `1042_smithing/campfire/mold.lua` and append the `moldable_things` table with a table like this one:
+Oven is used for things that cooks at (very)high temperature *(> 1000 °C)*, like iron. To be cooked on an oven, the item must first be placed in a mold. Molds are registed for all items with the `_1042_moldable` field in the item definition.
+
+#### `_1042_moldable` is a lua table in this format
 ```lua
-{
-	id = "", -- the name of the item to cook
-	color = "", -- the luanti colorstring of the item in the mold
-	name = "", -- an unique identifier found at the end of the entity name
-	drop = "" -- the name of the cooked item
+_1042_moldable = {
+	color = "", -- ColorString for the item in the mold
+	name = "", -- An unique identifier found at the end of the entity name, normaly the name of the item will work.
+	drop = "" -- The name of the cooked item.
 }
 ```
 
-## Chiseling pseudo-API
+# Chiseling pseudo-API (WIP)
 
 The chisel is used to create some complex nodes, *like oven or molds*, from more basic one, *like stone or rocks*. To add a new block to be chiseld, go in `1042_tools/init.lua` and append the `chiselable_nodes` table with a table like this one:
 ```lua
@@ -173,6 +180,12 @@ The chisel is used to create some complex nodes, *like oven or molds*, from more
 ```
 
 The waiting formspec image is made of 4 different images to create 2 tow-frames animations.
+
+
+
+
+
+
 
 # Weather API
 
@@ -265,6 +278,9 @@ If `the_weather.on_end(player, name, players_weather)` is defined then all thing
 
 
 
+
+
+
 # Intigrated Testing Mod
 
 `1042_tests` is a mod with a system of tests in game that are run with the game setting `1042_enable_intigrated_tests = true`. It has an API for easy testing in mods and new game components. This mod does not function when `1042_enable_intigrated_tests = false` but all function calls are still valid, but they will just return `false`.
@@ -274,6 +290,9 @@ If `the_weather.on_end(player, name, players_weather)` is defined then all thing
 - `function tests_1042.print(text)` Prints debug data when runs in the intigrated tests are enabled. Is the same as `core.log("warning", "1042_tests: " .. tostring(text))`. Returns `true` on success.
 - `function tests_1042.register_test(namein, func(name), run_on_loaded)` Register a test to run when all mods are loaded and testing starts. It is highly recommended to use the name format of `<mod name>:<test name>[_<test number>]>`. `run_on_loaded` runs the test as soon as all mods are loaded, other wise it is just set as a test that must be run, `false` by default. Returns `true` on success and `false` if already registered or intigrated tests are disabled. If `run_on_loaded` is `false` then when a player runs the test, the players name will be passed as `name`.
 - `testing_1042` A boolean set based on the value of 1042_enable_intigrated_tests, this is to be used internaly to enable WIP features or tests/experiments. This can be set internaly but should be avoided unless needed for testing, for this reason the `run_test` chat-command is always valid.
+
+
+
 
 
 

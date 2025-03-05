@@ -46,14 +46,11 @@ We strive to maintain a simple base texturepack for the game.
 ### Mapgen
 
 - Improve cave generation
-- Make treasures spawn. Done
-- Move mapgen to no-longer use a single mapgen file. Done
 
 
 ### UI
 
 - Add API for modding the inventory (I TX_Miner plan on making a new API + inventory for Luanti in general and might merge that here)
-- Fix `hotbar` for multiplayer
 
 
 
@@ -72,4 +69,3 @@ A demension with low gravity and dark skies that slowly change color with few no
 # New features
 
 - Torches
-- Fix wear perstintance when node

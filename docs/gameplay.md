@@ -44,7 +44,9 @@ Ores are worthless in their natrual state, they must be broken into nuggets in o
 
 ## Refining metals
 
-> See [Cooking](#cooking)
+Light charcoal near iron nugget block and wait for it to melt then break all of the iron slag until you get some crude iron.
+
+> See [Cooking](#cooking) for the extended refinement techniques.
 
 ## Starting fires
 
@@ -57,7 +59,7 @@ Tools are used to do some tasks, like mine or cut wood.
 
 ### Chisel
 
-The chisel is used to… chisel blocs! There are:
+The chisel is used to… chisel blocks! There are:
 
 | Final node |   Requirement  | Durration |
 |:-----------|:--------------:|----------:|

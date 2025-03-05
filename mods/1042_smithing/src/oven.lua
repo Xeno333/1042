@@ -41,7 +41,7 @@ core.register_node("1042_cooking:stone_oven_off", {
 		end
 	end,
 	
-	drop = "",
+	drop = "1042_nodes:stone",
 	groups = {stone = 1}
 })
 
@@ -80,8 +80,8 @@ core.register_node("1042_cooking:stone_oven_on", {
 		}
 	},
 	
-	drop = "",
-	groups = {burning = 1, stone = 1},
+	drop = "1042_nodes:stone",
+	groups = {burning = 1, stone = 1, not_in_creative_inventory = 1},
 	
 	on_construct = function(pos)
 		core.add_entity({x = pos.x, y = pos.y - 0.12, z = pos.z}, "1042_cooking:campfire_fire", nil)
@@ -110,7 +110,7 @@ core.register_node("1042_cooking:stone_oven_on", {
 				end
 			end
 		end
-		for i, v in ipairs(moldable_things) do
+		for id, v in pairs(cooking_1042.moldable_things) do
 			if ("1042_cooking:mold_with_" .. v.name == name and not has_cooking) then
 				itemstack:take_item()
 				core.add_entity({x = pos.x, y = pos.y+.65, z = pos.z}, "1042_cooking:mold_cooking_" .. v.name, nil)

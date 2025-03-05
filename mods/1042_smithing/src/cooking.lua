@@ -1,6 +1,5 @@
 cookable_things = {
-	{
-		id = "1042_nodes:pork_raw",
+	["1042_nodes:pork_raw"] = {
 		hanging = true,
 		name = "pork",
 		drop = "1042_nodes:pork_cooked",
@@ -31,7 +30,7 @@ core.register_entity("1042_cooking:campfire_fire", {
 	},
 })
 
-for i, thing in ipairs(cookable_things) do
+for id, thing in pairs(cookable_things) do
 	core.register_entity("1042_cooking:campfire_cooking_"  .. thing.name, {
 		initial_properties = {
 			hp_max = 1000,
@@ -111,7 +110,7 @@ core.register_node("1042_cooking:campfire", {
 			local entity = object:get_luaentity()
 			if entity then
 				if string.find(entity.name, "1042_cooking:campfire_cooking_") then
-					for i, thing in ipairs(cookable_things) do
+					for id, thing in pairs(cookable_things) do
 						if "1042_cooking:campfire_cooking_" .. thing.name == entity.name then
 							if thing.hanging then
 								has_hanging = true
@@ -132,8 +131,8 @@ core.register_node("1042_cooking:campfire", {
 				end
 			end
 		end
-		for i, thing in ipairs(cookable_things) do
-			if name == thing.id then
+		for id, thing in pairs(cookable_things) do
+			if name == id then
 				if (not has_hanging) and thing.hanging then
 					itemstack:take_item()
 					core.add_entity(pos, "1042_cooking:campfire_cooking_" .. thing.name, nil)

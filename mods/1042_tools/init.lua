@@ -237,6 +237,12 @@ core.register_craft({
         {"1042_nodes:crude_iron", "1042_nodes:sticks"}
     }
 })
+core.register_craft({
+    output = "1042_tools:chisel_iron",
+    recipe = {
+        {"1042_nodes:iron_ingot", "1042_nodes:sticks"}
+    }
+})
 
 
 

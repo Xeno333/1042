@@ -32,7 +32,7 @@ core.after(0,function() -- use after to ensure compleate initalization
     local added = {}
     local items_to_reg = {}
 
-    for _, list in ipairs(lists) do
+    for _, list in pairs(lists) do
         for name, def in pairs(list) do
             if not added[name] then
                 added[name] = true
@@ -71,16 +71,20 @@ function core_1042.update_player_crafts(player)
 
     for _, def in pairs(core_1042.all_registered_items) do
         if def.name and def.name ~= "" then
-            local recipe = core.get_craft_recipe(def.name)
+            local recipes = core.get_all_craft_recipes(def.name)
 
-            if recipe and recipe.method == "normal" then
-                local item_stacks = {}
+            if recipes then
+                for _, recipe in pairs(recipes) do
+                    if recipe and recipe.method == "normal" then
+                        local item_stacks = {}
 
-                for _, stack in pairs(recipe.items) do
-                    item_stacks[stack] = (item_stacks[stack] or 0) + 1
+                        for _, stack in pairs(recipe.items) do
+                            item_stacks[stack] = (item_stacks[stack] or 0) + 1
+                        end
+
+                        table_of_crafts[#table_of_crafts+1], _ = {recipe = recipe, output = core.get_craft_result(recipe), req_items = item_stacks}
+                    end
                 end
-
-                table_of_crafts[#table_of_crafts+1], _ = {recipe = recipe, output = core.get_craft_result(recipe), req_items = item_stacks}
             end
         end
     end

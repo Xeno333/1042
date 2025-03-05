@@ -1,15 +1,16 @@
 
-local moldable_things = {
+cooking_1042.moldable_things = {
 }
 
 
-core.register_on_mods_loaded(function()
-	for name, def in pairs(core.registered_items) do
-		local thing = def._1042_moldable
-		if thing and not moldable_things[name] then
-			moldable_things[name] = thing
 
-			core.register_node(":mold_with_" .. thing.name, {
+core.register_on_mods_loaded(function()
+	for id, def in pairs(core.registered_items) do
+		local thing = def._1042_moldable
+		if thing and not cooking_1042.moldable_things[id] then
+			cooking_1042.moldable_things[id] = thing
+
+			core.register_node(":1042_cooking:mold_with_" .. thing.name, {
 				description = "Mold with " .. thing.name,
 				drawtype = "mesh",
 				mesh = "mold_filled.obj",
@@ -44,10 +45,8 @@ core.register_on_mods_loaded(function()
 			
 				groups = {breakable_by_hand = 2}
 			})
-
-			print(dump(core.registered_items))
 			
-			core.register_entity(":mold_cooking_" .. thing.name, {
+			core.register_entity(":1042_cooking:mold_cooking_" .. thing.name, {
 				initial_properties = {
 					hp_max = 1000,
 					physical = false,
@@ -78,16 +77,18 @@ core.register_on_mods_loaded(function()
 					groups = {breakable_by_hand = 2}
 				},
 				
-				_dorp = thing.drop,
+				_1042_cooking_drop = thing.drop,
 				
 				on_activate = function(self, staticdata, dtime_s)
 					core.after(30, function()
 						local entity = self.object
-						core.add_item(self.object:get_pos(), (self["_dorp"]))
+						core.add_item(self.object:get_pos(), (self["_1042_cooking_drop"]))
 						entity:remove()
 					end)
 				end,
 			})
+		else
+			core.log("warning", "Failed to register mold for '" .. id .."'.")
 		end
 	end
 end)
@@ -131,7 +132,7 @@ core.register_node("1042_cooking:mold_empty", {
 		local name = itemstack:get_name()
 		if not name or name == "" then return end
 
-		local v = moldable_things[name]
+		local v = cooking_1042.moldable_things[name]
 		if v then
 			print("A")
 			itemstack:take_item()
