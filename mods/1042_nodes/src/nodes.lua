@@ -168,7 +168,7 @@ core.register_node("1042_nodes:stone", {
         }
     },
 
-    _1042_chisel_data = {
+    _1042_chisel_data = { -- #fixme Move all of this into a registration function where the mod for the new item uses a _.register_x(from, def) and bring back multi option system
 		check = function(pos)
 			return (core.get_node(pos).name == "1042_nodes:stone" and core.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "1042_nodes:stone")
 		end,
