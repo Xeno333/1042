@@ -194,12 +194,12 @@ _1042_moldable = {
 
 # Chiseling API (WIP **DO NOT USE YET**)
 
-The chisel is used to create some complex nodes, *like oven or molds*, from more basic one, *like stone or rocks*. Nodes that are chiselable use a table field `_1042_chisel_data` in their node definition. **WARNING:** This **WILL** be moved back to the multi select form where the mod that introduces a new item will have to register an option for the chiseled outcome, the shift to the inital node def is a short-cut in WIP state to fix other things in a clean enviorment.
+The chisel is used to create some complex nodes, *like oven or molds*, from more basic one, *like stone or rocks*. Nodes that are chiselable are registered with `tools_1042.chisel.register_chisel_recipes_from(from_node, recipe)`, where `from_node` is the node that is chiseled to produce a new node (source node).
 
-#### `_1042_chisel_data` format:
+#### Chisel recipie definition format:
 
 ```lua
-_1042_chisel_data = {
+{
 	check = function(pos), -- Returns a condition to test if the node at 'pos' can be chiseled. Only use this if you need a complex check, defaults to a simple check if node is there.
 	place = function(pos), -- Complex placement, only use if you need complex placement.
 	node = "<node name>", -- Node to be placed when done chiseling, for simple nodes that do not use complex placement.

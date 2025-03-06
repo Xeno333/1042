@@ -140,3 +140,9 @@ core.register_node("1042_cooking:mold_empty", {
 		end
 	end
 })
+
+tools_1042.chisel.register_chisel_recipes_from("1042_nodes:rock", {
+	node = {name="1042_cooking:mold_empty"},
+	cuting_formspec_image = "1042_chiseling_mold.png",
+	duration = 8
+})
