@@ -168,6 +168,18 @@ core.register_node("1042_nodes:stone", {
         }
     },
 
+    _1042_chisel_data = {
+		check = function(pos)
+			return (core.get_node(pos).name == "1042_nodes:stone" and core.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "1042_nodes:stone")
+		end,
+		place = function(pos)
+			core.set_node(pos, {name="1042_cooking:stone_oven_off"})
+			core.set_node({x = pos.x, y = pos.y+1, z = pos.z}, {name="air"})
+		end,
+		cuting_formspec_image = "1042_chiseling_stone_oven.png",
+		duration = 16
+	},
+
     groups = {stone = 1},
 })
 

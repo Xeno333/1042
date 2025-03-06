@@ -3,6 +3,19 @@
 This is documentation for development and modding for the game `1042` on the *Luanti* game engine.
 
 
+## Table of contents
+
+> [Core interface](#core-interface)\
+> [Groups](#groups)
+> [Node definition fields](#node-definition-fields)\
+> [`core_1042` APIs](#core_1042-apis)\
+> [Cooking API(s) (`1042_cooking`) (WIP)](#cooking-apis-1042_cooking-wip)\
+> [Chiseling API (WIP)](#chiseling-api-wip)\
+> [Weather API](#weather-api)\
+> [Intigrated Testing Mod](#intigrated-testing-mod)\
+> [Privs](#privs)\
+> [Development](#development)
+
 
 
 # Core interface
@@ -30,6 +43,17 @@ core_1042.shared_lib = {
 	}
 }
 ```
+
+## `item_wear` API
+
+This is an API for complex nodes/items that have wear, these are basicly tools of node types.
+
+### Functions (WIP)
+
+- `item_wear.set_uses(itemstack, uses)` Returns the itemstack with `uses` aplied to its wear. **WARNING:** `uses = 0` is undefined.
+- `item_wear.wear(itemstack, wear_to_apply)` Returns the itemstack with `wear_to_apply` uses aplied to it, if it breaks it removes and returns `ItemStack("")`.
+- `item_wear.register_complex_node(name, def)` Registers a node as a complex node (tool-like). **Note:** This may be changed to `register_complex_tool` in version v0.3-beta, but this is not definent yet. If it is changed later it will be kept until v0.4 with a depricated status and be a refrence.
+
 
 
 ## Tables
@@ -152,35 +176,35 @@ Campfire is used for things that cooks at low temperature *(< 200 °C)*, like fo
 
 Oven is used for things that cooks at (very)high temperature *(> 1000 °C)*, like iron. To be cooked on an oven, the item must first be placed in a mold. Molds are registed for all items with the `_1042_moldable` field in the item definition.
 
-#### `_1042_moldable` is a lua table in this format
+#### `_1042_moldable` format:
+
 ```lua
 _1042_moldable = {
 	color = "", -- ColorString for the item in the mold
-	name = "", -- An unique identifier found at the end of the entity name, normaly the name of the item will work.
+	name = "", -- An unique identifier found at the end of the entity name, normaly the n
+# Chiseling API (WIP)
+# Weather APIame of the item will work.
 	drop = "" -- The name of the cooked item.
 }
 ```
 
-# Chiseling pseudo-API (WIP)
 
-The chisel is used to create some complex nodes, *like oven or molds*, from more basic one, *like stone or rocks*. To add a new block to be chiseld, go in `1042_tools/init.lua` and append the `chiselable_nodes` table with a table like this one:
+
+# Chiseling API (WIP)
+
+The chisel is used to create some complex nodes, *like oven or molds*, from more basic one, *like stone or rocks*. Nodes that are chiselable use a table field `_1042_chisel_data` in their node definition.
+
+#### `_1042_chisel_data` format:
+
 ```lua
-{
-	check = function(pos)
-		return -- condition to test if the node at 'pos' can be chiseled 
-	end,
-	place = function(pos)
-		-- usualy just a 'core.set_node' function
-	end,
-	node = "", -- final node obtained
-	display_name = "", -- name on the button
-	cuting_formspec_image = "", -- waiting formspec image without extention
-	duration = 10 -- time, in seconds, to finish the chiseling
+_1042_chisel_data = {
+	check = function(pos), -- Returns a condition to test if the node at 'pos' can be chiseled. Only use this if you need a complex check, defaults to a simple check if node is there.
+	place = function(pos), -- Complex placement, only use if you need complex placement.
+	node = "<node name>", -- Node to be placed when done chiseling, for simple nodes that do not use complex placement.
+	cuting_formspec_image = "<image>", -- Waiting formspec image made of 4 different images to create 2 tow-frames animations.
+	duration = <number> -- Time, in seconds, to finish the chiseling.
 }
 ```
-
-The waiting formspec image is made of 4 different images to create 2 tow-frames animations.
-
 
 
 

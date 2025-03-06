@@ -173,6 +173,12 @@ core.register_node("1042_nodes:rock", {
         }
     },
 
+	_1042_chisel_data = {
+		node = {name="1042_cooking:mold_empty"},
+		cuting_formspec_image = "1042_chiseling_mold.png",
+		duration = 8
+	},
+    
     paramtype = "light",
     paramtype2 = "4dir",
     sunlight_propagates = true,

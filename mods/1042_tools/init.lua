@@ -152,38 +152,41 @@ core.register_craft({
 
 -- Chisel
 
+local function chisel_cuting_formspec(chisel_data, player, seconds, node_being_chiseled)
+	local phase = math.floor(seconds/(chisel_data.duration/2)) * 2
+    local player_name = player:get_player_name()
+
+	core.show_formspec(player_name, "1042_tools:chisel_cuting", "size[10,10]bgcolor[#00000000]background[4,4;2,2;" .. chisel_data.cuting_formspec_image .. "^[verticalframe:4:" .. ((2*seconds)%2)+phase .. "]")
+	
+    if seconds == chisel_data.duration then
+		local pos = core_1042.get_pointed_thing(player).under
+
+        if chisel_data.place then
+            if chisel_data.check then
+                if chisel_data.check(pos) then
+                    chisel_data.place(pos)
+                    core.close_formspec(player_name, "1042_tools:chisel_cuting")
+                end
+                
+            elseif core.get_node(pos).name == node_being_chiseled then
+                chisel_data.place(pos)
+                core.close_formspec(player_name, "1042_tools:chisel_cuting")
+            end
+
+        elseif chisel_data.node and core.get_node(pos).name == node_being_chiseled then
+			core.set_node(pos, chisel_data.node)
+            core.close_formspec(player_name, "1042_tools:chisel_cuting")
+        end
+
+	else
+		core.after(.5, function()
+			chisel_cuting_formspec(chisel_data, player, seconds+.5, node_being_chiseled)
+		end)
+	end
+end
 
 
-chiselable_nodes = {
-	{
-		check = function(pos)
-			return (core.get_node(pos).name == "1042_nodes:stone" and core.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "1042_nodes:stone")
-		end,
-		place = function(pos)
-			core.set_node(pos, {name="1042_smithing:stone_oven_off"})
-			core.set_node({x = pos.x, y = pos.y+1, z = pos.z}, {name="air"})
-		end,
-		node = "1042_smithing:stone_oven_off",
-		display_name = "Oven",
-		cuting_formspec_image = "1042_chiseling_stone_oven",
-		duration = 16
-	}, {
-		check = function(pos)
-			return core.get_node(pos).name == "1042_nodes:rock"
-		end,
-		place = function(pos)
-			core.set_node(pos, {name="1042_smithing:mold_empty"})
-		end,
-		node = "1042_smithing:mold_empty",
-		display_name = "Mold",
-		cuting_formspec_image = "1042_chiseling_mold",
-		duration = 8
-	}
-}
-
-
-
-core.register_node("1042_tools:chisel_iron", {
+item_wear.register_complex_node("1042_tools:chisel_iron", {
     description = "Iron chisel",
     drawtype = "mesh",
     mesh = "chisel.obj",
@@ -209,27 +212,31 @@ core.register_node("1042_tools:chisel_iron", {
     },
     wield_scale = {x = 1.5, y = 2, z = 1.5},
 
-    uses = 100,
-
-    damage_per_second = 64,
+    uses = 65,
 	
     groups = {weapon = 1, falling_node = 1, breakable_by_hand = 2},
 	
-	on_place = function(itemstack, user, pointed_thing)
-		formspec = "size[8,8]label[0,0;Select a construction:]"
-		local view_index = 0
-		for i, node in ipairs(chiselable_nodes) do
-			if node.check(pointed_thing.under) then
-				view_index = view_index+1
-				formspec = formspec .. "item_image_button[" .. .5+(2.5*((view_index-1)%3)) .. "," .. .5+(2.5*math.floor((view_index-1)/3)) .. ";2,2;" ..
-						node.node .. ";" .. node.node .. ";" .. node.display_name .. "]"
-			end
-		end
-		formspec = formspec .. "]image_button_exit[" .. .5+(2.5*(view_index%3)) .. "," .. .5+(2.5*math.floor(view_index/3)) .. ";2,2;cross.png;close;Cancel]"
-		core.show_formspec(user:get_player_name(), "1042_tools:chisel_select", formspec)
+	_1042_on_use = function(itemstack, user, pointed_thing)
+        if not pointed_thing then return end
+        local pos = pointed_thing.under
+        local node_being_chiseled = core.get_node(pos).name
+        local chisel_data = (core.registered_items[node_being_chiseled] or {})._1042_chisel_data
+        if not chisel_data then return end
+
+        if chisel_data.check then
+            if chisel_data.check(pos) then
+                itemstack = item_wear.wear(itemstack, math.ceil(chisel_data.duration))
+                chisel_cuting_formspec(chisel_data, user, 0, node_being_chiseled)
+            end
+        else
+            itemstack = item_wear.wear(itemstack, math.ceil(chisel_data.duration))
+            chisel_cuting_formspec(chisel_data, user, 0, node_being_chiseled)
+        end
+
+        return itemstack
 	end
 })
-core_1042.register_loot({name = "1042_tools:crude_iron"})
+core_1042.register_loot({name = "1042_tools:chisel_iron"})
 
 core.register_craft({
     output = "1042_tools:chisel_iron",
@@ -246,32 +253,6 @@ core.register_craft({
 
 
 
-function chisel_cuting_formspec(node, player, seconds)
-	local phase = math.floor(seconds/(node.duration/2)) * 2
-	core.show_formspec(player:get_player_name(), "1042_tools:chisel_cuting", "size[10,10]bgcolor[#00000000]background[4,4;2,2;" .. node.cuting_formspec_image .. ".png^[verticalframe:4:" .. ((2*seconds)%2)+phase .. "]")
-	if seconds == node.duration then
-		local pos = core_1042.get_pointed_thing(player).under
-		if node.check(pos) then
-			node.place(pos)
-			core.close_formspec(player:get_player_name(), "1042_tools:chisel_cuting")
-		end
-	else
-		core.after(.5, function()
-			chisel_cuting_formspec(node, player, seconds+.5)
-		end)
-	end
-end
 
-core.register_on_player_receive_fields(function(player, formname, fields)
-	if formname == "1042_tools:chisel_select" and fields["quit"] ~= "true" then
-		for k, v in pairs(fields) do -- Should only contains 1 item
-			for i, node in ipairs(chiselable_nodes) do
-				if node.node == k then
-					chisel_cuting_formspec(node, player, 0)
-				end
-			end
-		end
-	end
-end)
 
 core.log("action", "1042_tools loaded.")

@@ -87,7 +87,8 @@ core.register_on_mods_loaded(function()
 					end)
 				end,
 			})
-		else
+
+		elseif cooking_1042.moldable_things[id] then -- Failed
 			core.log("warning", "Failed to register mold for '" .. id .."'.")
 		end
 	end
@@ -116,7 +117,7 @@ core.register_node("1042_cooking:mold_empty", {
 	
 	paramtype2 = "4dir",
 	paramtype = "light",
-	sunlight_propagates = true,
+	sunlight_propagates = false,
 
 	sounds = {
 		dig = {
@@ -134,7 +135,6 @@ core.register_node("1042_cooking:mold_empty", {
 
 		local v = cooking_1042.moldable_things[name]
 		if v then
-			print("A")
 			itemstack:take_item()
 			core.swap_node(pos, {name="1042_cooking:mold_with_" .. v.name, param2=node.param2})
 		end

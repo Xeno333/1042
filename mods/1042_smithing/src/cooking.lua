@@ -148,7 +148,7 @@ core.register_node("1042_cooking:campfire", {
 	groups = {burning = 1, stone = 1},
 })
 core.register_craft({
-	output = "1042_cooking:campfire 1",
+	output = "1042_cooking:campfire",
 	type = "shapeless",
 	recipe = {
 		"1042_nodes:rock", "1042_nodes:rock", "1042_nodes:rock",
