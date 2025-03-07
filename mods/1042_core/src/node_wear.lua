@@ -53,9 +53,11 @@ function item_wear.register_complex_node(name, def)
 
     def.after_use = function(itemstack, user, node, digparams)
         local defl = core.registered_items[itemstack:get_name()] or {}
+
         if defl._item_wear_old_after_use then
             itemstack = item_wear.wear(defl._item_wear_old_after_use(itemstack, user, node, digparams), 1)
         end
+
         return item_wear.wear(itemstack, 1)
     end
 

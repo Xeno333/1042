@@ -1,60 +1,63 @@
 cookable_things = {
-	["1042_nodes:pork_raw"] = {
-		hanging = true,
-		name = "pork",
-		drop = "1042_nodes:pork_cooked",
-		model = "cooking_pork.obj",
-		textures = {
-			"1042_plain_node.png^[colorize:#672307:200",
-			"1042_plain_node.png^[colorize:#ffbb88:128",
-			"1042_plain_node.png^[colorize:#ffaa77:144",
-			"1042_plain_node.png^[colorize:#ff9966:128"
-		}
-	}
 }
+
+-- #fixme This needs a better way of handeling when a campfire is lit or is not lit. Also needs to be able to handel light emision somehow.
 
 core.register_entity("1042_cooking:campfire_fire", {
 	initial_properties = {
 		physical = false,
 		pointable = false,
 		collide_with_objects = false,
+
 		visual = "mesh",
 		mesh = "campfire_fire.obj",
 		visual_size = {x=15, y=15, z=15},
 		textures = {
 			"1042_plain_node.png^[colorize:#cc2200:128"
 		},
+		
 		use_texture_alpha = true,
 		backface_culling = false,
+		glow = 20,
+		shaded = false,
 		show_on_minimap = true
 	},
 })
 
-for id, thing in pairs(cookable_things) do
-	core.register_entity("1042_cooking:campfire_cooking_"  .. thing.name, {
-		initial_properties = {
-			hp_max = 1000,
-			physical = false,
-			pointable = false,
-			collide_with_objects = false,
-			visual = "mesh",
-			mesh = thing.model,
-			visual_size = {x=10, y=10, z=10},
-			textures = thing.textures,
-			use_texture_alpha = false
-		},
-		
-		_dorp = thing.drop,
-		
-		on_activate = function(self, staticdata, dtime_s)
-			core.after(10, function()
-				local entity = self.object
-				core.add_item(self.object:get_pos(), (self["_dorp"]))
-				entity:remove()
-			end)
-		end,
-	})
-end
+core.register_on_mods_loaded(function()
+	for id, def in pairs(core.registered_items) do
+		local thing = def._1042_campfire_cooks
+
+		if thing then
+			core.register_entity(":1042_cooking:campfire_cooking_"  .. thing.name, {
+				initial_properties = {
+					hp_max = 1000,
+					physical = false,
+					pointable = false,
+					collide_with_objects = false,
+					visual = "mesh",
+					mesh = thing.model,
+					visual_size = {x=10, y=10, z=10},
+					textures = thing.textures,
+					use_texture_alpha = false
+				},
+				
+				_dorp = thing.drop,
+				
+				on_activate = function(self, staticdata, dtime_s)
+					core.after(10, function()
+						local entity = self.object
+						core.add_item(self.object:get_pos(), (self["_dorp"]))
+						entity:remove()
+					end)
+				end,
+			})
+
+			cookable_things[id] = thing
+		end
+	end
+end)
+
 
 core.register_node("1042_cooking:campfire", {
 	description = "Campfire",
@@ -103,9 +106,11 @@ core.register_node("1042_cooking:campfire", {
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		local name = itemstack:get_name()
 		if not name or name == "" then return end
+
 		local has_hanging = false
 		local has_side = 0
 		local sides_used = {false, false, false, false}
+
 		for object in core.objects_inside_radius(pos, 1) do
 			local entity = object:get_luaentity()
 			if entity then
@@ -131,6 +136,8 @@ core.register_node("1042_cooking:campfire", {
 				end
 			end
 		end
+
+		
 		for id, thing in pairs(cookable_things) do
 			if name == id then
 				if (not has_hanging) and thing.hanging then
@@ -145,8 +152,9 @@ core.register_node("1042_cooking:campfire", {
 		end
 	end,
 
-	groups = {burning = 1, stone = 1},
+	groups = {burning = 1, breakable_by_hand = 6},
 })
+
 core.register_craft({
 	output = "1042_cooking:campfire",
 	type = "shapeless",

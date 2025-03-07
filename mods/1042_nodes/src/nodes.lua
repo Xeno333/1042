@@ -89,6 +89,9 @@ core.register_node("1042_nodes:snow", {
     
 	paramtype = "light",
     sunlight_propagates = true,
+
+    buildable_to = true,
+    floodable = true,
     
     paramtype2 = "leveled",
     leveled = 8,

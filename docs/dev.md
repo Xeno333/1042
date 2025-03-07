@@ -192,9 +192,13 @@ _1042_moldable = {
 
 
 
-# Chiseling API (WIP **DO NOT USE YET**)
+# Chiseling API (WIP)
 
 The chisel is used to create some complex nodes, *like oven or molds*, from more basic one, *like stone or rocks*. Nodes that are chiselable are registered with `tools_1042.chisel.register_chisel_recipes_from(from_node, recipe)`, where `from_node` is the node that is chiseled to produce a new node (source node).
+
+#### Functions
+
+- `tools_1042.chisel.register_chisel_recipes_from(from_node, recipe)` Register a chisel recipe from the node `from_node`.
 
 #### Chisel recipie definition format:
 

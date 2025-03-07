@@ -45,7 +45,7 @@ core.register_on_mods_loaded(function()
 			
 				groups = {breakable_by_hand = 2}
 			})
-			
+
 			core.register_entity(":1042_cooking:mold_cooking_" .. thing.name, {
 				initial_properties = {
 					hp_max = 1000,
@@ -76,9 +76,9 @@ core.register_on_mods_loaded(function()
 					
 					groups = {breakable_by_hand = 2}
 				},
-				
+
 				_1042_cooking_drop = thing.drop,
-				
+
 				on_activate = function(self, staticdata, dtime_s)
 					core.after(30, function()
 						local entity = self.object
@@ -101,7 +101,7 @@ core.register_node("1042_cooking:mold_empty", {
 	tiles = {
 		"1042_plain_node.png^[colorize:#777777:200"
 	},
-	
+
 	selection_box = {
 		type = "fixed",
 		fixed = {

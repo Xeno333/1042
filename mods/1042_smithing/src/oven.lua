@@ -66,7 +66,7 @@ core.register_node("1042_cooking:stone_oven_on", {
 		"1042_plain_node.png^[colorize:#777777:200",
 		"1042_plain_node.png^[colorize:#dd1100:128"
 	},
-	
+
 	paramtype2 = "4dir",
 	paramtype = "light",
 	sunlight_propagates = true,
@@ -92,14 +92,14 @@ core.register_node("1042_cooking:stone_oven_on", {
 			{-0.375, 0.375, -0.5, 0.375, 1.5, 0.5}
 		}
 	},
-	
+
 	drop = "1042_nodes:stone",
 	groups = {burning = 1, stone = 1, not_in_creative_inventory = 1},
-	
+
 	on_construct = function(pos)
 		core.add_entity({x = pos.x, y = pos.y - 0.12, z = pos.z}, "1042_cooking:campfire_fire", nil)
 	end,
-	
+
 	on_destruct = function(pos)
 		for object in core.objects_inside_radius(pos, 1) do
 			local entity = object:get_luaentity()
@@ -110,7 +110,7 @@ core.register_node("1042_cooking:stone_oven_on", {
 			end
 		end
 	end,
-	
+
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		local name = itemstack:get_name()
 		if not name or name == "" then return end
@@ -123,6 +123,7 @@ core.register_node("1042_cooking:stone_oven_on", {
 				end
 			end
 		end
+
 		for id, v in pairs(cooking_1042.moldable_things) do
 			if ("1042_cooking:mold_with_" .. v.name == name and not has_cooking) then
 				itemstack:take_item()

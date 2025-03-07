@@ -466,6 +466,19 @@ core.register_node("1042_nodes:pork_raw", {
 
     _1042_cooks_to = "1042_nodes:pork_cooked",
 
+    _1042_campfire_cooks = {
+		hanging = true,
+		name = "pork",
+		drop = "1042_nodes:pork_cooked",
+		model = "cooking_pork.obj",
+		textures = {
+			"1042_plain_node.png^[colorize:#672307:200",
+			"1042_plain_node.png^[colorize:#ffbb88:128",
+			"1042_plain_node.png^[colorize:#ffaa77:144",
+			"1042_plain_node.png^[colorize:#ff9966:128"
+		}
+	},
+
     groups = {food = 1, breakable_by_hand = 1, attached_node = 3, cooks = 3},
 })
 
