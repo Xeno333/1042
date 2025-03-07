@@ -178,7 +178,7 @@ core.register_node("1042_nodes:rock", {
     sunlight_propagates = true,
     walkable = true,
     buildable_to = false,
-    
+
     groups = {breakable_by_hand = 3, attached_node = 3},
 })
 
@@ -290,6 +290,8 @@ core.register_node("1042_nodes:iron_nugget", {
     },
 
     _1042_on_use = hit_flint_with_iron,
+
+    _1042_moldable = {color = "#551111", name = "iron", drop = "1042_nodes:iron_ingot"},
 
     paramtype = "light",
     paramtype2 = "4dir",
@@ -463,6 +465,19 @@ core.register_node("1042_nodes:pork_raw", {
     end,
 
     _1042_cooks_to = "1042_nodes:pork_cooked",
+
+    _1042_campfire_cooks = {
+		hanging = true,
+		name = "pork",
+		drop = "1042_nodes:pork_cooked",
+		model = "cooking_pork.obj",
+		textures = {
+			"1042_plain_node.png^[colorize:#672307:200",
+			"1042_plain_node.png^[colorize:#ffbb88:128",
+			"1042_plain_node.png^[colorize:#ffaa77:144",
+			"1042_plain_node.png^[colorize:#ff9966:128"
+		}
+	},
 
     groups = {food = 1, breakable_by_hand = 1, attached_node = 3, cooks = 3},
 })

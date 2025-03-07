@@ -1,5 +1,5 @@
 
-core.register_node("1042_smithing:stone_oven_off", {
+core.register_node("1042_cooking:stone_oven_off", {
 	description = "Stone Oven",
 	drawtype = "mesh",
 	mesh = "oven.obj",
@@ -35,17 +35,30 @@ core.register_node("1042_smithing:stone_oven_off", {
 	},
 	
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-		if (itemstack:get_name() == "1042_smithing:campfire") then
+		if (itemstack:get_name() == "1042_cooking:campfire") then
 			itemstack:take_item()
-			core.set_node(pos, {name="1042_smithing:stone_oven_on", param2=node.param2})
+			core.set_node(pos, {name="1042_cooking:stone_oven_on", param2=node.param2})
 		end
 	end,
 	
-	drop = "",
+	drop = "1042_nodes:stone",
 	groups = {stone = 1}
 })
 
-core.register_node("1042_smithing:stone_oven_on", {
+tools_1042.chisel.register_chisel_recipes_from("1042_nodes:stone", {
+	check = function(pos)
+		return (core.get_node(pos).name == "1042_nodes:stone" and core.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "1042_nodes:stone")
+	end,
+	place = function(pos)
+		core.set_node(pos, {name="1042_cooking:stone_oven_off"})
+		core.set_node({x = pos.x, y = pos.y+1, z = pos.z}, {name="air"})
+	end,
+	cuting_formspec_image = "1042_chiseling_stone_oven.png",
+	duration = 16
+})
+
+
+core.register_node("1042_cooking:stone_oven_on", {
 	description = "Stone Oven",
 	drawtype = "mesh",
 	mesh = "oven.obj",
@@ -53,7 +66,7 @@ core.register_node("1042_smithing:stone_oven_on", {
 		"1042_plain_node.png^[colorize:#777777:200",
 		"1042_plain_node.png^[colorize:#dd1100:128"
 	},
-	
+
 	paramtype2 = "4dir",
 	paramtype = "light",
 	sunlight_propagates = true,
@@ -79,14 +92,14 @@ core.register_node("1042_smithing:stone_oven_on", {
 			{-0.375, 0.375, -0.5, 0.375, 1.5, 0.5}
 		}
 	},
-	
-	drop = "",
-	groups = {burning = 1, stone = 1},
-	
+
+	drop = "1042_nodes:stone",
+	groups = {burning = 1, stone = 1, not_in_creative_inventory = 1},
+
 	on_construct = function(pos)
-		core.add_entity({x = pos.x, y = pos.y - 0.12, z = pos.z}, "1042_smithing:campfire_fire", nil)
+		core.add_entity({x = pos.x, y = pos.y - 0.12, z = pos.z}, "1042_cooking:campfire_fire", nil)
 	end,
-	
+
 	on_destruct = function(pos)
 		for object in core.objects_inside_radius(pos, 1) do
 			local entity = object:get_luaentity()
@@ -97,7 +110,7 @@ core.register_node("1042_smithing:stone_oven_on", {
 			end
 		end
 	end,
-	
+
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		local name = itemstack:get_name()
 		if not name or name == "" then return end
@@ -105,15 +118,16 @@ core.register_node("1042_smithing:stone_oven_on", {
 		for object in core.objects_inside_radius(pos, 1) do
 			local entity = object:get_luaentity()
 			if entity then
-				if string.find(entity.name, "1042_smithing:mold_cooking_") then
+				if string.find(entity.name, "1042_cooking:mold_cooking_") then
 					has_cooking = true
 				end
 			end
 		end
-		for i, v in ipairs(moldable_things) do
-			if ("1042_smithing:mold_with_" .. v.name == name and not has_cooking) then
+
+		for id, v in pairs(cooking_1042.moldable_things) do
+			if ("1042_cooking:mold_with_" .. v.name == name and not has_cooking) then
 				itemstack:take_item()
-				core.add_entity({x = pos.x, y = pos.y+.65, z = pos.z}, "1042_smithing:mold_cooking_" .. v.name, nil)
+				core.add_entity({x = pos.x, y = pos.y+.65, z = pos.z}, "1042_cooking:mold_cooking_" .. v.name, nil)
 			end
 		end
 	end

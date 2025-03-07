@@ -35,7 +35,6 @@
 
 ## Alpha v0.3-dev
 
-- Add basic Lightning -Xeno333
 - Fix fire drop -Xeno333
 - Added unlocking chests so that they don't have problems anymore -Xeno333
 - Add breaking animation -SuperStarSonic
@@ -54,6 +53,7 @@
 - Add foundational growth mechanics -Xeno333
 - Work on sounds and lower item break times with hand for some things -Xeno333
 - Re-order code and make smelting mod -Xeno333
+- Re-develop cooking and smelting mechanics -Futuray & Xeno333
 
 ### WIP
 - Adding contenent border to mapgen and spawing -Xeno333
