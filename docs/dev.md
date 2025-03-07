@@ -162,15 +162,15 @@ To add cookable items, it's depends on the method to be used.
 
 ### Campfire (WIP)
 
-Campfire is used for things that cooks at low temperature *(< 200 °C)*, like foods. On a campfire, an item can be cooked either above or on the side of the fire. To add a new cookable item in the campfire, go in `1042_smithing/campfire/init.lua` and append the `cookable_things` table with a table like this one:
+Campfire is used for things that cooks at low temperature *(< 200 °C)*, like foods. On a campfire, an item can be cooked either above or on the side of the fire. Nodes that are cookable with a campfire use the `_1042_campfire_cooks` field with the following table:
+
 ```lua
-{
-	id = "", -- the name of the item to cook
-	hanging = true, -- if the item is cooked above (true) or on the side (false) of the campfire
-	name = "", -- an unique identifier found at the end of the entity name
-	drop = "", -- the name of the cooked item
-	model = "", -- the model of the entity while cooking
-	textures = {} -- the list of the textures of the entity
+_1042_campfire_cooks = {
+	hanging = true, -- If the item is cooked above (true) or on the side (false) of the campfire.
+	name = "", -- Tn unique name/identifier found at the end of the entity name.
+	drop = "", -- The name of the cooked item.
+	model = "", -- The model of the entity while cooking.
+	textures = {} -- The list of the textures of the entity.
 }
 ```
 
@@ -182,11 +182,9 @@ Oven is used for things that cooks at (very)high temperature *(> 1000 °C)*, lik
 
 ```lua
 _1042_moldable = {
-	color = "", -- ColorString for the item in the mold
-	name = "", -- An unique identifier found at the end of the entity name, normaly the n
-# Chiseling API (WIP)
-# Weather APIame of the item will work.
-	drop = "" -- The name of the cooked item.
+	color = "", -- ColorString for the item in the mold.
+	name = "", -- An unique identifier found at the end of the entity name.
+	drop = "" -- The itemstring of the cooked item.
 }
 ```
 
@@ -196,9 +194,11 @@ _1042_moldable = {
 
 The chisel is used to create some complex nodes, *like oven or molds*, from more basic one, *like stone or rocks*. Nodes that are chiselable are registered with `tools_1042.chisel.register_chisel_recipes_from(from_node, recipe)`, where `from_node` is the node that is chiseled to produce a new node (source node).
 
+
 #### Functions
 
 - `tools_1042.chisel.register_chisel_recipes_from(from_node, recipe)` Register a chisel recipe from the node `from_node`.
+
 
 #### Chisel recipie definition format:
 

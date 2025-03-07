@@ -172,13 +172,13 @@ core.register_node("1042_nodes:rock", {
             pitch = 0.5
         }
     },
-    
+
     paramtype = "light",
     paramtype2 = "4dir",
     sunlight_propagates = true,
     walkable = true,
     buildable_to = false,
-    
+
     groups = {breakable_by_hand = 3, attached_node = 3},
 })
 

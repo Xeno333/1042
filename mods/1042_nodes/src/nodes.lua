@@ -86,13 +86,13 @@ core.register_node("1042_nodes:snow", {
     wield_scale = {x = 0.5, y = 0.5, z = 0.5},
     use_texture_alpha = "opaque",
     drawtype = "nodebox",
-    
+
 	paramtype = "light",
     sunlight_propagates = true,
 
     buildable_to = true,
     floodable = true,
-    
+
     paramtype2 = "leveled",
     leveled = 8,
     leveled_max = 64,

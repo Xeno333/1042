@@ -1,5 +1,4 @@
-cookable_things = {
-}
+
 
 -- #fixme This needs a better way of handeling when a campfire is lit or is not lit. Also needs to be able to handel light emision somehow.
 
@@ -52,8 +51,6 @@ core.register_on_mods_loaded(function()
 					end)
 				end,
 			})
-
-			cookable_things[id] = thing
 		end
 	end
 end)
@@ -115,21 +112,26 @@ core.register_node("1042_cooking:campfire", {
 			local entity = object:get_luaentity()
 			if entity then
 				if string.find(entity.name, "1042_cooking:campfire_cooking_") then
-					for id, thing in pairs(cookable_things) do
-						if "1042_cooking:campfire_cooking_" .. thing.name == entity.name then
-							if thing.hanging then
-								has_hanging = true
+					local thing = core.registered_items[name]._1042_campfire_cooks
+
+					if thing and "1042_cooking:campfire_cooking_" .. thing.name == entity.name then
+						if thing.hanging then
+							has_hanging = true
+
+						else
+							has_side = has_side+1
+
+							if object:get_pos().x%1 == .25 and object:get_pos().z%1 == .25 then
+								sides_used[1] = true
+
+							elseif object:get_pos().x%1 == .25 and object:get_pos().z%1 == .75 then
+								sides_used[2] = true
+
+							elseif object:get_pos().z%1 == .25 then
+								sides_used[3] = true
+
 							else
-								has_side = has_side+1
-								if object:get_pos().x%1 == .25 and object:get_pos().z%1 == .25 then
-									sides_used[1] = true
-								elseif object:get_pos().x%1 == .25 and object:get_pos().z%1 == .75 then
-									sides_used[2] = true
-								elseif object:get_pos().z%1 == .25 then
-									sides_used[3] = true
-								else
-									sides_used[4] = true
-								end
+								sides_used[4] = true
 							end
 						end
 					end
@@ -138,18 +140,19 @@ core.register_node("1042_cooking:campfire", {
 		end
 
 		
-		for id, thing in pairs(cookable_things) do
-			if name == id then
-				if (not has_hanging) and thing.hanging then
-					itemstack:take_item()
-					core.add_entity(pos, "1042_cooking:campfire_cooking_" .. thing.name, nil)
-				elseif (not thing.hanging) and has_side < 4 then
-					itemstack:take_item()
-					moved_pos = {x = pos.x-.25+(.5*(has_side%2)), y = pos.y+.2, z = pos.z-.25+(.5*math.floor(has_side/2))}
-					core.add_entity(moved_pos, "1042_cooking:campfire_cooking_" .. thing.name, nil)
-				end
+		local thing = core.registered_items[name]._1042_campfire_cooks
+		if thing then
+			if (not has_hanging) and thing.hanging then
+				itemstack:take_item()
+				core.add_entity(pos, "1042_cooking:campfire_cooking_" .. thing.name, nil)
+			elseif (not thing.hanging) and has_side < 4 then
+				itemstack:take_item()
+				moved_pos = {x = pos.x-.25+(.5*(has_side%2)), y = pos.y+.2, z = pos.z-.25+(.5*math.floor(has_side/2))}
+				core.add_entity(moved_pos, "1042_cooking:campfire_cooking_" .. thing.name, nil)
 			end
 		end
+
+		return itemstack
 	end,
 
 	groups = {burning = 1, breakable_by_hand = 6},
