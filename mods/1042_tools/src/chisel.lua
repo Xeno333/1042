@@ -1,155 +1,169 @@
-tools_1042.chisel = {
-    registered_chisel_recipes = {}
-}
-
-local registered_chisel_recipes = tools_1042.chisel.registered_chisel_recipes
 
 
-function tools_1042.chisel.register_chisel_recipes_from(from_node, recipe)
-    if not registered_chisel_recipes[from_node] then
-        registered_chisel_recipes[from_node] = {}
-    end
+-- #fixme This needs a better way of handeling when a campfire is lit or is not lit. Also needs to be able to handel light emision somehow.
 
-    registered_chisel_recipes[from_node][#(registered_chisel_recipes[from_node]) + 1] = recipe
-end
+core.register_entity("1042_cooking:campfire_fire", {
+	initial_properties = {
+		physical = false,
+		pointable = false,
+		collide_with_objects = false,
 
+		visual = "mesh",
+		mesh = "campfire_fire.obj",
+		visual_size = {x=15, y=15, z=15},
+		textures = {
+			"1042_plain_node.png^[colorize:#cc2200:128"
+		},
+		
+		use_texture_alpha = true,
+		backface_culling = false,
+		glow = 20,
+		shaded = false,
+		show_on_minimap = true
+	},
+})
 
+core.register_on_mods_loaded(function()
+	for id, def in pairs(core.registered_items) do
+		local thing = def._1042_campfire_cooks
 
-local chiseling = {}
-
-
--- Chisel
-
-local function chisel(chisel_data, player_name, seconds, node_being_chiseled)    
-    local player = core.get_player_by_name(player_name)
-    if not player then
-        chiseling[player_name] = nil
-        return
-    end
-
-    if chiseling[player_name] == nil then return end
-
-	local phase = math.floor(seconds/(chisel_data.duration/2)) * 2
-
-	core.show_formspec(player_name, "1042_tools:chisel_cuting", "size[10,10]bgcolor[#00000000]background[4,4;2,2;" .. chisel_data.cuting_formspec_image .. "^[verticalframe:4:" .. ((2*seconds)%2)+phase .. "]")
-	
-    if seconds == chisel_data.duration then
-		local pos = core_1042.get_pointed_thing(player).under
-
-        if chisel_data.place then
-            if chisel_data.check then
-                if chisel_data.check(pos) then
-                    chisel_data.place(pos)
-                    core.close_formspec(player_name, "1042_tools:chisel_cuting")
-                    chiseling[player_name] = nil
-                end
-
-            elseif core.get_node(pos).name == node_being_chiseled then
-                chisel_data.place(pos)
-                core.close_formspec(player_name, "1042_tools:chisel_cuting")
-                chiseling[player_name] = nil
-            end
-
-        elseif chisel_data.node and core.get_node(pos).name == node_being_chiseled then
-			core.set_node(pos, chisel_data.node)
-            core.close_formspec(player_name, "1042_tools:chisel_cuting")
-            chiseling[player_name] = nil
-        end
-
-	else
-		core.after(.5, function()
-			chisel(chisel_data, player_name, seconds+.5, node_being_chiseled)
-		end)
+		if thing then
+			core.register_entity(":1042_cooking:campfire_cooking_"  .. thing.name, {
+				initial_properties = {
+					hp_max = 1000,
+					physical = false,
+					pointable = false,
+					collide_with_objects = false,
+					visual = "mesh",
+					mesh = thing.model,
+					visual_size = {x=10, y=10, z=10},
+					textures = thing.textures,
+					use_texture_alpha = false
+				},
+				
+				_dorp = thing.drop,
+				
+				on_activate = function(self, staticdata, dtime_s)
+					core.after(10, function()
+						local entity = self.object
+						core.add_item(self.object:get_pos(), (self["_dorp"]))
+						entity:remove()
+					end)
+				end,
+			})
+		end
 	end
-end
-
-core.register_on_player_receive_fields(function(player, formspec, fields)
-    if formspec == "1042_tools:chisel_cuting" then
-        if fields.quit then
-            chiseling[player:get_player_name()] = nil
-            return false
-        end
-    end
 end)
 
 
-
-
--- #fixme Fix wear to go as delt
-item_wear.register_complex_node("1042_tools:chisel_iron", {
-    description = "Iron chisel",
-    drawtype = "mesh",
-    mesh = "chisel.obj",
-    tiles = {
-        "1042_plain_node.png^[colorize:#444444:168",
-        "1042_plain_node.png^[colorize:#672307:168"
-    },
-    use_texture_alpha = "opaque",
-
-    paramtype2 = "facedir",
-    paramtype = "light",
-    sunlight_propagates = true,
-    walkable = true,
-
-    stack_max = 1,
-    tool_capabilities = {
-        full_punch_interval = 2,
-        damage_groups = {fleshy = 1},
-		groupcaps = {
-			stone = {times = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}, uses = 1},
-		},
-        punch_attack_uses = 1
-    },
-    wield_scale = {x = 1.5, y = 2, z = 1.5},
-
-    uses = 500,
+core.register_node("1042_cooking:campfire", {
+	description = "Campfire",
+	drawtype = "mesh",
+	mesh = "campfire.obj",
+	tiles = {
+		"1042_plain_node.png^[colorize:#777777:200",
+		"1042_plain_node.png^[colorize:#672307:200"
+	},
 	
-    groups = {weapon = 1, falling_node = 1, breakable_by_hand = 2},
+	paramtype2 = "4dir",
+	paramtype = "light",
+	sunlight_propagates = true,
+
+	sounds = {
+		dig = {
+			name = "stone_dig",
+			gain = 2,
+			pitch = 1
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.12, 0.5}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -0.12, 0.5}
+	},
+
+	on_construct = function(pos)
+		core.add_entity(pos, "1042_cooking:campfire_fire", nil)
+	end,
 	
-	_1042_on_use = function(itemstack, user, pointed_thing)
-        if not pointed_thing then return end
-        local pos = pointed_thing.under
-        local node_being_chiseled = core.get_node(pos).name
-        local player_name = user:get_player_name()
+	on_destruct = function(pos)
+		for object in core.objects_inside_radius(pos, 1) do
+			local entity = object:get_luaentity()
+			if entity then
+				if entity.name == "1042_cooking:campfire_fire" then
+					entity.object:remove()
+				end
+			end
+		end
+	end,
 
-        local rec = registered_chisel_recipes[node_being_chiseled]
-        if not rec then return end
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+		local name = itemstack:get_name()
+		if not name or name == "" then return end
 
-        for _, chisel_data in ipairs(rec) do
-            -- #fixme add multi select here
-            if chisel_data.check then
-                if chisel_data.check(pos) then
-                    itemstack = item_wear.wear(itemstack, math.ceil(chisel_data.duration/2))
-                    chiseling[player_name] = true
-                    chisel(chisel_data, player_name, 0, node_being_chiseled)
-                    break
-                end
+		local has_hanging = false
+		local has_side = 0
+		local sides_used = {false, false, false, false}
 
-            else
-                itemstack = item_wear.wear(itemstack, math.ceil(chisel_data.duration/2))
-                chiseling[player_name] = true
-                chisel(chisel_data, player_name, 0, node_being_chiseled)
-                break
-            end
-        end
+		for object in core.objects_inside_radius(pos, 1) do
+			local entity = object:get_luaentity()
+			if entity then
+				if string.find(entity.name, "1042_cooking:campfire_cooking_") then
+					local thing = core.registered_items[name]._1042_campfire_cooks
 
-        return itemstack
-	end
+					if thing and "1042_cooking:campfire_cooking_" .. thing.name == entity.name then
+						if thing.hanging then
+							has_hanging = true
+
+						else
+							has_side = has_side+1
+
+							if object:get_pos().x%1 == .25 and object:get_pos().z%1 == .25 then
+								sides_used[1] = true
+
+							elseif object:get_pos().x%1 == .25 and object:get_pos().z%1 == .75 then
+								sides_used[2] = true
+
+							elseif object:get_pos().z%1 == .25 then
+								sides_used[3] = true
+
+							else
+								sides_used[4] = true
+							end
+						end
+					end
+				end
+			end
+		end
+
+		
+		local thing = core.registered_items[name]._1042_campfire_cooks
+		if thing then
+			if (not has_hanging) and thing.hanging then
+				itemstack:take_item()
+				core.add_entity(pos, "1042_cooking:campfire_cooking_" .. thing.name, nil)
+			elseif (not thing.hanging) and has_side < 4 then
+				itemstack:take_item()
+				moved_pos = {x = pos.x-.25+(.5*(has_side%2)), y = pos.y+.2, z = pos.z-.25+(.5*math.floor(has_side/2))}
+				core.add_entity(moved_pos, "1042_cooking:campfire_cooking_" .. thing.name, nil)
+			end
+		end
+
+		return itemstack
+	end,
+
+	groups = {burning = 1, breakable_by_hand = 6},
 })
 
-
-
-
-core_1042.register_loot({name = "1042_tools:chisel_iron"})
 core.register_craft({
-    output = "1042_tools:chisel_iron",
-    recipe = {
-        {"1042_nodes:crude_iron", "1042_nodes:sticks"}
-    }
-})
-core.register_craft({
-    output = "1042_tools:chisel_iron",
-    recipe = {
-        {"1042_nodes:iron_ingot", "1042_nodes:sticks"}
-    }
+	output = "1042_cooking:campfire",
+	type = "shapeless",
+	recipe = {
+		"1042_nodes:rock", "1042_nodes:rock", "1042_nodes:rock",
+		"1042_nodes:sticks", "1042_nodes:sticks",
+		"1042_nodes:flint",
+	},
 })

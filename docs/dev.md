@@ -204,9 +204,9 @@ The chisel is used to create some complex nodes, *like oven or molds*, from more
 
 ```lua
 {
-	check = function(pos), -- Returns a condition to test if the node at 'pos' can be chiseled. Only use this if you need a complex check, defaults to a simple check if node is there.
-	place = function(pos), -- Complex placement, only use if you need complex placement.
-	node = "<node name>", -- Node to be placed when done chiseling, for simple nodes that do not use complex placement.
+	check = function(pos), -- **Optional** Returns a condition to test if the node at 'pos' can be chiseled. Only use this if you need a complex check, defaults to a simple check if node is there.
+	place = function(pos), -- **Optional** Complex placement, only use if you need complex placement.
+	result = "<itemstring>", -- Itemstring of items to be placed when done chiseling.
 	cuting_formspec_image = "<image>", -- Waiting formspec image made of 4 different images to create 2 tow-frames animations.
 	duration = <number> -- Time, in seconds, to finish the chiseling.
 }
