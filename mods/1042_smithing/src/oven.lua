@@ -53,6 +53,7 @@ tools_1042.chisel.register_chisel_recipes_from("1042_nodes:stone", {
 		core.set_node(pos, {name="1042_cooking:stone_oven_off"})
 		core.set_node({x = pos.x, y = pos.y+1, z = pos.z}, {name="air"})
 	end,
+	result = "1042_cooking:stone_oven_off",
 	cuting_formspec_image = "1042_chiseling_stone_oven.png",
 	duration = 16
 })
