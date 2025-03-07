@@ -1,169 +1,257 @@
+tools_1042.chisel = {
+    registered_chisel_recipes = {}
+}
+
+local registered_chisel_recipes = tools_1042.chisel.registered_chisel_recipes
 
 
--- #fixme This needs a better way of handeling when a campfire is lit or is not lit. Also needs to be able to handel light emision somehow.
+function tools_1042.chisel.register_chisel_recipes_from(from_node, recipe)
+    if not registered_chisel_recipes[from_node] then
+        registered_chisel_recipes[from_node] = {}
+    end
 
-core.register_entity("1042_cooking:campfire_fire", {
-	initial_properties = {
-		physical = false,
-		pointable = false,
-		collide_with_objects = false,
+    registered_chisel_recipes[from_node][#(registered_chisel_recipes[from_node]) + 1] = recipe
+end
 
-		visual = "mesh",
-		mesh = "campfire_fire.obj",
-		visual_size = {x=15, y=15, z=15},
-		textures = {
-			"1042_plain_node.png^[colorize:#cc2200:128"
-		},
-		
-		use_texture_alpha = true,
-		backface_culling = false,
-		glow = 20,
-		shaded = false,
-		show_on_minimap = true
-	},
-})
 
-core.register_on_mods_loaded(function()
-	for id, def in pairs(core.registered_items) do
-		local thing = def._1042_campfire_cooks
 
-		if thing then
-			core.register_entity(":1042_cooking:campfire_cooking_"  .. thing.name, {
-				initial_properties = {
-					hp_max = 1000,
-					physical = false,
-					pointable = false,
-					collide_with_objects = false,
-					visual = "mesh",
-					mesh = thing.model,
-					visual_size = {x=10, y=10, z=10},
-					textures = thing.textures,
-					use_texture_alpha = false
-				},
-				
-				_dorp = thing.drop,
-				
-				on_activate = function(self, staticdata, dtime_s)
-					core.after(10, function()
-						local entity = self.object
-						core.add_item(self.object:get_pos(), (self["_dorp"]))
-						entity:remove()
-					end)
-				end,
-			})
-		end
+local chiseling = {}
+
+
+-- Chisel
+
+local function chisel(chisel_data, player_name, seconds, node_being_chiseled)    
+    local player = core.get_player_by_name(player_name)
+    if not player then
+        chiseling[player_name] = nil
+        return
+    end
+
+    if chiseling[player_name] == nil then return end
+
+	local phase = math.floor(seconds/(chisel_data.duration/2)) * 2
+
+	core.show_formspec(player_name, "1042_tools:chisel_cuting", "size[10,10]bgcolor[#00000000]background[4,4;2,2;" .. chisel_data.cuting_formspec_image .. "^[verticalframe:4:" .. ((2*seconds)%2)+phase .. "]")
+	
+    if seconds == chisel_data.duration then
+		local pos = core_1042.get_pointed_thing(player).under
+
+        if chisel_data.place then
+            if chisel_data.check then
+                if chisel_data.check(pos) then
+                    chisel_data.place(pos)
+                    core.close_formspec(player_name, "1042_tools:chisel_cuting")
+                    chiseling[player_name] = nil
+                end
+
+            elseif core.get_node(pos).name == node_being_chiseled then
+                chisel_data.place(pos)
+                core.close_formspec(player_name, "1042_tools:chisel_cuting")
+                chiseling[player_name] = nil
+            end
+
+        elseif chisel_data.result and core.get_node(pos).name == node_being_chiseled then
+			core.set_node(pos, chisel_data.result)
+            core.close_formspec(player_name, "1042_tools:chisel_cuting")
+            chiseling[player_name] = nil
+        end
+
+	else
+		core.after(.5, function()
+			chisel(chisel_data, player_name, seconds+.5, node_being_chiseled)
+		end)
 	end
+end
+
+core.register_on_player_receive_fields(function(player, formspec, fields)
+    if formspec == "1042_tools:chisel_cuting" then
+        if fields.quit then
+            chiseling[player:get_player_name()] = nil
+            return false
+        end
+    end
 end)
 
 
-core.register_node("1042_cooking:campfire", {
-	description = "Campfire",
-	drawtype = "mesh",
-	mesh = "campfire.obj",
-	tiles = {
-		"1042_plain_node.png^[colorize:#777777:200",
-		"1042_plain_node.png^[colorize:#672307:200"
-	},
+-- #fixme, add check for pointed thing
+local function chisel_select_menu(player_name, hud_id)
+    local player = core.get_player_by_name(player_name)
+    if player == nil then return end
+
+    if not hud_id then
+        hud_id = player:hud_add({
+            type = "inventory",
+            position = {x=0.6, y=0.5},
+            name = "chisel_select",
+            scale = {x = 1, y = 1},
+            text = "_1042_chisel_selected",
+            number = 1
+        })
+    end
+
+    if not (player:get_wielded_item():get_name() == "1042_tools:chisel_iron" and player:get_player_control().dig) then
+        player:hud_remove(hud_id)
+        return
+    end
+
+    core.after(0.5, function()
+        chisel_select_menu(player_name, hud_id)
+    end)
+end
+
+
+-- #fixme Fix wear to go as delt
+item_wear.register_complex_node("1042_tools:chisel_iron", {
+    description = "Iron chisel",
+    drawtype = "mesh",
+    mesh = "chisel.obj",
+    tiles = {
+        "1042_plain_node.png^[colorize:#444444:168",
+        "1042_plain_node.png^[colorize:#672307:168"
+    },
+    use_texture_alpha = "opaque",
+
+    paramtype2 = "facedir",
+    paramtype = "light",
+    sunlight_propagates = true,
+    walkable = true,
+
+    stack_max = 1,
+    tool_capabilities = {
+        full_punch_interval = 2,
+        damage_groups = {fleshy = 1},
+		groupcaps = {
+			stone = {times = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}, uses = 1},
+		},
+        punch_attack_uses = 1
+    },
+    wield_scale = {x = 1.5, y = 2, z = 1.5},
+
+    uses = 500,
 	
-	paramtype2 = "4dir",
-	paramtype = "light",
-	sunlight_propagates = true,
+    groups = {weapon = 1, falling_node = 1, breakable_by_hand = 2},
 
-	sounds = {
-		dig = {
-			name = "stone_dig",
-			gain = 2,
-			pitch = 1
-		}
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -0.12, 0.5}
-	},
-	collision_box = {
-		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -0.12, 0.5}
-	},
+    on_use = function(itemstack, user, pointed_thing)
+        if not pointed_thing then return end
+        local pos = pointed_thing.under
+        if not pos then return end
+    
+        local node_being_chiseled = core.get_node(pos).name
+        local rec = registered_chisel_recipes[node_being_chiseled]
+        if not rec then return end
 
-	on_construct = function(pos)
-		core.add_entity(pos, "1042_cooking:campfire_fire", nil)
-	end,
-	
-	on_destruct = function(pos)
-		for object in core.objects_inside_radius(pos, 1) do
-			local entity = object:get_luaentity()
-			if entity then
-				if entity.name == "1042_cooking:campfire_fire" then
-					entity.object:remove()
-				end
-			end
-		end
-	end,
+        -- Sort out ones that can not be placed do to failure of complex check
+        local valid_defs = {}
+        for _, chisel_data in ipairs(rec) do
+            if chisel_data.check then
+                if chisel_data.check(pos) then
+                    valid_defs[#valid_defs+1] = chisel_data
+                end
 
-	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-		local name = itemstack:get_name()
-		if not name or name == "" then return end
+            else
+                valid_defs[#valid_defs+1] = chisel_data
+            end
+        end
+        if #valid_defs == 0 then return end -- Error
 
-		local has_hanging = false
-		local has_side = 0
-		local sides_used = {false, false, false, false}
 
-		for object in core.objects_inside_radius(pos, 1) do
-			local entity = object:get_luaentity()
-			if entity then
-				if string.find(entity.name, "1042_cooking:campfire_cooking_") then
-					local thing = core.registered_items[name]._1042_campfire_cooks
+        local meta = itemstack:get_meta()
+        local index = meta:get_int("chisel_index")
 
-					if thing and "1042_cooking:campfire_cooking_" .. thing.name == entity.name then
-						if thing.hanging then
-							has_hanging = true
+        -- Make sure in range and roll over
+        if index >= #valid_defs then
+            index = 1
+        else
+            index = index + 1 -- Makes sure its never 0
+        end
+        meta:set_int("chisel_index", index)
 
-						else
-							has_side = has_side+1
+        local def = valid_defs[index]
 
-							if object:get_pos().x%1 == .25 and object:get_pos().z%1 == .25 then
-								sides_used[1] = true
+    
+        -- Put into the inv
+        local inv = user:get_inventory()
+        -- Handel errors if doesnt create
+        if inv:get_size("_1042_chisel_selected") == 0 then
+            if not inv:set_size("_1042_chisel_selected", 1) then
+                return -- Error occored
+            end
+        end
+        inv:set_stack("_1042_chisel_selected", 1, def.result)
 
-							elseif object:get_pos().x%1 == .25 and object:get_pos().z%1 == .75 then
-								sides_used[2] = true
 
-							elseif object:get_pos().z%1 == .25 then
-								sides_used[3] = true
+        -- Show
+        chisel_select_menu(user:get_player_name(), nil)
 
-							else
-								sides_used[4] = true
-							end
-						end
-					end
-				end
-			end
-		end
+        return itemstack
+    end,
 
-		
-		local thing = core.registered_items[name]._1042_campfire_cooks
-		if thing then
-			if (not has_hanging) and thing.hanging then
-				itemstack:take_item()
-				core.add_entity(pos, "1042_cooking:campfire_cooking_" .. thing.name, nil)
-			elseif (not thing.hanging) and has_side < 4 then
-				itemstack:take_item()
-				moved_pos = {x = pos.x-.25+(.5*(has_side%2)), y = pos.y+.2, z = pos.z-.25+(.5*math.floor(has_side/2))}
-				core.add_entity(moved_pos, "1042_cooking:campfire_cooking_" .. thing.name, nil)
-			end
-		end
+	_1042_on_use = function(itemstack, user, pointed_thing)
+        if not pointed_thing then return end
+        local pos = pointed_thing.under
+        local node_being_chiseled = core.get_node(pos).name
+        local player_name = user:get_player_name()
 
-		return itemstack
-	end,
+        local rec = registered_chisel_recipes[node_being_chiseled]
+        if not rec then return end
 
-	groups = {burning = 1, breakable_by_hand = 6},
+        -- Sort out ones that can not be placed do to failure of complex check
+        local valid_defs = {}
+        for _, chisel_data in ipairs(rec) do
+            if chisel_data.check then
+                if chisel_data.check(pos) then
+                    valid_defs[#valid_defs+1] = chisel_data
+                end
+
+            else
+                valid_defs[#valid_defs+1] = chisel_data
+            end
+        end
+        if not (#valid_defs > 0) then return end -- Error
+
+
+        local meta = itemstack:get_meta()
+        local index = meta:get_int("chisel_index")
+
+        if index == 0 then index = 1 end -- Make sure never 0 from error
+
+        -- Reset if overflow
+        if index > #valid_defs then
+            index = 1
+        end
+
+
+        local chisel_data = valid_defs[index]
+        if chisel_data.check then
+            if chisel_data.check(pos) then
+                itemstack = item_wear.wear(itemstack, math.ceil(chisel_data.duration/2))
+                chiseling[player_name] = true
+                chisel(chisel_data, player_name, 0, node_being_chiseled)
+            end
+
+        else
+            itemstack = item_wear.wear(itemstack, math.ceil(chisel_data.duration/2))
+            chiseling[player_name] = true
+            chisel(chisel_data, player_name, 0, node_being_chiseled)
+        end
+
+        return itemstack
+	end
 })
 
+
+
+
+core_1042.register_loot({name = "1042_tools:chisel_iron"})
 core.register_craft({
-	output = "1042_cooking:campfire",
-	type = "shapeless",
-	recipe = {
-		"1042_nodes:rock", "1042_nodes:rock", "1042_nodes:rock",
-		"1042_nodes:sticks", "1042_nodes:sticks",
-		"1042_nodes:flint",
-	},
+    output = "1042_tools:chisel_iron",
+    recipe = {
+        {"1042_nodes:crude_iron", "1042_nodes:sticks"}
+    }
+})
+core.register_craft({
+    output = "1042_tools:chisel_iron",
+    recipe = {
+        {"1042_nodes:iron_ingot", "1042_nodes:sticks"}
+    }
 })
