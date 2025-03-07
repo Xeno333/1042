@@ -8,9 +8,9 @@ We Hope you enjoy playing it and any feedback is welcome!
 
 
 
-## State: `alpha-v0.2.0` **WARNING** Some systems may have problems running this game!
+## State: `v0.3.0-dev (alpha)` **WARNING** Some systems may have problems running this game!
 
-![alpha-v0.2.0](screenshot.png)
+![v0.3.0-dev (alpha)](screenshot.png)
 
 ### Notes on this version
 - Server mode is disabled due to multiplayer nuances, this will be fixed by beta v0.2.0
