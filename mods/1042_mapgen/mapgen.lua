@@ -245,7 +245,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                             data[vi] = dirt
 
                         elseif y == ny then
-                            local grass_color = math.floor(((tempv / 30) + 1) * 8 * 16) - 1
+                            local grass_color = math.floor(((tempv / 30) + 1) * 8 * 16)
                             if y > water_level then
                                 if mountin_top then
                                     data[vi] = dirt
