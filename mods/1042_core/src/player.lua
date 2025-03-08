@@ -1,6 +1,7 @@
 core_1042.player_huds = {}
 local  player_huds = core_1042.player_huds
 local aux1_cooldown = {}
+local sprint_increment_cooldown = {}
 
 
 
@@ -76,6 +77,7 @@ core.register_on_joinplayer(function(player, last_join)
 
 	player_huds[name] = {}
 	aux1_cooldown[name] = 0
+	sprint_increment_cooldown[name] = 0
 
 	player:set_properties({
 		visual = "mesh",
@@ -255,6 +257,7 @@ core.register_on_leaveplayer(function(player)
 
 	player_huds[name] = nil
 	aux1_cooldown[name] = nil
+	sprint_increment_cooldown[name] = nil
 end)
 
 
@@ -266,15 +269,39 @@ core.register_globalstep(function(dtime)
 	for _, player in ipairs(core.get_connected_players()) do
 		local name = player:get_player_name()
 		local pointed_thing = core_1042.get_pointed_thing(player)
-	
-		if aux1_cooldown[name] and aux1_cooldown[name] > 0 then
-			aux1_cooldown[name] = aux1_cooldown[name] - dtime
-		end
 
 		-- Controles
 		local player_controls = player:get_player_control()
 		local player_meta = player:get_meta()
 
+
+		-- Sprint
+		local phy = player:get_physics_override()
+		if sprint_increment_cooldown[name] then
+			if sprint_increment_cooldown[name] > 0 then
+				sprint_increment_cooldown[name] = sprint_increment_cooldown[name] - dtime
+
+			else
+				if player_controls.movement_y ~= 0 or player_controls.movement_x ~= 0 then
+					if phy.speed_walk < 2 then
+						phy.speed_walk = phy.speed_walk + 0.05
+						player:set_physics_override(phy)
+
+						sprint_increment_cooldown[name] = 0.5
+						print(phy.speed_walk)
+					end
+
+				elseif phy.speed_walk > 1 then
+					phy.speed_walk = phy.speed_walk - 0.05
+					player:set_physics_override(phy)
+					sprint_increment_cooldown[name] = 0.5
+					print(phy.speed_walk)
+
+				end
+			end
+		end
+
+		-- Animation
 		if player_controls.movement_y ~= 0 and player_meta:get_string("moving") == "false" then
 			player:set_animation({x = 0, y = 40}, 3)
 			player_meta:set_string("moving", "true")
@@ -284,17 +311,21 @@ core.register_globalstep(function(dtime)
 		end
 
 
-		-- _1042_use
-		if player_controls.aux1 then
-			local itemstack = player:get_wielded_item()
-			local def = core.registered_items[itemstack:get_name()]
+		-- _1042_use (optimised)
+		if aux1_cooldown[name] then
+			if aux1_cooldown[name] > 0 then
+				aux1_cooldown[name] = aux1_cooldown[name] - dtime
+			elseif player_controls.aux1 then
+				local itemstack = player:get_wielded_item()
+				local def = core.registered_items[itemstack:get_name()]
 
-			if def._1042_on_use and aux1_cooldown[name] and aux1_cooldown[name] <= 0 then
-				local ret_itemstack = def._1042_on_use(itemstack, player, pointed_thing)
-				if ret_itemstack then
-					player:set_wielded_item(ret_itemstack)
+				if def._1042_on_use then
+					local ret_itemstack = def._1042_on_use(itemstack, player, pointed_thing)
+					if ret_itemstack then
+						player:set_wielded_item(ret_itemstack)
+					end
+					aux1_cooldown[name] = 0.5
 				end
-				aux1_cooldown[name] = 0.5
 			end
 		end
 
