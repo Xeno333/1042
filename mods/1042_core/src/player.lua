@@ -293,8 +293,8 @@ core.register_globalstep(function(dtime)
 				elseif phy.speed_walk > 1 then
 					phy.speed_walk = phy.speed_walk - 0.05
 					player:set_physics_override(phy)
-					sprint_increment_cooldown[name] = 0.5
 
+					sprint_increment_cooldown[name] = 0.5
 				end
 			end
 		end
