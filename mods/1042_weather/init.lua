@@ -81,11 +81,13 @@ core.register_globalstep(function(dtime)
 
             local def = the_weather.particlespawner
             if def then
+                local width = def._1042_weather_box_distance or 16
                 def.pos = {
-                    min = vector.new(pos.x-16,pos.y+weather_hight,pos.z-16),
-                    max = vector.new(pos.x+16,pos.y+weather_hight,pos.z+16),
+                    min = vector.new(pos.x-width,pos.y+weather_hight,pos.z-width),
+                    max = vector.new(pos.x+width,pos.y+weather_hight,pos.z+width),
                     bias = 0
                 }
+                def.width = nil
                 def.playername = name
                 
                 core.add_particlespawner(def)

@@ -54,6 +54,7 @@
 - Work on sounds and lower item break times with hand for some things -Xeno333
 - Re-order code and make smelting mod -Xeno333
 - Re-develop cooking and smelting mechanics -Futuray & Xeno333
+- Weather fixes and sprint mechanics -Xeno333
 
 ### WIP
 - Adding contenent border to mapgen and spawing -Xeno333
