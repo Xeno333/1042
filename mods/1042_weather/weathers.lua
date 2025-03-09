@@ -448,16 +448,17 @@ weather.register_weather({
         }
     },
     particlespawner = {
-        amount = 500,
+        amount = 1000,
         time = 1,
+        _1042_weather_box_distance = 32,
 
         collisiondetection = true,
         object_collision = true,
         collision_removal = true,
 
         vel = {
-            min = vector.new(-2, -1, -2),
-            max = vector.new(2, -4, 2),
+            min = vector.new(-2, -4, -2),
+            max = vector.new(2, -6, 2),
             bias = 0
         },
 
