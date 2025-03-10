@@ -10,24 +10,29 @@
 
 # Natural
 
-- tree
-- wood
+- tree - recte
+- wood - recyla
+- foliage - lyfe
 - turf - krec
 - grass - len-krec
-- snow - 
+- snow - slin
 - stone - ctxn
 - ore - [material] ctxn
 - rock - ctxn
-- flint - 
+- flint - sare-ctxn
 - sand - cond
-- water - 
+- water - van
 - ice - yc
+- mushroom - srem
 
 
 # Misc
 
 - iron - fero
 
+# Weather
+
+- rain
 
 # Living
 
