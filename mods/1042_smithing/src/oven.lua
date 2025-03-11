@@ -102,7 +102,7 @@ core.register_node("1042_cooking:stone_oven_on", {
 	end,
 
 	on_destruct = function(pos)
-		for object in core.objects_inside_radius(pos, 1) do
+		for object in core.objects_inside_radius(pos, 0.5) do
 			local entity = object:get_luaentity()
 			if entity then
 				if entity.name == "1042_nodes:campfire_fire" or string.find(entity.name, "1042_nodes:mold_cooking_") then
@@ -116,7 +116,7 @@ core.register_node("1042_cooking:stone_oven_on", {
 		local name = itemstack:get_name()
 		if not name or name == "" then return end
 		local has_cooking = false
-		for object in core.objects_inside_radius(pos, 1) do
+		for object in core.objects_inside_radius(pos, 0.5) do
 			local entity = object:get_luaentity()
 			if entity then
 				if string.find(entity.name, "1042_cooking:mold_cooking_") then
