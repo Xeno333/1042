@@ -9,7 +9,6 @@ core.register_abm({
     catch_up = true,
     interval = 32,
     chance = 2,
-    catch_up = true,
     action = function(pos, node, active_object_count, active_object_count_wider)
         core.set_node(pos, {name = "1042_nodes:iron_slag"})
     end

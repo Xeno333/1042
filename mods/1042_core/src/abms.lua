@@ -171,7 +171,6 @@ core.register_abm({
     catch_up = true,
     interval = 1,
     chance = 1,
-    catch_up = true,
     action = function(pos, node, active_object_count, active_object_count_wider)
         local def = core.registered_nodes[node.name]
         if def._1042_cools_to then
