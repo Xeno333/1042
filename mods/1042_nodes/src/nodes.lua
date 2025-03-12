@@ -1,5 +1,7 @@
 
 
+local c = core.colorize
+
 -- Land Nodes
 
 core.register_node("1042_nodes:bedrock", {
@@ -19,7 +21,7 @@ core.register_node("1042_nodes:dirt", {
 })
 
 core.register_node("1042_nodes:sand", {
-    description = "Sand",
+    description = "Cond"..c("#777", "\n(Sand)"),
     tiles = {"1042_plain_node.png^[colorize:#d9a357:128"},
     use_texture_alpha = "opaque",
 
@@ -27,7 +29,7 @@ core.register_node("1042_nodes:sand", {
 })
 
 core.register_node("1042_nodes:ice", {
-    description = "Ice",
+    description = "Yc"..c("#777", "\n(Ice)"),
     drawtype = "glasslike",
     tiles = {"ice.png"},
     use_texture_alpha = "blend",
@@ -40,7 +42,7 @@ core.register_node("1042_nodes:ice", {
 })
 
 core.register_node("1042_nodes:turf", {
-    description = "Turf",
+    description = "Krec"..c("#777", "\n(Turf)"),
     tiles = {"turf.png"},
 
     color = "#309913ff",
@@ -79,7 +81,7 @@ core.register_node("1042_nodes:turf", {
 })
 
 core.register_node("1042_nodes:snow", {
-    description = "Snow",
+    description = "Slin"..c("#777", "\n(Snow)"),
     tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},
     inventory_image = "snowflake1.png",
     wield_image = "snowflake1.png",
@@ -149,7 +151,7 @@ core.register_node("1042_nodes:snow", {
 })
 
 core.register_node("1042_nodes:stone", {
-    description = "Stone",
+    description = "Ctxn"..c("#777", "\n(Stone)"),
     tiles = {"1042_plain_node.png^[colorize:#777777:128"},
     use_texture_alpha = "opaque",
 
@@ -202,7 +204,7 @@ core.register_node("1042_nodes:basalt", {
 core_1042.register_loot({name = "1042_nodes:basalt"})
 
 core.register_node("1042_nodes:iron_ore", {
-    description = "Iron Ore",
+    description = "Fero Ctxn"..c("#777", "\n(Iron Ore)"),
     tiles = {"1042_plain_node.png^[colorize:#551111:128"},
     use_texture_alpha = "opaque",
 
@@ -254,7 +256,7 @@ core_1042.register_loot({name = "1042_nodes:iron_ore"})
 
 
 core.register_node("1042_nodes:leaves_plain", {
-    description = "Leaves",
+    description = "Plyke Lyfe"..c("#777", "\n(Plain Leaves)"),
     tiles = {"1042_plain_node.png^[colorize:#1c770a:168"},
     use_texture_alpha = "blend",
     drawtype = "allfaces",
@@ -266,7 +268,7 @@ core.register_node("1042_nodes:leaves_plain", {
 })
 
 core.register_node("1042_nodes:leaves_light", {
-    description = "Light leaves",
+    description = "Lec Lyfe"..c("#777", "\n(Light Leaves)"),
     tiles = {"1042_plain_node.png^[colorize:#99cc99:168"},
     use_texture_alpha = "blend",
     drawtype = "allfaces",
@@ -279,7 +281,7 @@ core.register_node("1042_nodes:leaves_light", {
 
 
 core.register_node("1042_nodes:leaves_dark", {
-    description = "Dark Leaves",
+    description = "Dec Lyfe"..c("#777", "\n(Dark Leaves)"),
     tiles = {"1042_plain_node.png^[colorize:#1f470a:168"},
     use_texture_alpha = "blend",
     drawtype = "allfaces",
@@ -292,7 +294,7 @@ core.register_node("1042_nodes:leaves_dark", {
 
 
 core.register_node("1042_nodes:tree", {
-    description = "Tree",
+    description = "Recte"..c("#777", "\n(Tree)"),
     tiles = {"1042_plain_node.png^[colorize:#672307:200"},
     use_texture_alpha = "opaque",
 
@@ -308,7 +310,7 @@ core.register_node("1042_nodes:tree", {
 })
 
 core.register_node("1042_nodes:tree_dark", {
-    description = "Dark Tree",
+    description = "Dec Recte"..c("#777", "\n(Dark Tree)"),
     tiles = {"1042_plain_node.png^[colorize:#371307:200"},
     use_texture_alpha = "opaque",
 
@@ -324,7 +326,7 @@ core.register_node("1042_nodes:tree_dark", {
 })
 
 core.register_node("1042_nodes:tree_light", {
-    description = "Light Tree",
+    description = "Lec Recte"..c("#777", "\n(Light Tree)"),
     tiles = {"1042_plain_node.png^[colorize:#676357:200"},
     use_texture_alpha = "opaque",
 

@@ -5,8 +5,10 @@
 
 -- Grasses are an extension of turf
 
+local c = core.colorize
+
 core.register_node("1042_nodes:grass_tall", {
-    description = "Tall Grass",
+    description = "Len-Krec"..c("#777", "\n(Long Grass)"),
     drawtype = "mesh",
     mesh = "grass_tall.obj",
     tiles = {"turf.png"},
@@ -49,7 +51,7 @@ core.register_node("1042_nodes:grass_tall", {
 })
 
 core.register_node("1042_nodes:grass_short", {
-    description = "Short Grass",
+    description = "Plyke-Krec"..c("#777", "\n(Short Grass)"),
     drawtype = "mesh",
     mesh = "grass_short.obj",
     tiles = {"turf.png"},
@@ -99,7 +101,7 @@ core.register_node("1042_nodes:grass_short", {
 
 
 core.register_node("1042_nodes:mushroom", {
-    description = "Mushroom",
+    description = "Srem"..c("#777", "\n(Mushroom)"),
     drawtype = "mesh",
     mesh = "mushroom.obj",
     tiles = {"1042_plain_node.png^[colorize:#7B3500:128"},

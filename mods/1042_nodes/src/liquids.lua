@@ -2,7 +2,7 @@
 -- Liquids
 
 core.register_node("1042_nodes:water_source", {
-    description = "Water Source",
+    description = "Van"..core.colorize("#777", "\n(Water Source)"),
 
     drawtype = "liquid",
     tiles = {
@@ -50,7 +50,7 @@ core.register_node("1042_nodes:water_source", {
 })
 
 core.register_node("1042_nodes:water_flowing", {
-    description = "Flowing Water",
+    description = "Van"..core.colorize("#777", "\n(Flowing Water)"),
 
     drawtype = "flowingliquid",
     tiles = {"water.png"},

@@ -102,7 +102,7 @@ end
 
 -- #fixme Fix wear to go as delt
 item_wear.register_complex_node("1042_tools:chisel_iron", {
-    description = "Iron chisel",
+    description = "Fero Blunt-Kyf"..core.colorize("#777", "\n(Iron Chisel)"),
     drawtype = "mesh",
     mesh = "chisel.obj",
     tiles = {

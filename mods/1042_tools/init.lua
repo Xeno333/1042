@@ -5,10 +5,10 @@ tools_1042 = {}
 local path = core.get_modpath("1042_tools")
 dofile(path.."/src/chisel.lua")
 
-
+local c = core.colorize
 
 item_wear.register_complex_node("1042_tools:sword",{
-    description = "Sword",
+    description = "Len-Kyf"..c("#777", "\n(Sword)"),
     drawtype = "mesh",
     mesh = "sword.obj",
     tiles = {"1042_plain_node.png^[colorize:#444444:168"},
@@ -63,7 +63,7 @@ core.register_craft({
 
 
 item_wear.register_complex_node("1042_tools:pick",{
-    description = "Pick",
+    description = "Ctxn-Kyf"..c("#777", "\n(Pick)"),
     drawtype = "mesh",
     mesh = "pick.obj",
     tiles = {
@@ -110,7 +110,7 @@ core.register_craft({
 
 
 item_wear.register_complex_node("1042_tools:axe_flint",{
-    description = "Flint axe",
+    description = "Sare-Ctxn Akce"..c("#777", "\n(Flint Axe)"),
     drawtype = "mesh",
     mesh = "axe.obj",
     tiles = {
