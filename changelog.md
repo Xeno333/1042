@@ -56,6 +56,8 @@
 - Re-develop cooking and smelting mechanics -Futuray & Xeno333
 - Weather fixes and sprint mechanics -Xeno333
 - Fix snow and grass and turf -Xeno333
+- Color grasses by biome with same system as turf -Xeno333
+- Make player spawn in tempetures [10 C, 20 C] -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic
@@ -67,5 +69,4 @@
 
 
 #### Very WIP (needs changes)
-- Color grasses by biome with same system as turf -Xeno333
 - Start tree generation and growth mod -Xeno333
