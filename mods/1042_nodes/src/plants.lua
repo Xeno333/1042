@@ -45,6 +45,12 @@ core.register_node("1042_nodes:grass_tall", {
         end
     end,
 
+    -- Add self as a drop to avoid meta
+    drop = "",
+    preserve_metadata = function(_, _, _, drops)
+        drops[#drops+1] = ItemStack("1042_nodes:grass_tall")
+    end,
+
     groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
 })
 
@@ -64,6 +70,7 @@ core.register_node("1042_nodes:grass_short", {
     color = "#309913ff",
     paramtype2 = "color",
     palette = "turf_palette.png",
+    node_placement_prediction = "",
 
     sounds = {
         dig = {
@@ -80,11 +87,16 @@ core.register_node("1042_nodes:grass_short", {
 
     on_construct = function(pos)
         local node = core.get_node(pos)
-
         if node then
             node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
             core.swap_node(pos, node)
         end
+    end,
+
+    -- Add self as a drop to avoid meta
+    drop = "",
+    preserve_metadata = function(_, _, _, drops)
+        drops[#drops+1] = ItemStack("1042_nodes:grass_short")
     end,
 
     groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
@@ -107,6 +119,8 @@ core.register_node("1042_nodes:mushroom", {
 
     paramtype = "light",
     paramtype2 = "wallmounted",
+    node_placement_prediction = "",
+
     sunlight_propagates = true,
     floodable = true,
     walkable = false,

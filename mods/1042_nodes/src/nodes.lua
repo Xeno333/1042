@@ -75,6 +75,12 @@ core.register_node("1042_nodes:turf", {
         end
     end,
 
+    -- Add self as a drop to avoid meta
+    drop = "",
+    preserve_metadata = function(_, _, _, drops)
+        drops[#drops+1] = ItemStack("1042_nodes:turf")
+    end,
+
     groups = {dirt = 1, breakable_by_hand = 3, bio_mass = 8},
 })
 
@@ -90,7 +96,6 @@ core.register_node("1042_nodes:snow", {
 	paramtype = "light",
     sunlight_propagates = true,
 
-    buildable_to = true,
     floodable = true,
 
     paramtype2 = "leveled",
@@ -130,10 +135,11 @@ core.register_node("1042_nodes:snow", {
 
         core.item_place(itemstack, placer, pointed_thing)
     end,
-    
-    on_dig = function(pos, node, digger)
-        player_api.add_item_to_player_inventory(digger, "main", ItemStack("1042_nodes:snow " .. tostring((math.floor(core.get_node_level(pos) or 8)/8))), pos)
-        core.set_node(pos, {name = "air"})
+
+    -- Add self as a drop to avoid meta
+    drop = "",
+    preserve_metadata = function(pos, _, _, drops)
+        drops[#drops+1] = ItemStack("1042_nodes:snow " .. tostring((math.floor(core.get_node_level(pos) or 8)/8)))
     end,
 
     node_box = {
