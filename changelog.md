@@ -58,6 +58,7 @@
 - Fix snow and grass and turf -Xeno333
 - Color grasses by biome with same system as turf -Xeno333
 - Make player spawn in tempetures [10 C, 20 C] -Xeno333
+- Speed changes -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic

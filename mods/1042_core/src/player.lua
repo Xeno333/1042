@@ -112,7 +112,8 @@ core.register_on_joinplayer(function(player, last_join)
 			gravity = 1.5,
 			jump = 1.2,
 			sneak_glitch = true,
-			liquid_sink = 2
+			liquid_sink = 2,
+			speed_walk = 0.5
 		}
 	)
 	player:hud_set_flags(
@@ -287,15 +288,15 @@ core.register_globalstep(function(dtime)
 				sprint_increment_cooldown[name] = sprint_increment_cooldown[name] - dtime
 
 			else
-				if player_controls.movement_y ~= 0 or player_controls.movement_x ~= 0 then
-					if phy.speed_walk < 2 then
+				if (player_controls.movement_y ~= 0 or player_controls.movement_x ~= 0) and not player_controls.sneak then
+					if phy.speed_walk < 1.2 then
 						phy.speed_walk = phy.speed_walk + 0.05
 						player:set_physics_override(phy)
 
 						sprint_increment_cooldown[name] = 0.5
 					end
 
-				elseif phy.speed_walk > 1 then
+				elseif phy.speed_walk > 0.5 then
 					phy.speed_walk = phy.speed_walk - 0.05
 					player:set_physics_override(phy)
 
