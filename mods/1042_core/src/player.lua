@@ -27,12 +27,12 @@ core.override_item("", {
 
 
 
--- Spawn player
+-- Spawn player; depends on mapgen
 
 local function spawn_player(player)
 	local pos = nil
 
-	while pos == nil do
+	for tries = 0, 5000 do -- Max 5000 tries (This is very fast, and is mearly theoretical)
 		local x = math.random(0, 20000)
 		local z = math.random(0, 20000)
 		local y = mapgen_1042.get_spawn_y(x, z) 
@@ -41,6 +41,11 @@ local function spawn_player(player)
 			pos = vector.new(x, y+1, z)
 			break
 		end
+	end
+
+	-- stop inf loop
+	if not pos then
+		pos = vector.new(0, 0, 0) -- Put here on problem to stop inf loop
 	end
 
 	player:set_pos(pos)

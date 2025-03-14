@@ -67,6 +67,11 @@ mapgen_1042.continent_radius = 30000
 
 
 function mapgen_1042.get_spawn_y(x, z)
+    local temp = weather.get_temp_single(vector.new(x, 0, z))
+    if not (temp >= 10 and temp <= 20) then -- Temp range
+        return false
+    end
+
     local noise = mapgen_1042.map_single:get_2d(vector.new(z, x, 0))
     local ny
 
