@@ -90,7 +90,7 @@ core.register_node("1042_cooking:campfire", {
 	end,
 	
 	on_destruct = function(pos)
-		for object in core.objects_inside_radius(pos, 1) do
+		for object in core.objects_inside_radius(pos, 0.5) do
 			local entity = object:get_luaentity()
 			if entity then
 				if entity.name == "1042_cooking:campfire_fire" then
@@ -108,7 +108,7 @@ core.register_node("1042_cooking:campfire", {
 		local has_side = 0
 		local sides_used = {false, false, false, false}
 
-		for object in core.objects_inside_radius(pos, 1) do
+		for object in core.objects_inside_radius(pos, 0.5) do
 			local entity = object:get_luaentity()
 			if entity then
 				if string.find(entity.name, "1042_cooking:campfire_cooking_") then

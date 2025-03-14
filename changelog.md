@@ -55,6 +55,7 @@
 - Re-order code and make smelting mod -Xeno333
 - Re-develop cooking and smelting mechanics -Futuray & Xeno333
 - Weather fixes and sprint mechanics -Xeno333
+- Fix snow and grass and turf -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic
