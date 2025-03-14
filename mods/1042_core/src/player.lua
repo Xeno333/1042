@@ -39,7 +39,6 @@ local function spawn_player(player)
 
 		if y then
 			pos = vector.new(x, y+1, z)
-			print(tries)
 			break
 		end
 	end
