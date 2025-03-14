@@ -268,7 +268,32 @@ end)
 
 
 
+local function make_death_formspec(player_name)
+	return "1042_death_screen", "formspec_version[8]size[12,8]position[0.5,0.5]style_type[*;sound=stone_dig]"..
+		"bgcolor[#00223320;;]"..
+		"set_focus[respawn;true]"..
+		"image_button[4.5,3.5;3,1;1042_plain_node.png^[colorize:#00ffff:144;respawn;Respawn]"
+end
 
+function core.show_death_screen(player, reason)
+	print(dump(reason))
+	local player_name = player:get_player_name()
+	core.show_formspec(player_name, make_death_formspec(player_name))
+end
+
+core.register_on_player_receive_fields(function(player, form, fields)
+	if form == "1042_death_screen" then
+		local player_name = player:get_player_name()
+
+		if fields.respawn then
+			player:respawn()
+			core.close_formspec(player_name, form)
+
+		else
+			core.show_formspec(player_name, make_death_formspec(player_name))
+		end
+	end
+end)
 
 
 core.register_globalstep(function(dtime)
