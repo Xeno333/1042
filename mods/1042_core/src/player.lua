@@ -268,7 +268,52 @@ end)
 
 
 
+local function make_death_formspec( reason)
+	local msg = "You "
+	if reason then
+		if reason._1042_death_msg then
+			msg = msg .. reason._1042_death_msg
 
+		elseif reason.type == "fall" then
+			msg = msg .. "fell"
+
+		elseif reason.type == "drown" then
+			msg = msg .. "drowned"
+
+		else
+			msg = "You are dead"
+		end
+	else
+		msg = "You are dead"
+	end
+
+	return "1042_death_screen", "formspec_version[8]size[12,8]position[0.5,0.5]style_type[*;sound=stone_dig]"..
+		"bgcolor[#00223340;;]"..
+		"set_focus[respawn;true]"..
+		"hypertext[4,1;4,1;reason;<center>" .. msg .. "</center>]"..
+		"image_button[4.5,3.5;3,1;1042_plain_node.png^[colorize:#00ffff:144;respawn;Respawn]"
+end
+
+function core.show_death_screen(player, reason)
+	local player_name = player:get_player_name()
+	core.show_formspec(player_name, make_death_formspec(reason))
+end
+
+core.register_on_player_receive_fields(function(player, form, fields)
+	if form == "1042_death_screen" then
+		local player_name = player:get_player_name()
+
+		if fields.respawn then
+			player:respawn()
+			core.close_formspec(player_name, form)
+
+		else
+			core.show_formspec(player_name, make_death_formspec(nil))
+		end
+
+		return true
+	end
+end)
 
 
 core.register_globalstep(function(dtime)

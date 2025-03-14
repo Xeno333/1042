@@ -56,6 +56,13 @@ This is an API for complex nodes/items that have wear, these are basicly tools o
 
 
 
+## 1042 extensions of `PlayerHPChangeReason`
+
+- `_1042_death_msg` 1042 death message, if it causes or can cause death. **Note:** Prepends `You ` to message.
+- `_1042_reason` 1042 reason of death.
+
+
+
 ## Tables
 
 ### `Loot table`

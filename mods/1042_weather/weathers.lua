@@ -67,7 +67,7 @@ weather.register_weather({
 
         if clear then
             if core_1042.rand:next(1, 4) == 1 then
-                player:set_hp(player:get_hp()-1, "Hail")
+                player:set_hp(player:get_hp()-1, {_1042_reason="hail", _1042_death_msg="got struck by hail"})
             end
         end
 
