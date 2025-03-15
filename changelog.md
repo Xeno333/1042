@@ -61,11 +61,11 @@
 - Speed changes -Xeno333
 - Death screen -Xeno333
 - HUD reworking -Xeno333
+- Adding custom schematics -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic
 - Adding contenent border to mapgen and spawing -Xeno333
-- Adding custom schematics -Xeno333
 - Improve textures and models -Xeno333 & SuperStarSonic
 - Improve mapgen code -Xeno333
 - Improve and orginize documentation -Xeno333 & SuperStarSonic
