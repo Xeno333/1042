@@ -7,12 +7,22 @@ dofile(core.get_modpath("1042_mapgen") .. "/mapgen_api.lua")
 -- Weather api
 dofile(core.get_modpath("1042_weather") .. "/weather_api.lua")
 
+-- schematics api
+dofile(core.get_modpath("1042_schematics") .. "/schematics_api.lua")
 
 
---local path = core.get_modpath("1042_mapgen")
+-- register schematics
+local schematic_path = core.get_modpath("1042_mapgen") .. "/schematics/"
 
---dofile(path.."/api.lua")
---dofile(path.."/mapgen.lua")
+local schem = schematics_1042.load_schematic(schematic_path .. "/big_tree_1")
+schematics_1042.register_schematic("big_tree_1", schem)
+
+schem = schematics_1042.load_schematic(schematic_path .. "/big_tree_dark_1")
+schematics_1042.register_schematic("big_tree_dark_1", schem)
+
+schem = schematics_1042.load_schematic(schematic_path .. "/big_tree_light_1")
+schematics_1042.register_schematic("big_tree_light_1", schem)
+
 
 
 -- Settings
@@ -61,8 +71,6 @@ local chest = core.get_content_id("1042_nodes:chest")
 
 
 
-local schematic_path = core.get_modpath("1042_mapgen") .. "/schematics/"
-
 
 
 
@@ -98,11 +106,10 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data
 
             -- Big tree
             elseif y >= water_level+10 and tempv >= 15 and c == 995 then
-                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematic_path .. "big_tree_1.mts", rotation="random", replacements=nil, force_placement=true, flags=nil}
+                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematics_1042.get_schematic("big_tree_1"), force=false}
 
             elseif y >= water_level+5 and tempv >= 5 and c == 999 then
-                place_list[#place_list+1] = {pos=vector.new(x-11,y-3,z-11), schematic=schematic_path .. "big_tree_dark_1.mts", rotation="random", replacements=nil, force_placement=true, flags=nil}
-
+                place_list[#place_list+1] = {pos=vector.new(x-11,y-3,z-11), schematic=schematics_1042.get_schematic("big_tree_dark_1"), force=true}
             end
 
         elseif tempv > 20 then
@@ -110,17 +117,15 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data
                 data[area:index(x, y+1, z)] = grass_short
             end
 
-        else
-            if tempv <= -3 then
+        elseif tempv <= -3 then
+            if y >= water_level+3 and c >= 999+(tempv/8) then
+                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematics_1042.get_schematic("big_tree_light_1"), force=true}
+            else
                 local vi = area:index(x, y+1, z)
                 data[vi] = snow
                 param2_data[vi] = pr:next(8, 16)
             end
 
-            if y >= water_level+3 and c >= 999+(tempv/8) then
-                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematic_path .. "big_tree_light_1.mts", rotation="random", replacements=nil, force_placement=true, flags=nil}
-
-            end
         end
 
     elseif cave == "bottom" then
@@ -311,11 +316,12 @@ core.register_on_generated(function(vm, minp, maxp, seed)
 
     local light_data = vm:get_light_data()
     for _, def in ipairs(place_list) do
-        if not core.place_schematic_on_vmanip(vm, def.pos, def.schematic, def.rotation, def.replacements, def.force_placement, def.flags) then
-            vm:set_data(data)
-            vm:set_light_data(light_data)
-            vm:set_param2_data(param2_data)
-        end
+        schematics_1042.place_schematic_on_vmanip(def.pos, def.schematic, vm, def.force)
+        --if not core.place_schematic_on_vmanip(vm, def.pos, def.schematic, def.rotation, def.replacements, def.force_placement, def.flags) then
+        --    vm:set_data(data)
+        --    vm:set_light_data(light_data)
+        --    vm:set_param2_data(param2_data)
+        --end
     end
     
     vm:update_liquids()

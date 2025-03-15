@@ -328,6 +328,21 @@ If `the_weather.on_end(player, name, players_weather)` is defined then all thing
 
 
 
+# `1042_schematics` API
+
+1042 has its own schematic format to be used in mapgen. It uses a json formated file as an output and has the following functions:
+
+- `schematics_1042.new_schematic(x, y, z)` Returns a schematic table with a size of `(x, y, z)`.
+- `schematics_1042.register_schematic(name, schem)` Register a schematic table in the enviorment. Returns `true` if it worked or `false` if it was alredy registered.
+- `schematics_1042.get_schematic` Get a registered schematic talbe, returns `nil` if it doesn't exist.
+- `schematics_1042.is_schamatic(schem)` Returns `true` if table is formated correctly.
+- `schematics_1042.load_schematic(path)` Load a schematic from disk. Returns `nil` on failure.
+- `schematics_1042.place_schematic(posin, schematic, force)` Queue placing of schematic. Returns `"Qeued..."`
+- `schematics_1042.save_schematic(pos1, pos2, path, ignore_air)` Queue saving of schematic. Returns `"Qeued..."`
+- `schematics_1042.place_schematic_on_vmanip(posin, schematic, vm, force)` Place schematic on vm. Returns `true` if success, or `false` if it was to large for the vm area.
+
+
+
 
 # Intigrated Testing Mod
 

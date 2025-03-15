@@ -440,7 +440,7 @@ weather.register_weather({
     name = "Light snow",
     conditions = {
         temp = {
-            max = 0
+            max = -3
         },
         y_level = {
             max = core_1042.shared_lib.consts.plain_world_y_levels.max,
