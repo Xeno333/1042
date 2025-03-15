@@ -19,7 +19,6 @@ We Hope you enjoy playing it and any feedback is welcome!
 ## Features
 - Mapgen with 4 biomes (tempeture areas) vast mountins and plains with deep oceans and caves
 - Unique UI with custom HUD and Invintory and in-game settings (on a per-player basis)
-- 1 texture
 - Several nodes
 - Working weather system
 - Working tools
@@ -28,8 +27,8 @@ We Hope you enjoy playing it and any feedback is welcome!
 - Some sounds
 - Basic mobs (Fish and pigs, as of last update)
 - Basic smelting and crafting recipies.
-- Working hardcore mode.
-- Crafting of items
+- Hardcore mode.
+- Crafting
 - Weather sounds
 
 
@@ -42,13 +41,11 @@ We Hope you enjoy playing it and any feedback is welcome!
 
 ## Roadmap
 
-#### beta v0.2.0
+#### beta v0.3.0
 - Add mapgen APIs
 - Add more trees and plants, flowers maybe.
 - Add pvp physics and more weapons (Bow and club)
 - Add lootable structures
-
-#### beta v0.3.0
 - Add more structures (villages)
 - Add rivers
 - Possibly add new world(s)
