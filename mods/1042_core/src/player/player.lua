@@ -25,7 +25,7 @@ core.override_item("", {
 
 
 
--- Spawn player; depends on mapgen
+-- Spawn player; depends on 1042_mapgen
 
 local function spawn_player(player)
 	local pos = nil
