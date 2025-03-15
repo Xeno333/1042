@@ -156,6 +156,15 @@ There are a few APIs built into the game, and more planned for the beta release.
 
 - `player_api.add_item_to_player_inventory(player, list, itemstack, drop_overflow_pos)` Add itemstack to player inv and drop remains, returns count droped at `drop_overflow_pos`. If player is not a player node the itemstack is just dropped.
 
+#### Player HUD Functions
+
+These functions clean up automaticly, and provide a clean interface.
+
+- `player_api.add_hud(player, unique_hud_name, hud_def)` Add a HUD to a player, returns `true` if it was added, and `false` if it already exits.
+- `player_api.remove_hud(player, unique_hud_name)` Remove a HUD to a player, returns `true` if it was removed, and `false` if it didn't exits.
+- `player_api.update_hud(player, unique_hud_name, hud_def)` Add/Update(remove and add) a HUD without respecting pervious definition. Always returns `true` and should always be ignored.
+- `player_api.hud_exists(player, unique_hud_name)` Check if a HUD exits for player.
+
 
 
 

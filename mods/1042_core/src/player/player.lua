@@ -1,5 +1,3 @@
-core_1042.player_huds = {}
-local  player_huds = core_1042.player_huds
 local aux1_cooldown = {}
 local sprint_increment_cooldown = {}
 
@@ -79,8 +77,6 @@ end)
 
 core.register_on_joinplayer(function(player, last_join)
 	local name = player:get_player_name()
-
-	player_huds[name] = {}
 	aux1_cooldown[name] = 0
 	sprint_increment_cooldown[name] = 0
 
@@ -228,7 +224,7 @@ core.register_on_joinplayer(function(player, last_join)
 		hotbar.position = {x=0.05, y=0.5}
 	end
 
-	player_huds[name].hotbar = player:hud_add(hotbar)
+	player_api.add_hud(player, "hotbar", hotbar)
 
 
 	player:hud_add({
@@ -261,7 +257,6 @@ end)
 core.register_on_leaveplayer(function(player)
 	local name = player:get_player_name()
 
-	player_huds[name] = nil
 	aux1_cooldown[name] = nil
 	sprint_increment_cooldown[name] = nil
 end)
@@ -383,52 +378,34 @@ core.register_globalstep(function(dtime)
 
 		-- Hud code
 
-		local player_huds = player_huds[name] or {}
-
-		-- Pointed Item
-		local id = player_huds.pointed_thing
-
-		if id then 
-			player:hud_remove(id)
-			player_huds.pointed_thing = nil
-		end
-
 		if pointed_thing and pointed_thing.type == "node" then
-			local txt = core.registered_nodes[core.get_node(vector.new(pointed_thing.under.x, pointed_thing.under.y, pointed_thing.under.z)).name].description
-			if txt then 
-				player_huds.pointed_thing =  player:hud_add({
-					type = "text",
-					name = "pointed_node_hud",
-					text = txt,
-					position = {x=0.5, y=0.05},
-					number = 0x00ffdd,
-					style = 3
-				})
-			end
+			local node_name = core.get_node(vector.new(pointed_thing.under.x, pointed_thing.under.y, pointed_thing.under.z)).name
+
+			player_api.update_hud(player, "pointed_thing", {
+				type = "text",
+				name = "pointed_node_hud",
+				text = core.registered_nodes[node_name].description or node_name,
+				position = {x=0.5, y=0.05},
+				number = 0x00ffdd,
+				style = 3
+			})
+
+		else
+			player_api.remove_hud(player, "pointed_thing") -- remove old if exists
 		end
 
 
 		-- Wield Item
-		local wield_text = player_huds.wield_text
-
-		if wield_text then
-			player:hud_remove(wield_text)
-			player_huds.wield_text = nil
-		end
-
-		local wield_item = player:get_wielded_item()
-		if wield_item then
-			local item = core.registered_items[wield_item:get_name()]
-			if item and item.description then
-				player_huds.wield_text = player:hud_add({
-					type = "text",
-					name = "wield_text_hud",
-					text = item.description,
-					position = {x=0.05, y=0.9},
-					number = 0x00ffdd,
-					style = 3
-				})
-			end
+		local item = core.registered_items[ player:get_wielded_item():get_name()]
+		if item and item.description then
+			player_api.update_hud(player, "wield_text", {
+				type = "text",
+				name = "wield_text_hud",
+				text = item.description,
+				position = {x=0.05, y=0.9},
+				number = 0x00ffdd,
+				style = 3
+			})
 		end
 
 	end

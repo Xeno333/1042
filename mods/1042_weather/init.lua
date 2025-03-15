@@ -34,13 +34,7 @@ core.register_globalstep(function(dtime)
             local the_weather = weather.weathers[weather.get_weather_at_pos(pos)]
 
             -- Temp hud:
-            local player_huds = core_1042.player_huds[name] or {}
-            local id = player_huds.pos_temp
-            if id then
-                player:hud_remove(id)
-                player_huds.pos_temp = nil
-            end
-            player_huds.pos_temp = player:hud_add({
+            player_api.update_hud(player, "pos_temp", {
                 type = "text",
                 name = "pos_temp",
                 text = weather.get_temp_single(pos) .. " C",

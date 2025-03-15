@@ -60,6 +60,7 @@
 - Make player spawn in tempetures [10 C, 20 C] -Xeno333
 - Speed changes -Xeno333
 - Death screen -Xeno333
+- HUD reworking -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic
