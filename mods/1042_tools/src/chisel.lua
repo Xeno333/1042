@@ -73,24 +73,32 @@ core.register_on_player_receive_fields(function(player, formspec, fields)
 end)
 
 
+local chisel_job = {}
+
 -- #fixme, add check for pointed thing
-local function chisel_select_menu(player_name)
+local function chisel_select_menu(player_name, change)
     local player = core.get_player_by_name(player_name)
     if player == nil then return end
 
 
     if player:get_wielded_item():get_name() == "1042_tools:chisel_iron" and player:get_player_control().dig then
-        player_api.update_hud(player, "chisel_select", {
-            type = "inventory",
-            position = {x=0.6, y=0.5},
-            name = "chisel_select",
-            scale = {x = 1, y = 1},
-            text = "_1042_chisel_selected",
-            number = 1
-        })
+        if change then
+            player_api.update_hud(player, "chisel_select", {
+                type = "inventory",
+                position = {x=0.6, y=0.5},
+                name = "chisel_select",
+                scale = {x = 1, y = 1},
+                text = "_1042_chisel_selected",
+                number = 1
+            })
+        end
 
-        core.after(0.5, function()
-            chisel_select_menu(player_name)
+        if chisel_job[player_name] then
+            chisel_job[player_name]:cancel()
+        end
+        chisel_job[player_name] = core.after(1, function()
+            chisel_select_menu(player_name, false)
+            chisel_job[player_name] = nil
         end)
 
     else
@@ -180,7 +188,7 @@ item_wear.register_complex_node("1042_tools:chisel_iron", {
 
 
         -- Show
-        chisel_select_menu(user:get_player_name())
+        chisel_select_menu(user:get_player_name(), true)
 
         return itemstack
     end,

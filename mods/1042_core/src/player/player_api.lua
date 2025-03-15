@@ -1,7 +1,10 @@
 player_api = {}
 
-local player_huds = {} -- Private
 
+
+-- HUDs
+
+local player_huds = {} -- Private
 
 function player_api.add_hud(player, unique_hud_name, hud_def)
     local player_name = player:get_player_name()
@@ -45,9 +48,13 @@ function player_api.update_hud(player, unique_hud_name, hud_def)
     local player_name = player:get_player_name()
 
     -- if no player huds table make it
-    if not player_huds[player_name] then player_huds[player_name] = {} end
+    if not player_huds[player_name] then
+        player_huds[player_name] = {}
+
      -- if exists remove
-    if player_huds[player_name][unique_hud_name] then player:hud_remove(player_huds[player_name][unique_hud_name]) end
+    elseif player_huds[player_name][unique_hud_name] then 
+        player:hud_remove(player_huds[player_name][unique_hud_name])
+    end
 
     -- add new
     player_huds[player_name][unique_hud_name] = player:hud_add(hud_def)
@@ -65,8 +72,6 @@ function player_api.hud_exists(player, unique_hud_name)
         return false
     end
 end
-
-
 
 core.register_on_leaveplayer(function(player)
 	player_huds[player:get_player_name()] = nil
