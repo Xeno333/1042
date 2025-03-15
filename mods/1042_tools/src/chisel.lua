@@ -74,12 +74,13 @@ end)
 
 
 -- #fixme, add check for pointed thing
-local function chisel_select_menu(player_name, hud_id)
+local function chisel_select_menu(player_name)
     local player = core.get_player_by_name(player_name)
     if player == nil then return end
 
-    if not hud_id then
-        hud_id = player:hud_add({
+
+    if player:get_wielded_item():get_name() == "1042_tools:chisel_iron" and player:get_player_control().dig then
+        player_api.update_hud(player, "chisel_select", {
             type = "inventory",
             position = {x=0.6, y=0.5},
             name = "chisel_select",
@@ -87,16 +88,14 @@ local function chisel_select_menu(player_name, hud_id)
             text = "_1042_chisel_selected",
             number = 1
         })
-    end
 
-    if not (player:get_wielded_item():get_name() == "1042_tools:chisel_iron" and player:get_player_control().dig) then
-        player:hud_remove(hud_id)
-        return
-    end
+        core.after(0.5, function()
+            chisel_select_menu(player_name)
+        end)
 
-    core.after(0.5, function()
-        chisel_select_menu(player_name, hud_id)
-    end)
+    else
+        player_api.remove_hud(player, "chisel_select")
+    end
 end
 
 
@@ -181,7 +180,7 @@ item_wear.register_complex_node("1042_tools:chisel_iron", {
 
 
         -- Show
-        chisel_select_menu(user:get_player_name(), nil)
+        chisel_select_menu(user:get_player_name())
 
         return itemstack
     end,
