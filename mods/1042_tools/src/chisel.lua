@@ -78,7 +78,10 @@ local chisel_job = {}
 -- #fixme, add check for pointed thing
 local function chisel_select_menu(player_name, change)
     local player = core.get_player_by_name(player_name)
-    if player == nil then return end
+    if player == nil then
+        chisel_job[player_name] = nil
+        return
+    end
 
 
     if player:get_wielded_item():get_name() == "1042_tools:chisel_iron" and player:get_player_control().dig then
@@ -98,11 +101,11 @@ local function chisel_select_menu(player_name, change)
         end
         chisel_job[player_name] = core.after(1, function()
             chisel_select_menu(player_name, false)
-            chisel_job[player_name] = nil
         end)
 
     else
         player_api.remove_hud(player, "chisel_select")
+        chisel_job[player_name] = nil
     end
 end
 
