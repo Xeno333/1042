@@ -1,9 +1,18 @@
 core.log("action", "Loading 1042_core...")
 
 core_1042 = {
+    version_release_to_string = {"", "-pre-release", "-dev"},
+    version = {major = 0, minor = 3, patch = 0, release = 3},
+    version_string = nil, -- string set at start time
+    oldest_supported_version = {major = 0, minor = 3, patch = 0, release = 3},
+    world_version = nil,
+    world_version_string = nil, -- string set at start time
+
     info = core.get_game_info(),
     rand = PcgRandom(math.random(1, 2048)) -- Good for all random needed
 }
+
+core_1042.version_string = "1042 v" .. core_1042.version.major .. "." .. core_1042.version.minor .. "." .. core_1042.version.patch ..  core_1042.version_release_to_string[core_1042.version.release]
 
 
 
@@ -70,10 +79,9 @@ elseif not core.settings:get_bool("1042_ignore_required_settings", false) then
                         core.disconnect_player(player:get_player_name(), "Enable "..name.." to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
                     end
                 end
+
             elseif core.settings:get(name) ~= value.value then
-                on_player_joins[#on_player_joins+1] = function(player)
-                    core.disconnect_player(player:get_player_name(), "Enable "..name.." to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
-                end
+                    error("Enable "..name.." to play this game!\n\nYou can also turn on the setting 1042>1042_auto_adjust_settings.")
             end
         end
     end
@@ -85,14 +93,9 @@ if not core.is_singleplayer() and core.settings:get_bool("1042_warn_players_abou
     end
 end
 
-if #on_player_joins > 0 then
-    core.register_on_joinplayer(function(player)
-        for _, func in ipairs(on_player_joins) do
-            func(player)
-        end
-    end)
-end
 
+
+-- Load other parts
 local path = core.get_modpath("1042_core")
 
 dofile(path.."/src/funcs.lua")
@@ -103,13 +106,51 @@ dofile(path.."/src/player/player_api.lua")
 dofile(path.."/src/player/player.lua")
 dofile(path.."/src/player/player_inv.lua")
 
-
 dofile(path.."/src/privs.lua")
 dofile(path.."/src/achievements.lua")
 dofile(path.."/src/chat_commands.lua")
 dofile(path.."/src/node_wear.lua")
 dofile(path.."/src/shared_lib.lua")
 dofile(path.."/src/abms.lua")
+
+
+
+
+
+local world_version = core_1042.get("1042_world_version")
+
+if world_version == nil then
+    core_1042.world_version = core_1042.version
+    core_1042.set("1042_world_version", core_1042.world_version)
+    core_1042.world_version_string = "1042 v" .. core_1042.world_version.major .. "." .. core_1042.world_version.minor .. "." .. core_1042.world_version.patch ..  core_1042.version_release_to_string[core_1042.world_version.release]
+
+else
+    core_1042.world_version = world_version
+    core_1042.world_version_string = "1042 v" .. core_1042.world_version.major .. "." .. core_1042.world_version.minor .. "." .. core_1042.world_version.patch ..  core_1042.version_release_to_string[core_1042.world_version.release]
+
+    if world_version.major < core_1042.oldest_supported_version.major or world_version.minor < core_1042.oldest_supported_version.minor
+        or world_version.patch < core_1042.oldest_supported_version.patch or world_version.release > core_1042.oldest_supported_version.release then
+            if core.is_singleplayer() then
+                on_player_joins[#on_player_joins+1] = function(player)
+                    core.disconnect_player(player:get_player_name(), "Wold is to old for " .. core_1042.version_string .. ", try an older version. World is on " .. core_1042.world_version_string)
+                end
+            else
+                error("Wold is to old for " .. core_1042.version_string .. ", try an older version. World is on " .. core_1042.world_version_string)
+            end
+    end
+
+end
+
+
+
+
+if #on_player_joins > 0 then
+    core.register_on_joinplayer(function(player)
+        for _, func in ipairs(on_player_joins) do
+            func(player)
+        end
+    end)
+end
 
 
 core.log("action", "1042_core loaded.")
