@@ -62,6 +62,7 @@
 - Death screen -Xeno333
 - HUD reworking -Xeno333
 - Adding custom schematics -Xeno333
+- Adding world versioning -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic

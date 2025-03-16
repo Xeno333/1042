@@ -21,6 +21,7 @@ This is documentation for development and modding for the game `1042` on the *Lu
 # Core interface
 
 ## `core_1042` is the namespace for all core_1042 functions
+
 - `core_1042.eat(itemstack, user, food_value, p_chance)` This removes one item from itemstack from the player `user` and adds `value` to `user`'s HP, `p_chance` is chance of taking damage of 2 times `food_value` while eating item.
 - `core_1042.read_file(filename)` Read a file and return its contense as a string. Returns `nil` if no data is read.
 - `core_1042.get_pointed_thing(player)` Gets player pointed thing, in form of raycast.
@@ -30,6 +31,18 @@ This is documentation for development and modding for the game `1042` on the *Lu
 - `core_1042.rand` Core random a `PcgRandom(math.random(1, 2048))` object. This can be used by anything.
 - `core_1042.register_loot(def)` Register loot as defined by `Loot table`
 - `core_1042.get_loot()` Returns a random `ItemStack` from the loot that is registered.
+
+### `core_1042` Data fields (Read Only)
+
+- `version_release_to_string` Mapped table for converting `<version table>.release` to a string.
+- `version` Current 1042 version. Format: `{major = <number>, minor = <number>, patch = <number>, release = <number>}`. `release` uses the format mapped in `version_release_to_string`.
+- `version_string` Readable formated string form of `version`.
+- `oldest_supported_version` Last suported version in same format, dev is older than release.
+- `world_version` Version of world  in same format.
+- `world_version_string` Readable formated string form of `world_version`.
+- `info` Result of `core.get_game_info()`.
+- `rand` Result of `PcgRandom(math.random(1, 2048))`. May be used for all true randoms.
+
 
 ## `core_1042.shared_lib` is a library that can be loaded into any place with `dofile(core.get_modpath("1042_core").."/src/shared_lib.lua")` if it isnt already loaded (it should be)
 
