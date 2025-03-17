@@ -62,7 +62,7 @@ end
 
 -- Load a schamtic from a file
 function schematics_1042.load_schematic(path)
-    local file = io.open(path..".1042_schem", "r")
+    local file = io.open(path..".1042_schem.json", "r")
     if not file then return nil end
 
     local schem = core.parse_json(file:read("*all") or "{}") or {}
@@ -176,7 +176,7 @@ function schematics_1042.save_schematic(pos1, pos2, path, ignore_air)
             end
         end
 
-        core.safe_file_write(path..".1042_schem", core.write_json(schematic, true))
+        core.safe_file_write(path..".1042_schem.json", core.write_json(schematic, true))
     end)
 
     return "Queued..."
