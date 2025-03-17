@@ -384,7 +384,7 @@ core.register_globalstep(function(dtime)
 			player_api.update_hud(player, "pointed_thing", {
 				type = "text",
 				name = "pointed_node_hud",
-				text = core.registered_nodes[node_name].description or node_name,
+				text = (core.registered_nodes[node_name] or {}).description or node_name,
 				position = {x=0.5, y=0.05},
 				number = 0x00ffdd,
 				style = 3
