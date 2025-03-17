@@ -179,6 +179,44 @@ These functions clean up automaticly, and provide a clean interface.
 - `player_api.hud_exists(player, unique_hud_name)` Check if a HUD exits for player.
 
 
+## Tree API
+
+This API allows for registering trees.
+
+- `core_1042.trees.register_tree(from_mod, def)` This registers a tree and the nodes related to it.
+
+The definition of a tree is as follows:
+
+```lua
+tree_def = {
+    name = "", -- Name of tree type/class it will end with ' Tree'/' Leaves'/' Sapling' unless name = "" like here the space is stripped.
+    
+    tree = { -- Tree trunk node def without description.
+        tiles = {"1042_plain_node.png^[colorize:#672307:200"},
+        use_texture_alpha = "opaque",
+    
+        sounds = {
+            dig = {
+                name = "tree_dig",
+                gain = 2,
+                pitch = 1
+            }
+        },
+    
+        groups = {wood = 1, plant = 1, burns = 3},
+    },
+    leaves = { -- Tree leaves def without description.
+        tiles = {"1042_plain_node.png^[colorize:#1c770a:168"},
+        use_texture_alpha = "blend",
+        drawtype = "allfaces",
+        
+        paramtype = "light",
+        sunlight_propagates = true,
+    
+        groups = {leafy = 1, plant = 1, breakable_by_hand = 1, burns = 1},
+    }
+}
+```
 
 
 
@@ -343,7 +381,7 @@ If `the_weather.on_end(player, name, players_weather)` is defined then all thing
 
 # `1042_schematics` API
 
-1042 has its own schematic format to be used in mapgen. It uses a json formated file as an output and has the following functions:
+1042 has its own schematic format to be used in mapgen. The files use a naming conventions in this format: `<schematic name>.1042_schem.json`. It uses a json formated file as an output and has the following functions:
 
 - `schematics_1042.new_schematic(x, y, z)` Returns a schematic table with a size of `(x, y, z)`.
 - `schematics_1042.register_schematic(name, schem)` Register a schematic table in the enviorment. Returns `true` if it worked or `false` if it was alredy registered.

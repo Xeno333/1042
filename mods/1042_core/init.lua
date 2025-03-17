@@ -106,6 +106,8 @@ dofile(path.."/src/player/player_api.lua")
 dofile(path.."/src/player/player.lua")
 dofile(path.."/src/player/player_inv.lua")
 
+dofile(path.."/src/tree_system.lua")
+
 dofile(path.."/src/privs.lua")
 dofile(path.."/src/achievements.lua")
 dofile(path.."/src/chat_commands.lua")
