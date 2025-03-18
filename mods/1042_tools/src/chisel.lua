@@ -1,18 +1,9 @@
-tools_1042.chisel = {
-    registered_chisel_recipes = {}
-}
-
-local registered_chisel_recipes = tools_1042.chisel.registered_chisel_recipes
-
-
-function tools_1042.chisel.register_chisel_recipes_from(from_node, recipe)
-    if not registered_chisel_recipes[from_node] then
-        registered_chisel_recipes[from_node] = {}
+core_1042.crafting.register_craft_type("1042_chisel", function(def)
+    if not core_1042.crafting.registered_crafts["1042_chisel"][def.node] then
+        core_1042.crafting.registered_crafts["1042_chisel"][def.node] = {}
     end
-
-    registered_chisel_recipes[from_node][#(registered_chisel_recipes[from_node]) + 1] = recipe
-end
-
+    core_1042.crafting.registered_crafts["1042_chisel"][def.node][#core_1042.crafting.registered_crafts["1042_chisel"][def.node]+1] = def
+end)
 
 
 local chiseling = {}
@@ -33,7 +24,7 @@ local function chisel(chisel_data, player_name, seconds, node_being_chiseled)
 
 	core.show_formspec(player_name, "1042_tools:chisel_cuting", "size[10,10]bgcolor[#00000000]background[4,4;2,2;" .. chisel_data.cuting_formspec_image .. "^[verticalframe:4:" .. ((2*seconds)%2)+phase .. "]")
 	
-    if seconds == chisel_data.duration then
+    if seconds >= chisel_data.duration then
 		local pos = core_1042.get_pointed_thing(player).under
 
         if chisel_data.place then
@@ -51,14 +42,14 @@ local function chisel(chisel_data, player_name, seconds, node_being_chiseled)
             end
 
         elseif chisel_data.result and core.get_node(pos).name == node_being_chiseled then
-			core.set_node(pos, chisel_data.result)
+			core.set_node(pos, {name=chisel_data.result})
             core.close_formspec(player_name, "1042_tools:chisel_cuting")
             chiseling[player_name] = nil
         end
 
 	else
 		core.after(.5, function()
-			chisel(chisel_data, player_name, seconds+.5, node_being_chiseled)
+			chisel(chisel_data, player_name, seconds+0.5, node_being_chiseled)
 		end)
 	end
 end
@@ -147,12 +138,12 @@ item_wear.register_complex_node("1042_tools:chisel_iron", {
         if not pos then return end
     
         local node_being_chiseled = core.get_node(pos).name
-        local rec = registered_chisel_recipes[node_being_chiseled]
+        local rec = core_1042.crafting.registered_crafts["1042_chisel"][node_being_chiseled]
         if not rec then return end
 
         -- Sort out ones that can not be placed do to failure of complex check
         local valid_defs = {}
-        for _, chisel_data in ipairs(rec) do
+        for _, chisel_data in pairs(rec) do
             if chisel_data.check then
                 if chisel_data.check(pos) then
                     valid_defs[#valid_defs+1] = chisel_data
@@ -202,12 +193,12 @@ item_wear.register_complex_node("1042_tools:chisel_iron", {
         local node_being_chiseled = core.get_node(pos).name
         local player_name = user:get_player_name()
 
-        local rec = registered_chisel_recipes[node_being_chiseled]
+        local rec = core_1042.crafting.registered_crafts["1042_chisel"][node_being_chiseled]
         if not rec then return end
 
         -- Sort out ones that can not be placed do to failure of complex check
         local valid_defs = {}
-        for _, chisel_data in ipairs(rec) do
+        for _, chisel_data in pairs(rec) do
             if chisel_data.check then
                 if chisel_data.check(pos) then
                     valid_defs[#valid_defs+1] = chisel_data
@@ -253,15 +244,17 @@ item_wear.register_complex_node("1042_tools:chisel_iron", {
 
 
 core_1042.register_loot({name = "1042_tools:chisel_iron"})
-core.register_craft({
-    output = "1042_tools:chisel_iron",
-    recipe = {
-        {"1042_nodes:crude_iron", "1042_nodes:sticks"}
+core_1042.crafting.register_craft({
+    result = "1042_tools:chisel_iron",
+    type = "1042_default",
+    items = {
+        "1042_nodes:crude_iron", "1042_nodes:sticks"
     }
 })
-core.register_craft({
-    output = "1042_tools:chisel_iron",
-    recipe = {
-        {"1042_nodes:iron_ingot", "1042_nodes:sticks"}
+core_1042.crafting.register_craft({
+    result = "1042_tools:chisel_iron",
+    type = "1042_default",
+    items = {
+        "1042_nodes:iron_ingot", "1042_nodes:sticks"
     }
 })

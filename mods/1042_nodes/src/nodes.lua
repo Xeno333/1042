@@ -343,18 +343,18 @@ core.register_node("1042_nodes:iron_nugget_block", {
     groups = {stone = 3},
 })
 
-core.register_craft({
-    output = "1042_nodes:iron_nugget_block",
-    recipe = {
-        {"1042_nodes:iron_nugget", "1042_nodes:iron_nugget", "1042_nodes:iron_nugget"},
-        {"1042_nodes:iron_nugget", "1042_nodes:iron_nugget", "1042_nodes:iron_nugget"},
-        {"1042_nodes:iron_nugget", "1042_nodes:iron_nugget", "1042_nodes:iron_nugget"},
+core_1042.crafting.register_craft({
+    result = "1042_nodes:iron_nugget_block",
+    type = "1042_default",
+    items = {
+        "1042_nodes:iron_nugget 9"
     }
 })
-core.register_craft({
-    output = "1042_nodes:iron_nugget 9",
-    recipe = {
-        {"1042_nodes:iron_nugget_block"},
+core_1042.crafting.register_craft({
+    result = "1042_nodes:iron_nugget 9",
+    type = "1042_default",
+    items = {
+        "1042_nodes:iron_nugget_block"
     }
 })
 
@@ -434,11 +434,8 @@ core.register_node("1042_nodes:chest", {
     groups = {wood = 1},
 })
 
-core.register_craft({
-    output = "1042_nodes:chest 2",
-    recipe = {
-        {"1042_nodes:tree_dark", "1042_nodes:tree_dark", "1042_nodes:tree_dark"},
-        {"1042_nodes:tree_dark", "", "1042_nodes:tree_dark"},
-        {"1042_nodes:tree_dark", "1042_nodes:tree_dark", "1042_nodes:tree_dark"}
-    }
+core_1042.crafting.register_craft({
+    result = "1042_nodes:chest 2",
+    type = "1042_default",
+    items = {"1042_nodes:tree_dark 8"}
 })

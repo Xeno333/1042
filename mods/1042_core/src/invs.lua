@@ -62,37 +62,40 @@ core.after(0,function() -- use after to ensure compleate initalization
 end)
 
 
+
+local table_of_crafts = {}
+
+core_1042.phases.register_callback("startup_done", function()
+    for _, recipe in pairs(core_1042.crafting.registered_crafts["1042_default"]) do
+        local item_stacks = {}
+
+        for _, stack in pairs(recipe.items) do
+            if core.registered_items[stack] then
+                local itemstack = ItemStack(stack)
+                item_stacks[itemstack:get_name()] = (item_stacks[itemstack:get_name()] or 0) + itemstack:get_count()
+            else
+                item_stacks[stack] = (item_stacks[stack] or 0) + 1
+            end
+        end
+
+        table_of_crafts[#table_of_crafts+1], _ = {recipe = recipe, output = recipe.result, req_items = item_stacks}
+    end
+end)
+
+
+
+
+
+
 -- #fixme Add a part to return the replacements things from crafting and part that updates when there inv updates so only things they have items for show
 function core_1042.update_player_crafts(player)
     --local inv = player:get_inventory()
     local craft_inv = core.get_inventory({type="detached", name=player:get_player_name() .. "_crafts"})
 
-    local table_of_crafts = {}
-
-    for _, def in pairs(core_1042.all_registered_items) do
-        if def.name and def.name ~= "" then
-            local recipes = core.get_all_craft_recipes(def.name)
-
-            if recipes then
-                for _, recipe in pairs(recipes) do
-                    if recipe and recipe.method == "normal" then
-                        local item_stacks = {}
-
-                        for _, stack in pairs(recipe.items) do
-                            item_stacks[stack] = (item_stacks[stack] or 0) + 1
-                        end
-
-                        table_of_crafts[#table_of_crafts+1], _ = {recipe = recipe, output = core.get_craft_result(recipe), req_items = item_stacks}
-                    end
-                end
-            end
-        end
-    end
-
     craft_inv:set_size("main", #table_of_crafts)
 
     for i, craft in ipairs(table_of_crafts) do
-        local item = craft.output.item
+        local item = ItemStack(craft.output)
         local meta = item:get_meta()
         local rec = ""
 

@@ -98,7 +98,9 @@ end
 -- Load other parts
 local path = core.get_modpath("1042_core")
 
+dofile(path.."/src/phases.lua")
 dofile(path.."/src/funcs.lua")
+dofile(path.."/src/crafting.lua")
 dofile(path.."/src/invs.lua")
 
 -- player
@@ -109,11 +111,11 @@ dofile(path.."/src/player/player_inv.lua")
 dofile(path.."/src/tree_system.lua")
 
 dofile(path.."/src/privs.lua")
-dofile(path.."/src/achievements.lua")
 dofile(path.."/src/chat_commands.lua")
 dofile(path.."/src/node_wear.lua")
 dofile(path.."/src/shared_lib.lua")
 dofile(path.."/src/abms.lua")
+
 
 
 
