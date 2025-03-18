@@ -63,6 +63,10 @@
 - HUD reworking -Xeno333
 - Adding custom schematics -Xeno333
 - Adding world versioning -Xeno333
+- Adding tree system -Xeno333
+- Adding custom crafting system and API -Xeno333
+- Adding add phases -Xeno333
+- Adding fix crash bug -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic

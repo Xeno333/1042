@@ -248,14 +248,6 @@ core.register_node("1042_nodes:sticks", {
 
 core_1042.register_loot({name = "1042_nodes:sticks", max_count = 32})
 
-core.register_craft({
-    output = "1042_tools:sticks 6",
-    type = "shapeless",
-    recipe = {
-        "group:wood"
-    }
-})
-
 
 
 

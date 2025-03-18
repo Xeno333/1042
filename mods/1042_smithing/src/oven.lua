@@ -45,7 +45,10 @@ core.register_node("1042_cooking:stone_oven_off", {
 	groups = {stone = 1}
 })
 
-tools_1042.chisel.register_chisel_recipes_from("1042_nodes:stone", {
+core_1042.crafting.register_craft({
+	result = "1042_cooking:stone_oven_off",
+	type = "1042_chisel",
+
 	check = function(pos)
 		return (core.get_node(pos).name == "1042_nodes:stone" and core.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "1042_nodes:stone")
 	end,
@@ -53,7 +56,8 @@ tools_1042.chisel.register_chisel_recipes_from("1042_nodes:stone", {
 		core.set_node(pos, {name="1042_cooking:stone_oven_off"})
 		core.set_node({x = pos.x, y = pos.y+1, z = pos.z}, {name="air"})
 	end,
-	result = "1042_cooking:stone_oven_off",
+
+	node = "1042_nodes:stone",
 	cuting_formspec_image = "1042_chiseling_stone_oven.png",
 	duration = 16
 })

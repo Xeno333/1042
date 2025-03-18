@@ -57,17 +57,6 @@ core_1042.shared_lib = {
 }
 ```
 
-## `item_wear` API
-
-This is an API for complex nodes/items that have wear, these are basicly tools of node types.
-
-### Functions (WIP)
-
-- `item_wear.set_uses(itemstack, uses)` Returns the itemstack with `uses` aplied to its wear. **WARNING:** `uses = 0` is undefined.
-- `item_wear.wear(itemstack, wear_to_apply)` Returns the itemstack with `wear_to_apply` uses aplied to it, if it breaks it removes and returns `ItemStack("")`.
-- `item_wear.register_complex_node(name, def)` Registers a node as a complex node (tool-like). **Note:** This may be changed to `register_complex_tool` in version v0.3-beta, but this is not definent yet. If it is changed later it will be kept until v0.4 with a depricated status and be a refrence.
-
-
 
 ## 1042 extensions of `PlayerHPChangeReason`
 
@@ -90,7 +79,7 @@ This is an API for complex nodes/items that have wear, these are basicly tools o
 
 
 
-# Groups
+## Groups
 
 - `breakable_by_hand` Player can break these items without tools. value is for break-time `{[1] = 0.1, [2] = 0.25, [3] = 0.5, [4] = 1, [5] = 2, [6] = 3, [7] = 4}`
 - `stone` Stone nodes. Value is for tools like pick, for break-time. `{[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}`
@@ -126,41 +115,47 @@ There are a few new node definition fields for ABMs and such:
 
 
 
+
+
 # `core_1042` APIs
 
 There are a few APIs built into the game, and more planned for the beta release.
 
 
-## Achievement API `achievements_1042`
 
-`achievements_1042` is the mod that contains the API for achievements, along with some core achievements.
+## `item_wear` API
 
+This is an API for complex nodes/items that have wear, these are basicly tools of node types.
 
-## Functions
+### Functions (WIP)
 
-- `achievements_1042.achieve(player, achievement_name)` Returns `nil` if the achievement does not exist, `false` if the player already has it, and `true` if the achievement is shown to the player.
-- `achievements_1042.register_achievement(achievement_name, achievement_definition)` Register an achievement, returns `false` if already registered, `true` otherwise.
-
-
-## Exposed tables
-
-- `achievements_1042.achievements` All registered achievements.
+- `item_wear.set_uses(itemstack, uses)` Returns the itemstack with `uses` aplied to its wear. **WARNING:** `uses = 0` is undefined.
+- `item_wear.wear(itemstack, wear_to_apply)` Returns the itemstack with `wear_to_apply` uses aplied to it, if it breaks it removes and returns `ItemStack("")`.
+- `item_wear.register_complex_node(name, def)` Registers a node as a complex node (tool-like). **Note:** This may be changed to `register_complex_tool` in version v0.3-beta, but this is not definent yet. If it is changed later it will be kept until v0.4 with a depricated status and be a refrence.
 
 
-## Achievement definition
+
+
+
+## Crafting API (`core_1042.crafting`)
+
+The crafting system 1042 has is fully custom and does not depend on the luanti crafting system. It allows for custom types and mod specific usage.
+
+### Functions
+
+- `core_1042.crafting.default_register_craft(def)` This is the default craft registration and just appends the craft to the list of this type's crafting recipeis. 
+- `core_1042.crafting.register_craft(def)` Register a craft recipe.
+- `core_1042.crafting.register_craft_type(type_name, reg_craft_func(def))` This registers a craft type with a custom function to handel it. The functions should add its data in the mods own format to `core_1042.crafting.registered_crafts_results[<type>]`, but not `core_1042.crafting.registered_crafts_results`.
+
+### Tables
 
 ```lua
-{
-	achievement = core.colorize("#ffffff", "First life"),
-	colour = "#00ffaa"
+core_1042.crafting = {
+    registered_crafts = {}, -- Sorted by type tables and then subsorted by mod that uses it. Non-game spesific and can be in any format, i.e. the mods internal format.
+    registered_crafts_results = {}, -- Indexed by result with value being a table of recipies, can be used for crafting guid.
 }
 ```
 
-
-## Core achievements
-
-- `first_life` This is the achievement for first spawn of a player.
-- `smelter` This is the achievement for first ingot broken.
 
 
 ## Player API
@@ -177,6 +172,7 @@ These functions clean up automaticly, and provide a clean interface.
 - `player_api.remove_hud(player, unique_hud_name)` Remove a HUD to a player, returns `true` if it was removed, and `false` if it didn't exits.
 - `player_api.update_hud(player, unique_hud_name, hud_def)` Add/Update(remove and add) a HUD without respecting pervious definition. Always returns `true` and should always be ignored.
 - `player_api.hud_exists(player, unique_hud_name)` Check if a HUD exits for player.
+
 
 
 ## Tree API
@@ -219,6 +215,57 @@ tree_def = {
 ```
 
 
+## Function Callback Phases (WIP) `core_1042.phases`
+
+Function callback phases are callbacks called at points in runtime. Some are called durring start up so that mods can have fixed start times.
+
+### Registration
+
+- `core_1042.phases.register_callback(phase, func)` Register a callback to run in specified phase.
+
+### On mods loaded (`core.on_mods_loaded(func())`)
+
+- `"complex_registration"` Called right after all mods are loaded, used to make entities or extened forms of some nodes (stairs, etc.).
+- `"startup"` Called at durring start up in the same `on_mods_loaded` as `"complex_registration"` but right after.
+
+### Server startup compleated (`core.after(0, func())`)
+- `"startup_done"` Called right after server startup compleated.
+- `"tests"` Testing time.
+
+
+
+
+
+
+
+# Achievement API `achievements_1042`
+
+`achievements_1042` is the mod that contains the API for achievements, along with some core achievements.
+
+### Functions
+
+- `achievements_1042.achieve(player, achievement_name)` Returns `nil` if the achievement does not exist, `false` if the player already has it, and `true` if the achievement is shown to the player.
+- `achievements_1042.register_achievement(achievement_name, achievement_definition)` Register an achievement, returns `false` if already registered, `true` otherwise.
+
+### Exposed tables
+
+- `achievements_1042.achievements` All registered achievements.
+
+### Achievement definition
+
+```lua
+{
+	achievement = core.colorize("#ffffff", "First life"),
+	colour = "#00ffaa"
+}
+```
+
+### Core achievements
+
+- `first_life` This is the achievement for first spawn of a player.
+- `smelter` This is the achievement for first ingot broken. *With 1042_nodes*
+
+
 
 
 
@@ -257,27 +304,32 @@ _1042_moldable = {
 
 
 
+
+
+
+
+
 # Chiseling API (WIP)
 
-The chisel is used to create some complex nodes, *like oven or molds*, from more basic one, *like stone or rocks*. Nodes that are chiselable are registered with `tools_1042.chisel.register_chisel_recipes_from(from_node, recipe)`, where `from_node` is the node that is chiseled to produce a new node (source node).
-
-
-#### Functions
-
-- `tools_1042.chisel.register_chisel_recipes_from(from_node, recipe)` Register a chisel recipe from the node `from_node`.
-
+The chisel is used to create some complex nodes, *like oven or molds*, from more basic one, *like stone or rocks*. Register a chisel recipe from the node `from_node`. Register it with a type of `"1042_chisel"` with `core_1042.crafting.register_craft(def)`.
 
 #### Chisel recipie definition format:
 
 ```lua
 {
+	type = "1042_chisel",
+	result = "<itemstring>", -- Itemstring of items to be placed when done chiseling.
+
+	node = "<itemstring>", -- Itemstring of node that will be chiseled
 	check = function(pos), -- **Optional** Returns a condition to test if the node at 'pos' can be chiseled. Only use this if you need a complex check, defaults to a simple check if node is there.
 	place = function(pos), -- **Optional** Complex placement, only use if you need complex placement.
-	result = "<itemstring>", -- Itemstring of items to be placed when done chiseling.
+
 	cuting_formspec_image = "<image>", -- Waiting formspec image made of 4 different images to create 2 tow-frames animations.
 	duration = <number> -- Time, in seconds, to finish the chiseling.
 }
 ```
+
+
 
 
 

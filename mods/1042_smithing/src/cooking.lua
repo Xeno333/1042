@@ -23,7 +23,7 @@ core.register_entity("1042_cooking:campfire_fire", {
 	},
 })
 
-core.register_on_mods_loaded(function()
+core_1042.phases.register_callback("complex_registration", function()
 	for id, def in pairs(core.registered_items) do
 		local thing = def._1042_campfire_cooks
 
@@ -41,13 +41,15 @@ core.register_on_mods_loaded(function()
 					use_texture_alpha = false
 				},
 				
-				_dorp = thing.drop,
+				_drop = thing.drop,
 				
 				on_activate = function(self, staticdata, dtime_s)
 					core.after(10, function()
 						local entity = self.object
-						core.add_item(self.object:get_pos(), (self["_dorp"]))
-						entity:remove()
+						if entity:is_valid() then
+							core.add_item(self.object:get_pos(), (self["_drop"]))
+							entity:remove()
+						end
 					end)
 				end,
 			})
@@ -158,12 +160,12 @@ core.register_node("1042_cooking:campfire", {
 	groups = {burning = 1, breakable_by_hand = 6},
 })
 
-core.register_craft({
-	output = "1042_cooking:campfire",
-	type = "shapeless",
-	recipe = {
-		"1042_nodes:rock", "1042_nodes:rock", "1042_nodes:rock",
-		"1042_nodes:sticks", "1042_nodes:sticks",
+core_1042.crafting.register_craft({
+	result = "1042_cooking:campfire",
+	type = "1042_default",
+	items = {
+		"1042_nodes:rock 3",
+		"1042_nodes:sticks 2",
 		"1042_nodes:flint",
 	},
 })

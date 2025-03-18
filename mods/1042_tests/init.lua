@@ -78,7 +78,7 @@ core.log("action", "Loading 1042_tests (" .. version.project .. " " .. version.s
 
 
 
-core.register_on_mods_loaded(function()
+core_1042.phases.register_callback("tests", function()
     for name, test in pairs(tests_1042.registered_tests) do
         if test.run_on_loaded then
             tests_1042.print("Result of test '" .. name .. "': " .. tostring(test.func() or "NO RETURN"))

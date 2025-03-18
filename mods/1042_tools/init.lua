@@ -51,13 +51,10 @@ item_wear.register_complex_node("1042_tools:sword",{
 })
 core_1042.register_loot({name = "1042_tools:sword"})
 
-core.register_craft({
-    output = "1042_tools:sword",
-    recipe = {
-        {"", "1042_nodes:iron_ingot", ""},
-        {"", "1042_nodes:iron_ingot", ""},
-        {"", "1042_nodes:sticks", ""},
-    }
+core_1042.crafting.register_craft({
+    result = "1042_tools:sword",
+    type = "1042_default",
+    items = {"1042_nodes:iron_ingot 2", "1042_nodes:sticks"}
 })
 
 
@@ -97,13 +94,10 @@ item_wear.register_complex_node("1042_tools:pick",{
 })
 core_1042.register_loot({name = "1042_tools:pick"})
 
-core.register_craft({
-    output = "1042_tools:pick",
-    recipe = {
-        {"1042_nodes:iron_ingot", "1042_nodes:iron_ingot", "1042_nodes:iron_ingot"},
-        {"", "1042_nodes:sticks", ""},
-        {"", "1042_nodes:sticks", ""},
-    }
+core_1042.crafting.register_craft({
+    result = "1042_tools:pick",
+    type = "1042_default",
+    items = {"1042_nodes:iron_ingot 3", "1042_nodes:sticks 2"}
 })
 
 
@@ -142,13 +136,10 @@ item_wear.register_complex_node("1042_tools:axe_flint",{
     groups = {weapon = 1, falling_node = 1, breakable_by_hand = 2},
 })
 
-core.register_craft({
-    output = "1042_tools:axe_flint",
-    recipe = {
-        {"1042_nodes:flint", "1042_nodes:flint", "1042_nodes:flint"},
-        {"", "1042_nodes:sticks", ""},
-        {"", "1042_nodes:sticks", ""},
-    }
+core_1042.crafting.register_craft({
+    result = "1042_tools:axe_flint",
+    type = "1042_default",
+    items = {"1042_nodes:flint 3", "1042_nodes:sticks 2"}
 })
 
 

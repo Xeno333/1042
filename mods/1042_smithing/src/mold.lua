@@ -4,7 +4,7 @@ cooking_1042.moldable_things = {
 
 
 
-core.register_on_mods_loaded(function()
+core_1042.phases.register_callback("complex_registration", function()
 	for id, def in pairs(core.registered_items) do
 		local thing = def._1042_moldable
 		if thing and not cooking_1042.moldable_things[id] then
@@ -141,13 +141,19 @@ core.register_node("1042_cooking:mold_empty", {
 	end
 })
 
-tools_1042.chisel.register_chisel_recipes_from("1042_nodes:rock", {
-	result = {name="1042_cooking:mold_empty"},
+core_1042.crafting.register_craft({
+	type = "1042_chisel",
+	result = "1042_cooking:mold_empty",
+
+	node = "1042_nodes:rock",
 	cuting_formspec_image = "1042_chiseling_mold.png",
 	duration = 8
 })
-tools_1042.chisel.register_chisel_recipes_from("1042_nodes:stone", {
-	result = {name="1042_cooking:mold_empty"},
+core_1042.crafting.register_craft({
+	result = "1042_cooking:mold_empty",
+	type = "1042_chisel",
+
+	node = "1042_nodes:stone",
 	cuting_formspec_image = "1042_chiseling_mold.png",
 	duration = 8
 })
