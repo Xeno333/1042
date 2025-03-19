@@ -99,6 +99,105 @@ core.register_node("1042_nodes:water_flowing", {
 })
 
 
+core.register_node("1042_nodes:water_source2", {
+    description = "Water Source 2",
+
+    drawtype = "liquid",
+    tiles = {
+		{
+			name = "water.png^[makealpha:1,1,1",
+			backface_culling = false,
+		},
+		{
+			name = "water.png^[makealpha:1,1,1",
+			backface_culling = true,
+		},
+    },
+	use_texture_alpha = "blend",
+    
+    paramtype = "light",
+    paramtype2 = "none",
+    light_source = 4,
+
+    walkable = false,
+    pointable = false,
+    diggable = false,
+    buildable_to = true,
+    is_ground_content = false,
+    liquid_renewable = false,
+
+    sounds = {
+        footstep = {
+            name = "water",
+            gain = 0.5,
+            pitch = 1
+        },
+    },
+
+    liquidtype = "source",
+    liquid_alternative_flowing = "1042_nodes:water_flowing2",
+    liquid_alternative_source = "1042_nodes:water_source2",
+    drop = "",
+
+    drowning = 2,
+    liquid_viscosity = 1,
+    liquid_range = 5,
+	waving = 3,
+
+    post_effect_color = {a = 64, r = 0x00, g = 0x6e, b = 0xa9},
+    groups = {water = 1, liquid = 1, cools = 1},
+})
+
+core.register_node("1042_nodes:water_flowing2", {
+    description = "Flowing Water 2",
+
+    drawtype = "flowingliquid",
+    tiles = {"water.png"},
+    special_tiles = {
+		{
+			name = "water.png^[makealpha:1,1,1",
+			backface_culling = false,
+		},
+		{
+			name = "water.png^[makealpha:1,1,1",
+			backface_culling = true,
+		},
+    },
+	use_texture_alpha = "blend",
+
+    paramtype = "light",
+    paramtype2 = "flowingliquid",
+    light_source = 4,
+
+    walkable = false,
+    pointable = false,
+    diggable = false,
+    buildable_to = true,
+    is_ground_content = false,
+    liquid_renewable = false,
+
+    sounds = {
+        footstep = {
+            name = "water",
+            gain = 0.5,
+            pitch = 1
+        },
+    },
+
+    liquidtype = "flowing",
+    liquid_alternative_flowing = "1042_nodes:water_flowing2",
+    liquid_alternative_source = "1042_nodes:water_source2",
+    drop = "",
+
+    drowning = 2,
+    liquid_viscosity = 1,
+    liquid_range = 5,
+	waving = 3,
+
+    post_effect_color = {a = 64, r = 0x00, g = 0x6e, b = 0xa9},
+    groups = {water = 1, liquid = 1, cools = 1, not_in_creative_inventory = 1},
+})
+
 
 
 

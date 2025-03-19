@@ -67,12 +67,12 @@ local grass_short = core.get_content_id("1042_nodes:grass_short")
 local mushroom = core.get_content_id("1042_nodes:mushroom")
 
 local chest = core.get_content_id("1042_nodes:chest")
+local air = core.get_content_id("air")
 
 
 
-
-
-
+local node2 = core.get_content_id("1042_nodes:node2")
+local water2 = core.get_content_id("1042_nodes:water_source2")
 
 
 
@@ -170,19 +170,17 @@ core.register_on_generated(function(vm, minp, maxp, seed)
     local param2_data = vm:get_param2_data()
 
     local pr = PseudoRandom(seed)
-
-    local noise_m = mapgen_1042.map:get_2d_map({z=0,y=minp.x, x=minp.z})
-    local m_pos = {z=minp.x,y=minp.y,x=minp.z}
-    local cave_noise_m = mapgen_1042.cave_map:get_3d_map(m_pos)
-    local ore_noise_m = mapgen_1042.ore_map:get_3d_map(m_pos)
-
     local tm = weather.get_temp_map(minp.x, minp.z)
-
     local place_list = {}
 
     -- Add for T_ymin just do stone
 
-    if maxp.y >= bedrock_level then
+    if maxp.y >= bedrock_level and minp.y <= T_ymax then
+        local noise_m = mapgen_1042.map:get_2d_map({z=0,y=minp.x, x=minp.z})
+        local m_pos = {z=minp.x,y=minp.y,x=minp.z}
+        local cave_noise_m = mapgen_1042.cave_map:get_3d_map(m_pos)
+        local ore_noise_m = mapgen_1042.ore_map:get_3d_map(m_pos)
+
         local ly = 0
         for y = minp.y, maxp.y do
             ly = ly + 1
@@ -299,7 +297,67 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                 end
             end
         end
-        
+
+    -- New demension
+    elseif maxp.y <= 4096 and maxp.y >= 1024 then
+        local noise_m = mapgen_1042.map2:get_2d_map({z=0,y=minp.x, x=minp.z})
+        local noise_m_1 = mapgen_1042.map2_1:get_2d_map({z=0,y=minp.x, x=minp.z})
+        local ly = 0
+        for y = minp.y, maxp.y do
+            ly = ly + 1
+            local lz = 0
+            for z = minp.z, maxp.z do
+                lz = lz + 1
+                local lx = 0
+                for x = minp.x, maxp.x do
+                    lx = lx + 1
+                    local vi = area:index(x, y, z)
+
+                    local noise = noise_m[lx][lz]
+                    local noise_1 = noise_m_1[lx][lz]
+                    local y_max = 2048 + (noise - 0.3)^(1/3) * 10
+
+                    --[[if noise_1 > 0.5 and y == math.floor(y_max) then
+                            data[area:index(x, y, z)] = ice]]
+                    if noise_1 > 0.35 and (y == math.floor(y_max) or (noise - 0.3 <= 0 and y == 2048)) then
+                        if noise_1 > 0.5 then
+                            data[area:index(x, y, z)] = air
+                            data[area:index(x, y-1, z)] = water2
+                            data[area:index(x, y-2, z)] = node2
+
+                            for y = y-1,y do
+                                local x = x-2
+                                for lx = lx-1, lx+1 do
+                                    x = x + 1
+                                    local z = z-2
+                                    for lz = lz-1, lz+1 do
+                                        z = z + 1
+
+                                        noise = (noise_m[lx] or {})[lz] or 1
+                                        noise_1 = (noise_m_1[lx] or {})[lz] or 1
+                                        y_max = 2048 + (noise - 0.3)^(1/3) * 10
+
+                                        if not (noise_1 > 0.5) and not (math.floor(y_max) == 1) then
+                                            data[area:index(x, y, z)] = node2
+                                        end
+                                    end
+                                end
+                            end
+
+                        else
+                            data[area:index(x, y, z)] = node2
+                            data[area:index(x, y-1, z)] = node2
+                        end
+
+                    elseif noise >= 0.3 then
+                        local y_min = 2048 - (noise - 0.3)^(3/5) * 30
+                        if y <= y_max and y >= y_min then
+                            data[vi] = node2
+                        end
+                    end
+                end
+            end
+        end
     end
 
     vm:set_data(data)
