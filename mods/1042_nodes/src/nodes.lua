@@ -1,4 +1,13 @@
 
+core.register_node("1042_nodes:node2", {
+    description = "node2",
+    tiles = {"1042_plain_node.png^[colorize:#aaaa88:168"},
+    use_texture_alpha = "opaque",
+
+    groups = {unbreakable = 1},
+})
+
+
 
 -- Land Nodes
 

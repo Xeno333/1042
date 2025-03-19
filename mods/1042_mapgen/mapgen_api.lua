@@ -1,7 +1,7 @@
 mapgen_1042 = {}
 
 
-if not core_1042 then core_1042 = {} end
+if rawget(_G, "core_1042") == nil then core_1042 = {} end
 if not core_1042.shared_lib then
     dofile(core.get_modpath("1042_core").."/src/shared_lib.lua")
 end
@@ -23,6 +23,43 @@ local map_noise_params = {
 
 mapgen_1042.map = PerlinNoiseMap(map_noise_params, {x=80, y=80})
 mapgen_1042.map_single = PerlinNoise(map_noise_params)
+
+
+local map_noise_params_2 = {
+    offset = 0,
+    scale = 1,
+    spread = {x = 40, y = 40, z = 40},
+    seed = core.get_mapgen_setting("seed") + 3754634652,
+    octaves = 5,
+    persist = 0.5,
+    lacunarity = 1,
+    flags = {
+        eased = true,
+        absvalue = false,
+        defaults = false
+    }
+}
+
+mapgen_1042.map2 = PerlinNoiseMap(map_noise_params_2, {x=80, y=80})
+mapgen_1042.map_single2 = PerlinNoise(map_noise_params_2)
+
+local map_noise_params_2_1 = {
+    offset = 0,
+    scale = 1,
+    spread = {x = 20, y = 20, z = 20},
+    seed = core.get_mapgen_setting("seed") + 354634652,
+    octaves = 5,
+    persist = 0.5,
+    lacunarity = 1,
+    flags = {
+        eased = true,
+        absvalue = false,
+        defaults = false
+    }
+}
+
+mapgen_1042.map2_1 = PerlinNoiseMap(map_noise_params_2_1, {x=80, y=80})
+mapgen_1042.map_single2_1 = PerlinNoise(map_noise_params_2_1)
 
 mapgen_1042.cave_map = PerlinNoiseMap({
     offset = 0,
