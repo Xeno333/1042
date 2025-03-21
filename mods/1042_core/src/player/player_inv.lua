@@ -149,15 +149,17 @@ core.register_on_player_receive_fields(function(player, form, fields)
         elseif fields.setting_hud_at_bottom then
             core_1042.set("playersetting_"..player:get_player_name().."_hud_at_bottom", fields.setting_hud_at_bottom)
 
-            local id = core_1042.player_huds[player:get_player_name()].hotbar
-            if fields.setting_hud_at_bottom == "true" then
-                player:hud_change(id, "direction", 0)
-                player:hud_change(id, "position", {x=0.5, y=0.95})
+            local id = player_api.get_hud_id(player, "hotbar")
+            if id then
+                if fields.setting_hud_at_bottom == "true" then
+                    player:hud_change(id, "direction", 0)
+                    player:hud_change(id, "position", {x=0.5, y=0.95})
 
-            else
-                player:hud_change(id, "direction", 2)
-                player:hud_change(id, "position", {x=0.05, y=0.5})
+                else
+                    player:hud_change(id, "direction", 2)
+                    player:hud_change(id, "position", {x=0.05, y=0.5})
 
+                end
             end
 
             player:set_inventory_formspec(core_1042.make_inv_formspec(player))

@@ -115,6 +115,7 @@ dofile(path.."/src/chat_commands.lua")
 dofile(path.."/src/node_wear.lua")
 dofile(path.."/src/shared_lib.lua")
 dofile(path.."/src/abms.lua")
+dofile(path.."/src/item.lua")
 
 
 

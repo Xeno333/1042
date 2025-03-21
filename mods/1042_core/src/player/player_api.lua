@@ -33,7 +33,7 @@ function player_api.remove_hud(player, unique_hud_name)
 
         if not next(player_huds[player_name]) then -- emtpy
             player_huds[player_name] = nil
-            return true
+            return truehud_def
         end
 
         return true
@@ -67,6 +67,17 @@ function player_api.hud_exists(player, unique_hud_name)
 
     if huds and huds[unique_hud_name] then
         return true
+
+    else
+        return false
+    end
+end
+
+function player_api.get_hud_id(player, unique_hud_name)
+    local huds = player_huds[player:get_player_name()]
+
+    if huds and huds[unique_hud_name] then
+        return huds[unique_hud_name]
 
     else
         return false
