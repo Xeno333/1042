@@ -314,7 +314,19 @@ end)
 core.register_globalstep(function(dtime)
 	for _, player in ipairs(core.get_connected_players()) do
 		local name = player:get_player_name()
+		local pos = player:get_pos()
 		local pointed_thing = core_1042.get_pointed_thing(player)
+
+		-- Collect items
+		--[[for object in core.objects_inside_radius(pos, 1) do
+			local entity = object:get_luaentity()
+			if entity and entity.name == "__builtin:item" then
+				player_api.add_item_to_player_inventory(player, "main", ItemStack(entity.itemstring), entity.object:get_pos())
+				entity.itemstring = nil
+				entity.object:remove()
+			end
+		end]]
+
 
 		-- Controles
 		local player_controls = player:get_player_control()

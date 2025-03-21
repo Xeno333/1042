@@ -66,7 +66,9 @@
 - Adding tree system -Xeno333
 - Adding custom crafting system and API -Xeno333
 - Adding add phases -Xeno333
-- Adding fix crash bug -Xeno333
+- Fix crash bug -Xeno333
+- Adding item -Xeno333
+- Fix crash -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic

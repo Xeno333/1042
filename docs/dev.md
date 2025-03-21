@@ -172,6 +172,7 @@ These functions clean up automaticly, and provide a clean interface.
 - `player_api.remove_hud(player, unique_hud_name)` Remove a HUD to a player, returns `true` if it was removed, and `false` if it didn't exits.
 - `player_api.update_hud(player, unique_hud_name, hud_def)` Add/Update(remove and add) a HUD without respecting pervious definition. Always returns `true` and should always be ignored.
 - `player_api.hud_exists(player, unique_hud_name)` Check if a HUD exits for player.
+- `player_api.get_hud_id(player, unique_hud_name)` Get a HUD id. Returns `false` on fail.
 
 
 
