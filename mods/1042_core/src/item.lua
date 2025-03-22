@@ -76,10 +76,18 @@ core.register_entity(":__builtin:item", {
         local x = 0
         local z = 0
         if v.x ~= 0 then
-            x = trunc(v.x, 2) - (sign(v.x) * 0.05)
+            if (v.x > 0 and v.x <= 0.5) or (v.x < 0 and v.x >= -0.5) then
+                x = 0
+            else
+                x = trunc(v.x, 2) - (sign(v.x) * 0.05)
+            end
         end
         if v.z ~= 0 then
-            z = trunc(v.z, 2) - (sign(v.z) * 0.05)
+            if (v.z > 0 and v.z <= 0.5) or (v.z < 0 and v.z >= -0.5) then
+                z = 0
+            else
+                z = trunc(v.z, 2) - (sign(v.z) * 0.05)
+            end
         end
         self.object:set_velocity(vector.new(x, v.y, z))
 
