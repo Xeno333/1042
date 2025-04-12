@@ -34,7 +34,6 @@ local bedrock_level = mapgen_1042.bedrock_level
 local caves_max = mapgen_1042.caves_max
 local decorated_caves = mapgen_1042.decorated_caves
 local treasure_y = mapgen_1042.water_level - 10
-local continent_radius = mapgen_1042.continent_radius
 
 
 
@@ -200,35 +199,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                     end
 
                     lx = lx + 1
-                    -- Get properties of land
-                    local noise = noise_m[lx][lz]
-                    local ny, rv
-                    local mountin_top = false
-
-                    -- Distance from (0,y,0)
-                    local r = math.sqrt(x^2+z^2)
-                    if noise <= 0.9 or r > continent_radius then -- make sure always runs if beyond cont range
-                        if noise > -0.5 then
-                            -- Normal gen
-                            ny = (noise * math.abs(noise)) * T_ymax
-                        else
-                            -- Deep sea Gen
-                            ny = (noise) * math.abs(T_ymin) + (0.75*T_ymax) 
-                        end
-
-                        -- Border
-                        if r > continent_radius then
-                            local offset = math.max(0, math.min(T_ymax, (1/3)*(r-continent_radius)))
-                            ny = ny - offset
-                        end
-                    else
-                        -- Mountin hole
-                        ny = (0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/8 + 4
-                        rv = math.floor((0.9 * math.abs(0.9)) * T_ymax - 3)
-                        mountin_top = true
-                    end
-                    
-                    ny = math.floor(ny)
+                    local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, noise_m[lx][lz])
 
 
                     local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
