@@ -92,7 +92,7 @@ weather.register_weather({
             shadow = "#aaaaaa",
             thickness = 128,
             speed = {x=2, y=2},
-            height = 120
+            height = core_1042.shared_lib.consts.plain_world_y_levels.sea_level + 120
         })
         player:set_sky({
             type = "regular",
@@ -202,7 +202,7 @@ weather.register_weather({
             shadow = "#aaaaaa",
             thickness = 128,
             speed = {x=2, y=2},
-            height = 120
+            height = core_1042.shared_lib.consts.plain_world_y_levels.sea_level + 120
         })
         player:set_sky({
             type = "regular",
@@ -300,7 +300,7 @@ weather.register_weather({
             shadow = "#aaaaaa",
             thickness = 128,
             speed = {x=2, y=2},
-            height = 120
+            height = core_1042.shared_lib.consts.plain_world_y_levels.sea_level + 120
         })
         player:set_sky({
             type = "regular",
@@ -397,7 +397,7 @@ weather.register_weather({
             thickness = 128,
             speed = {x=1, y=1},
             shadow = "#cccccc",
-            height = 120
+            height = core_1042.shared_lib.consts.plain_world_y_levels.sea_level + 120
         })
         player:set_sky({
             type = "regular",
@@ -507,7 +507,7 @@ weather.register_weather({
             thickness = 128,
             speed = {x=1, y=1},
             shadow = "#cccccc",
-            height = 120
+            height = core_1042.shared_lib.consts.plain_world_y_levels.sea_level + 120
         })
         player:set_sky({
             type = "regular",
