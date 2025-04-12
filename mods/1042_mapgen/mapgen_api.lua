@@ -62,7 +62,7 @@ mapgen_1042.map2_1 = PerlinNoiseMap(map_noise_params_2_1, {x=80, y=80})
 mapgen_1042.map_single2_1 = PerlinNoise(map_noise_params_2_1)
 
 
-local map_noise_params_tectonics = {
+--[[local map_noise_params_tectonics = {
     offset = 0,
     scale = 1,
     spread = {x = 2000, y = 2000, z = 2000},
@@ -77,7 +77,7 @@ local map_noise_params_tectonics = {
     }
 }
 mapgen_1042.map_tectonics = PerlinNoiseMap(map_noise_params_tectonics, {x=80, y=80})
-mapgen_1042.map_single_tectonics = PerlinNoise(map_noise_params_tectonics)
+mapgen_1042.map_single_tectonics = PerlinNoise(map_noise_params_tectonics)]]
 
 
 mapgen_1042.cave_map = PerlinNoiseMap({
