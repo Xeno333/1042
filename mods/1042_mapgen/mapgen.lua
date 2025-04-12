@@ -27,6 +27,7 @@ schematics_1042.register_schematic("big_tree_light_1", schem)
 
 -- Settings
 local T_ymax = mapgen_1042.ymax
+local T_ymax_Real = mapgen_1042.d_ymax
 local T_ymin = mapgen_1042.ymin
 local water_level = mapgen_1042.water_level
 local lava_level = mapgen_1042.lava_level
@@ -42,12 +43,15 @@ local treasure_y = mapgen_1042.water_level - 10
 -- Mapgen
 
 
+local bedrock = core.get_content_id("1042_nodes:bedrock")
+local skyrock = core.get_content_id("1042_nodes:skyrock")
+
+
 local stone = core.get_content_id("mapgen_stone")
 local dirt = core.get_content_id("1042_nodes:dirt")
 local sand = core.get_content_id("1042_nodes:sand")
 local turf = core.get_content_id("1042_nodes:turf")
 local snow = core.get_content_id("1042_nodes:snow")
-local bedrock = core.get_content_id("1042_nodes:bedrock")
 local lava = core.get_content_id("1042_nodes:lava_source")
 local iron_ore = core.get_content_id("1042_nodes:iron_ore")
 
@@ -174,7 +178,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
 
     -- Add for T_ymin just do stone
 
-    if maxp.y >= bedrock_level and minp.y <= T_ymax then
+    if maxp.y >= bedrock_level and minp.y <= T_ymax_Real then
         local noise_m = mapgen_1042.map:get_2d_map({z=0,y=minp.x, x=minp.z})
         local m_pos = {z=minp.x,y=minp.y,x=minp.z}
         local cave_noise_m = mapgen_1042.cave_map:get_3d_map(m_pos)
@@ -194,6 +198,16 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                         if  y == bedrock_level then
                             data[vi] = bedrock
                         end
+                        vi = vi + 1
+                        goto skip
+                    end
+                    if y == T_ymax_Real then
+                        data[vi] = skyrock
+
+                        vi = vi + 1
+                        goto skip
+                    end
+                    if y >= T_ymax then
                         vi = vi + 1
                         goto skip
                     end
