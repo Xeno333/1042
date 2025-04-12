@@ -9,15 +9,37 @@ core.register_node("1042_nodes:node2", {
 
 
 
--- Land Nodes
+
+-- Universal nodes
 
 core.register_node("1042_nodes:bedrock", {
     description = "Bedrock",
     tiles = {"1042_plain_node.png^[colorize:#110a02:200"},
     use_texture_alpha = "opaque",
 
+    diggable = false,
+
     groups = {unbreakable = 1},
 })
+
+core.register_node("1042_nodes:skyrock", {
+    description = "Skyrock",
+    drawtype = "airlike",
+
+    pointable = false,
+    diggable = false,
+    walkable = true,
+
+    paramtype = "light",
+    sunlight_propagates = true,
+
+    groups = {unbreakable = 1, not_in_creative_inventory = 1},
+})
+
+
+
+
+-- Land Nodes
 
 core.register_node("1042_nodes:dirt", {
     description = "Dirt",
