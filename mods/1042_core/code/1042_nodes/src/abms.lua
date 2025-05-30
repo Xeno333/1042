@@ -31,8 +31,8 @@ core.register_abm({
 core.register_abm({
     label = "Spread Fire",
     catch_up = true,
-    interval = 8,
-    chance = 4,
+    interval = 16,
+    chance = 2,
     nodenames = {"group:burns"},
     neighbors = {"group:burning"},
 
