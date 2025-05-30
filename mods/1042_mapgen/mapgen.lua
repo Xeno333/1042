@@ -233,7 +233,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                             data[vi] = dirt
 
                         elseif y == ny then
-                            local grass_color = math.floor(((tempv / 30) + 1) * 8 * 16) - 1 -- From weather_api.lua
+                            local grass_color = math.min(math.floor(((tempv / 30) + 1) * 8 * 16) - 1, 255) -- From weather_api.lua
                             if y > water_level then
                                 if mountin_top then
                                     data[vi] = dirt

@@ -284,6 +284,7 @@ local function make_death_formspec( reason)
 
 	return "1042_death_screen", "formspec_version[8]size[12,8]position[0.5,0.5]style_type[*;sound=stone_dig]"..
 		"bgcolor[#00223340;;]"..
+		"allow_close[false]"..
 		"set_focus[respawn;true]"..
 		"hypertext[4,1;4,1;reason;<center>" .. msg .. "</center>]"..
 		"image_button[4.5,3.5;3,1;1042_plain_node.png^[colorize:#00ffff:144;respawn;Respawn]"
