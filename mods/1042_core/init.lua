@@ -48,7 +48,6 @@ local required_settings = {
     ["enable_dynamic_shadows"] = {single_player=true, value="true"},
     ["enable_volumetric_lighting"] = {single_player=true, value="true"},
     ["enable_bloom"] = {single_player=true, value="true"},
-    ["enable_node_specular"] = {single_player=true, value="true"},
     ["enable_water_reflections"] = {single_player=true, value="true"},
     ["soft_clouds"] = {single_player=true, value="true"},
     ["enable_fog"] = {single_player=true, value="true"},

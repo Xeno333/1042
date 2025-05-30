@@ -82,11 +82,14 @@ function core_1042.make_inv_formspec(player)
         "scroll_container_end[]"..
         "scrollbar[1,2;0.5,4;vertical;setting_box_scrollbar;0]"..
 
-        "label[1.5,7.5;Docs]"..
-        "image_button[2,8;2,1;1042_plain_node.png^[colorize:#22ff44:144;doc_gameplay_md;Guide]"..
-        "image_button[5,8;2,1;1042_plain_node.png^[colorize:#22ffff:144;README_md;README]"..
-        "image_button[8,8;2,1;1042_plain_node.png^[colorize:#88ffff:144;LICENSE;©]"..
-        "image_button[11,8;2,1;1042_plain_node.png^[colorize:#448888:144;credits_txt;Credits]"..
+        "label[1.5,7.5;Controles]"..
+        "label[2,8;Use - Aux1\nSprint - Walk]"..
+
+        --"label[1.5,7.5;Docs]"..
+        --"image_button[2,8;2,1;1042_plain_node.png^[colorize:#22ff44:144;doc_gameplay_md;Guide]"..
+        --"image_button[5,8;2,1;1042_plain_node.png^[colorize:#22ffff:144;README_md;README]"..
+        --"image_button[8,8;2,1;1042_plain_node.png^[colorize:#88ffff:144;LICENSE;©]"..
+        --"image_button[11,8;2,1;1042_plain_node.png^[colorize:#448888:144;credits_txt;Credits]"..
 
         "list[current_player;main;1,11;10,4;]"..
         "listring[current_player;main]"
@@ -168,17 +171,17 @@ core.register_on_player_receive_fields(function(player, form, fields)
             core_1042.set("playersetting_"..player:get_player_name().."_hide_creative_inv", fields.setting_hide_creative_inv)
             player:set_inventory_formspec(core_1042.make_inv_formspec(player))
 
-        elseif fields.doc_gameplay_md then
-            core.show_formspec(player:get_player_name(), "doc_gameplay_md", "formspec_version[8]size[14,9,false]textarea[0,0;14,9;gameplay_md_text;;" .. core.formspec_escape(gamplay_md) .. "]")
+        --elseif fields.doc_gameplay_md then
+        --    core.show_formspec(player:get_player_name(), "doc_gameplay_md", "formspec_version[8]size[32,17.5,false]textarea[0,0;32,17.5;gameplay_md_text;;" .. core.formspec_escape(gamplay_md) .. "]")
 
-        elseif fields.README_md then
-            core.show_formspec(player:get_player_name(), "README_md", "formspec_version[8]size[14,9,false]textarea[0,0;14,9;README_md_text;;" .. core.formspec_escape(README_md) .. "]")
+        --elseif fields.README_md then
+        --    core.show_formspec(player:get_player_name(), "README_md", "formspec_version[8]size[32,17.5,false]textarea[0,0;32,17.5;README_md_text;;" .. core.formspec_escape(README_md) .. "]")
             
-        elseif fields.LICENSE then
-            core.show_formspec(player:get_player_name(), "LICENSE", "formspec_version[8]size[14,9,false]textarea[0,0;14,9;LICENSE_text;;" .. core.formspec_escape(LICENSE) .. "]")
+        --elseif fields.LICENSE then
+        --    core.show_formspec(player:get_player_name(), "LICENSE", "formspec_version[8]size[32,17.5,false]textarea[0,0;32,17.5;LICENSE_text;;" .. core.formspec_escape(LICENSE) .. "]")
 
-        elseif fields.credits_txt then
-            core.show_formspec(player:get_player_name(), "credits_txt", "formspec_version[8]size[14,9,false]textarea[0,0;14,9;credits_txt_text;;" .. core.formspec_escape(credits_txt) .. "]")
+        --elseif fields.credits_txt then
+        --    core.show_formspec(player:get_player_name(), "credits_txt", "formspec_version[8]size[32,17.5,false]textarea[0,0;32,17.5;credits_txt_text;;" .. core.formspec_escape(credits_txt) .. "]")
 
         end
     end
