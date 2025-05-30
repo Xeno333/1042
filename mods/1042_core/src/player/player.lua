@@ -374,7 +374,7 @@ core.register_globalstep(function(dtime)
 				aux1_cooldown[name] = aux1_cooldown[name] - dtime
 			elseif player_controls.aux1 then
 				local itemstack = player:get_wielded_item()
-				local def = core.registered_items[itemstack:get_name()]
+				local def = core.registered_items[itemstack:get_name()] or {}
 
 				if def._1042_on_use then
 					local ret_itemstack = def._1042_on_use(itemstack, player, pointed_thing)

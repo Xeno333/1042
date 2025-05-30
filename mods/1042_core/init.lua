@@ -1,19 +1,8 @@
 core.log("action", "Loading 1042_core...")
 
-core_1042 = {
-    version_release_to_string = {"", "-pre-release", "-dev"},
-    version = {major = 0, minor = 3, patch = 0, release = 3},
-    version_string = nil, -- string set at start time
-    oldest_supported_version = {major = 0, minor = 3, patch = 0, release = 3},
-    world_version = nil,
-    world_version_string = nil, -- string set at start time
-
-    info = core.get_game_info(),
-    rand = PcgRandom(math.random(1, 2048)) -- Good for all random needed
-}
-
-core_1042.version_string = "1042 v" .. core_1042.version.major .. "." .. core_1042.version.minor .. "." .. core_1042.version.patch ..  core_1042.version_release_to_string[core_1042.version.release]
-
+local path = core.get_modpath("1042_core")
+dofile(path.."/src/shared_lib.lua")
+core.register_mapgen_script(path.."/src/shared_lib.lua")
 
 
 
@@ -96,7 +85,7 @@ end
 
 
 -- Load other parts
-local path = core.get_modpath("1042_core")
+local path = core_1042.core_path
 
 dofile(path.."/src/phases.lua")
 dofile(path.."/src/funcs.lua")
@@ -113,7 +102,6 @@ dofile(path.."/src/tree_system.lua")
 dofile(path.."/src/privs.lua")
 dofile(path.."/src/chat_commands.lua")
 dofile(path.."/src/node_wear.lua")
-dofile(path.."/src/shared_lib.lua")
 dofile(path.."/src/abms.lua")
 dofile(path.."/src/item.lua")
 
@@ -159,3 +147,8 @@ end
 
 
 core.log("action", "1042_core loaded.")
+
+
+
+
+dofile(path.."/load_mods.lua")
