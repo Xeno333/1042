@@ -102,7 +102,13 @@ function core_1042.update_player_crafts(player)
         meta:set_string("items_needed_to_craft", core.serialize(craft.req_items))
 
         for stack, c in pairs(craft.req_items) do
-            rec = rec .. "\n" .. ItemStack(stack):get_short_description() .. " x " .. c
+            local itemstack = ItemStack(stack)
+            local itemstack_name = itemstack:get_name()
+
+            local ingredient_name = itemstack_name
+            if core.registered_items[itemstack_name] then ingredient_name = itemstack:get_short_description() end
+
+            rec = rec  .. "\n" .. ingredient_name .. " x " .. c
         end
 
         meta:set_string("description", item:get_description() .. "\n" .. core.colorize("#00ff00", rec))
@@ -142,9 +148,28 @@ core.register_on_joinplayer(function(player)
         allow_take = function(orginv, orglistname, orgindex, stack, player)
             local inv = player:get_inventory()
             local items_needed_to_craft = core.deserialize(stack:get_meta():get_string("items_needed_to_craft") or "")
+            local inv_list = inv:get_list("main")
 
             for item, count in pairs(items_needed_to_craft) do
-                if not inv:contains_item("main", ItemStack(item .. " " .. count)) then
+                if item:find("^group:") ~= nil then
+                    local parts = {}
+                    for part in string.gmatch(item, "([^:, ]+)") do parts[#parts+1] = part end
+
+                    local found = false
+                    for _, is in pairs(inv_list) do
+                        local raw_name = is:get_name()
+                        if core.registered_items[raw_name] and (core.get_item_group(raw_name, parts[2]) or 0) ~= 0 then
+                            if is:get_count() >= count then
+                                found = true
+                                break
+                            end
+                        end
+                    end
+
+                    if not found then
+                        return 0
+                    end
+                elseif not inv:contains_item("main", ItemStack(item .. " " .. count)) then
                     return 0
                 end
             end
@@ -165,9 +190,27 @@ core.register_on_joinplayer(function(player)
         on_take = function(orginv, orglistname, orgindex, stack, player)
             local inv = player:get_inventory()
             local items_needed_to_craft = core.deserialize(swap_meta_data.items_needed_to_craft or "")
+            local inv_list = inv:get_list("main")
 
             for item, count in pairs(items_needed_to_craft) do
-                inv:remove_item("main", ItemStack(item .. " " .. count))
+                if item:find("^group:") ~= nil then
+                    local parts = {}
+                    for part in string.gmatch(item, "([^:, ]+)") do parts[#parts+1] = part end
+
+                    for _, is in pairs(inv_list) do
+                        local raw_name = is:get_name()
+                        if core.registered_items[raw_name] and (core.get_item_group(raw_name, parts[2]) or 0) ~= 0 then
+                            if is:get_count() >= count then
+                                local remove_it = ItemStack(is)
+                                remove_it:set_count(count)
+                                inv:remove_item("main", remove_it)
+                                break
+                            end
+                        end
+                    end
+                else
+                    inv:remove_item("main", ItemStack(item .. " " .. count))
+                end
             end
 
             -- swap back of inv data so that it doesnt end up with meta on the stack for player

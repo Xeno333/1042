@@ -69,6 +69,8 @@
 - Fix crash bug -Xeno333
 - Adding item -Xeno333
 - Fix crash -Xeno333
+- Add groups support to default crafting -Xeno333
+- Start torch -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic

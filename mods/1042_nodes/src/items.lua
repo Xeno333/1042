@@ -222,6 +222,54 @@ core.register_node("1042_nodes:flint", {
     groups = {breakable_by_hand = 3, attached_node = 3},
 })
 
+core.register_node("1042_nodes:torch", {
+    description = "Torch",
+    drawtype = "nodebox",
+    tiles = {
+        "1042_plain_node.png^[colorize:#ff9900:128",
+        "1042_plain_node.png^[colorize:#371307:172"
+    },
+    use_texture_alpha = "opaque",
+
+    selection_box = {
+        fixed = {
+            {-0.1, -0.5, -0.1, 0.1, -0.1, 0.1},
+            {-0.15, -0.1, -0.15, 0.15, 0.1, 0.15}
+        }
+    },
+    collision_box = {
+        fixed = {
+            {-0.1, -0.5, -0.1, 0.1, -0.1, 0.1},
+            {-0.15, -0.1, -0.15, 0.15, 0.1, 0.15}
+        }
+    },
+    node_box = {
+        type = "fixed",
+        fixed = {
+            {-0.1, -0.5, -0.1, 0.1, -0.1, 0.1},
+            {-0.15, -0.1, -0.15, 0.15, 0.1, 0.15}
+        }
+    },
+
+    paramtype2 = "4dir",
+
+    paramtype = "light",
+    light_source = 10,
+    sunlight_propagates = true,
+    walkable = false,
+    buildable_to = false,
+    
+    groups = {breakable_by_hand = 3, attached_node = 3, burning = 1},
+})
+
+core_1042.crafting.register_craft({
+    result = "1042_nodes:torch",
+    type = "1042_default",
+    items = {
+        "group:burns 5",
+    }
+})
+
 
 core.register_node("1042_nodes:sticks", {
     description = "Sticks",
