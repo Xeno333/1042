@@ -52,5 +52,5 @@ end
 
 -- This equation is hard coded in mapgen!
 function weather.get_biome_palette_index(temp)
-    return math.floor(((temp / 30) + 1) * 8 * 16) - 1
+    return math.min(math.floor(((temp / 30) + 1) * 8 * 16) - 1, 255)
 end
