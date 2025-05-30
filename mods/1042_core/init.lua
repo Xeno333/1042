@@ -1,8 +1,8 @@
-core.log("action", "Loading 1042_core...")
+core.log("action", "Loading 1042...")
 
 local path = core.get_modpath("1042_core")
-dofile(path.."/src/shared_lib.lua")
-core.register_mapgen_script(path.."/src/shared_lib.lua")
+dofile(path.."/shared_lib.lua")
+core.register_mapgen_script(path.."/shared_lib.lua")
 
 
 
@@ -84,26 +84,30 @@ end
 
 
 
--- Load other parts
-local path = core_1042.core_path
 
-dofile(path.."/src/phases.lua")
-dofile(path.."/src/funcs.lua")
-dofile(path.."/src/crafting.lua")
-dofile(path.."/src/invs.lua")
+-- load mods
 
--- player
-dofile(path.."/src/player/player_api.lua")
-dofile(path.."/src/player/player.lua")
-dofile(path.."/src/player/player_inv.lua")
+local path = core_1042.core_path .. "/code/"
+local mod_load_order = {
+    path .. "core/core.lua",
 
-dofile(path.."/src/tree_system.lua")
+    path .. "1042_player/player.lua",
+    path .. "1042_tests/init.lua",
+    path .. "1042_achievements/init.lua",
+    path .. "1042_nodes/init.lua",
+    path .. "1042_tools/init.lua",
+    path .. "1042_smithing/init.lua",
+    path .. "1042_mobs/mobs.lua",
+    path .. "1042_schematics/init.lua",
+    path .. "1042_weather/init.lua",
 
-dofile(path.."/src/privs.lua")
-dofile(path.."/src/chat_commands.lua")
-dofile(path.."/src/node_wear.lua")
-dofile(path.."/src/abms.lua")
-dofile(path.."/src/item.lua")
+    path .. "1042_mapgen/init.lua",
+}
+
+
+for _, init_file in ipairs(mod_load_order) do
+    dofile(init_file)
+end
 
 
 
@@ -146,9 +150,4 @@ if #on_player_joins > 0 then
 end
 
 
-core.log("action", "1042_core loaded.")
-
-
-
-
-dofile(path.."/load_mods.lua")
+core.log("action", "1042 loaded.")

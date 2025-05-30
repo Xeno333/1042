@@ -29,5 +29,5 @@ core_1042.shared_lib = {
 }
 
 function core_1042.get_core_mod_path(name)
-    return core_1042.core_path .. "/src/" .. name
+    return core_1042.core_path .. "/code/" .. name
 end

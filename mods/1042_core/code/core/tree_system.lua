@@ -45,3 +45,8 @@ function core_1042.trees.register_tree(from_mod, def)
         grow_data = def.grow_data -- #fixme Add grow data functions etc
     }
 end
+
+
+
+function core_1042.trees.grow_tree()
+end
