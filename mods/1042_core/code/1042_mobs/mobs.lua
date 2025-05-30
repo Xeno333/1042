@@ -1,5 +1,24 @@
 core.log("action", "Loading 1042_mobs...")
 
+
+core.register_chatcommand("mob", {
+    description = "Kill slef instantly.",
+    privs = {["creative"] = true},
+    params = "<mob>",
+    description = "Spawn mob.",
+    func = function(name, mob)
+        local player = core.get_player_by_name(name)
+        if player then
+            if core.add_entity(player:get_pos(), mob) ~= nil then
+                return true, "Spawned " .. mob
+            end
+        end
+
+        return false, "Could not spawn " .. mob
+    end
+})
+
+
 core.register_entity("1042_core:fish", {
     initial_properties = {
         visual = "mesh",
