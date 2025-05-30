@@ -68,6 +68,9 @@ local beryl_top = core.get_content_id("1042_core:beryl_hanging")
 local grass_tall = core.get_content_id("1042_core:grass_tall")
 local grass_short = core.get_content_id("1042_core:grass_short")
 local mushroom = core.get_content_id("1042_core:mushroom")
+local digitalis = core.get_content_id("1042_core:digitalis")
+local light_bloom = core.get_content_id("1042_core:light_bloom")
+local sunflower = core.get_content_id("1042_core:sunflower")
 
 local chest = core.get_content_id("1042_core:chest")
 local air = core.get_content_id("air")
@@ -93,6 +96,12 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data
         if c <= 20 then
             data[area:index(x, y+1, z)] = grass_tall
             param2_data[area:index(x, y+1, z)] = grass_color
+        elseif c == 21 and tempv >= 10 and tempv <= 20 then
+            data[area:index(x, y+1, z)] = digitalis
+        elseif c <= 25 and tempv >= 5 and tempv <= 15 and y >= water_level+5 then -- be with dark trees
+            data[area:index(x, y+1, z)] = light_bloom
+        elseif c <= 25 and tempv >= 20 then
+            data[area:index(x, y+1, z)] = sunflower
         elseif c < 100 then
             data[area:index(x, y+1, z)] = grass_short
             param2_data[area:index(x, y+1, z)] = grass_color
@@ -213,10 +222,8 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                     end
 
                     lx = lx + 1
-                    local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, noise_m[lx][lz])
-
-
                     local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
+                    local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, noise_m[lx][lz], tempv)
 
 
                     -- Place and handel caves

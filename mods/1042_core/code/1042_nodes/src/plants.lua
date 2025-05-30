@@ -160,8 +160,8 @@ core.register_node("1042_core:apple", {
 
 -- Flowers
 
-core.register_node("1042_core:flower_1", {
-    description = "Flower",
+core.register_node("1042_core:light_bloom", {
+    description = "Light bloom",
     drawtype = "mesh",
     mesh = "flower_1.obj",
     tiles = {
@@ -217,8 +217,8 @@ core.register_node("1042_core:digitalis", {
     groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1, flower = 2},
 })
 
-core.register_node("1042_core:flower_3", {
-    description = "Flower",
+core.register_node("1042_core:tulip", {
+    description = "Tulip",
     drawtype = "mesh",
     mesh = "flower_3.obj",
     tiles = {
@@ -237,8 +237,8 @@ core.register_node("1042_core:flower_3", {
     groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1, flower = 3},
 })
 
-core.register_node("1042_core:flower_4", {
-    description = "Flower",
+core.register_node("1042_core:sunflower", {
+    description = "Sunflower",
     drawtype = "mesh",
     mesh = "flower_4.obj",
     tiles = {

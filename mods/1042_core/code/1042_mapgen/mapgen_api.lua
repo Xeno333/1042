@@ -16,7 +16,7 @@ local map_noise_params = {
     }
 }
 
-mapgen_1042.map = PerlinNoiseMap(map_noise_params, {x=80, y=80})
+mapgen_1042.map = PerlinNoiseMap(map_noise_params, {x=80, y=80, z=0})
 mapgen_1042.map_single = PerlinNoise(map_noise_params)
 
 
@@ -35,7 +35,7 @@ local map_noise_params_2 = {
     }
 }
 
-mapgen_1042.map2 = PerlinNoiseMap(map_noise_params_2, {x=80, y=80})
+mapgen_1042.map2 = PerlinNoiseMap(map_noise_params_2, {x=80, y=80, z=0})
 mapgen_1042.map_single2 = PerlinNoise(map_noise_params_2)
 
 local map_noise_params_2_1 = {
@@ -53,7 +53,7 @@ local map_noise_params_2_1 = {
     }
 }
 
-mapgen_1042.map2_1 = PerlinNoiseMap(map_noise_params_2_1, {x=80, y=80})
+mapgen_1042.map2_1 = PerlinNoiseMap(map_noise_params_2_1, {x=80, y=80, z=0})
 mapgen_1042.map_single2_1 = PerlinNoise(map_noise_params_2_1)
 
 
@@ -126,7 +126,7 @@ local T_ymax = mapgen_1042.ymax
 local T_ymin = mapgen_1042.ymin
 local continent_radius = mapgen_1042.continent_radius
 
-function mapgen_1042.get_y(x, z, noisei)
+function mapgen_1042.get_y(x, z, noisei, temp)
     local noise = noisei
     if not noise then
         noise = mapgen_1042.map_single:get_2d(vector.new(z, x, 0))
@@ -153,9 +153,12 @@ function mapgen_1042.get_y(x, z, noisei)
         end
     else
         -- Mountin hole
-        ny = math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/8 + 4)
         local rv = math.floor((0.9 * math.abs(0.9)) * T_ymax - 3)
-        return math.floor(ny), rv, true, noise
+        if temp and temp <= 20 then
+            return math.floor(math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/8 + 4)), rv, true, noise
+        else
+            return math.floor(math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/(8*(temp/20)) + 4)), rv, false, noise
+        end
     end
     
 

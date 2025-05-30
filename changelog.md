@@ -72,6 +72,7 @@
 - Add groups support to default crafting -Xeno333
 - Start torch -Xeno333
 - Use new allow_close[false] in death screen -Xeno333
+- Flowers and mapgen changes along with massive re-structure -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic

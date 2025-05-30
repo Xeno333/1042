@@ -22,7 +22,7 @@ local weather_def = {
     }
 }
 
-local temp_m = PerlinNoiseMap(weather_def, {x=80, y=80})
+local temp_m = PerlinNoiseMap(weather_def, {x=80, y=80, z=0})
 local temp_s = PerlinNoise(weather_def)
 
 -- Single vector to be used once so as to not make a whole bunch
