@@ -129,6 +129,20 @@ item_wear.register_complex_node("1042_core:axe_flint",{
     },
     wield_scale = {x = 1.5, y = 2, z = 1.5},
 
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        if not pointed_thing then return end
+        local pos = pointed_thing.under
+        local node = core.get_node(pos).name
+        local player_name = user:get_player_name()
+
+        local rec = core_1042.crafting.registered_crafts["1042_chopping"][node]
+        if not rec then return end
+
+        core.set_node(pos, {name = rec.result})
+
+        return item_wear.wear(itemstack, 1)
+    end,
+
     uses = 65,
 
     damage_per_second = 128,
