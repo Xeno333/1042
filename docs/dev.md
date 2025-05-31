@@ -164,6 +164,15 @@ core_1042.crafting = {
 
 - `player_api.add_item_to_player_inventory(player, list, itemstack, drop_overflow_pos)` Add itemstack to player inv and drop remains, returns count droped at `drop_overflow_pos`. If player is not a player node the itemstack is just dropped.
 
+#### Player Data
+
+- `player_api.set_data(playername, id, data)` Store data for player.
+- `player_api.get_data(playername, id)` Ger data for player.
+
+#### Player Hunger
+
+- `player_api.add_hunger(player, v)` Add hunger to player, `v` can be +/- and will always be put into range from 0 to 20.
+
 #### Player HUD Functions
 
 These functions clean up automaticly, and provide a clean interface.

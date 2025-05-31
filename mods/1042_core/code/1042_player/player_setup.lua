@@ -124,7 +124,7 @@ core.register_on_joinplayer(function(player, last_join)
 
 	-- Ligthing and enviorment
 	local saturation = 1.8
-	if core_1042.get("playersetting_"..name.."_greyscale") == "true" then
+	if player_api.get_data(name, "setting_greyscale") == "true" then
 		saturation = 0
 	end
 
@@ -193,6 +193,7 @@ core.register_on_joinplayer(function(player, last_join)
 		text = "1042_plain_node.png^[colorize:#ddffff:168",
 		text2 = "1042_plain_node.png^[colorize:#ddffff:64",
 		number = 20,
+		item = 20,
 		direction = 3,
 		position = {x=0.98, y=0.6},
 		size = {x=20,y=20}
@@ -205,6 +206,7 @@ core.register_on_joinplayer(function(player, last_join)
 		text = "1042_plain_node.png^[colorize:#ff0000:168",
 		text2 = "1042_plain_node.png^[colorize:#ff0000:64",
 		number = 20,
+		item = 20,
 		direction = 3,
 		position = {x=0.98, y=0.9},
 		size = {x=20,y=20}
@@ -216,7 +218,7 @@ core.register_on_joinplayer(function(player, last_join)
 		name = "hotbar",
 		text = "main",
 	}
-	if core_1042.get("playersetting_"..player:get_player_name().."_hud_at_bottom") == "true" then
+	if player_api.get_data(name, "setting_hud_at_bottom") == "true" then
 		hotbar.direction = 0
 		hotbar.position = {x=0.5, y=0.95}
 	else
@@ -225,6 +227,27 @@ core.register_on_joinplayer(function(player, last_join)
 	end
 
 	player_api.add_hud(player, "hotbar", hotbar)
+
+
+
+	local hunger = player_api.get_data(name, "hunger")
+	if hunger == nil then
+		hunger = 20
+		player_api.set_data(name, "hunger", hunger)
+	end
+
+	player_api.add_hud(player, "hunger", {
+		type = "statbar",
+		name = "hunger",
+		text = "1042_plain_node.png^[colorize:#ff8822:168",
+		text2 = "1042_plain_node.png^[colorize:#ff8822:64",
+		number = hunger,
+		item = 20,
+		direction = 3,
+		position = {x=0.96, y=0.9},
+		size = {x=20,y=20}
+	})
+
 
 
 	player:hud_add({

@@ -68,7 +68,7 @@ function weather.default_on_change(player, name, players_weather)
     )
     
     local saturation = 1.8
-    if core_1042.get("playersetting_"..name.."_greyscale") == "true" then
+    if player_api.get_data(name, "setting_greyscale") == "true" then
         saturation = 0
     end
 

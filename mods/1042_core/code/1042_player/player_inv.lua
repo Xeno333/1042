@@ -40,8 +40,9 @@ end
 
 
 function core_1042.make_inv_formspec(player)
-    local greyscale = core_1042.get("playersetting_"..player:get_player_name().."_greyscale") or "false"
-    local hud_at_bottom = core_1042.get("playersetting_"..player:get_player_name().."_hud_at_bottom") or "false"
+    local name = player:get_player_name()
+    local greyscale = player_api.get_data(name, "setting_greyscale") or "false"
+    local hud_at_bottom = player_api.get_data(name, "setting_hud_at_bottom") or "false"
     local show_creative = core_1042.is_creative(player)
     local hide_creative_inv = "false"
     local position = "0.53,0.5"
@@ -50,7 +51,7 @@ function core_1042.make_inv_formspec(player)
         position = "0.5,0.48"
     end
 
-    local craft_count = core.get_inventory({type="detached", name=player:get_player_name() .. "_crafts"}):get_size("main")
+    local craft_count = core.get_inventory({type="detached", name=name .. "_crafts"}):get_size("main")
 
     local inv_formspec = 
         "formspec_version[8]size[32,17.5,false]position["..position.."]style_type[*;sound=stone_dig]"..
@@ -68,7 +69,7 @@ function core_1042.make_inv_formspec(player)
             "checkbox[0,0.5;setting_greyscale;Greyscale;"..greyscale.."]"
 
             if show_creative then
-                hide_creative_inv = core_1042.get("playersetting_"..player:get_player_name().."_hide_creative_inv") or "false"
+                hide_creative_inv = player_api.get_data(name, "setting_hide_creative_inv") or "false"
                 inv_formspec = inv_formspec..
                 "checkbox[0,1;setting_hide_creative_inv;Hide creative inv;"..hide_creative_inv.."]"
             end
@@ -97,8 +98,8 @@ function core_1042.make_inv_formspec(player)
         if craft_count > 0 then
             inv_formspec = inv_formspec..
             "scroll_container[15,11;10,5;craft;vertical;0.1;true]"..
-            "list[detached:" .. player:get_player_name() .. "_crafts;main;0,0;4," .. craft_count / 4 + ((craft_count % 4 > 0) and 1 or 0) .. ";]"..
-            "listring[detached:" .. player:get_player_name() .. "_crafts;main]"..
+            "list[detached:" .. name .. "_crafts;main;0,0;4," .. craft_count / 4 + ((craft_count % 4 > 0) and 1 or 0) .. ";]"..
+            "listring[detached:" .. name .. "_crafts;main]"..
             "listring[current_player;main]"..
             "scroll_container_end[]"..
             "scrollbar[14.3,11;0.5,5;vertical;craft;0]"
@@ -132,7 +133,7 @@ core.register_on_player_receive_fields(function(player, form, fields)
             core.disconnect_player(player:get_player_name(), "Thanks for playing!", true)
 
         elseif fields.setting_greyscale then
-            core_1042.set("playersetting_"..player:get_player_name().."_greyscale", fields.setting_greyscale)
+            player_api.set_data(player:get_player_name(), "setting_greyscale", fields.setting_greyscale)
 
             if fields.setting_greyscale == "true" then
                 player:set_lighting(
@@ -150,7 +151,7 @@ core.register_on_player_receive_fields(function(player, form, fields)
             player:set_inventory_formspec(core_1042.make_inv_formspec(player))
 
         elseif fields.setting_hud_at_bottom then
-            core_1042.set("playersetting_"..player:get_player_name().."_hud_at_bottom", fields.setting_hud_at_bottom)
+            player_api.set_data(player:get_player_name(), "setting_hud_at_bottom", fields.setting_hud_at_bottom)
 
             local id = player_api.get_hud_id(player, "hotbar")
             if id then
@@ -168,7 +169,7 @@ core.register_on_player_receive_fields(function(player, form, fields)
             player:set_inventory_formspec(core_1042.make_inv_formspec(player))
 
         elseif fields.setting_hide_creative_inv then
-            core_1042.set("playersetting_"..player:get_player_name().."_hide_creative_inv", fields.setting_hide_creative_inv)
+            player_api.set_data(player:get_player_name(), "setting_hide_creative_inv", fields.setting_hide_creative_inv)
             player:set_inventory_formspec(core_1042.make_inv_formspec(player))
 
         --elseif fields.doc_gameplay_md then

@@ -75,6 +75,7 @@
 - Flowers and mapgen changes along with massive re-structure -Xeno333
 - Remove doc buttons in menu and add simple controles guid -Xeno333
 - Add /mob command -Xeno333
+- Start of hunger -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic

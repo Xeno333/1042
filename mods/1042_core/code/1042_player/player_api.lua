@@ -111,3 +111,33 @@ end
 
 
 -- Hunger system
+
+function player_api.add_hunger(player, v)
+    local name = player:get_player_name()
+	local hunger = player_api.get_data(name, "hunger")
+    hunger = math.max(math.min(hunger + v, 20), 0)
+    player_api.set_data(name, "hunger", hunger)
+
+    player_api.update_hud(player, "hunger", {
+		type = "statbar",
+		name = "hunger",
+		text = "1042_plain_node.png^[colorize:#ff8822:168",
+		text2 = "1042_plain_node.png^[colorize:#ff8822:64",
+		number = hunger,
+		item = 20,
+		direction = 3,
+		position = {x=0.96, y=0.9},
+		size = {x=20,y=20}
+    })
+end
+
+
+-- Player data
+
+function player_api.set_data(playername, id, data)
+    core_1042.set("1042_player_data__" .. playername .. "__" .. id, data)
+end
+
+function player_api.get_data(playername, id)
+    return core_1042.get("1042_player_data__" .. playername .. "__" .. id)
+end
