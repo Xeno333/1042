@@ -165,9 +165,9 @@ core.register_node("1042_core:light_bloom", {
     drawtype = "mesh",
     mesh = "flower_1.obj",
     tiles = {
-        "1042_plain_node.png^[colorize:#278b13:128", -- stem
+        "1042_plain_node.png^[colorize:#178b03:128", -- stem
         "1042_plain_node.png^[colorize:#110099:64", -- petal
-        "1042_plain_node.png^[colorize:#278b13:128"  -- leaf
+        "1042_plain_node.png^[colorize:#077b03:128"  -- leaf
     },
     use_texture_alpha = "opaque",
 
