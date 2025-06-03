@@ -112,7 +112,11 @@ weather.weathers = {
 }
 
 core.register_on_mods_loaded(function()
-    weather.weather_index = weather.rand:next(1, #weather.weathers)
+    weather.weather_index = core_1042.get("current_weather")
+    if not weather.weather_index then
+        weather.weather_index = weather.rand:next(1, #weather.weathers)
+        core_1042.set("current_weather", weather.weather_index)
+    end
 end)
 
 
@@ -121,6 +125,17 @@ function weather.register_weather(def)
 end
 
 
+
+
+function weather.next_weather()
+    weather.weather_index = weather.weather_index + 1
+
+    if weather.weather_index > #weather.weathers then
+        weather.weather_index = 1
+    end
+
+    core_1042.set("current_weather", weather.weather_index)
+end
 
 
 

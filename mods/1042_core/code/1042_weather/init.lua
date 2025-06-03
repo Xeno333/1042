@@ -20,8 +20,8 @@ dofile(core_1042.get_core_mod_path("1042_weather") .. "/weathers.lua")
 
 -- Make it work
 
-local time_between_changes = 60*5
-local time_to_next_change = 0
+local time_between_changes = weather.rand:next(60*5, 60*25)
+local been_this_weather = 0
 local timer = 0
 local weather_hight = weather.weather_hight
 
@@ -93,10 +93,11 @@ core.register_globalstep(function(dtime)
 
 
     -- Make new random index for weather sort to find
-    time_to_next_change = time_to_next_change - dtime
-    if time_to_next_change <= 0 then
-        weather.weather_index = weather.rand:next(1, #weather.weathers)
-        time_to_next_change = time_between_changes
+    been_this_weather = been_this_weather + dtime
+    if been_this_weather >= time_between_changes then
+        weather.next_weather()
+        time_between_changes = weather.rand:next(60*5, 60*25)
+        been_this_weather = 0
     end
 end)
 

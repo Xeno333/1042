@@ -77,6 +77,7 @@
 - Add /mob command -Xeno333
 - Start of hunger -Xeno333
 - Hunger mechanic -Xeno333
+- Globalize weather between starts -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic
