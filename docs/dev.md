@@ -164,6 +164,15 @@ core_1042.crafting = {
 
 - `player_api.add_item_to_player_inventory(player, list, itemstack, drop_overflow_pos)` Add itemstack to player inv and drop remains, returns count droped at `drop_overflow_pos`. If player is not a player node the itemstack is just dropped.
 
+#### Player Data
+
+- `player_api.set_data(playername, id, data)` Store data for player.
+- `player_api.get_data(playername, id)` Ger data for player.
+
+#### Player Hunger
+
+- `player_api.add_hunger(player, v)` Add hunger to player, `v` can be +/- and will always be put into range from 0 to 20.
+
 #### Player HUD Functions
 
 These functions clean up automaticly, and provide a clean interface.
@@ -186,7 +195,7 @@ The definition of a tree is as follows:
 
 ```lua
 tree_def = {
-    name = "", -- Name of tree type/class it will end with ' Tree'/' Leaves'/' Sapling' unless name = "" like here the space is stripped.
+    name = "", -- Name of tree type/class it will end with ' Tree'/' Leaves'/' Sapling'/' Planks' unless name = "" like here the space is stripped.
     
     tree = { -- Tree trunk node def without description.
         tiles = {"1042_plain_node.png^[colorize:#672307:200"},
@@ -211,6 +220,20 @@ tree_def = {
         sunlight_propagates = true,
     
         groups = {leafy = 1, plant = 1, breakable_by_hand = 1, burns = 1},
+    },
+    Planks = { -- Tree planks def without description.
+        tiles = {"1042_plain_node.png^[colorize:#672307:128"},
+        use_texture_alpha = "opaque",
+    
+        sounds = {
+            dig = {
+                name = "tree_dig",
+                gain = 2,
+                pitch = 1
+            }
+        },
+    
+        groups = {wood = 1, plant = 1, burns = 3},
     }
 }
 ```

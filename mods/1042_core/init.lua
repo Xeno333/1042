@@ -1,19 +1,8 @@
-core.log("action", "Loading 1042_core...")
+core.log("action", "Loading 1042...")
 
-core_1042 = {
-    version_release_to_string = {"", "-pre-release", "-dev"},
-    version = {major = 0, minor = 3, patch = 0, release = 3},
-    version_string = nil, -- string set at start time
-    oldest_supported_version = {major = 0, minor = 3, patch = 0, release = 3},
-    world_version = nil,
-    world_version_string = nil, -- string set at start time
-
-    info = core.get_game_info(),
-    rand = PcgRandom(math.random(1, 2048)) -- Good for all random needed
-}
-
-core_1042.version_string = "1042 v" .. core_1042.version.major .. "." .. core_1042.version.minor .. "." .. core_1042.version.patch ..  core_1042.version_release_to_string[core_1042.version.release]
-
+local path = core.get_modpath("1042_core")
+dofile(path.."/shared_lib.lua")
+core.register_mapgen_script(path.."/shared_lib.lua")
 
 
 
@@ -59,7 +48,6 @@ local required_settings = {
     ["enable_dynamic_shadows"] = {single_player=true, value="true"},
     ["enable_volumetric_lighting"] = {single_player=true, value="true"},
     ["enable_bloom"] = {single_player=true, value="true"},
-    ["enable_node_specular"] = {single_player=true, value="true"},
     ["enable_water_reflections"] = {single_player=true, value="true"},
     ["soft_clouds"] = {single_player=true, value="true"},
     ["enable_fog"] = {single_player=true, value="true"},
@@ -95,27 +83,30 @@ end
 
 
 
--- Load other parts
-local path = core.get_modpath("1042_core")
 
-dofile(path.."/src/phases.lua")
-dofile(path.."/src/funcs.lua")
-dofile(path.."/src/crafting.lua")
-dofile(path.."/src/invs.lua")
+-- load mods
 
--- player
-dofile(path.."/src/player/player_api.lua")
-dofile(path.."/src/player/player.lua")
-dofile(path.."/src/player/player_inv.lua")
+local path = core_1042.core_path .. "/code/"
+local mod_load_order = {
+    path .. "core/core.lua",
 
-dofile(path.."/src/tree_system.lua")
+    path .. "1042_player/player.lua",
+    path .. "1042_tests/init.lua",
+    path .. "1042_achievements/init.lua",
+    path .. "1042_nodes/init.lua",
+    path .. "1042_tools/init.lua",
+    path .. "1042_smithing/init.lua",
+    path .. "1042_mobs/mobs.lua",
+    path .. "1042_schematics/init.lua",
+    path .. "1042_weather/init.lua",
 
-dofile(path.."/src/privs.lua")
-dofile(path.."/src/chat_commands.lua")
-dofile(path.."/src/node_wear.lua")
-dofile(path.."/src/shared_lib.lua")
-dofile(path.."/src/abms.lua")
-dofile(path.."/src/item.lua")
+    path .. "1042_mapgen/init.lua",
+}
+
+
+for _, init_file in ipairs(mod_load_order) do
+    dofile(init_file)
+end
 
 
 
@@ -158,4 +149,4 @@ if #on_player_joins > 0 then
 end
 
 
-core.log("action", "1042_core loaded.")
+core.log("action", "1042 loaded.")

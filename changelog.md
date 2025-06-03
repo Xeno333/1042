@@ -69,6 +69,14 @@
 - Fix crash bug -Xeno333
 - Adding item -Xeno333
 - Fix crash -Xeno333
+- Add groups support to default crafting -Xeno333
+- Start torch -Xeno333
+- Use new allow_close[false] in death screen -Xeno333
+- Flowers and mapgen changes along with massive re-structure -Xeno333
+- Remove doc buttons in menu and add simple controles guid -Xeno333
+- Add /mob command -Xeno333
+- Start of hunger -Xeno333
+- Hunger mechanic -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & SuperStarSonic
