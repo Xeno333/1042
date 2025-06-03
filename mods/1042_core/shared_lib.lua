@@ -1,7 +1,7 @@
 
 core_1042 = {
     version_release_to_string = {"", "-pre-release", "-dev"},
-    version = {major = 0, minor = 3, patch = 0, release = 3},
+    version = {major = 0, minor = 3, patch = 0, release = 4},
     version_string = nil, -- string set at start time
     oldest_supported_version = {major = 0, minor = 3, patch = 0, release = 3},
     world_version = nil,
