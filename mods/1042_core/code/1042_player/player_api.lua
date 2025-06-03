@@ -1,4 +1,6 @@
-player_api = {}
+player_api = {
+    hunger_time = 60 -- seconds per -1 hunger
+}
 
 
 
@@ -112,10 +114,15 @@ end
 
 -- Hunger system
 
-function player_api.add_hunger(player, v)
+function player_api.add_hunger(player, v, reason)
     local name = player:get_player_name()
 	local hunger = player_api.get_data(name, "hunger")
-    hunger = math.max(math.min(hunger + v, 20), 0)
+    hunger = math.min(hunger + v, 20)
+    if v < 0 and hunger < 0 then
+        hunger = 0
+        player:set_hp(player:get_hp() - 1, {_1042_reason="starved", _1042_death_msg="starved"})
+    end
+
     player_api.set_data(name, "hunger", hunger)
 
     player_api.update_hud(player, "hunger", {

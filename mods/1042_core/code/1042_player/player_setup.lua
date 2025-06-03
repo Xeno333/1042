@@ -357,9 +357,26 @@ core.register_globalstep(function(dtime)
 		local player_meta = player:get_meta()
 
 
+		-- Hunger
+		local hunger_cooldown = player_api.get_data(name, "hunger_cooldown") or 0
+		if hunger_cooldown >= player_api.hunger_time or ((player_controls.movement_y ~= 0 or player_controls.movement_x ~= 0) and hunger_cooldown >= (player_api.hunger_time / 2)) then
+			player_api.add_hunger(player, -1)
+
+			local hunger = player_api.get_data(name, "hunger")
+			if hunger > 10 then
+       			player:set_hp(player:get_hp() + 1, {_1042_reason="feed", _1042_death_msg="digested"})
+			end
+
+			player_api.set_data(name, "hunger_cooldown", 0)
+		else
+			player_api.set_data(name, "hunger_cooldown", hunger_cooldown + dtime)
+		end
+
+
+
 		-- Sprint
 		local phy = player:get_physics_override()
-		if sprint_increment_cooldown[name] then
+		if sprint_increment_cooldown[name] then -- sanity chgeck
 			if sprint_increment_cooldown[name] > 0 then
 				sprint_increment_cooldown[name] = sprint_increment_cooldown[name] - dtime
 
@@ -389,7 +406,6 @@ core.register_globalstep(function(dtime)
 			player:set_animation({x = 0, y = 0}, 1)
 			player_meta:set_string("moving", "false")
 		end
-
 
 		-- _1042_use (optimised)
 		if aux1_cooldown[name] then
