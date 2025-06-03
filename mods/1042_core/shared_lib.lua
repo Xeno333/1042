@@ -1,9 +1,9 @@
 
 core_1042 = {
     version_release_to_string = {"", "-pre-release", "-dev"},
-    version = {major = 0, minor = 3, patch = 0, release = 4},
+    version = {major = 0, minor = 3, patch = 1, release = 3},
     version_string = nil, -- string set at start time
-    oldest_supported_version = {major = 0, minor = 3, patch = 0, release = 4},
+    oldest_supported_version = {major = 0, minor = 3, patch = 1, release = 3},
     world_version = nil,
     world_version_string = nil, -- string set at start time
 
@@ -13,7 +13,7 @@ core_1042 = {
     rand = PcgRandom(math.random(1, 2048)) -- Good for all random needed
 }
 
-core_1042.version_string = "1042 v" .. core_1042.version.major .. "." .. core_1042.version.minor .. "." .. core_1042.version.patch ..  core_1042.version_release_to_string[core_1042.version.release]
+core_1042.version_string = "1042 v" .. core_1042.version.major .. "." .. core_1042.version.minor .. "." .. core_1042.version.patch .. core_1042.version_release_to_string[core_1042.version.release]
 
 core_1042.shared_lib = {
     consts = {
