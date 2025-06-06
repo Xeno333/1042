@@ -18,14 +18,15 @@ core.register_privilege("creative", {
 })
 
 
-function core_1042.is_creative(player)
-    return core.check_player_privs(player, "creative") or core.is_creative_enabled(player:get_player_name())
+function core.is_creative_enabled(player_name)
+    local player = core.get_player_by_name(player_name)
+    return core.check_player_privs(player, "creative") or core.settings:get_bool("creative_mode", false)
 end
 
 
 core.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
     if core.is_player(placer) then
-        if core_1042.is_creative(placer) then
+        if core.is_creative_enabled(placer:get_player_name()) then
             return true
         end
     end
