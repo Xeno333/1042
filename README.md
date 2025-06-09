@@ -73,7 +73,7 @@ _See changelog for more compleate list._
 
 #### Can not be overridden
 
-- Luanti version 5.10.0 or later
+- Luanti version 5.11.0 or later
 
 #### Can be overridden with `1042_ignore_required_settings = true`
 
