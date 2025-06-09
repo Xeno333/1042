@@ -154,10 +154,10 @@ function mapgen_1042.get_y(x, z, noisei, temp)
     else
         -- Mountin hole
         local rv = math.floor((0.9 * math.abs(0.9)) * T_ymax - 3)
-        if temp and temp <= 20 then
-            return math.floor(math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/8 + 4)), rv, true, noise
-        else
+        if temp and temp > 20 then
             return math.floor(math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/(8*(temp/20)) + 4)), rv, false, noise
+        else
+            return math.floor(math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/8 + 4)), rv, true, noise
         end
     end
     

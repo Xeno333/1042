@@ -43,7 +43,7 @@ function core_1042.make_inv_formspec(player)
     local name = player:get_player_name()
     local greyscale = player_api.get_data(name, "setting_greyscale") or "false"
     local hud_at_bottom = player_api.get_data(name, "setting_hud_at_bottom") or "false"
-    local show_creative = core_1042.is_creative(player)
+    local show_creative = core.is_creative_enabled(name)
     local hide_creative_inv = "false"
     local position = "0.53,0.5"
 
@@ -59,7 +59,7 @@ function core_1042.make_inv_formspec(player)
         "listcolors[#00ffff40;#00ffff80;#00aaaaff;#00444480;#00ffffff]"..
         "bgcolor[#00223320;;]"..
         "set_focus[leave_game;true]"..
-        "image_button[29,0.3;2.7,1;1042_plain_node.png^[colorize:#ff2200:144;leave_game;Leave Game]"..
+        "image_button[29,0.3;2.7,1;1042_plain_node.png^[colorize:#ff2200:144;leave_game;Leave Game;false;false]"..
 
         "model[13,-2.2;4,4;logo;1042.obj;1042_plain_node.png^[colorize:#672307:168;0,90;true;true;;]"..
 

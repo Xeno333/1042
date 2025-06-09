@@ -12,27 +12,30 @@ We Hope you enjoy playing it and any feedback is welcome!
 
 ![v0.3.0-dev (alpha)](screenshot.png)
 
-### Notes on this version
-- Server mode is disabled due to multiplayer nuances, this will be fixed by beta v0.2.0
-
 
 ## Features
+
+_See changelog for more compleate list._
+
 - Mapgen with 4 biomes (tempeture areas) vast mountins and plains with deep oceans and caves
 - Unique UI with custom HUD and Invintory and in-game settings (on a per-player basis)
 - Several nodes
 - Working weather system
-- Working tools
-- Ores
+- Working tools (with custom system)
+- Ores (Iorn)
 - Achivments API
 - Some sounds
-- Basic mobs (Fish and pigs, as of last update)
-- Basic smelting and crafting recipies.
-- Hardcore mode.
+- Basic mobs Fish and pigs
+- Basic smelting and crafting recipies
+- Hardcore mode
 - Crafting
 - Weather sounds
+- Custom hunger and sprint mechanics
+- Custom tools
 
 
 ## Planned
+
 - Add moddable mapgen API
 - More trees and plants
 - Add More sounds and music
@@ -43,7 +46,7 @@ We Hope you enjoy playing it and any feedback is welcome!
 
 #### beta v0.3.0
 - Add mapgen APIs
-- Add more trees and plants, flowers maybe.
+- Add more trees and plants, flowers.
 - Add pvp physics and more weapons (Bow and club)
 - Add lootable structures
 - Add more structures (villages)
@@ -57,6 +60,7 @@ We Hope you enjoy playing it and any feedback is welcome!
 - `1042_auto_adjust_settings` Automaticly turns on settings for player (and updates to minetest.conf) if user settings conflict, default: `false`
 
 ### NOT RECOMMENDED
+
 - `1042_ignore_required_settings` Ignore required settings and run anyway (See Requirements), default: `false`
 - `1042_disable_weather` Disable in-game weather, default: `false`
 
@@ -64,12 +68,15 @@ We Hope you enjoy playing it and any feedback is welcome!
 ## Requirements
 
 ### Luanti
+
 1042 has some requirements to run. There are also some things that are recommended and will be set up if settings are left to default values or if `1042_auto_adjust_settings = true`
 
 #### Can not be overridden
+
 - Luanti version 5.10.0 or later
 
 #### Can be overridden with `1042_ignore_required_settings = true`
+
 - `enable_shaders = true` for rendering some nodes properly
 - `enable_auto_exposure = true` for the colours in the game to look right
 - `enable_post_processing = true` for rendering
@@ -79,22 +86,24 @@ We Hope you enjoy playing it and any feedback is welcome!
 - `exposure_compensation = 0.5` for stuff to look right
 
 #### Recommended
+
 - `enable_waving_water = true`
 - `enable_water_reflections = true`
 - `smooth_lighting = true`
 - `enable_dynamic_shadows = true`
 - `enable_volumetric_lighting = true`
 - `enable_bloom = true`
-- `enable_node_specular = true`
 - `soft_clouds = true`
 - `connected_glass = true`
 - `enable_fog = true`
 
 
 ## Contributing
+
 1042 is a free and open-source game and is licensed under the MIT license. If you would like to help develop you can make PRs on our [github](https://github.com/Xeno333/1042/). You can also join our [discord](https://discord.gg/7YTMtyPgrD).
 
 
 ## Online Resources
+
 - [1042 Github](https://github.com/Xeno333/1042/): `https://github.com/Xeno333/1042/`
 - [1042 Discord](https://discord.gg/7YTMtyPgrD) `https://discord.gg/7YTMtyPgrD`
