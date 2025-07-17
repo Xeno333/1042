@@ -5,6 +5,8 @@
 
 -- Grasses are an extension of turf
 
+local c = core.colorize
+
 core.register_node("1042_core:grass_tall", {
     description = "Tall Grass",
     drawtype = "mesh",

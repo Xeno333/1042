@@ -5,7 +5,7 @@ tools_1042 = {}
 local path = core_1042.get_core_mod_path("1042_tools")
 dofile(path.."/src/chisel.lua")
 
-
+local c = core.colorize
 
 item_wear.register_complex_node("1042_core:sword",{
     description = "Sword",
