@@ -285,7 +285,6 @@ core.register_node("1042_core:lava_flowing", {
     liquid_range = 4,
     damage_per_second = 10,
 
-    _1042_cools_to = "1042_core:basalt",
     post_effect_color = {a = 144, r = 0xff, g = 0x22, b = 0x00},
     groups = {molten = 1, liquid = 1, burning = 1, not_in_creative_inventory = 1},
 })
