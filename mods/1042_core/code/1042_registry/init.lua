@@ -36,7 +36,7 @@ local function recipe_rarity(recipe)
         c = c + count
     end
     local rarity = math.floor(r / c + 0.5) -- round the remainder of the division off to make it an integer (+0.5 to round up)
-    return rarity
+    return math.min(rarity, #registry_1042)
 end
 
 function registry_1042.register_item(name, def, rarity, recipe, loot)

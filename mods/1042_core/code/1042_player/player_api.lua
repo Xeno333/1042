@@ -35,7 +35,7 @@ function player_api.remove_hud(player, unique_hud_name)
 
         if not next(player_huds[player_name]) then -- emtpy
             player_huds[player_name] = nil
-            return truehud_def
+            return truehud_def -- TODO: variable not defined?
         end
 
         return true

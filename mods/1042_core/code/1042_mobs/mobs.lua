@@ -2,7 +2,7 @@ core.log("action", "Loading 1042_mobs...")
 
 
 core.register_chatcommand("mob", {
-    description = "Kill slef instantly.",
+    --description = "Kill slef instantly.",
     privs = {["creative"] = true},
     params = "<mob>",
     description = "Spawn mob.",
