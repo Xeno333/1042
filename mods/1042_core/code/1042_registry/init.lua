@@ -39,9 +39,7 @@ local function recipe_rarity(recipe)
     return rarity
 end
 
-function registry_1042.register_item(name, def, rarity, recipe)
-    nname = "1042_core:" .. name -- names follow modname:itemname convention
-
+function registry_1042.register_item(name, def, rarity, recipe, loot)
     local ndef = {}
     for k, v in pairs(def) do
         ndef[k] = v -- add in all the definition key/value pairs
@@ -56,76 +54,75 @@ function registry_1042.register_item(name, def, rarity, recipe)
 
     if recipe ~= nil then
         core_1042.crafting.register_craft({ -- if recipe defined then register it
-            result = nname,
+            result = name,
             type = "1042_default",
             items = recipe
         })
     end
 
-    registry_1042.items[nname] = { -- add the item to the list so we can get rarity easily (could use the nodedef._rarity?)
-        name = nname,
+    registry_1042.items[name] = { -- add the item to the list so we can get rarity easily (could use the nodedef._rarity?)
         rarity = r
     }
 
     ndef._rarity = r or 1
 
-    rcolor = registry_1042.rarity[r].color
-    rlabel = registry_1042.rarity[r].name
+    local rcolor = registry_1042.rarity[r].color
+    local rlabel = registry_1042.rarity[r].name
 
-    tx = ndef.inventory_image or ndef.textures[1]
-    ndef.inventory_image = tx .. "^(rarity.png^[colorize:" .. rcolor .. ":255)" -- TODO: Handle inventory images for nodes and models better
-    core.log(ndef.inventory_image)
+    --local tx = ndef.inventory_image or ndef.tiles[0]
+    ndef.inventory_overlay = "rarity.png^[colorize:" .. rcolor .. ":255" -- overlay the rarity visual
+    core.log(ndef.inventory_overlay)
     ndef.description = ndef.description .. "\n" .. core.colorize(rcolor, rlabel)
 
     if def.item_type == "craftitem" then -- register it as a craftitem or node respectively
-        core.register_craftitem(nname, ndef)
+        core.register_craftitem(name, ndef)
     elseif def.item_type == "node" then
-        core.register_node(nname, ndef)
+        core.register_node(name, ndef)
     end
+
+    if loot ~= nil then core_1042.register_loot(loot) end
 end
 
-
 --[[
-registry_1042.register_item("test_0", {
+registry_1042.register_item("1042_core:test_0", {
     description = "Test thingy 0",
-    textures = {"test_stick.png"},
+    inventory_image = "test_stick.png",
     item_type = "craftitem",
 }, 1)
 
-registry_1042.register_item("test_1", {
+registry_1042.register_item("1042_core:test_1", {
     description = "Test thingy 1",
-    textures = {"test_stick.png"},
+    inventory_image = "test_stick.png",
     item_type = "craftitem",
 }, 2)
 
-registry_1042.register_item("test_2", {
+registry_1042.register_item("1042_core:test_2", {
     description = "Test thingy 2",
-    textures = {"test_stick.png"},
+    inventory_image = "test_stick.png",
     item_type = "craftitem",
 }, 3)
 
-registry_1042.register_item("test_3", {
+registry_1042.register_item("1042_core:test_3", {
     description = "Test thingy 3",
-    textures = {"test_stick.png"},
+    inventory_image = "test_stick.png",
     item_type = "craftitem",
 }, 4)
 
-registry_1042.register_item("test_4", {
+registry_1042.register_item("1042_core:test_4", {
     description = "Test thingy 4",
-    textures = {"test_stick.png"},
+    inventory_image = "test_stick.png",
     item_type = "craftitem",
 }, 5)
 
-registry_1042.register_item("test_5", {
+registry_1042.register_item("1042_core:test_5", {
     description = "Test thingy 5",
-    textures = {"test_stick.png"},
+    inventory_image = "test_stick.png",
     item_type = "craftitem",
 }, 6)
 
-registry_1042.register_item("test_r", {
+registry_1042.register_item("1042_core:test_r", {
     description = "Test thingy R",
-    textures = {"test_stick.png"},
+    inventory_image = "test_stick.png",
     item_type = "craftitem",
 }, nil, {"1042_core:sticks 10"})
-
 ]]--

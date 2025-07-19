@@ -4,7 +4,7 @@ function item_wear.set_uses(itemstack, uses)
     itemstack:get_meta():set_int("item_uses", uses)
 end
 
- function item_wear.wear(itemstack, wear_to_apply)
+function item_wear.wear(itemstack, wear_to_apply)
     local meta = itemstack:get_meta()
     local uses = meta:get_int("_item_uses")
     local defl = core.registered_items[itemstack:get_name()] or {}
@@ -27,7 +27,7 @@ end
 
     if uses <= 0 then
         if defl.sounds and defl.sounds.breaks then
-            if user and user:is_player() then
+            if user and user:is_player() then -- TODO: there is no such 'user'?
                 core.sound_play(defl.sounds.breaks, {gain = 1.0, pitch = 1.0, loop = false, to_player = user:get_player_name()}, true)
             end
         end
