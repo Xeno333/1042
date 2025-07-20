@@ -12,6 +12,7 @@ local files = {
     "node_wear.lua",
     "abms.lua",
     "item.lua",
+    "register.lua",
 }
 
 

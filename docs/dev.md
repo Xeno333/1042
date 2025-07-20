@@ -141,6 +141,8 @@ This is an API for complex nodes/items that have wear, these are basicly tools o
 
 The crafting system 1042 has is fully custom and does not depend on the luanti crafting system. It allows for custom types and mod specific usage.
 
+**NOTE:** Crafting systems **MUST** use either `items = {...}` or `node = <node name>` for inputs, this is so that the internal system can index recipies. Side note: Prefer `items` as it may become the only supported input source.
+
 ### Functions
 
 - `core_1042.crafting.default_register_craft(def)` This is the default craft registration and just appends the craft to the list of this type's crafting recipeis. 
@@ -156,6 +158,10 @@ core_1042.crafting = {
 }
 ```
 
+
+# Node/Item(node) registration and Rarity systems
+
+- `core_1042.registry.register_material(name, def, rarity, recipe, loot)` Register node of `name` with `def` along with a rarity and recipe and loot definitions.
 
 
 ## Player API

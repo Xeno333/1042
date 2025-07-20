@@ -65,7 +65,7 @@ achievements_1042.register_achievement("oooo_fire", {
 
 
 
-registry_1042.register_item("1042_core:fire", {
+core_1042.registry.register_material("1042_core:fire", {
     description = "Fire",
     drawtype = "firelike",
     tiles = {
@@ -100,7 +100,7 @@ registry_1042.register_item("1042_core:fire", {
 
 -- Speacal nodes
 
-registry_1042.register_item("1042_core:beryl", {
+core_1042.registry.register_material("1042_core:beryl", {
     description = "Beryl",
     drawtype = "mesh",
     mesh = "crystal.obj",
@@ -129,7 +129,7 @@ registry_1042.register_item("1042_core:beryl", {
     item_type = "node",
 }, 5, nil, nil)
 
-registry_1042.register_item("1042_core:beryl_hanging", {
+core_1042.registry.register_material("1042_core:beryl_hanging", {
     description = "Hanging Beryl",
     drawtype = "mesh",
     mesh = "crystal_roof.obj",
@@ -149,7 +149,7 @@ registry_1042.register_item("1042_core:beryl_hanging", {
     item_type = "node",
 }, 5, nil, nil)
 
-registry_1042.register_item("1042_core:rock", {
+core_1042.registry.register_material("1042_core:rock", {
     description = "Rock",
     drawtype = "mesh",
     mesh = "rock.obj",
@@ -190,7 +190,7 @@ registry_1042.register_item("1042_core:rock", {
     item_type = "node",
 }, 2, nil, nil)
 
-registry_1042.register_item("1042_core:flint", {
+core_1042.registry.register_material("1042_core:flint", {
     description = "Flint",
     drawtype = "mesh",
     mesh = "flint.obj",
@@ -232,7 +232,7 @@ registry_1042.register_item("1042_core:flint", {
     item_type = "node",
 }, 1, nil, nil)
 
-registry_1042.register_item("1042_core:torch", {
+core_1042.registry.register_material("1042_core:torch", {
     description = "Torch",
     drawtype = "nodebox",
     tiles = {
@@ -272,10 +272,16 @@ registry_1042.register_item("1042_core:torch", {
     groups = {breakable_by_hand = 3, attached_node = 3, burning = 1},
 
     item_type = "node",
-}, nil, {"group:burns 5"}, nil)
+}, nil, {
+    result = "1042_core:torch",
+    type = "1042_default",
+    items = {
+        "group:burns 5",
+    }
+}, nil)
 
 
-registry_1042.register_item("1042_core:sticks", {
+core_1042.registry.register_material("1042_core:sticks", {
     description = "Sticks",
     drawtype = "mesh",
     mesh = "sticks.obj",
@@ -301,7 +307,7 @@ registry_1042.register_item("1042_core:sticks", {
 }, 1, nil, {name = "1042_core:sticks", max_count = 32})
 
 
-registry_1042.register_item("1042_core:iron_nugget", {
+core_1042.registry.register_material("1042_core:iron_nugget", {
     description = "Iron Nugget",
     drawtype = "mesh",
     mesh = "nugget.obj",
@@ -348,7 +354,7 @@ registry_1042.register_item("1042_core:iron_nugget", {
 
 
 -- #fixme
-registry_1042.register_item("1042_core:anvil", {
+core_1042.registry.register_material("1042_core:anvil", {
     description = "Anvil (WIP)",
     drawtype = "mesh",
     mesh = "anvil.obj",
@@ -385,7 +391,7 @@ achievements_1042.register_achievement("smelter", {
     colour = "#ffddaa"
 })
 
-registry_1042.register_item("1042_core:crude_iron", {
+core_1042.registry.register_material("1042_core:crude_iron", {
     description = "Crude Iron",
     drawtype = "mesh",
     mesh = "flint.obj",
@@ -436,7 +442,7 @@ registry_1042.register_item("1042_core:crude_iron", {
 }, 3, nil, {{name = "1042_core:crude_iron", max_count = 6}})
 
 
-registry_1042.register_item("1042_core:iron_ingot", {
+core_1042.registry.register_material("1042_core:iron_ingot", {
     description = "Iron Ingot",
     drawtype = "nodebox",
     tiles = {"1042_plain_node.png^[colorize:#998888:200"},
@@ -490,7 +496,7 @@ registry_1042.register_item("1042_core:iron_ingot", {
 }, 3, nil, {name = "1042_core:iron_ingot", max_count = 6})
 
 
-registry_1042.register_item("1042_core:pork_raw", {
+core_1042.registry.register_material("1042_core:pork_raw", {
     description = "Raw Pork",
     drawtype = "mesh",
     mesh = "pork.obj",
@@ -531,7 +537,7 @@ registry_1042.register_item("1042_core:pork_raw", {
     item_type = "node",
 }, 2, nil, nil)
 
-registry_1042.register_item("1042_core:pork_cooked", {
+core_1042.registry.register_material("1042_core:pork_cooked", {
     description = "Cooked Pork",
     drawtype = "mesh",
     mesh = "pork.obj",

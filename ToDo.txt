@@ -9,3 +9,5 @@ ToDo:
     Add torch to light fires etc.
     Add a better light fire abm that works for more complex nodes and has a replacement for the light form, and remove the charcole light abms make it a group system
     Improve lighting mechanic for campfire and oven.
+
+    Python-Sargent- rework hud to look better and be easier to use. (hotbar, health/hunger, inventory)
