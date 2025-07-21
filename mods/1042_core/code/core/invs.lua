@@ -70,12 +70,8 @@ core_1042.phases.register_callback("startup_done", function()
         local item_stacks = {}
 
         for _, stack in pairs(recipe.items) do
-            if core.registered_items[stack] then
-                local itemstack = ItemStack(stack)
-                item_stacks[itemstack:get_name()] = (item_stacks[itemstack:get_name()] or 0) + itemstack:get_count()
-            else
-                item_stacks[stack] = (item_stacks[stack] or 0) + 1
-            end
+            local itemstack = ItemStack(stack)
+            item_stacks[itemstack:get_name()] = (item_stacks[itemstack:get_name()] or 0) + itemstack:get_count()
         end
 
         table_of_crafts[#table_of_crafts+1], _ = {recipe = recipe, output = recipe.result, req_items = item_stacks}
