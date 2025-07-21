@@ -263,10 +263,16 @@ Function callback phases are callbacks called at points in runtime. Some are cal
 - `"tests"` Testing time.
 
 
+## Item/Node Registration (`core_1042.register`)
 
+Builtin functions to handle recipes, rarity and item loot definition.
 
-
-
+- `core_1042.registry.register_material(name, def, rarity, recipe, loot)` registers a material.
+  - `name` name of node/item to register
+  - `def` definition table for node/item registration
+  - `rarity` material rarity, can be integer to set rarity or nil to leave it unset
+  - `recipe` recipe for automatically registering a recipe, leave nil to not register a recipe. If `rarity` is nil the rarity will be calculated based on the ingredients of the recipe, defaults to base rarity if `recipe` is nil
+  - `loot` used to define loot properties, such as max count (stack_max)
 
 # Achievement API `achievements_1042`
 

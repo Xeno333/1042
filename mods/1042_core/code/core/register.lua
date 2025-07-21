@@ -52,7 +52,7 @@ end
 function core_1042.registry.register_material(name, def, rarity, recipe, loot)
     local ndef = {}
     for k, v in pairs(def) do
-        ndef[k] = v -- add in all the definition key/value pairs
+        ndef[k] = v -- append the definition key/value pairs
     end
 
     local rarity = rarity or recipe_rarity(recipe)
