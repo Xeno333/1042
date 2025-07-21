@@ -2,7 +2,6 @@ core.log("action", "Loading 1042_mobs...")
 
 
 core.register_chatcommand("mob", {
-    description = "Spawn mob.",
     privs = {["creative"] = true},
     params = "<mob>",
     description = "Spawn mob.",

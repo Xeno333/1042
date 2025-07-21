@@ -26,11 +26,11 @@ function item_wear.wear(itemstack, wear_to_apply)
     --meta:set_string("inventory_overlay", "1042_plain_node.png^[colorize:#ff0000:" .. c)
 
     if uses <= 0 then
-        if defl.sounds and defl.sounds.breaks then
-            if user and user:is_player() then -- TODO: there is no such 'user'?
-                core.sound_play(defl.sounds.breaks, {gain = 1.0, pitch = 1.0, loop = false, to_player = user:get_player_name()}, true)
-            end
-        end
+        --if defl.sounds and defl.sounds.breaks then
+        --    if user and user:is_player() then -- there is no such 'user'?
+        --        core.sound_play(defl.sounds.breaks, {gain = 1.0, pitch = 1.0, loop = false, to_player = user:get_player_name()}, true)
+        --    end
+        --end
         
         itemstack:take_item(1)
         return itemstack
