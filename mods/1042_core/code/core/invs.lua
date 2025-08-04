@@ -46,11 +46,17 @@ core.after(0,function() -- use after to ensure compleate initalization
     end
 
     table.sort(items_to_reg, function(a, b)
-        return (a.short_description or a.description or a.name) < (b.short_description or b.description or b.name)
+        if (a._1042_rarity or 0) == (b._1042_rarity or 0) then
+            return (a.short_description or a.description or a.name) < (b.short_description or b.description or b.name)
+        end
+        return (a._1042_rarity or 0) < (b._1042_rarity or 0)
     end)
     
     table.sort(core_1042.all_registered_items, function(a, b)
-        return (a.short_description or a.description or a.name) < (b.short_description or b.description or b.name)
+        if (a._1042_rarity or 0) == (b._1042_rarity or 0) then
+            return (a.short_description or a.description or a.name) < (b.short_description or b.description or b.name)
+        end
+        return (a._1042_rarity or 0) < (b._1042_rarity or 0)
     end)
 
     core_1042.creative_inv:set_size("main", size)

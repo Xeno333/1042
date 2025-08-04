@@ -34,14 +34,14 @@ core.register_globalstep(function(dtime)
             local the_weather = weather.weathers[weather.get_weather_at_pos(pos)]
 
             -- Temp hud:
-            player_api.update_hud(player, "pos_temp", {
+            --[[player_api.update_hud(player, "pos_temp", {
                 type = "text",
                 name = "pos_temp",
                 text = weather.get_temp_single(pos) .. " C",
                 position = {x=0.8, y=0.9},
                 number = 0x00ffdd,
                 style = 3
-            })
+            })]]
 
 
 

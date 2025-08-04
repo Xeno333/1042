@@ -79,14 +79,14 @@ item_wear.register_complex_node("1042_core:pick",{
         full_punch_interval = 2,
         damage_groups = {fleshy = 1},
 		groupcaps = {
-			stone = {times = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}, uses = 1},
+			stone = {times = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}, uses = 2},
             frozen = {times = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}, uses = 1},
 		},
         punch_attack_uses = 1
     },
     wield_scale = {x = 1.5, y = 2, z = 1.5},
 
-    uses = 200,
+    uses = 400,
 
     damage_per_second = 128,
 
@@ -120,8 +120,8 @@ item_wear.register_complex_node("1042_core:axe_flint",{
 
     stack_max = 1,
     tool_capabilities = {
-        full_punch_interval = 4,
-        damage_groups = {fleshy = 4},
+        full_punch_interval = 2,
+        damage_groups = {fleshy = 3},
 		groupcaps = {
 			wood = {times = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6}, uses = 1},
 		},
@@ -157,6 +157,60 @@ core_1042.crafting.register_craft({
 })
 
 
+
+
+item_wear.register_complex_node("1042_core:axe_iron",{
+    description = "Iron axe",
+    drawtype = "mesh",
+    mesh = "axe.obj",
+    tiles = {
+        "1042_plain_node.png^[colorize:#672307:168",
+        "1042_plain_node.png^[colorize:#444444:168"
+    },
+    use_texture_alpha = "opaque",
+
+    paramtype2 = "facedir",
+    paramtype = "light",
+    sunlight_propagates = true,
+    walkable = true,
+
+    stack_max = 1,
+    tool_capabilities = {
+        full_punch_interval = 2,
+        damage_groups = {fleshy = 4},
+		groupcaps = {
+			wood = {times = {[1] = 0.5, [2] = 1, [3] = 1.5, [4] = 2, [5] = 2.5, [6] = 3}, uses = 1},
+		},
+        punch_attack_uses = 1
+    },
+    wield_scale = {x = 1.5, y = 2, z = 1.5},
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        if not pointed_thing then return end
+        local pos = pointed_thing.under
+        local node = core.get_node(pos).name
+        local player_name = user:get_player_name()
+
+        local rec = core_1042.crafting.registered_crafts["1042_chopping"][node]
+        if not rec then return end
+
+        core.set_node(pos, {name = rec.result})
+
+        return item_wear.wear(itemstack, 1)
+    end,
+
+    uses = 256,
+
+    damage_per_second = 128,
+
+    groups = {weapon = 1, falling_node = 1, breakable_by_hand = 2},
+})
+
+core_1042.crafting.register_craft({
+    result = "1042_core:axe_iron",
+    type = "1042_default",
+    items = {"1042_core:iron_ingot 2", "1042_core:sticks 2"}
+})
 
 
 

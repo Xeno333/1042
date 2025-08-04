@@ -71,7 +71,8 @@ function core_1042.registry.register_material(name, def, rarity, recipe, loot)
     local rcolor = core_1042.registry.rarity[rarity].color
     local rlabel = core_1042.registry.rarity[rarity].name
 
-    ndef.inventory_overlay = "rarity.png^[colorize:" .. rcolor .. ":255" -- overlay the rarity visual
+    ndef.inventory_overlay = "rarity.png^[opacity:1^[colorize:" .. rcolor .. ":200" -- overlay the rarity visual
+    ndef.short_description = ndef.short_description or ndef.description
     ndef.description = ndef.description .. "\n" .. core.colorize(rcolor, rlabel)
 
     core.register_node(name, ndef)
@@ -83,6 +84,7 @@ core.register_on_mods_loaded(function()
         if name ~= "" and not registered_rare_items[name] then
             local ndef = {
                 description = def.description or "",
+                short_description = def.short_description or def.description,
                 inventory_overlay = def.inventory_overlay or ""
             }
 
@@ -98,7 +100,7 @@ core.register_on_mods_loaded(function()
             local rlabel = core_1042.registry.rarity[rarity].name
 
             if ndef.inventory_overlay ~= "" then ndef.inventory_overlay = ndef.inventory_overlay .. "^[overlay:" end
-            ndef.inventory_overlay = ndef.inventory_overlay .. "rarity.png^[colorize:" .. rcolor .. ":255"
+            ndef.inventory_overlay = ndef.inventory_overlay .. "rarity.png^[opacity:1^[colorize:" .. rcolor .. ":200"
 
             if ndef.description ~= "" then ndef.description = ndef.description .. "\n" end
             ndef.description = ndef.description .. core.colorize(rcolor, rlabel)

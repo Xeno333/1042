@@ -12,7 +12,7 @@ core.register_node("1042_core:node2", {
 
 -- Universal nodes
 
-core.register_node("1042_core:bedrock", {
+core_1042.registry.register_material("1042_core:bedrock", {
     description = "Bedrock",
     tiles = {"1042_plain_node.png^[colorize:#110a02:200"},
     use_texture_alpha = "opaque",
@@ -20,7 +20,7 @@ core.register_node("1042_core:bedrock", {
     diggable = false,
 
     groups = {unbreakable = 1},
-})
+}, 6, nil, nil)
 
 core.register_node("1042_core:skyrock", {
     description = "Skyrock",
