@@ -60,7 +60,7 @@ function core_1042.registry.register_material(name, def, rarity, recipe, loot)
     if recipe then
         core_1042.crafting.register_craft(recipe)
     end
-    if loot then
+    if loot and loot.name then
         core_1042.register_loot(loot)
     end
 

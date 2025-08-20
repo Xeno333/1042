@@ -57,6 +57,31 @@ core.register_node("1042_core:sand", {
     groups = {dirt = 1, falling_node = 1, breakable_by_hand = 3},
 })
 
+core.register_node("1042_core:glass", {
+    description = "Glass",
+    drawtype = "glasslike",
+    tiles = {"1042_plain_node.png"},
+    use_texture_alpha = "blend",
+	paramtype = "light",
+
+    groups = {falling_node = 1, slippery = 1},
+})
+
+core.register_node("1042_core:turf", {
+    description = "Turf",
+    tiles = {"turf.png"},
+
+    color = "#309913ff",
+    paramtype2 = "color",
+    palette = "turf_palette.png",
+    node_placement_prediction = "",
+
+    -- Add self as a drop to avoid meta
+    drop = "",
+
+    groups = {dirt = 1, breakable_by_hand = 3, bio_mass = 8},
+})
+
 core.register_node("1042_core:ice", {
     description = "Ice",
     drawtype = "glasslike",

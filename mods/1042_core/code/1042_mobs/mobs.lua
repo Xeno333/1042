@@ -1,5 +1,9 @@
 core.log("action", "Loading 1042_mobs...")
 
+mobs_1042 = {}
+
+dofile(core_1042.get_core_mod_path("1042_mobs") .. "/mob_api.lua")
+
 
 core.register_chatcommand("mob", {
     privs = {["creative"] = true},

@@ -3,6 +3,7 @@
 -- Todo Make modable using normal mapgen definitions for biomes and schematics #fixme
 
 dofile(core_1042.get_core_mod_path("1042_mapgen") .. "/mapgen_api.lua")
+dofile(core_1042.get_core_mod_path("1042_mapgen") .. "/structures.lua")
 
 -- Weather api
 dofile(core_1042.get_core_mod_path("1042_weather") .. "/weather_api.lua")
@@ -181,17 +182,31 @@ core.register_on_generated(function(vm, minp, maxp, seed)
     local data = vm:get_data()
     local param2_data = vm:get_param2_data()
 
-    local pr = PseudoRandom(seed)
+    local pr = PseudoRandom(seed + minp.x + minp.y + minp.z)
+    local struct_pr = PseudoRandom(seed + 13572126 + minp.x + minp.y + minp.z)
+    local structs = {}
+
     local tm = weather.get_temp_map(minp.x, minp.z)
     local place_list = {}
 
     -- Add for T_ymin just do stone
 
     if maxp.y >= bedrock_level and minp.y <= T_ymax_Real then
+        local village = false
+        if struct_pr:next(1, 10) == 1 then
+            village = true
+            --return
+        end
+
+        local buildings = {}
+
         local noise_m = mapgen_1042.map:get_2d_map({z=0,y=minp.x, x=minp.z})
         local m_pos = {z=minp.x,y=minp.y,x=minp.z}
         local cave_noise_m = mapgen_1042.cave_map:get_3d_map(m_pos)
         local ore_noise_m = mapgen_1042.ore_map:get_3d_map(m_pos)
+
+        local y_avr = 0
+        local y_avr_c = 0
 
         local ly = 0
         for y = minp.y, maxp.y do
@@ -247,6 +262,13 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                                 else
                                     data[vi] = turf
                                     param2_data[vi] = grass_color
+
+                                    y_avr = y_avr + y
+                                    y_avr_c = y_avr_c + 1
+
+                                    if village then
+                                        buildings[#buildings+1] = {x = x, y = y, z = z, vi = vi}
+                                    end
                                 end
 
                             elseif y < water_level then
@@ -289,6 +311,21 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                 end
             end
         end
+
+        if y_avr_c > 0 then
+            y_avr = y_avr / y_avr_c
+        else
+            y_avr = 0
+        end
+
+        -- Village code
+        if village and y_avr > 2 and y_avr < 20 then
+            structs[#structs+1] = function(d)
+                structures_1042.place_village(buildings, minp, maxp, d, area, struct_pr)
+            end
+        end
+
+
 
     -- New demension
     elseif maxp.y <= 4096 and maxp.y >= 1024 then
@@ -356,7 +393,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
     vm:set_param2_data(param2_data)
 
 
-    -- #fixme this just skips chunks with overlaps, probably should make my own format and API for this to allow checking for fits
+    -- (OLD) #fixme this just skips chunks with overlaps, probably should make my own format and API for this to allow checking for fits
     --[[
         format_voxel_manip_data = {}
         format_voxel_manip_data:fits_in(<format_voxel_manip_data>)
@@ -372,6 +409,17 @@ core.register_on_generated(function(vm, minp, maxp, seed)
         --    vm:set_light_data(light_data)
         --    vm:set_param2_data(param2_data)
         --end
+    end
+
+    -- Structs
+    if #data > 0 then
+        data = vm:get_data()
+
+        for _, func in pairs(structs) do
+            func(data)
+        end
+
+        vm:set_data(data)
     end
     
     vm:update_liquids()
