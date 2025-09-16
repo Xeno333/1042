@@ -19,6 +19,7 @@ function core_1042.get_loot()
     local ret = nil
     if #core_1042.loots > 0 then
         local def = core_1042.loots[core_1042.rand:next(1, #core_1042.loots)]
+        print(dump(core_1042.loots))
         ret = ItemStack(def.name .. " " .. core_1042.rand:next(1, (def.max_count or 1)))
     end
     return ret

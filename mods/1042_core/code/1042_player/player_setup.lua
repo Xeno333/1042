@@ -227,6 +227,9 @@ core.register_on_joinplayer(function(player, last_join)
 	end
 
 	player_api.add_hud(player, "hotbar", hotbar)
+	player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:64")
+	player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:128")
+	player:hud_set_hotbar_itemcount(10)
 
 
 
@@ -235,7 +238,6 @@ core.register_on_joinplayer(function(player, last_join)
 		hunger = 20
 		player_api.set_data(name, "hunger", hunger)
 	end
-
 	player_api.add_hud(player, "hunger", {
 		type = "statbar",
 		name = "hunger",
@@ -249,8 +251,7 @@ core.register_on_joinplayer(function(player, last_join)
 	})
 
 
-
-	player:hud_add({
+	player_api.add_hud(player, "crosshair", {
 		type = "image",
 		name = "pointer",
 		text = "1042_plain_node.png^[colorize:#aaffff:128",
@@ -258,7 +259,7 @@ core.register_on_joinplayer(function(player, last_join)
 		scale = {x=3,y=3},
 	})
 
-	player:hud_add({
+	player_api.add_hud(player, "1042", {
 		type = "text",
 		name = "game",
 		text = "1042",
@@ -266,11 +267,6 @@ core.register_on_joinplayer(function(player, last_join)
 		number = 0x00ffff,
 		style = 3
 	})
-
-	player:hud_set_hotbar_itemcount(10)
-	player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:64")
-	player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ffff:128")
-
 end)
 
 
@@ -436,7 +432,7 @@ core.register_globalstep(function(dtime)
 			player_api.update_hud(player, "pointed_thing", {
 				type = "text",
 				name = "pointed_node_hud",
-				text = (core.registered_nodes[node_name] or {}).description or node_name,
+				text = (core.registered_nodes[node_name] or {}).short_description or node_name,
 				position = {x=0.5, y=0.05},
 				number = 0x00ffdd,
 				style = 3
@@ -449,11 +445,11 @@ core.register_globalstep(function(dtime)
 
 		-- Wield Item
 		local item = core.registered_items[ player:get_wielded_item():get_name()]
-		if item and item.description then
+		if item and item.short_description then
 			player_api.update_hud(player, "wield_text", {
 				type = "text",
 				name = "wield_text_hud",
-				text = item.description,
+				text = item.short_description,
 				position = {x=0.05, y=0.9},
 				number = 0x00ffdd,
 				style = 3

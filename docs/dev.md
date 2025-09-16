@@ -130,7 +130,7 @@ This is an API for complex nodes/items that have wear, these are basicly tools o
 ### Functions (WIP)
 
 - `item_wear.set_uses(itemstack, uses)` Returns the itemstack with `uses` aplied to its wear. **WARNING:** `uses = 0` is undefined.
-- `item_wear.wear(itemstack, wear_to_apply)` Returns the itemstack with `wear_to_apply` uses aplied to it, if it breaks it removes and returns `ItemStack("")`.
+- `item_wear.wear(itemstack, wear_to_apply, user)` Returns the itemstack with `wear_to_apply` uses aplied to it, if it breaks it removes and returns `ItemStack("")`.
 - `item_wear.register_complex_node(name, def)` Registers a node as a complex node (tool-like). **Note:** This may be changed to `register_complex_tool` in version v0.3-beta, but this is not definent yet. If it is changed later it will be kept until v0.4 with a depricated status and be a refrence.
 
 
@@ -140,6 +140,8 @@ This is an API for complex nodes/items that have wear, these are basicly tools o
 ## Crafting API (`core_1042.crafting`)
 
 The crafting system 1042 has is fully custom and does not depend on the luanti crafting system. It allows for custom types and mod specific usage.
+
+**NOTE:** Crafting systems **MUST** use either `items = {...}` or `node = <node name>` for inputs, this is so that the internal system can index recipies. Side note: Prefer `items` as it may become the only supported input source.
 
 ### Functions
 
@@ -156,6 +158,10 @@ core_1042.crafting = {
 }
 ```
 
+
+# Node/Item(node) registration and Rarity systems
+
+- `core_1042.registry.register_material(name, def, rarity, recipe, loot)` Register node of `name` with `def` along with a rarity and recipe and loot definitions.
 
 
 ## Player API
@@ -257,10 +263,16 @@ Function callback phases are callbacks called at points in runtime. Some are cal
 - `"tests"` Testing time.
 
 
+## Item/Node Registration (`core_1042.register`)
 
+Builtin functions to handle recipes, rarity and item loot definition.
 
-
-
+- `core_1042.registry.register_material(name, def, rarity, recipe, loot)` registers a material.
+  - `name` name of node/item to register
+  - `def` definition table for node/item registration
+  - `rarity` material rarity, can be integer to set rarity or nil to leave it unset
+  - `recipe` recipe for automatically registering a recipe, leave nil to not register a recipe. If `rarity` is nil the rarity will be calculated based on the ingredients of the recipe, defaults to base rarity if `recipe` is nil
+  - `loot` used to define loot properties, such as max count (stack_max)
 
 # Achievement API `achievements_1042`
 

@@ -65,7 +65,7 @@ achievements_1042.register_achievement("oooo_fire", {
 
 
 
-core.register_node("1042_core:fire", {
+core_1042.registry.register_material("1042_core:fire", {
     description = "Fire",
     drawtype = "firelike",
     tiles = {
@@ -93,12 +93,14 @@ core.register_node("1042_core:fire", {
     damage_per_second = 5,
     
     groups = {breakable_by_hand = 3, burning = 1},
-})
+
+    item_type = "node",
+}, 6, nil, nil)
 
 
 -- Speacal nodes
 
-core.register_node("1042_core:beryl", {
+core_1042.registry.register_material("1042_core:beryl", {
     description = "Beryl",
     drawtype = "mesh",
     mesh = "crystal.obj",
@@ -123,9 +125,11 @@ core.register_node("1042_core:beryl", {
     light_source = 5,
     
     groups = {breakable_by_hand = 3, attached_node = 3},
-})
 
-core.register_node("1042_core:beryl_hanging", {
+    item_type = "node",
+}, 5, nil, nil)
+
+core_1042.registry.register_material("1042_core:beryl_hanging", {
     description = "Hanging Beryl",
     drawtype = "mesh",
     mesh = "crystal_roof.obj",
@@ -141,9 +145,11 @@ core.register_node("1042_core:beryl_hanging", {
     light_source = 5,
     
     groups = {breakable_by_hand = 3, attached_node = 4},
-})
 
-core.register_node("1042_core:rock", {
+    item_type = "node",
+}, 5, nil, nil)
+
+core_1042.registry.register_material("1042_core:rock", {
     description = "Rock",
     drawtype = "mesh",
     mesh = "rock.obj",
@@ -180,9 +186,11 @@ core.register_node("1042_core:rock", {
     buildable_to = false,
 
     groups = {breakable_by_hand = 3, attached_node = 3},
-})
 
-core.register_node("1042_core:flint", {
+    item_type = "node",
+}, 2, nil, nil)
+
+core_1042.registry.register_material("1042_core:flint", {
     description = "Flint",
     drawtype = "mesh",
     mesh = "flint.obj",
@@ -220,9 +228,11 @@ core.register_node("1042_core:flint", {
     buildable_to = false,
     
     groups = {breakable_by_hand = 3, attached_node = 3},
-})
 
-core.register_node("1042_core:torch", {
+    item_type = "node",
+}, 1, nil, nil)
+
+core_1042.registry.register_material("1042_core:torch", {
     description = "Torch",
     drawtype = "nodebox",
     tiles = {
@@ -260,18 +270,18 @@ core.register_node("1042_core:torch", {
     buildable_to = false,
     
     groups = {breakable_by_hand = 3, attached_node = 3, burning = 1},
-})
 
-core_1042.crafting.register_craft({
+    item_type = "node",
+}, nil, {
     result = "1042_core:torch",
     type = "1042_default",
     items = {
         "group:burns 5",
     }
-})
+}, nil)
 
 
-core.register_node("1042_core:sticks", {
+core_1042.registry.register_material("1042_core:sticks", {
     description = "Sticks",
     drawtype = "mesh",
     mesh = "sticks.obj",
@@ -292,14 +302,12 @@ core.register_node("1042_core:sticks", {
     },
     
     groups = {breakable_by_hand = 2, attached_node = 3, burns = 1},
-})
 
-core_1042.register_loot({name = "1042_core:sticks", max_count = 32})
-
-
+    item_type = "node",
+}, 1, nil, {name = "1042_core:sticks", max_count = 32})
 
 
-core.register_node("1042_core:iron_nugget", {
+core_1042.registry.register_material("1042_core:iron_nugget", {
     description = "Iron Nugget",
     drawtype = "mesh",
     mesh = "nugget.obj",
@@ -340,12 +348,13 @@ core.register_node("1042_core:iron_nugget", {
     buildable_to = false,
     
     groups = {breakable_by_hand = 2, attached_node = 3},
-})
-core_1042.register_loot({name = "1042_core:iron_nugget", max_count = 16})
+
+    item_type = "node",
+}, 2, nil, {name = "1042_core:iron_nugget", max_count = 16})
 
 
 -- #fixme
-core.register_node("1042_core:anvil", {
+core_1042.registry.register_material("1042_core:anvil", {
     description = "Anvil (WIP)",
     drawtype = "mesh",
     mesh = "anvil.obj",
@@ -372,7 +381,9 @@ core.register_node("1042_core:anvil", {
     light_source = 5,
     
     groups = {breakable_by_hand = 3, attached_node = 3},
-})
+
+    item_type = "node",
+}, 3, nil, nil)
 
 
 achievements_1042.register_achievement("smelter", {
@@ -380,7 +391,7 @@ achievements_1042.register_achievement("smelter", {
     colour = "#ffddaa"
 })
 
-core.register_node("1042_core:crude_iron", {
+core_1042.registry.register_material("1042_core:crude_iron", {
     description = "Crude Iron",
     drawtype = "mesh",
     mesh = "flint.obj",
@@ -426,11 +437,12 @@ core.register_node("1042_core:crude_iron", {
     end,
     
     groups = {breakable_by_hand = 1, falling_node = 1},
-})
-core_1042.register_loot({name = "1042_core:crude_iron", max_count = 6})
+
+    item_type = "node",
+}, 3, nil, {{name = "1042_core:crude_iron", max_count = 6}})
 
 
-core.register_node("1042_core:iron_ingot", {
+core_1042.registry.register_material("1042_core:iron_ingot", {
     description = "Iron Ingot",
     drawtype = "nodebox",
     tiles = {"1042_plain_node.png^[colorize:#998888:200"},
@@ -479,11 +491,12 @@ core.register_node("1042_core:iron_ingot", {
     end,
     
     groups = {breakable_by_hand = 1, falling_node = 1},
-})
-core_1042.register_loot({name = "1042_core:iron_ingot", max_count = 6})
+
+    item_type = "node"
+}, 3, nil, {name = "1042_core:iron_ingot", max_count = 6})
 
 
-core.register_node("1042_core:pork_raw", {
+core_1042.registry.register_material("1042_core:pork_raw", {
     description = "Raw Pork",
     drawtype = "mesh",
     mesh = "pork.obj",
@@ -520,9 +533,11 @@ core.register_node("1042_core:pork_raw", {
 	},
 
     groups = {food = 1, breakable_by_hand = 1, attached_node = 3, cooks = 3},
-})
 
-core.register_node("1042_core:pork_cooked", {
+    item_type = "node",
+}, 2, nil, nil)
+
+core_1042.registry.register_material("1042_core:pork_cooked", {
     description = "Cooked Pork",
     drawtype = "mesh",
     mesh = "pork.obj",
@@ -545,4 +560,6 @@ core.register_node("1042_core:pork_cooked", {
 
 
     groups = {food = 1, breakable_by_hand = 2, attached_node = 3},
-})
+
+    item_type = "node",
+}, 2, nil, nil)

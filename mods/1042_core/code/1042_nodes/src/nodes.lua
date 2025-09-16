@@ -12,7 +12,7 @@ core.register_node("1042_core:node2", {
 
 -- Universal nodes
 
-core.register_node("1042_core:bedrock", {
+core_1042.registry.register_material("1042_core:bedrock", {
     description = "Bedrock",
     tiles = {"1042_plain_node.png^[colorize:#110a02:200"},
     use_texture_alpha = "opaque",
@@ -20,7 +20,7 @@ core.register_node("1042_core:bedrock", {
     diggable = false,
 
     groups = {unbreakable = 1},
-})
+}, 6, nil, nil)
 
 core.register_node("1042_core:skyrock", {
     description = "Skyrock",
@@ -55,6 +55,31 @@ core.register_node("1042_core:sand", {
     use_texture_alpha = "opaque",
 
     groups = {dirt = 1, falling_node = 1, breakable_by_hand = 3},
+})
+
+core.register_node("1042_core:glass", {
+    description = "Glass",
+    drawtype = "glasslike",
+    tiles = {"1042_plain_node.png"},
+    use_texture_alpha = "blend",
+	paramtype = "light",
+
+    groups = {falling_node = 1, slippery = 1},
+})
+
+core.register_node("1042_core:turf", {
+    description = "Turf",
+    tiles = {"turf.png"},
+
+    color = "#309913ff",
+    paramtype2 = "color",
+    palette = "turf_palette.png",
+    node_placement_prediction = "",
+
+    -- Add self as a drop to avoid meta
+    drop = "",
+
+    groups = {dirt = 1, breakable_by_hand = 3, bio_mass = 8},
 })
 
 core.register_node("1042_core:ice", {

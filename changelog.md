@@ -37,15 +37,15 @@
 
 - Fix fire drop -Xeno333
 - Added unlocking chests so that they don't have problems anymore -Xeno333
-- Add breaking animation -SuperStarSonic
-- Fix some doc typos -SuperStarSonic
+- Add breaking animation -Python-Sargent
+- Fix some doc typos -Python-Sargent
 - Add tool wear system -Xeno333
 - Add crafting system and improve inventory -Xeno333
 - Persist tool wear -Xeno333
 - Redesign biomes -Xeno333
 - Fix grass in trees -Xeno333
-- Improve turf -Xeno333 & SuperStarSonic
-- Add Flowers -SuperStarSonic
+- Improve turf -Xeno333 & Python-Sargent
+- Add Flowers -Python-Sargent
 - Work on tree Saplings -Futuray && Xeno333
 - Add intigrated tests mod -Xeno333
 - Add `admin` priv and migrate `change_weather` to use it insted of `creative` along with other priv fixes -Xeno333
@@ -78,13 +78,16 @@
 - Start of hunger -Xeno333
 - Hunger mechanic -Xeno333
 - Globalize weather between starts -Xeno333
+- Rarity system and registration system (partly-WIP) -Python-Sargent & Xeno333
+- Tweaks and Iron axe -Xeno333
 
 ### WIP
-- Lore.Lang dev -Xeno333 & SuperStarSonic
+- Lore.Lang dev -Xeno333 & Python-Sargent
 - Adding contenent border to mapgen and spawing -Xeno333
-- Improve textures and models -Xeno333 & SuperStarSonic
+- Improve textures and models -Xeno333 & Python-Sargent
 - Improve mapgen code -Xeno333
-- Improve and orginize documentation -Xeno333 & SuperStarSonic
+- Improve and orginize documentation -Xeno333 & Python-Sargent
+- Dynamic item rarity/item registration system -Xeno333 & Python-Sargent
 
 
 #### Very WIP (needs changes)

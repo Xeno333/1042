@@ -46,11 +46,17 @@ core.after(0,function() -- use after to ensure compleate initalization
     end
 
     table.sort(items_to_reg, function(a, b)
-        return (a.short_description or a.description or a.name) < (b.short_description or b.description or b.name)
+        if (a._1042_rarity or 0) == (b._1042_rarity or 0) then
+            return (a.short_description or a.description or a.name) < (b.short_description or b.description or b.name)
+        end
+        return (a._1042_rarity or 0) < (b._1042_rarity or 0)
     end)
     
     table.sort(core_1042.all_registered_items, function(a, b)
-        return (a.short_description or a.description or a.name) < (b.short_description or b.description or b.name)
+        if (a._1042_rarity or 0) == (b._1042_rarity or 0) then
+            return (a.short_description or a.description or a.name) < (b.short_description or b.description or b.name)
+        end
+        return (a._1042_rarity or 0) < (b._1042_rarity or 0)
     end)
 
     core_1042.creative_inv:set_size("main", size)
@@ -70,12 +76,8 @@ core_1042.phases.register_callback("startup_done", function()
         local item_stacks = {}
 
         for _, stack in pairs(recipe.items) do
-            if core.registered_items[stack] then
-                local itemstack = ItemStack(stack)
-                item_stacks[itemstack:get_name()] = (item_stacks[itemstack:get_name()] or 0) + itemstack:get_count()
-            else
-                item_stacks[stack] = (item_stacks[stack] or 0) + 1
-            end
+            local itemstack = ItemStack(stack)
+            item_stacks[itemstack:get_name()] = (item_stacks[itemstack:get_name()] or 0) + itemstack:get_count()
         end
 
         table_of_crafts[#table_of_crafts+1], _ = {recipe = recipe, output = recipe.result, req_items = item_stacks}

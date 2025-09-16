@@ -83,7 +83,7 @@ function core_1042.make_inv_formspec(player)
         "scroll_container_end[]"..
         "scrollbar[1,2;0.5,4;vertical;setting_box_scrollbar;0]"..
 
-        "label[1.5,7.5;Controles]"..
+        "label[1.5,7.5;Controls]"..
         "label[2,8;Use - Aux1\nSprint - Walk]"..
 
         --"label[1.5,7.5;Docs]"..
