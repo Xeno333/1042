@@ -84,7 +84,70 @@ local water2 = core.get_content_id("1042_core:water_source2")
 
 
 
+local tree_dark = core.get_content_id("1042_core:tree_dark")
+local leaves_dark = core.get_content_id("1042_core:leaves_dark")
+local tree_light = core.get_content_id("1042_core:tree_light")
+local leaves_light = core.get_content_id("1042_core:leaves_light")
+local tree = core.get_content_id("1042_core:tree")
+local leaves = core.get_content_id("1042_core:leaves")
 
+
+function grow_tree(pos, data, area, def)
+    local pr = PseudoRandom(pos.x + pos.y + pos.z)
+    local h = def.h
+    local used = {}
+
+    for i = 1, h do
+        local l1 = pr:next(1, 3) - 2
+        local l2 = pr:next(1, 3) - 2
+        pos = pos + vector.new(l1, 1, l2)
+        for l = 0, pr:next(2, 4) do
+            for x = -1, 1 do
+                for y = -1, 1 do
+                    local v = vector.new(x, l, y) + pos
+                    data[area:index(v.x, v.y, v.z)] = def.tree
+                    used[v] = true
+                end
+            end
+        end
+    end
+    for i = 1, h/2 do
+        local l1 = pr:next(1, 3) - 2
+        local l2 = pr:next(1, 3) - 2
+        pos = pos + vector.new(l1, 1, l2)
+        for l = 0, pr:next(2, 4) do
+            for x = -pr:next(1, 2), pr:next(1, 2) do
+                for y = -pr:next(1, 2), pr:next(1, 2) do
+                    local v = vector.new(x, l, y) + pos
+                    if not used[v] then
+                        data[area:index(v.x, v.y, v.z)] = def.leaves
+                    end
+                end
+            end
+        end
+    end
+
+    local c = pos
+
+    for n = 1, pr:next(1, 4) do
+        pos = c
+        for i = 1, pr:next(4, def.down_c or 6) do
+            local l1 = pr:next(1, 7) - 4
+            local l2 = pr:next(1, 7) - 4
+            pos = pos + vector.new(l1, -pr:next(1, def.down or 2), l2)
+            for l = 0, pr:next(2, 4) do
+                for x = -pr:next(1, 3), pr:next(1, 3) do
+                    for y = -pr:next(1, 3), pr:next(1, 3) do
+                        local v = vector.new(x, l, y) + pos
+                        if not used[v] then
+                            data[area:index(v.x, v.y, v.z)] = def.leaves
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
 
 
 
@@ -119,10 +182,12 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data
 
             -- Big tree
             elseif y >= water_level+10 and tempv >= 15 and c == 995 then
-                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematics_1042.get_schematic("big_tree_1"), force=false}
+                --place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematics_1042.get_schematic("big_tree_1"), force=false}
+                grow_tree(vector.new(x, y-2, z), data, area, {tree = tree, leaves = leaves, h = 10})
 
             elseif y >= water_level+5 and tempv >= 5 and c == 999 then
-                place_list[#place_list+1] = {pos=vector.new(x-11,y-3,z-11), schematic=schematics_1042.get_schematic("big_tree_dark_1"), force=true}
+                --place_list[#place_list+1] = {pos=vector.new(x-11,y-3,z-11), schematic=schematics_1042.get_schematic("big_tree_dark_1"), force=true}
+                grow_tree(vector.new(x, y-2, z), data, area, {tree = tree_dark, leaves = leaves_dark, h = 12})
             end
 
         elseif tempv > 20 then
@@ -132,7 +197,8 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data
 
         elseif tempv <= -3 then
             if y >= water_level+3 and c >= 999+(tempv/8) then
-                place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematics_1042.get_schematic("big_tree_light_1"), force=true}
+                --place_list[#place_list+1] = {pos=vector.new(x-7,y-1,z-7), schematic=schematics_1042.get_schematic("big_tree_light_1"), force=true}
+                grow_tree(vector.new(x, y-2, z), data, area, {tree = tree_light, leaves = leaves_light, h = 16, down_c = 8, down = 5})
             else
                 local vi = area:index(x, y+1, z)
                 data[vi] = snow

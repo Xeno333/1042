@@ -24,9 +24,7 @@ function core_1042.trees.register_tree(from_mod, def)
     def.planks.description = item_desc.. "Planks"
 
     core.register_node(":" .. from_mod .. ":tree" .. item_name, def.tree)
-
     core.register_node(":" .. from_mod .. ":leaves" .. item_name, def.leaves)
-
     core.register_node(":" .. from_mod .. ":planks" .. item_name, def.planks)
 
     -- WIP
@@ -60,7 +58,3 @@ function core_1042.trees.register_tree(from_mod, def)
     }
 end
 
-
-
-function core_1042.trees.grow_tree()
-end
