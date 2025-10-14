@@ -92,6 +92,22 @@ function weather.default_on_change(player, name, players_weather)
             }
         }
     )
+    player:set_stars(
+        {
+            visible = true,
+            day_opacity = 0.1,
+            count = 6000,
+            star_color = "#99aaffff",
+            scale = 0.3
+        }
+    )
+    player:set_moon(
+        {
+            texture = "1042_plain_node.png^[colorize:#aaaaaa:144",
+            visible = true,
+            scale = 0.3
+        }
+    )
 end
 
 

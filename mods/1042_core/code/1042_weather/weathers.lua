@@ -116,6 +116,22 @@ weather.register_weather({
             }
         })
         player:set_lighting({exposure = {exposure_correction = -2}})
+        player:set_stars(
+            {
+                visible = true,
+                day_opacity = 0.1,
+                count = 6000,
+                star_color = "#99aaffff",
+                scale = 0.3
+            }
+        )
+        player:set_moon(
+            {
+                texture = "1042_plain_node.png^[colorize:#aaaaaa:144",
+                visible = true,
+                scale = 0.3
+            }
+        )
 
         -- Sound
         players_weather.sound_handle = core.sound_play("storm", 
@@ -130,6 +146,122 @@ weather.register_weather({
 })
 
 
+
+weather.register_weather({
+    name = "Sky Plain",
+    conditions = {
+        y_level = {
+            max = 4096,
+            min = 1024
+        }
+    },
+    particlespawner = {
+        amount = 100,
+        time = 2,
+
+        collisiondetection = true,
+        object_collision = true,
+
+        vel = {
+            min = vector.new(-16, -16, -16),
+            max = vector.new(16, 16, 16),
+            bias = 0
+        },
+
+        acc = vector.new(0, -9.8, 0),
+
+        size = {
+            min = 0.5,
+            max = 2
+        },
+
+        exptime = {
+            min = 2,
+            max = 3
+        },
+
+        glow = 14,
+
+        texpool = {
+            {
+                name = "1042_plain_node.png^[colorize:#440088:144",
+                scale = 1,
+                blend = "alpha"
+            },
+            {
+                name = "1042_plain_node.png^[colorize:#004488:144",
+                scale = 1,
+                blend = "alpha"
+            },
+            {
+                name = "1042_plain_node.png^[colorize:#008888:144",
+                scale = 1,
+                blend = "alpha"
+            },
+            {
+                name = "1042_plain_node.png^[colorize:#888888:144",
+                scale = 1,
+                blend = "alpha"
+            }
+        }
+    },
+
+    on_change = function(player, name, players_weather)
+        -- Sky changes
+        player:set_sun(
+            {
+                visible = false
+            }
+        )
+        player:set_clouds({
+            density = 0.5,
+            color = "#003366",
+            ambient = "#007777",
+            shadow = "#0099aa",
+            thickness = 64,
+            speed = {x=32, y=32},
+            height = 2048 + 64
+        })
+        player:set_sky({
+            type = "regular",
+            clouds = true,
+            sky_color = {
+                night_sky = "#003366",
+                night_horizon = "#003366",
+                day_horizon = "#007799",
+                day_sky = "#005577",
+                dawn_sky = "#007777",
+                dawn_horizon = "#008877",
+                indoors = "#005544",
+                --fog_sun_tint = "#212222ff",
+                fog_moon_tint = "#0099cc",
+                fog_tint_type = "custom"
+            },
+            fog = {
+                fog_start = 0,
+                fog_distance = 40,
+                fog_color = "#223355"
+            }
+        })
+        player:set_stars(
+            {
+                visible = true,
+                day_opacity = 0.6,
+                count = 2000,
+                star_color = "#22aa88ff",
+                scale = 0.2
+            }
+        )
+        player:set_moon(
+            {
+                texture = "1042_plain_node.png^[colorize:#00aacc:144",
+                visible = true,
+                scale = 1
+            }
+        )
+        player:set_lighting({exposure = {exposure_correction = -2}})
+    end,
+})
 
 weather.register_weather({
     name = "Storm",
@@ -226,6 +358,22 @@ weather.register_weather({
             }
         })
         player:set_lighting({exposure = {exposure_correction = -2}})
+        player:set_stars(
+            {
+                visible = true,
+                day_opacity = 0.1,
+                count = 6000,
+                star_color = "#99aaffff",
+                scale = 0.3
+            }
+        )
+        player:set_moon(
+            {
+                texture = "1042_plain_node.png^[colorize:#aaaaaa:144",
+                visible = true,
+                scale = 0.3
+            }
+        )
 
 
         -- Sound
@@ -324,6 +472,22 @@ weather.register_weather({
             }
         })
         player:set_lighting({exposure = {exposure_correction = -1}})
+        player:set_stars(
+            {
+                visible = true,
+                day_opacity = 0.1,
+                count = 6000,
+                star_color = "#99aaffff",
+                scale = 0.3
+            }
+        )
+        player:set_moon(
+            {
+                texture = "1042_plain_node.png^[colorize:#aaaaaa:144",
+                visible = true,
+                scale = 0.3
+            }
+        )
 
 
         -- Sound
@@ -421,6 +585,22 @@ weather.register_weather({
             }
         })
         player:set_lighting({exposure = {exposure_correction = -0.3}})
+        player:set_stars(
+            {
+                visible = true,
+                day_opacity = 0.1,
+                count = 6000,
+                star_color = "#99aaffff",
+                scale = 0.3
+            }
+        )
+        player:set_moon(
+            {
+                texture = "1042_plain_node.png^[colorize:#aaaaaa:144",
+                visible = true,
+                scale = 0.3
+            }
+        )
 
 
         -- Sound
@@ -531,6 +711,22 @@ weather.register_weather({
             }
         })
         player:set_lighting({exposure = {exposure_correction = 0.3}})
+        player:set_stars(
+            {
+                visible = true,
+                day_opacity = 0.1,
+                count = 6000,
+                star_color = "#99aaffff",
+                scale = 0.3
+            }
+        )
+        player:set_moon(
+            {
+                texture = "1042_plain_node.png^[colorize:#aaaaaa:144",
+                visible = true,
+                scale = 0.3
+            }
+        )
     end,
 })
 
