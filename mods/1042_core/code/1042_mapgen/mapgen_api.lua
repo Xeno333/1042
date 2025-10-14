@@ -105,6 +105,21 @@ mapgen_1042.ore_map = PerlinNoiseMap({
     }
 }, {x=80, y=80, z=80})
 
+mapgen_1042.ore_map_gold = PerlinNoiseMap({
+    offset = 0,
+    scale = 1,
+    spread = {x = 10, y = 5, z = 10},
+    seed = core.get_mapgen_setting("seed") + 3723542,
+    octaves = 3,
+    persist = 0.7,
+    lacunarity = 2,
+    flags = {
+        eased = true,
+        absvalue = false,
+        defaults = false
+    }
+}, {x=80, y=80, z=80})
+
 
 
 -- #fixme these need to be dynmic and need to be fixed in mapgen overhaul

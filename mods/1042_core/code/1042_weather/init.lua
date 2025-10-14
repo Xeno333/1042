@@ -3,6 +3,34 @@ core.log("action", "Loading 1042_weather...")
 
 dofile(core_1042.get_core_mod_path("1042_weather") .. "/weather_api.lua")
 
+local w = 388
+print("Checking " .. (w*2)^2 .. " chunks and building map")
+local map = {}
+for x = -w, w do
+    map[x] = {}
+    for y = -w, w do
+        map[x][y] = weather.get_biome_palette_index(weather.get_temp_single(vector.new(x, 0, y)))
+    end
+end
+
+--[[local img = core.encode_base64(core.encode_png(tex))
+
+
+
+core.register_chatcommand("a", {
+    description = "Kill self instantly.",
+    func = function(name)
+        core.show_formspec(name, "a", 
+            "formspec_version[8]size[32,17.5,false]" ..
+            "image[1,0.6;1,2;^[png:" .. img .. "]"
+        )
+
+        return true
+    end
+})]]
+
+
+
 -- Skip weather
 if core.settings:get_bool("1042_disable_weather", false) then
     weather.is_loaded = false

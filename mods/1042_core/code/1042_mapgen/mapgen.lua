@@ -55,6 +55,7 @@ local turf = core.get_content_id("1042_core:turf")
 local snow = core.get_content_id("1042_core:snow")
 local lava = core.get_content_id("1042_core:lava_source")
 local iron_ore = core.get_content_id("1042_core:iron_ore")
+local gold_ore = core.get_content_id("1042_core:gold_ore")
 
 local water = core.get_content_id("mapgen_water_source")
 local ice = core.get_content_id("1042_core:ice")
@@ -270,6 +271,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
         local m_pos = {z=minp.x,y=minp.y,x=minp.z}
         local cave_noise_m = mapgen_1042.cave_map:get_3d_map(m_pos)
         local ore_noise_m = mapgen_1042.ore_map:get_3d_map(m_pos)
+        local gold_ore_noise_m = mapgen_1042.ore_map_gold:get_3d_map(m_pos)
 
         local y_avr = 0
         local y_avr_c = 0
@@ -310,8 +312,10 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                     -- Place and handel caves
                     if cave_noise_m[lx][ly][lz] > -0.95 or y > caves_max then
                         if y < (ny-1) then
-                            if noise < -1.3 then
+                            if ore_noise_m[lx][ly][lz] < -1.3 then
                                 data[vi] = iron_ore
+                            elseif gold_ore_noise_m[lx][ly][lz] < -1.6 then
+                                data[vi] = gold_ore
                             else
                                 data[vi] = stone
                             end
