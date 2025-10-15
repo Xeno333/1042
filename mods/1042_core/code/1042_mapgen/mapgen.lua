@@ -49,23 +49,28 @@ local skyrock = core.get_content_id("1042_core:skyrock")
 
 
 local stone = core.get_content_id("mapgen_stone")
+local basalt = core.get_content_id("1042_core:basalt")
+
 local dirt = core.get_content_id("1042_core:dirt")
 local sand = core.get_content_id("1042_core:sand")
 local turf = core.get_content_id("1042_core:turf")
+local ice = core.get_content_id("1042_core:ice")
+local water = core.get_content_id("mapgen_water_source")
+
 local snow = core.get_content_id("1042_core:snow")
+
 local lava = core.get_content_id("1042_core:lava_source")
 local iron_ore = core.get_content_id("1042_core:iron_ore")
 local gold_ore = core.get_content_id("1042_core:gold_ore")
 
-local water = core.get_content_id("mapgen_water_source")
-local ice = core.get_content_id("1042_core:ice")
-
+-- Dec
 local rock = core.get_content_id("1042_core:rock")
 local sticks = core.get_content_id("1042_core:sticks")
 local iron_nugget = core.get_content_id("1042_core:iron_nugget")
 local beryl = core.get_content_id("1042_core:beryl")
 local flint = core.get_content_id("1042_core:flint")
 local beryl_top = core.get_content_id("1042_core:beryl_hanging")
+local chest = core.get_content_id("1042_core:chest")
 
 local grass_tall = core.get_content_id("1042_core:grass_tall")
 local grass_short = core.get_content_id("1042_core:grass_short")
@@ -74,10 +79,10 @@ local digitalis = core.get_content_id("1042_core:digitalis")
 local light_bloom = core.get_content_id("1042_core:light_bloom")
 local sunflower = core.get_content_id("1042_core:sunflower")
 
-local chest = core.get_content_id("1042_core:chest")
 local air = core.get_content_id("air")
 
 
+-- Dimension
 
 local node2 = core.get_content_id("1042_core:node2")
 local water2 = core.get_content_id("1042_core:water_source2")
@@ -277,6 +282,8 @@ core.register_on_generated(function(vm, minp, maxp, seed)
         local y_avr_c = 0
 
         local ly = 0
+
+        local special = nil
         for y = minp.y, maxp.y do
             ly = ly + 1
             local lz = 0
@@ -285,6 +292,36 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                 local vi = area:index(minp.x, y, z)
                 local lx = 0
                 for x = minp.x, maxp.x do
+                    lx = lx + 1
+                    local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
+                    local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, noise_m[lx][lz], tempv)
+
+                    if mapgen_1042.underworld_entrences[x .. " " .. z] ~= nil then
+                        if special ~= {} then
+                            special = {}
+                            for j = -1, 1 do
+                                special[x + j] = {}
+                                for i = -1, 1 do
+                                    special[x + j][z + i] = true
+                                end
+                            end
+                        end
+                        vi = vi + 1
+                        goto skip
+                    end
+                    if special and (special[x] or {})[z] and y >= bedrock_level - 4 then
+                        if pr:next(0, (math.abs((ny - y) / 32) or 5)) == 0 then
+                            data[vi] = bedrock
+                        else
+                            if pr:next(1, 10) == 1 then
+                                data[vi] = gold_ore
+                            else
+                                data[vi] = basalt
+                            end
+                        end
+                        vi = vi + 1
+                        goto skip
+                    end
 
                     if y <= bedrock_level then
                         if  y == bedrock_level then
@@ -303,10 +340,6 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                         vi = vi + 1
                         goto skip
                     end
-
-                    lx = lx + 1
-                    local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
-                    local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, noise_m[lx][lz], tempv)
 
 
                     -- Place and handel caves
@@ -401,6 +434,8 @@ core.register_on_generated(function(vm, minp, maxp, seed)
     elseif maxp.y <= 4096 and maxp.y >= 1024 then
         local noise_m = mapgen_1042.map2:get_2d_map({z=0,y=minp.x, x=minp.z})
         local noise_m_1 = mapgen_1042.map2_1:get_2d_map({z=0,y=minp.x, x=minp.z})
+        local complex_lands = mapgen_1042.complex_lands:get_3d_map({z=minp.x,y=minp.y,x=minp.z})
+
         local ly = 0
         for y = minp.y, maxp.y do
             ly = ly + 1
@@ -416,11 +451,11 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                     local noise_1 = noise_m_1[lx][lz]
                     local y_max = 2048 + (noise - 0.3)^(1/3) * 10
 
-                    --[[if noise_1 > 0.5 and y == math.floor(y_max) then
-                            data[area:index(x, y, z)] = ice]]
-                    if noise_1 > 0.35 and (y == math.floor(y_max) or (noise - 0.3 <= 0 and y == 2048)) then
+                    if noise_1 > 0.5 and y == math.floor(y_max) then
+                        data[area:index(x, y, z)] = ice
+                    elseif noise_1 > 0.35 and (y == math.floor(y_max) or (noise - 0.3 <= 0 and y == 2048)) then
                         if noise_1 > 0.5 then
-                            data[area:index(x, y, z)] = air
+                            data[vi] = air
                             data[area:index(x, y-1, z)] = water2
                             data[area:index(x, y-2, z)] = node2
 
@@ -448,10 +483,19 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                             data[area:index(x, y-1, z)] = node2
                         end
 
-                    elseif noise >= 0.3 then
-                        local y_min = 2048 - (noise - 0.3)^(3/5) * 30
-                        if y <= y_max and y >= y_min then
+                    elseif noise >= 0.3 and y <= y_max and y >= 2048 - (noise - 0.3)^(3/5) * 30 then
+                        data[vi] = node2
+
+                    elseif complex_lands[lx][ly][lz] >= 0.8 and complex_lands[lx][ly][lz] <= 0.9 then
+                        if complex_lands[lx][ly][lz] <= 0.85 then
+                            data[vi] = ice
+                        else
                             data[vi] = node2
+                        end
+
+                    elseif y == math.floor(y_max)+1 and noise_1 <= 0.5 then
+                        if pr:next(1, 200) == 1 then
+                            data[area:index(x, y, z)] = beryl
                         end
                     end
                 end

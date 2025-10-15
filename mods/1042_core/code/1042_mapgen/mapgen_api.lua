@@ -120,6 +120,34 @@ mapgen_1042.ore_map_gold = PerlinNoiseMap({
     }
 }, {x=80, y=80, z=80})
 
+mapgen_1042.complex_lands = PerlinNoiseMap({
+    offset = 0,
+    scale = 1,
+    spread = {x = 100, y = 50, z = 100},
+    seed = core.get_mapgen_setting("seed") + 125542,
+    octaves = 2,
+    persist = 0.5,
+    lacunarity = 1,
+    flags = {
+        eased = true,
+        absvalue = false,
+        defaults = false
+    }
+}, {x=80, y=80, z=80})
+
+
+local entrences_pr = PseudoRandom(core.get_mapgen_setting("seed"))
+local entrences = {}
+for i = 1, entrences_pr:next(10, 20) do
+    local x = entrences_pr:next(-1000, 1000) * entrences_pr:next(1, 20)
+    local z = entrences_pr:next(-1000, 1000) * entrences_pr:next(1, 20)
+    entrences[x .. " " .. z] = vector.new(x, 0, z)
+end
+
+mapgen_1042.underworld_entrences = entrences
+
+print(dump(entrences))
+print(#entrences)
 
 
 -- #fixme these need to be dynmic and need to be fixed in mapgen overhaul
@@ -148,7 +176,6 @@ function mapgen_1042.get_y(x, z, noisei, temp)
     end
 
     local ny
-    local mountin_top = false
 
     -- Distance from (0,y,0)
     local r = math.sqrt(x^2+z^2)
@@ -169,11 +196,11 @@ function mapgen_1042.get_y(x, z, noisei, temp)
     else
         -- Mountin hole
         local rv = math.floor((0.9 * math.abs(0.9)) * T_ymax - 3)
-        if temp and temp > 20 then
-            return math.floor(math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/(8*(temp/20)) + 4)), rv, false, noise
-        else
+        --if temp and temp > 20 then
+        --    return math.floor(math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/(8*(temp/20)) + 4)), rv, false, noise
+        --else
             return math.floor(math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/8 + 4)), rv, true, noise
-        end
+        --end
     end
     
 

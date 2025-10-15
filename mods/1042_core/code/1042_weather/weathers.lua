@@ -156,6 +156,11 @@ weather.register_weather({
         }
     },
     particlespawner = {
+        y_spawn = {
+            min = -16,
+            max = 16
+        },
+
         amount = 100,
         time = 2,
 

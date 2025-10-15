@@ -104,9 +104,10 @@ core.register_globalstep(function(dtime)
             local def = the_weather.particlespawner
             if def then
                 local width = def._1042_weather_box_distance or 16
+                local y_spawn = def.y_spawn or {}
                 def.pos = {
-                    min = vector.new(pos.x-width,pos.y+weather_hight,pos.z-width),
-                    max = vector.new(pos.x+width,pos.y+weather_hight,pos.z+width),
+                    min = vector.new(pos.x-width,pos.y + (y_spawn.min or weather_hight),pos.z-width),
+                    max = vector.new(pos.x+width,pos.y + (y_spawn.max or weather_hight),pos.z+width),
                     bias = 0
                 }
                 def.width = nil
@@ -158,6 +159,7 @@ core.register_chatcommand("change_weather", {
         end
 
         weather.weather_index = index
+        core_1042.set("current_weather", index)
         return true, "Setting weather to " .. weather.weathers[weather.weather_index].name
     end
 })
