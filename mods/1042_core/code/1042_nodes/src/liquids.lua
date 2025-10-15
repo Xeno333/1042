@@ -31,7 +31,7 @@ core.register_node("1042_core:water_source", {
         footstep = {
             name = "water",
             gain = 0.5,
-            pitch = 1
+            pitch = 0.5
         },
     },
 
@@ -80,7 +80,7 @@ core.register_node("1042_core:water_flowing", {
         footstep = {
             name = "water",
             gain = 0.5,
-            pitch = 1
+            pitch = 0.75
         },
     },
 
@@ -130,7 +130,7 @@ core.register_node("1042_core:water_source2", {
         footstep = {
             name = "water",
             gain = 0.5,
-            pitch = 1
+            pitch = 0.5
         },
     },
 
@@ -180,7 +180,7 @@ core.register_node("1042_core:water_flowing2", {
         footstep = {
             name = "water",
             gain = 0.5,
-            pitch = 1
+            pitch = 0.75
         },
     },
 

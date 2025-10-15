@@ -124,3 +124,42 @@ function structures_1042.place_village(buildings, minp, maxp, data, area, struct
         end
     end
 end
+
+
+
+
+
+
+
+
+
+-- Portal room
+
+local bedrock = core.get_content_id("1042_core:bedrock")
+local basalt = core.get_content_id("1042_core:basalt")
+local sky_portal = core.get_content_id("1042_core:sky_portal")
+local water2 = core.get_content_id("1042_core:water_source2")
+
+function structures_1042.place_portal(minp, maxp, d, area, struct_pr, pos)
+    for x = pos.x + 1, pos.x + 8 do
+        for z = pos.z, pos.z + 8 do
+            d[area:index(x, pos.y, z)] = bedrock
+            d[area:index(x, pos.y + 8, z)] = bedrock
+            for y = pos.y+1, pos.y + 7 do
+                d[area:index(pos.x, y, z)] = bedrock
+                d[area:index(pos.x + 9, y, z)] = bedrock
+                d[area:index(x, y, pos.z)] = bedrock
+                d[area:index(x, y, pos.z + 9)] = bedrock
+
+                d[area:index(x, y, z)] = air
+            end
+        end
+    end
+
+    d[area:index(pos.x + 4, pos.y + 1, pos.z)] = basalt
+    d[area:index(pos.x + 4, pos.y + 2, pos.z)] = basalt
+
+    -- Portal
+    d[area:index(pos.x + 4, pos.y + 1, pos.z + 4)] = bedrock
+    d[area:index(pos.x + 4, pos.y + 2, pos.z + 4)] = sky_portal
+end

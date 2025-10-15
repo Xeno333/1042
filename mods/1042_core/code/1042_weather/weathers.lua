@@ -265,6 +265,15 @@ weather.register_weather({
             }
         )
         player:set_lighting({exposure = {exposure_correction = -2}})
+
+        players_weather.sound_handle = core.sound_play("water", 
+        {
+            loop = true,
+            to_player = name,
+            gain = 0,
+            pitch = 0.05
+        })
+        core.sound_fade(players_weather.sound_handle, 0.25, 4)
     end,
 })
 

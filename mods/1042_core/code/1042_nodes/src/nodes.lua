@@ -38,6 +38,41 @@ core.register_node("1042_core:skyrock", {
 
 
 
+-- Dimensional
+
+core.register_node("1042_core:sky_portal", {
+    description = "Sky Portal",
+    tiles = {"1042_plain_node.png^[colorize:#002228:220"},
+    drawtype = "glasslike",
+    use_texture_alpha = "blend",
+    paramtype = "light",
+
+    diggable = false,
+    walkable = false,
+
+    light_source = 14,
+
+    on_punch = function(_, _, clicker, _, _)
+        local sound = core.sound_play("water", {
+            loop = true,
+            to_player = name,
+            gain = 0,
+            pitch = 0.1
+        })
+        core.sound_fade(sound, 0.25, 6)
+        core.emerge_area(vector.new(0, 2046, 0), vector.new(0, 2048, 0), function()
+            core.set_node(vector.new(0, 2046, 0), {name = "1042_core:bedrock"})
+            core.set_node(vector.new(0, 2047, 0), {name = "air"})
+            core.set_node(vector.new(0, 2048, 0), {name = "air"})
+            clicker:set_pos(vector.new(0, 2048, 0))
+
+            core.sound_fade(sound, 0.1, 0)
+        end)
+    end,
+
+    groups = {unbreakable = 1},
+})
+
 
 -- Land Nodes
 

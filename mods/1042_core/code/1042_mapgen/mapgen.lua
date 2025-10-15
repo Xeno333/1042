@@ -263,7 +263,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
 
     -- Add for T_ymin just do stone
 
-    if maxp.y >= bedrock_level and minp.y <= T_ymax_Real then
+    if maxp.y >= T_ymin and minp.y <= T_ymax_Real then
         local village = false
         if struct_pr:next(1, 10) == 1 then
             village = true
@@ -296,7 +296,12 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                     local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
                     local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, noise_m[lx][lz], tempv)
 
-                    if mapgen_1042.underworld_entrences[x .. " " .. z] ~= nil then
+                    if x == mapgen_1042.portal_room.x and z == mapgen_1042.portal_room.z and y == mapgen_1042.portal_room.y then
+                        structs[#structs+1] = function(d)
+                            structures_1042.place_portal(minp, maxp, d, area, struct_pr, vector.new(x, y, z))
+                        end
+
+                    elseif y >= bedrock_level and mapgen_1042.underworld_entrences[x .. " " .. z] ~= nil then
                         if special ~= {} then
                             special = {}
                             for j = -1, 1 do
@@ -324,8 +329,12 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                     end
 
                     if y <= bedrock_level then
-                        if  y == bedrock_level then
+                        if y == bedrock_level then
                             data[vi] = bedrock
+                        elseif y == T_ymin then
+                            data[vi] = bedrock
+                        else
+                            -- Mapgen for underworld
                         end
                         vi = vi + 1
                         goto skip

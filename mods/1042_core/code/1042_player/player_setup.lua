@@ -155,6 +155,7 @@ core.register_on_joinplayer(function(player, last_join)
 			scale = 0.3
 		}
 	)
+	player:set_sun({sunrise_visible = false})
 	player:set_stars(
 		{
 			visible = true,
