@@ -453,10 +453,12 @@ core.register_on_generated(function(vm, minp, maxp, seed)
 
 
     -- New demension
-    elseif maxp.y <= 4096 and maxp.y >= 1024 then
+    elseif maxp.y <= core_1042.shared_lib.consts.sky_world_y_levels.max and maxp.y >= core_1042.shared_lib.consts.sky_world_y_levels.min then
         local noise_m = mapgen_1042.map2:get_2d_map({z=0,y=minp.x, x=minp.z})
         local noise_m_1 = mapgen_1042.map2_1:get_2d_map({z=0,y=minp.x, x=minp.z})
         local complex_lands = mapgen_1042.complex_lands:get_3d_map({z=minp.x,y=minp.y,x=minp.z})
+
+        local main_y = core_1042.shared_lib.consts.sky_world_y_levels.main_level
 
         local ly = 0
         for y = minp.y, maxp.y do
@@ -471,11 +473,11 @@ core.register_on_generated(function(vm, minp, maxp, seed)
 
                     local noise = noise_m[lx][lz]
                     local noise_1 = noise_m_1[lx][lz]
-                    local y_max = 2048 + (noise - 0.3)^(1/3) * 10
+                    local y_max = main_y + (noise - 0.3)^(1/3) * 10
 
                     if noise_1 > 0.5 and y == math.floor(y_max) then
                         data[area:index(x, y, z)] = ice
-                    elseif noise_1 > 0.35 and (y == math.floor(y_max) or (noise - 0.3 <= 0 and y == 2048)) then
+                    elseif noise_1 > 0.35 and (y == math.floor(y_max) or (noise - 0.3 <= 0 and y == main_y)) then
                         if noise_1 > 0.5 then
                             data[vi] = air
                             data[area:index(x, y-1, z)] = water2
@@ -491,7 +493,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
 
                                         noise = (noise_m[lx] or {})[lz] or 1
                                         noise_1 = (noise_m_1[lx] or {})[lz] or 1
-                                        y_max = 2048 + (noise - 0.3)^(1/3) * 10
+                                        y_max = main_y + (noise - 0.3)^(1/3) * 10
 
                                         if not (noise_1 > 0.5) and not (math.floor(y_max) == 1) then
                                             data[area:index(x, y, z)] = node2
@@ -505,7 +507,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                             data[area:index(x, y-1, z)] = node2
                         end
 
-                    elseif noise >= 0.3 and y <= y_max and y >= 2048 - (noise - 0.3)^(3/5) * 30 then
+                    elseif noise >= 0.3 and y <= y_max and y >= main_y - (noise - 0.3)^(3/5) * 30 then
                         data[vi] = node2
 
                     elseif complex_lands[lx][ly][lz] >= 0.8 and complex_lands[lx][ly][lz] <= 0.9 then

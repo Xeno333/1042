@@ -151,8 +151,8 @@ weather.register_weather({
     name = "Sky Plain",
     conditions = {
         y_level = {
-            max = 4096,
-            min = 1024
+            max = core_1042.shared_lib.consts.sky_world_y_levels.max,
+            min = core_1042.shared_lib.consts.sky_world_y_levels.min
         }
     },
     particlespawner = {
@@ -351,7 +351,7 @@ weather.register_weather({
         player:set_clouds({
             density = 0.5,
             color = "#bb2200",
-            ambient = "#bb7700",
+            ambient = "#774400",
             shadow = "#993300",
             thickness = 32,
             speed = {x=16, y=16},
@@ -388,7 +388,7 @@ weather.register_weather({
                 visible = false,
             }
         )
-        player:set_lighting({exposure = {exposure_correction = -4}})
+        player:set_lighting({exposure = {exposure_correction = 2}})
     end,
 })
 

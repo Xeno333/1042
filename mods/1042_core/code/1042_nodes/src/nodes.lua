@@ -55,7 +55,7 @@ core.register_node("1042_core:sky_portal", {
     on_punch = function(_, _, clicker, _, _)
         local sound = core.sound_play("water", {
             loop = true,
-            to_player = name,
+            to_player = clicker:get_player_name(),
             gain = 0,
             pitch = 0.1
         })

@@ -38,19 +38,35 @@ end
 -- max temp = 30, min = -10
 
 function weather.get_temp(pos, temp_map)
-    return math.max(math.min(temp_map[pos.x][pos.z] * 30, 30), -30)
+    if pos.y <= core_1042.shared_lib.consts.plain_world_y_levels.max and pos.y >= core_1042.shared_lib.consts.plain_world_y_levels.min then
+        return math.max(math.min(temp_map[pos.x][pos.z] * 30, 30), -30)
+
+    elseif pos.y <= core_1042.shared_lib.consts.underworldworld_y_levels.max and pos.y >= core_1042.shared_lib.consts.underworldworld_y_levels.min then
+        return 30
+
+    elseif pos.y <= core_1042.shared_lib.consts.sky_world_y_levels.max and pos.y >= core_1042.shared_lib.consts.sky_world_y_levels.min then
+        return -30
+    end
 end
 
 
 function weather.get_temp_single(pos)
-    v.x = pos.z
-    v.y = pos.x
-    local tempv = math.max(math.min(temp_s:get_2d(v) * 30, 30), -30)
-    return tempv
+    if pos.y <= core_1042.shared_lib.consts.plain_world_y_levels.max and pos.y >= core_1042.shared_lib.consts.plain_world_y_levels.min then
+        v.x = pos.z
+        v.y = pos.x
+        local tempv = math.max(math.min(temp_s:get_2d(v) * 30, 30), -30)
+        return tempv
+
+    elseif pos.y <= core_1042.shared_lib.consts.underworldworld_y_levels.max and pos.y >= core_1042.shared_lib.consts.underworldworld_y_levels.min then
+        return 30
+
+    elseif pos.y <= core_1042.shared_lib.consts.sky_world_y_levels.max and pos.y >= core_1042.shared_lib.consts.sky_world_y_levels.min then
+        return -30
+    end
 end
 
 
 -- This equation is hard coded in mapgen!
 function weather.get_biome_palette_index(temp)
-    return math.min(math.floor(((temp / 30) + 1) * 8 * 16) - 1, 255)
+    return math.max(math.min(math.floor(((temp / 30) + 1) * 8 * 16) - 1, 255), 0)
 end

@@ -168,7 +168,7 @@ function weather.get_weather_at_pos(pos)
         end
 
         -- If there is no value then skip it but other wise make sure in range
-        if (not weather_t.conditions.y_level) or (((not weather_t.conditions.y_level.max) or weather_t.conditions.y_level.max >= pos.y) and ((not weather_t.conditions.y_level.max) or weather_t.conditions.y_level.max >= pos.y)) then
+        if (not weather_t.conditions.y_level) or (((not weather_t.conditions.y_level.max) or weather_t.conditions.y_level.max >= pos.y) and ((not weather_t.conditions.y_level.max) or weather_t.conditions.y_level.min <= pos.y)) then
             if weather_t.conditions.temp then
                 if weather_t.conditions.temp.max and weather_t.conditions.temp.max >= temp then
                     if not weather_t.conditions.temp.min or weather_t.conditions.temp.min >= temp then

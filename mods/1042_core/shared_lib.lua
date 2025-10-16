@@ -30,7 +30,13 @@ core_1042.shared_lib = {
             min = -512,
 
             lava_sea_level = -428
-        }
+        },
+        sky_world_y_levels = {
+            max = 4096,
+            min = 1024,
+
+            main_level = 2048
+        },
     }
 }
 
