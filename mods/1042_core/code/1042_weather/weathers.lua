@@ -278,6 +278,121 @@ weather.register_weather({
 })
 
 weather.register_weather({
+    name = "Underworld",
+    conditions = {
+        y_level = {
+            max = core_1042.shared_lib.consts.underworldworld_y_levels.max,
+            min = core_1042.shared_lib.consts.underworldworld_y_levels.min
+        }
+    },
+    particlespawner = {
+        y_spawn = {
+            min = -16,
+            max = 16
+        },
+
+        amount = 100,
+        time = 2,
+
+        collisiondetection = true,
+        object_collision = true,
+
+        vel = {
+            min = vector.new(-16, -16, -16),
+            max = vector.new(16, 16, 16),
+            bias = 0
+        },
+
+        acc = vector.new(0, -9.8, 0),
+
+        size = {
+            min = 0.5,
+            max = 2
+        },
+
+        exptime = {
+            min = 2,
+            max = 3
+        },
+
+        glow = 14,
+
+        texpool = {
+            {
+                name = "1042_plain_node.png^[colorize:#440000:144",
+                scale = 1,
+                blend = "alpha"
+            },
+            {
+                name = "1042_plain_node.png^[colorize:#221111:144",
+                scale = 1,
+                blend = "alpha"
+            },
+            {
+                name = "1042_plain_node.png^[colorize:#666600:144",
+                scale = 1,
+                blend = "alpha"
+            },
+            {
+                name = "1042_plain_node.png^[colorize:#886666:144",
+                scale = 1,
+                blend = "alpha"
+            }
+        }
+    },
+
+    on_change = function(player, name, players_weather)
+        -- Sky changes
+        player:set_sun(
+            {
+                visible = false
+            }
+        )
+        player:set_clouds({
+            density = 0.5,
+            color = "#bb2200",
+            ambient = "#bb7700",
+            shadow = "#993300",
+            thickness = 32,
+            speed = {x=16, y=16},
+            height = core_1042.shared_lib.consts.underworldworld_y_levels.max - 100
+        })
+        player:set_sky({
+            type = "regular",
+            clouds = true,
+            sky_color = {
+                night_sky = "#bb4400",
+                night_horizon = "#bb4400",
+                day_horizon = "#bb2200",
+                day_sky = "#bb2200",
+                dawn_sky = "#bb2200",
+                dawn_horizon = "#bb2200",
+                indoors = "#bb2200",
+                fog_sun_tint = "#222222ff",
+                fog_moon_tint = "#222222ff",
+                fog_tint_type = "custom"
+            },
+            fog = {
+                fog_start = 0,
+                fog_distance = 40,
+                fog_color = "#bb4400"
+            }
+        })
+        player:set_stars(
+            {
+                visible = false,
+            }
+        )
+        player:set_moon(
+            {
+                visible = false,
+            }
+        )
+        player:set_lighting({exposure = {exposure_correction = -4}})
+    end,
+})
+
+weather.register_weather({
     name = "Storm",
     conditions = {
         temp = {
