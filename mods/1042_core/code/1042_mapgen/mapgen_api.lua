@@ -78,14 +78,14 @@ mapgen_1042.map_single_tectonics = PerlinNoise(map_noise_params_tectonics)]]
 mapgen_1042.cave_map = PerlinNoiseMap({
     offset = 0,
     scale = 1,
-    spread = {x = 50, y = 30, z = 50},
-    seed = core.get_mapgen_setting("seed") + 34634,
+    spread = {x = 100, y = 50, z = 100},
+    seed = core.get_mapgen_setting("seed") + 3632612,
     octaves = 3,
-    persist = 0.7,
+    persist = 0.75,
     lacunarity = 2,
     flags = {
-        eased = true,
-        absvalue = false,
+        eased = false,
+        absvalue = true,
         defaults = false
     }
 }, {x=80, y=80, z=80})
@@ -131,6 +131,21 @@ mapgen_1042.complex_lands = PerlinNoiseMap({
     flags = {
         eased = true,
         absvalue = false,
+        defaults = false
+    }
+}, {x=80, y=80, z=80})
+
+mapgen_1042.underworld = PerlinNoiseMap({
+    offset = 0,
+    scale = 1,
+    spread = {x = 100, y = 50, z = 100},
+    seed = core.get_mapgen_setting("seed") + 56634,
+    octaves = 3,
+    persist = 0.75,
+    lacunarity = 2,
+    flags = {
+        eased = false,
+        absvalue = true,
         defaults = false
     }
 }, {x=80, y=80, z=80})

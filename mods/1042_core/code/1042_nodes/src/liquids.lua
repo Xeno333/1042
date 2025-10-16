@@ -286,7 +286,7 @@ core.register_node("1042_core:lava_flowing", {
     damage_per_second = 10,
 
     post_effect_color = {a = 144, r = 0xff, g = 0x22, b = 0x00},
-    groups = {molten = 1, liquid = 1, burning = 1, not_in_creative_inventory = 1},
+    groups = {molten = 1, liquid = 1, burning_2 = 1, not_in_creative_inventory = 1},
 })
 
 

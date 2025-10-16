@@ -36,6 +36,7 @@ local bedrock_level = mapgen_1042.bedrock_level
 local caves_max = mapgen_1042.caves_max
 local decorated_caves = mapgen_1042.decorated_caves
 local treasure_y = mapgen_1042.water_level - 10
+local cave_v = 0.2
 
 
 
@@ -277,6 +278,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
         local cave_noise_m = mapgen_1042.cave_map:get_3d_map(m_pos)
         local ore_noise_m = mapgen_1042.ore_map:get_3d_map(m_pos)
         local gold_ore_noise_m = mapgen_1042.ore_map_gold:get_3d_map(m_pos)
+        local underworld_noise_m = mapgen_1042.underworld:get_3d_map(m_pos)
 
         local y_avr = 0
         local y_avr_c = 0
@@ -331,10 +333,19 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                     if y <= bedrock_level then
                         if y == bedrock_level then
                             data[vi] = bedrock
-                        elseif y == T_ymin then
+                        elseif y <= T_ymin then
                             data[vi] = bedrock
                         else
                             -- Mapgen for underworld
+                            if underworld_noise_m[lx][ly][lz] <= 0.5 then
+                                if pr:next(1, 1000) == 1 then
+                                    data[vi] = lava
+                                else
+                                    data[vi] = basalt
+                                end
+                            elseif y < T_ymin+16 then
+                                data[vi] = lava
+                            end
                         end
                         vi = vi + 1
                         goto skip
@@ -350,9 +361,8 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                         goto skip
                     end
 
-
                     -- Place and handel caves
-                    if cave_noise_m[lx][ly][lz] > -0.95 or y > caves_max then
+                    if cave_noise_m[lx][ly][lz] > cave_v or y > caves_max then
                         if y < (ny-1) then
                             if ore_noise_m[lx][ly][lz] < -1.3 then
                                 data[vi] = iron_ore
@@ -398,9 +408,9 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                     elseif y <= ny and y<= lava_level then
                         data[vi] = lava
                     else
-                        if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > -0.95 and y <= ny then
+                        if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > cave_v and y <= ny then
                             dec(pr, x, y-1, z, data, area, place_list, tempv, "bottom", param2_data)
-                        elseif cave_noise_m[lx][ly+1] and cave_noise_m[lx][ly+1][lz] > -0.95 and y <= ny then
+                        elseif cave_noise_m[lx][ly+1] and cave_noise_m[lx][ly+1][lz] > cave_v and y <= ny then
                             dec(pr, x, y-1, z, data, area, place_list, tempv, "top", param2_data)
                         end
                     end

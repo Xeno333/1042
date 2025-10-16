@@ -273,7 +273,7 @@ core.register_node("1042_core:stone", {
 
 core.register_node("1042_core:basalt", {
     description = "Basalt",
-    tiles = {"1042_plain_node.png^[colorize:#111111:128"},
+    tiles = {"1042_plain_node.png^[colorize:#111111:200"},
     use_texture_alpha = "opaque",
 
     sounds = {

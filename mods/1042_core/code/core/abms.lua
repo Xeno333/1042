@@ -132,18 +132,18 @@ core.register_abm({
 
 core.register_abm({
 	label = "Burning Sound",
-	nodenames = {"group:burning", "group:burning_2"},
-	interval = 30,
+	nodenames = {"group:burning"},
+	interval = 2,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
-		core.sound_play("fire", {pos = pos, gain = .1, max_hear_distance = 10})
+		core.sound_play("fire", {pos = pos, pitch = 2, gain = 0.5, max_hear_distance = 10})
 	end
 })
 
 core.register_abm({
     label = "Burning Particles",
     interval = 4,
-    chance = 1,
+    chance = 5,
     nodenames = {"group:burning_2"},
     neighbors = {"air"},
     action = function(pos, node, active_object_count, active_object_count_wider)

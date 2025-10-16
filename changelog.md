@@ -80,6 +80,7 @@
 - Globalize weather between starts -Xeno333
 - Rarity system and registration system (partly-WIP) -Python-Sargent & Xeno333
 - Tweaks and Iron axe -Xeno333
+- New dimension, Underworld, New structures, Cave overhaul, Gold, new internal structures for burning_2 -Xeno333
 
 ### WIP
 - Lore.Lang dev -Xeno333 & Python-Sargent
