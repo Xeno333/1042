@@ -99,7 +99,7 @@ mapgen_1042.ore_map = PerlinNoiseMap({
     persist = 0.7,
     lacunarity = 2,
     flags = {
-        eased = true,
+        eased = false,
         absvalue = false,
         defaults = false
     }
@@ -114,7 +114,7 @@ mapgen_1042.ore_map_gold = PerlinNoiseMap({
     persist = 0.7,
     lacunarity = 2,
     flags = {
-        eased = true,
+        eased = false,
         absvalue = false,
         defaults = false
     }
@@ -166,11 +166,16 @@ mapgen_1042.underworld_entrences = entrences
 mapgen_1042.ymax = core_1042.shared_lib.consts.plain_world_y_levels.land_max
 mapgen_1042.d_ymax = core_1042.shared_lib.consts.plain_world_y_levels.max
 mapgen_1042.ymin = core_1042.shared_lib.consts.plain_world_y_levels.min
+
 mapgen_1042.water_level = core_1042.shared_lib.consts.plain_world_y_levels.sea_level
-mapgen_1042.lava_level = mapgen_1042.ymin + 32
-mapgen_1042.bedrock_level = mapgen_1042.ymin + 128
+mapgen_1042.bedrock_level = mapgen_1042.ymin
+mapgen_1042.lava_level = mapgen_1042.bedrock_level + 32
 mapgen_1042.caves_max = mapgen_1042.ymax - 68
 mapgen_1042.decorated_caves = mapgen_1042.ymin + 128
+
+mapgen_1042.underworld_ymax = core_1042.shared_lib.consts.underworldworld_y_levels.max
+mapgen_1042.underworld_ymin = core_1042.shared_lib.consts.underworldworld_y_levels.min
+mapgen_1042.underworld_lava_sea = core_1042.shared_lib.consts.underworldworld_y_levels.lava_sea_level
 
 mapgen_1042.continent_radius = 30000
 

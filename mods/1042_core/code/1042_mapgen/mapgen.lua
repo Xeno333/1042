@@ -262,9 +262,17 @@ core.register_on_generated(function(vm, minp, maxp, seed)
     local tm = weather.get_temp_map(minp.x, minp.z)
     local place_list = {}
 
-    -- Add for T_ymin just do stone
+    -- Both overworld and underworld
+    if maxp.y >= mapgen_1042.underworld_ymin and minp.y <= T_ymax_Real then
+        local m_pos = {z=minp.x,y=minp.y,x=minp.z}
 
-    if maxp.y >= T_ymin and minp.y <= T_ymax_Real then
+        local noise_m = mapgen_1042.map:get_2d_map({z=0,y=minp.x, x=minp.z})
+        local cave_noise_m = mapgen_1042.cave_map:get_3d_map(m_pos)
+        local ore_noise_m = mapgen_1042.ore_map:get_3d_map(m_pos)
+        local gold_ore_noise_m = mapgen_1042.ore_map_gold:get_3d_map(m_pos)
+        local underworld_noise_m = mapgen_1042.underworld:get_3d_map(m_pos)
+
+        -- Structures
         local village = false
         if struct_pr:next(1, 10) == 1 then
             village = true
@@ -272,29 +280,24 @@ core.register_on_generated(function(vm, minp, maxp, seed)
         end
 
         local buildings = {}
-
-        local noise_m = mapgen_1042.map:get_2d_map({z=0,y=minp.x, x=minp.z})
-        local m_pos = {z=minp.x,y=minp.y,x=minp.z}
-        local cave_noise_m = mapgen_1042.cave_map:get_3d_map(m_pos)
-        local ore_noise_m = mapgen_1042.ore_map:get_3d_map(m_pos)
-        local gold_ore_noise_m = mapgen_1042.ore_map_gold:get_3d_map(m_pos)
-        local underworld_noise_m = mapgen_1042.underworld:get_3d_map(m_pos)
-
+        local special = nil
+        
         local y_avr = 0
         local y_avr_c = 0
 
         local ly = 0
-
-        local special = nil
         for y = minp.y, maxp.y do
             ly = ly + 1
             local lz = 0
+
             for z = minp.z, maxp.z do
                 lz = lz + 1
                 local vi = area:index(minp.x, y, z)
                 local lx = 0
+
                 for x = minp.x, maxp.x do
                     lx = lx + 1
+
                     local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
                     local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, noise_m[lx][lz], tempv)
 
@@ -333,17 +336,18 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                     if y <= bedrock_level then
                         if y == bedrock_level then
                             data[vi] = bedrock
-                        elseif y <= T_ymin then
-                            data[vi] = bedrock
                         else
                             -- Mapgen for underworld
-                            if underworld_noise_m[lx][ly][lz] <= 0.5 then
+                            if y == mapgen_1042.underworld_ymin then
+                                data[vi] = bedrock
+
+                            elseif underworld_noise_m[lx][ly][lz] <= 0.5 then
                                 if pr:next(1, 1000) == 1 then
                                     data[vi] = lava
                                 else
                                     data[vi] = basalt
                                 end
-                            elseif y < T_ymin+16 then
+                            elseif y <= mapgen_1042.underworld_lava_sea then
                                 data[vi] = lava
                             end
                         end
@@ -446,7 +450,6 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                 structures_1042.place_village(buildings, minp, maxp, d, area, struct_pr)
             end
         end
-
 
 
     -- New demension

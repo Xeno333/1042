@@ -24,6 +24,12 @@ core_1042.shared_lib = {
 
             sea_level = 0,
             land_max = 128
+        },
+        underworldworld_y_levels = {
+            max = -257,
+            min = -512,
+
+            lava_sea_level = -428
         }
     }
 }
