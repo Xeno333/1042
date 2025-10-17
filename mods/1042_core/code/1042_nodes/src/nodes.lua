@@ -86,7 +86,7 @@ core.register_node("1042_core:dirt", {
 
 core.register_node("1042_core:sand", {
     description = "Sand",
-    tiles = {"1042_plain_node.png^[colorize:#d9a357:128"},
+    tiles = {"1042_sand.png^[colorize:#d9a357:128"},
     use_texture_alpha = "opaque",
 
     groups = {dirt = 1, falling_node = 1, breakable_by_hand = 3},
