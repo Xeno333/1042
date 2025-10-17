@@ -42,7 +42,16 @@ core.register_node("1042_core:skyrock", {
 
 core.register_node("1042_core:sky_portal", {
     description = "Sky Portal",
-    tiles = {"1042_plain_node.png^[colorize:#002228:220"},
+    tiles = {{
+        name = "1042_plain_node.png^[colorize:#002228:128",
+        backface_culling = true,
+        animation = {
+            type = "sheet_2d",
+            frames_w = 2,
+            frames_h = 2,
+            frame_length = 1,
+        }
+    }},
     drawtype = "glasslike",
     use_texture_alpha = "blend",
     paramtype = "light",
