@@ -36,6 +36,25 @@ core.register_node("1042_core:skyrock", {
     groups = {unbreakable = 1, not_in_creative_inventory = 1},
 })
 
+core_1042.registry.register_material("1042_core:white", {
+    description = "White",
+    tiles = {"1042_plain_node.png^[colorize:#ffffff:255"},
+    use_texture_alpha = "opaque",
+
+    diggable = false,
+
+    groups = {unbreakable = 1},
+}, 6, nil, nil)
+
+core_1042.registry.register_material("1042_core:black", {
+    description = "Black",
+    tiles = {"1042_plain_node.png^[colorize:#000000:255"},
+    use_texture_alpha = "opaque",
+
+    diggable = false,
+
+    groups = {unbreakable = 1},
+}, 6, nil, nil)
 
 
 -- Dimensional

@@ -148,6 +148,57 @@ weather.register_weather({
 
 
 weather.register_weather({
+    name = "Void",
+    conditions = {
+        y_level = {
+            max = core_1042.shared_lib.consts.void_y_levels.max,
+            min = core_1042.shared_lib.consts.void_y_levels.min
+        }
+    },
+    on_change = function(player, name, players_weather)
+        -- Sky changes
+        player:set_sun(
+            {
+                visible = false
+            }
+        )
+        player:set_sky({
+            type = "regular",
+            clouds = false,
+            sky_color = {
+                night_sky = "#000000",
+                night_horizon = "#000000",
+                day_horizon = "#000000",
+                day_sky = "#000000",
+                dawn_sky = "#000000",
+                dawn_horizon = "#000000",
+                indoors = "#000000",
+                --fog_sun_tint = "#212222ff",
+                fog_moon_tint = "#000000",
+                fog_tint_type = "custom"
+            },
+            fog = {
+                fog_start = 100,
+                fog_distance = 200,
+                fog_color = "#000000"
+            }
+        })
+        player:set_stars(
+            {
+                visible = false,
+            }
+        )
+        player:set_moon(
+            {
+                visible = false,
+            }
+        )
+        player:set_lighting({exposure = {exposure_correction = 0}})
+    end,
+})
+
+
+weather.register_weather({
     name = "Sky Plain",
     conditions = {
         y_level = {

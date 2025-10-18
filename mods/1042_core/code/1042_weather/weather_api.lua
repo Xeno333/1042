@@ -46,6 +46,8 @@ function weather.get_temp(pos, temp_map)
 
     elseif pos.y <= core_1042.shared_lib.consts.sky_world_y_levels.max and pos.y >= core_1042.shared_lib.consts.sky_world_y_levels.min then
         return -30
+    else
+        return 0
     end
 end
 
@@ -62,6 +64,8 @@ function weather.get_temp_single(pos)
 
     elseif pos.y <= core_1042.shared_lib.consts.sky_world_y_levels.max and pos.y >= core_1042.shared_lib.consts.sky_world_y_levels.min then
         return -30
+    else
+        return 0
     end
 end
 

@@ -47,6 +47,8 @@ local cave_v = 0.2
 
 local bedrock = core.get_content_id("1042_core:bedrock")
 local skyrock = core.get_content_id("1042_core:skyrock")
+local white = core.get_content_id("1042_core:white")
+local black = core.get_content_id("1042_core:black")
 
 
 local stone = core.get_content_id("mapgen_stone")
@@ -263,7 +265,26 @@ core.register_on_generated(function(vm, minp, maxp, seed)
     local place_list = {}
 
     -- Both overworld and underworld
-    if maxp.y >= mapgen_1042.underworld_ymin and minp.y <= T_ymax_Real then
+    if maxp.y >= mapgen_1042.void_ymin and minp.y <= mapgen_1042.void_ymax then
+        local ly = 0
+        for y = minp.y, maxp.y do
+            ly = ly + 1
+            local lz = 0
+            for z = minp.z, maxp.z do
+                lz = lz + 1
+                local lx = 0
+                for x = minp.x, maxp.x do
+                    lx = lx + 1
+
+                    if x % 25 == 0 or z % 25 == 0 or y % 25 == 0 or y == mapgen_1042.void_ymin then
+                        local vi = area:index(x, y, z)
+                        data[vi] = black
+                    end
+                end
+            end
+        end
+
+    elseif maxp.y >= mapgen_1042.underworld_ymin and minp.y <= T_ymax_Real then
         local m_pos = {z=minp.x,y=minp.y,x=minp.z}
 
         local noise_m = mapgen_1042.map:get_2d_map({z=0,y=minp.x, x=minp.z})

@@ -177,6 +177,9 @@ mapgen_1042.underworld_ymax = core_1042.shared_lib.consts.underworldworld_y_leve
 mapgen_1042.underworld_ymin = core_1042.shared_lib.consts.underworldworld_y_levels.min
 mapgen_1042.underworld_lava_sea = core_1042.shared_lib.consts.underworldworld_y_levels.lava_sea_level
 
+mapgen_1042.void_ymin = core_1042.shared_lib.consts.void_y_levels.min
+mapgen_1042.void_ymax = core_1042.shared_lib.consts.void_y_levels.max
+
 mapgen_1042.continent_radius = 30000
 
 

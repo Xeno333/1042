@@ -37,6 +37,12 @@ core_1042.shared_lib = {
 
             main_level = 2048
         },
+        void_y_levels = {
+            max = -513,
+            min = -1024,
+
+            main_level = -800
+        },
     }
 }
 
