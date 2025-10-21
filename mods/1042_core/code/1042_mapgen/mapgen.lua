@@ -36,7 +36,6 @@ local bedrock_level = mapgen_1042.bedrock_level
 local caves_max = mapgen_1042.caves_max
 local decorated_caves = mapgen_1042.decorated_caves
 local treasure_y = mapgen_1042.water_level - 10
-local cave_v = 0.2
 
 
 
@@ -310,8 +309,9 @@ core.register_on_generated(function(vm, minp, maxp, seed)
         local ly = 0
         for y = minp.y, maxp.y do
             ly = ly + 1
-            local lz = 0
+            local cave_v = math.abs((y + caves_max) / lava_level)
 
+            local lz = 0
             for z = minp.z, maxp.z do
                 lz = lz + 1
                 local vi = area:index(minp.x, y, z)

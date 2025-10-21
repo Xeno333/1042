@@ -425,7 +425,7 @@ weather.register_weather({
             },
             fog = {
                 fog_start = 0,
-                fog_distance = 40,
+                fog_distance = 100,
                 fog_color = "#bb4400"
             }
         })
