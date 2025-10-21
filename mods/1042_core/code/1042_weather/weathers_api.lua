@@ -120,7 +120,7 @@ weather.weathers = {
         conditions = {
             y_level = {
                 max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-                min = core_1042.shared_lib.consts.plain_world_y_levels.min
+                min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
             }
         },
         on_change = weather.default_on_change

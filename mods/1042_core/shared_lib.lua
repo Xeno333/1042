@@ -22,6 +22,7 @@ core_1042.shared_lib = {
             max = 512,
             min = -256,
 
+            deep_cave = -100,
             sea_level = 0,
             land_max = 128
         },

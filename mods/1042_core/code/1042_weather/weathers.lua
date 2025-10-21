@@ -8,7 +8,7 @@ weather.register_weather({
         },
         y_level = {
             max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-            min = core_1042.shared_lib.consts.plain_world_y_levels.min
+            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
         }
     },
     particlespawner = {
@@ -444,6 +444,198 @@ weather.register_weather({
 })
 
 weather.register_weather({
+    name = "Lower Cave",
+    conditions = {
+        y_level = {
+            max = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave,
+            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave - 20
+        }
+    },
+    particlespawner = {
+        y_spawn = {
+            min = -16,
+            max = 16
+        },
+
+        amount = 25,
+        time = 2,
+
+        collisiondetection = true,
+        object_collision = true,
+
+        vel = {
+            min = vector.new(-16, -16, -16),
+            max = vector.new(16, 16, 16),
+            bias = 0
+        },
+
+        acc = vector.new(0, -9.8, 0),
+
+        size = {
+            min = 0.5,
+            max = 2
+        },
+
+        exptime = {
+            min = 2,
+            max = 3
+        },
+
+        glow = 14,
+
+        texpool = {
+            {
+                name = "1042_plain_node.png^[colorize:#222222:144",
+                scale = 1,
+                blend = "alpha"
+            },
+            {
+                name = "1042_plain_node.png^[colorize:#111111:144",
+                scale = 1,
+                blend = "alpha"
+            },
+        }
+    },
+
+    on_change = function(player, name, players_weather)
+        -- Sky changes
+        player:set_sun(
+            {
+                visible = false
+            }
+        )
+        player:set_sky({
+            type = "regular",
+            clouds = false,
+            sky_color = {
+                night_sky = "#554400ff",
+                night_horizon = "#554400ff",
+                day_horizon = "#554400ff",
+                day_sky = "#554400ff",
+                dawn_sky = "#554400ff",
+                dawn_horizon = "#554400ff",
+                indoors = "#554400ff",
+                fog_sun_tint = "#693c554400ff00ff",
+                fog_moon_tint = "#554400ff",
+                fog_tint_type = "custom"
+            },
+            fog = {
+                fog_start = 0,
+                fog_distance = 100,
+                fog_color = "#554400ff"
+            }
+        })
+        player:set_stars(
+            {
+                visible = false,
+            }
+        )
+        player:set_moon(
+            {
+                visible = false,
+            }
+        )
+        player:set_lighting({exposure = {exposure_correction = -2}})
+    end,
+})
+
+weather.register_weather({
+    name = "Deep Cave",
+    conditions = {
+        y_level = {
+            max = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave - 20,
+            min = core_1042.shared_lib.consts.plain_world_y_levels.min
+        }
+    },
+    particlespawner = {
+        y_spawn = {
+            min = -16,
+            max = 16
+        },
+
+        amount = 25,
+        time = 2,
+
+        collisiondetection = true,
+        object_collision = true,
+
+        vel = {
+            min = vector.new(-16, -16, -16),
+            max = vector.new(16, 16, 16),
+            bias = 0
+        },
+
+        acc = vector.new(0, -9.8, 0),
+
+        size = {
+            min = 0.5,
+            max = 2
+        },
+
+        exptime = {
+            min = 2,
+            max = 3
+        },
+
+        glow = 14,
+
+        texpool = {
+            {
+                name = "1042_plain_node.png^[colorize:#222222:144",
+                scale = 1,
+                blend = "alpha"
+            },
+            {
+                name = "1042_plain_node.png^[colorize:#111111:144",
+                scale = 1,
+                blend = "alpha"
+            },
+        }
+    },
+
+    on_change = function(player, name, players_weather)
+        -- Sky changes
+        player:set_sun(
+            {
+                visible = false
+            }
+        )
+        player:set_sky({
+            type = "regular",
+            clouds = false,
+            sky_color = {
+                night_sky = "#554400ff",
+                night_horizon = "#554400ff",
+                day_horizon = "#66772255",
+                day_sky = "#66772255",
+                dawn_sky = "#693c00ff",
+                dawn_horizon = "#693c00ff",
+                indoors = "#693c00ff",
+                fog_sun_tint = "#693c00ff",
+                fog_moon_tint = "#693c00ff",
+                fog_tint_type = "custom"
+            },
+            fog = {
+                fog_start = 0,
+                fog_distance = 100,
+                fog_color = "#66660055"
+            }
+        })
+        player:set_stars(
+            {
+                visible = false,
+            }
+        )
+        player:set_moon(
+            {
+                visible = false,
+            }
+        )
+        player:set_lighting({exposure = {exposure_correction = -4}})
+    end,
+})
+
+weather.register_weather({
     name = "Storm",
     conditions = {
         temp = {
@@ -451,7 +643,7 @@ weather.register_weather({
         },
         y_level = {
             max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-            min = core_1042.shared_lib.consts.plain_world_y_levels.min
+            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
         }
     },
     particlespawner = {
@@ -578,7 +770,7 @@ weather.register_weather({
         },
         y_level = {
             max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-            min = core_1042.shared_lib.consts.plain_world_y_levels.min
+            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
         }
     },
     particlespawner = {
@@ -691,7 +883,7 @@ weather.register_weather({
         },
         y_level = {
             max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-            min = core_1042.shared_lib.consts.plain_world_y_levels.min
+            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
         }
     },
     particlespawner = {
@@ -804,7 +996,7 @@ weather.register_weather({
         },
         y_level = {
             max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-            min = core_1042.shared_lib.consts.plain_world_y_levels.min
+            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
         }
     },
     particlespawner = {
