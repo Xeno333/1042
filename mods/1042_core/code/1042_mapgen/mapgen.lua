@@ -292,6 +292,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
         local ore_noise_m = mapgen_1042.ore_map:get_3d_map(m_pos)
         local gold_ore_noise_m = mapgen_1042.ore_map_gold:get_3d_map(m_pos)
         local underworld_noise_m = mapgen_1042.underworld:get_3d_map(m_pos)
+        local underworld_density_m = mapgen_1042.underworld_density:get_3d_map(m_pos)
 
         -- Structures
         local village = false
@@ -358,11 +359,17 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                         if y == bedrock_level then
                             data[vi] = bedrock
                         else
+                            local d = underworld_density_m[lx][ly][lz]
+                            if d < 0.1 and d > -0.1 then
+                                d = 0.1 * (d / math.abs(d))
+                            end
+
+
                             -- Mapgen for underworld
                             if y == mapgen_1042.underworld_ymin then
                                 data[vi] = bedrock
 
-                            elseif underworld_noise_m[lx][ly][lz] <= 0.5 then
+                            elseif underworld_noise_m[lx][ly][lz] <= d then
                                 if pr:next(1, 1000) == 1 then
                                     data[vi] = lava
                                 else

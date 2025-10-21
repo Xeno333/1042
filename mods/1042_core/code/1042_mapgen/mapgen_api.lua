@@ -149,6 +149,20 @@ mapgen_1042.underworld = PerlinNoiseMap({
         defaults = false
     }
 }, {x=80, y=80, z=80})
+mapgen_1042.underworld_density = PerlinNoiseMap({
+    offset = 0,
+    scale = 1,
+    spread = {x = 500, y = 500, z = 500},
+    seed = core.get_mapgen_setting("seed") + 7654678968,
+    octaves = 1,
+    persist = 1,
+    lacunarity = 1,
+    flags = {
+        eased = false,
+        absvalue = true,
+        defaults = false
+    }
+}, {x=80, y=80, z=80})
 
 
 local entrences_pr = PseudoRandom(core.get_mapgen_setting("seed"))
