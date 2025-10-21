@@ -571,8 +571,57 @@ core_1042.registry.register_material("1042_core:candel", {
 
     groups = {breakable_by_hand = 1, falling_node = 1},
 
+    on_rightclick = function(pos, _, _, itemstack)
+        if core.get_item_group(itemstack:get_name(), "burning") > 0 then
+            core.set_node(pos, {name = "1042_core:candel_lit"})
+        end
+    end,
+
     item_type = "node"
 }, 1, nil, {name = "1042_core:candel", max_count = 16})
+
+core_1042.registry.register_material("1042_core:candel_lit", {
+    description = "Candel Lit",
+    drawtype = "mesh",
+    mesh = "candel.obj",
+    tiles = {
+        "1042_plain_node.png^[colorize:#aaaa88:200",
+        "1042_plain_node.png^[colorize:#bb9944:200"
+    },
+
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    light_source = 8,
+
+    drop = "1042_core:candel",
+
+    node_box = {
+        type = "fixed",
+        fixed = {-0.25, -0.5, -0.2, 0.25, -0.2, 0.25}
+    },
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.25, -0.5, -0.2, 0.25, -0.2, 0.25}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.25, -0.5, -0.2, 0.25, -0.2, 0.25}
+    },
+
+    stack_max = 16,
+
+    groups = {breakable_by_hand = 1, falling_node = 1},
+
+    on_rightclick = function(pos)
+        core.set_node(pos, {name = "1042_core:candel"})
+    end,
+
+    item_type = "node"
+}, 1, nil, {})
 
 
 core_1042.registry.register_material("1042_core:gold_ingot", {
