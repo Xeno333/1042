@@ -80,6 +80,7 @@ local mushroom = core.get_content_id("1042_core:mushroom")
 local digitalis = core.get_content_id("1042_core:digitalis")
 local light_bloom = core.get_content_id("1042_core:light_bloom")
 local sunflower = core.get_content_id("1042_core:sunflower")
+local moss = core.get_content_id("1042_core:moss")
 
 local air = core.get_content_id("air")
 
@@ -444,6 +445,9 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                         data[vi] = lava
                     else
                         if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > cave_v and y <= ny then
+                            if tempv >= 10 and tempv <= 20 then
+                                data[area:index(x, y-1, z)] = moss
+                            end
                             dec(pr, x, y-1, z, data, area, place_list, tempv, "bottom", param2_data)
                         elseif cave_noise_m[lx][ly+1] and cave_noise_m[lx][ly+1][lz] > cave_v and y <= ny then
                             dec(pr, x, y-1, z, data, area, place_list, tempv, "top", param2_data)
