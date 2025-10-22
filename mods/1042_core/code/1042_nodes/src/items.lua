@@ -185,7 +185,7 @@ core_1042.registry.register_material("1042_core:rock", {
     walkable = true,
     buildable_to = false,
 
-    groups = {breakable_by_hand = 3, attached_node = 3},
+    groups = {breakable_by_hand = 3, attached_node = 3, rock = 1},
 
     item_type = "node",
 }, 2, nil, nil)
@@ -227,7 +227,7 @@ core_1042.registry.register_material("1042_core:flint", {
     walkable = true,
     buildable_to = false,
     
-    groups = {breakable_by_hand = 3, attached_node = 3},
+    groups = {breakable_by_hand = 3, attached_node = 3, rock = 1},
 
     item_type = "node",
 }, 1, nil, nil)

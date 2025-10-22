@@ -141,6 +141,8 @@ core.register_node("1042_core:mold_empty", {
 	end
 })
 
+
+-- #fixme Make chisel accept groups
 core_1042.crafting.register_craft({
 	type = "1042_chisel",
 	result = "1042_core:mold_empty",

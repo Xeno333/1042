@@ -164,7 +164,7 @@ core_1042.crafting.register_craft({
 	result = "1042_core:campfire",
 	type = "1042_default",
 	items = {
-		"1042_core:rock 3",
+		"group:rock 3",
 		"1042_core:sticks 2",
 		"1042_core:flint",
 	},

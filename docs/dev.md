@@ -412,7 +412,7 @@ Present if `weather.is_loaded` is set to `true`.
 			}
 		},
 		on_change = function(player, players_weather) end, -- Code can only modify things that will be restored in weather.default_on_change or sounds.
-		on_step = function(player), -- Code that is run once per weather step (1 second)
+		on_step = function(player, time), -- Code that is run once per weather step (0.25 second), time is time since last run.
 		on_end = function(player, name, players_weather), -- Code run at end defaults to weather.default_on_change if not used, otherwise you must undo ALL changes made in on_change
 		particlespawner = -- Same as luanti particlespawner, with the exception of the _1042_* fields
 		{
