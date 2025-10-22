@@ -55,7 +55,7 @@ local weather_hight = weather.weather_hight
 
 core.register_globalstep(function(dtime)
     timer = timer + dtime
-    if timer > 0.5 then
+    if timer > 0.25 then
         for _, player in ipairs(core.get_connected_players()) do
             local pos = player:get_pos()
             local name = player:get_player_name()
@@ -98,7 +98,7 @@ core.register_globalstep(function(dtime)
             end
 
             if the_weather.on_step then
-                the_weather.on_step(player)
+                the_weather.on_step(player, timer)
             end
 
             local def = the_weather.particlespawner

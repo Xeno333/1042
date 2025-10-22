@@ -1,5 +1,6 @@
 
 
+local hail_timer = 0
 weather.register_weather({
     name = "Hail",
     conditions = {
@@ -61,21 +62,26 @@ weather.register_weather({
             }
         }
     },
-    on_step = function(player)
-        local pos = player:get_pos()
-        local clear, pos = core.line_of_sight(vector.new(pos.x, pos.y+1, pos.z), vector.new(pos.x, pos.y+weather.weather_hight, pos.z))
+    on_step = function(player, timer)
+        hail_timer = hail_timer + timer
+        if hail_timer >= 1 then
+            local pos = player:get_pos()
+            local clear, pos = core.line_of_sight(vector.new(pos.x, pos.y+1, pos.z), vector.new(pos.x, pos.y+weather.weather_hight, pos.z))
 
-        if clear then
-            if core_1042.rand:next(1, 8) == 1 then
-                player:set_hp(player:get_hp()-1, {_1042_reason="hail", _1042_death_msg="got struck by hail"})
+            if clear then
+                if core_1042.rand:next(1, 8) == 1 then
+                    player:set_hp(player:get_hp()-1, {_1042_reason="hail", _1042_death_msg="got struck by hail"})
+                end
             end
-        end
 
-        if core_1042.rand:next(1, 20) == 1 then
-            player:set_lighting({exposure = {exposure_correction = core_1042.rand:next(10, 20)*0.1}})
-            core.after(0.1, function()
-                player:set_lighting({exposure = {exposure_correction = -2}})
-            end)
+            if core_1042.rand:next(1, 20) == 1 then
+                player:set_lighting({exposure = {exposure_correction = core_1042.rand:next(10, 20)*0.1}})
+                core.after(0.1, function()
+                    player:set_lighting({exposure = {exposure_correction = -2}})
+                end)
+            end
+
+            hail_timer = 0
         end
     end,
     on_change = function(player, name, players_weather)
@@ -635,6 +641,7 @@ weather.register_weather({
     end,
 })
 
+local storm_timer = 0
 weather.register_weather({
     name = "Storm",
     conditions = {
@@ -684,14 +691,6 @@ weather.register_weather({
             scale = {x=0.25, y=1}
         }
     },
-    on_step = function(player)
-        if core_1042.rand:next(1, 40) == 1 then
-            player:set_lighting({exposure = {exposure_correction = core_1042.rand:next(10, 20)*0.1}})
-            core.after(0.1, function()
-                player:set_lighting({exposure = {exposure_correction = -2}})
-            end)
-        end
-    end,
     on_change = function(player, name, players_weather)
         -- Sky changes
         player:set_sun(
@@ -758,10 +757,36 @@ weather.register_weather({
         })
         core.sound_fade(players_weather.sound_handle, 0.1, 0.75)
     end,
+    on_step = function(player, timer)
+        storm_timer = storm_timer + timer
+
+        local s = core_1042.rand:next(1, 30) / 100
+        local id = player:hud_add({
+            type = "image",
+            name = "rain",
+            text = "rain_on_hud.png^[colorize:#0066bb:128",
+            position = {x = core_1042.rand:next(1, 1000) / 1000, y = core_1042.rand:next(1, 1000) / 1000},
+            scale = {x = s, y = s},
+        })
+
+        core.after(core_1042.rand:next(2, 6), function()
+            player:hud_remove(id)
+        end)
+
+        if storm_timer >= 1 then
+            if core_1042.rand:next(1, 40) == 1 then
+                player:set_lighting({exposure = {exposure_correction = core_1042.rand:next(10, 20)*0.1}})
+                core.after(0.1, function()
+                    player:set_lighting({exposure = {exposure_correction = -2}})
+                end)
+            end
+            storm_timer = 0
+        end
+    end
 })
 
 
-
+local light_storm_timer = 0
 weather.register_weather({
     name = "Light storm",
     conditions = {
@@ -873,23 +898,28 @@ weather.register_weather({
         core.sound_fade(players_weather.sound_handle, 0.1, 0.5)
     end,
 
-    on_step = function(player)
-        local s = core_1042.rand:next(4, 12)
-        local id = player:hud_add({
-            type = "image",
-            name = "rain",
-            text = "1042_plain_node.png^[colorize:#4444aa:128",
-            position = {x = core_1042.rand:next(1, 1000) / 1000, y = core_1042.rand:next(1, 1000) / 1000},
-            scale = {x = s, y = s},
-        })
+    on_step = function(player, timer)
+        light_storm_timer = light_storm_timer + timer
+        if light_storm_timer >= 0.5 then
+            local s = core_1042.rand:next(1, 20) / 100
+            local id = player:hud_add({
+                type = "image",
+                name = "rain",
+                text = "rain_on_hud.png^[colorize:#0066bb:128",
+                position = {x = core_1042.rand:next(1, 1000) / 1000, y = core_1042.rand:next(1, 1000) / 1000},
+                scale = {x = s, y = s},
+            })
 
-        core.after(core_1042.rand:next(2, 6), function()
-            player:hud_remove(id)
-        end)
+            core.after(core_1042.rand:next(2, 6), function()
+                player:hud_remove(id)
+            end)
+            light_storm_timer = 0
+        end
     end,
 })
 
 
+local drizzle_timer = 0
 weather.register_weather({
     name = "Drizzle",
     conditions = {
@@ -1001,13 +1031,14 @@ weather.register_weather({
         core.sound_fade(players_weather.sound_handle, 0.1, 0.25)
     end,
 
-    on_step = function(player)
-        if core_1042.rand:next(1, 2) == 1 then
-            local s = core_1042.rand:next(4, 12)
+    on_step = function(player, timer)
+        drizzle_timer = drizzle_timer + timer
+        if drizzle_timer >= 1 then
+            local s = core_1042.rand:next(1, 10) / 100
             local id = player:hud_add({
                 type = "image",
                 name = "rain",
-                text = "1042_plain_node.png^[colorize:#4444aa:128",
+                text = "rain_on_hud.png^[colorize:#4444aa:128",
                 position = {x = core_1042.rand:next(1, 1000) / 1000, y = core_1042.rand:next(1, 1000) / 1000},
                 scale = {x = s, y = s},
             })
@@ -1015,6 +1046,8 @@ weather.register_weather({
             core.after(core_1042.rand:next(2, 6), function()
                 player:hud_remove(id)
             end)
+
+            drizzle_timer = 0
         end
     end,
 })
