@@ -21,7 +21,7 @@ function achievements_1042.achieve(player, achievement_name)
             position = {x=0.2, y=0.85},
             scale = {x=128,y=80},
         })
-        
+
         local id2 = player:hud_add({
             type = "text",
             name = "achievement_"..achievement_name.."_txt",

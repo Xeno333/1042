@@ -55,7 +55,7 @@ local weather_hight = weather.weather_hight
 
 core.register_globalstep(function(dtime)
     timer = timer + dtime
-    if timer > 1 then
+    if timer > 0.5 then
         for _, player in ipairs(core.get_connected_players()) do
             local pos = player:get_pos()
             local name = player:get_player_name()

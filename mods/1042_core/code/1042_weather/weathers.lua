@@ -66,12 +66,12 @@ weather.register_weather({
         local clear, pos = core.line_of_sight(vector.new(pos.x, pos.y+1, pos.z), vector.new(pos.x, pos.y+weather.weather_hight, pos.z))
 
         if clear then
-            if core_1042.rand:next(1, 4) == 1 then
+            if core_1042.rand:next(1, 8) == 1 then
                 player:set_hp(player:get_hp()-1, {_1042_reason="hail", _1042_death_msg="got struck by hail"})
             end
         end
 
-        if core_1042.rand:next(1, 10) == 1 then
+        if core_1042.rand:next(1, 20) == 1 then
             player:set_lighting({exposure = {exposure_correction = core_1042.rand:next(10, 20)*0.1}})
             core.after(0.1, function()
                 player:set_lighting({exposure = {exposure_correction = -2}})
@@ -872,6 +872,21 @@ weather.register_weather({
         })
         core.sound_fade(players_weather.sound_handle, 0.1, 0.5)
     end,
+
+    on_step = function(player)
+        local s = core_1042.rand:next(4, 12)
+        local id = player:hud_add({
+            type = "image",
+            name = "rain",
+            text = "1042_plain_node.png^[colorize:#4444aa:128",
+            position = {x = core_1042.rand:next(1, 1000) / 1000, y = core_1042.rand:next(1, 1000) / 1000},
+            scale = {x = s, y = s},
+        })
+
+        core.after(core_1042.rand:next(2, 6), function()
+            player:hud_remove(id)
+        end)
+    end,
 })
 
 
@@ -984,6 +999,23 @@ weather.register_weather({
             pitch = 1
         })
         core.sound_fade(players_weather.sound_handle, 0.1, 0.25)
+    end,
+
+    on_step = function(player)
+        if core_1042.rand:next(1, 2) == 1 then
+            local s = core_1042.rand:next(4, 12)
+            local id = player:hud_add({
+                type = "image",
+                name = "rain",
+                text = "1042_plain_node.png^[colorize:#4444aa:128",
+                position = {x = core_1042.rand:next(1, 1000) / 1000, y = core_1042.rand:next(1, 1000) / 1000},
+                scale = {x = s, y = s},
+            })
+
+            core.after(core_1042.rand:next(2, 6), function()
+                player:hud_remove(id)
+            end)
+        end
     end,
 })
 

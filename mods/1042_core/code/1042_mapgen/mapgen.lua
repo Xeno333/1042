@@ -309,7 +309,10 @@ core.register_on_generated(function(vm, minp, maxp, seed)
         local ly = 0
         for y = minp.y, maxp.y do
             ly = ly + 1
-            local cave_v = math.abs((y + caves_max) / lava_level)
+            local cave_v = 0.2
+            if y < 0 then
+                cave_v = math.abs((y + caves_max) / lava_level)
+            end
 
             local lz = 0
             for z = minp.z, maxp.z do
