@@ -34,5 +34,16 @@ function core_1042.crafting.register_craft_type(type_name, reg_craft_func)
 end
 
 
+core_1042.crafting.register_craft_type("1042_tilling", function(def)
+    if not core_1042.crafting.registered_crafts["1042_tilling"][def.node] then
+        core_1042.crafting.registered_crafts["1042_tilling"][def.node] = def
+    end
+end)
+core_1042.crafting.register_craft_type("1042_chopping", function(def)
+    if not core_1042.crafting.registered_crafts["1042_chopping"][def.node] then
+        core_1042.crafting.registered_crafts["1042_chopping"][def.node] = def
+    end
+end)
+
 
 core_1042.crafting.register_craft_type("1042_default", nil)

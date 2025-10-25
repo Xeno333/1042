@@ -216,6 +216,58 @@ core.register_node("1042_core:turf", {
     groups = {dirt = 1, breakable_by_hand = 3, bio_mass = 8},
 })
 
+core.register_node("1042_core:turf_tilled", {
+    description = "Turf",
+    tiles = {"turf.png^[colorize:#000000:128"},
+
+    color = "#664413ff",
+    paramtype2 = "color",
+    palette = "turf_palette.png",
+    node_placement_prediction = "",
+
+    sounds = {
+        footstep = {
+            name = "turf",
+            gain = 0.8,
+            pitch = 1.5
+        },
+        dig = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.5
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.5
+        }
+    },
+
+    on_construct = function(pos)
+        local node = core.get_node(pos)
+
+        if node then
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            core.swap_node(pos, node)
+        end
+    end,
+
+    -- Add self as a drop to avoid meta
+    drop = "",
+    preserve_metadata = function(_, _, _, drops)
+        drops[#drops+1] = ItemStack("1042_core:turf")
+    end,
+
+    groups = {dirt = 1, breakable_by_hand = 3, bio_mass = 8},
+})
+
+
+core_1042.crafting.register_craft({
+    node = "1042_core:turf",
+    type = "1042_tilling",
+    result = "1042_core:turf_tilled"
+})
+
 core.register_node("1042_core:snow", {
     description = "Snow",
     tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},

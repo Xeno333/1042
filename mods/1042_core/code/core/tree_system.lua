@@ -2,12 +2,6 @@ core_1042.trees = {
     registered_trees = {}
 }
 
-core_1042.crafting.register_craft_type("1042_chopping", function(def)
-    if not core_1042.crafting.registered_crafts["1042_chopping"][def.node] then
-        core_1042.crafting.registered_crafts["1042_chopping"][def.node] = def
-    end
-end)
-
 function core_1042.trees.register_tree(from_mod, def)
     local sep = ""
     local item_name = string.lower(def.name)
