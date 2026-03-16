@@ -92,6 +92,7 @@ local mod_load_order = {
 
     path .. "1042_player/player.lua",
     path .. "1042_tests/init.lua",
+    path .. "1042_effects/init.lua",
     path .. "1042_achievements/init.lua",
 
     path .. "1042_nodes/init.lua",
