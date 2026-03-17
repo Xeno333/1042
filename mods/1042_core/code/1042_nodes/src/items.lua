@@ -1,6 +1,4 @@
 
-
-
 local function hit_flint_with_iron(itemstack, player, pointed_thing)
     local node = nil
     if pointed_thing and pointed_thing.under then
@@ -39,7 +37,8 @@ local function hit_flint_with_iron(itemstack, player, pointed_thing)
 
             name = player:get_player_name(),
 
-            texture = "1042_plain_node.png^[colorize:#ffcc66:144"
+            texture = "1042_flint.png"
+            --texture = "1042_plain_node.png^[colorize:#ffcc66:144"
         })
 
         if math.random(1, 10) == 1 then
@@ -58,24 +57,20 @@ achievements_1042.register_achievement("oooo_fire", {
 })
 
 
-
-
-
-
-
-
-
 core_1042.registry.register_material("1042_core:fire", {
     description = "Fire",
     drawtype = "firelike",
     tiles = {
         {
-            name = "[combine:2x8:0,0=1042_plain_node.png\\^[colorize\\:#ff2200\\:128:0,2=1042_plain_node.png\\^[transformR90\\^[colorize\\:#ff3300\\:128:0,4=1042_plain_node.png\\^[transformR180\\^[colorize\\:#ff4400\\:128:0,6=1042_plain_node.png\\^[transformR270\\^[colorize\\:#ff3300\\:128",
+            name = "1042_fire_animated.png",
+            --name = "[combine:2x8:0,0=1042_plain_node.png\\^[colorize\\:#ff2200\\:128:0,2=1042_plain_node.png\\^[transformR90\\^[colorize\\:#ff3300\\:128:0,4=1042_plain_node.png\\^[transformR180\\^[colorize\\:#ff4400\\:128:0,6=1042_plain_node.png\\^[transformR270\\^[colorize\\:#ff3300\\:128",
             animation = {
                 type = "vertical_frames",
-                aspect_w = 2,
-                aspect_h = 2,
-                length = 1,
+                frames_w = 1,
+                frames_h = 4,
+                --aspect_w = 2,
+                --aspect_h = 2,
+                length = 0.5,
             }
         },
     },
@@ -104,7 +99,8 @@ core_1042.registry.register_material("1042_core:beryl", {
     description = "Beryl",
     drawtype = "mesh",
     mesh = "crystal.obj",
-    tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
+    tiles = {"1042_beryl.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
     use_texture_alpha = "blend",
 
     paramtype = "light",
@@ -133,7 +129,8 @@ core_1042.registry.register_material("1042_core:beryl_hanging", {
     description = "Hanging Beryl",
     drawtype = "mesh",
     mesh = "crystal_roof.obj",
-    tiles = {"1042_plain_node.png^[colorize:#66eeee:128"},
+    tiles = {"1042_beryl.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#66eeee:128"},
     use_texture_alpha = "blend",
 
     paramtype = "light",
@@ -153,7 +150,8 @@ core_1042.registry.register_material("1042_core:rock", {
     description = "Rock",
     drawtype = "mesh",
     mesh = "rock.obj",
-    tiles = {"1042_plain_node.png^[colorize:#777777:128"},
+    tiles = {"1042_stone.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#777777:128"},
     use_texture_alpha = "opaque",
 
 
@@ -194,7 +192,8 @@ core_1042.registry.register_material("1042_core:flint", {
     description = "Flint",
     drawtype = "mesh",
     mesh = "flint.obj",
-    tiles = {"1042_plain_node.png^[colorize:#07070d:128"},
+    tiles = {"1042_flint.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#07070d:128"},
     use_texture_alpha = "opaque",
 
 
@@ -235,10 +234,11 @@ core_1042.registry.register_material("1042_core:flint", {
 core_1042.registry.register_material("1042_core:torch", {
     description = "Torch",
     drawtype = "nodebox",
-    tiles = {
-        "1042_plain_node.png^[colorize:#ff9900:128",
-        "1042_plain_node.png^[colorize:#371307:172"
-    },
+    tiles = {"1042_torch_top.png", "1042_torch_side.png"},
+    --tiles = {
+    --    "1042_plain_node.png^[colorize:#ff9900:128",
+    --    "1042_plain_node.png^[colorize:#371307:172"
+    --},
     use_texture_alpha = "opaque",
 
     selection_box = {
@@ -285,7 +285,8 @@ core_1042.registry.register_material("1042_core:sticks", {
     description = "Sticks",
     drawtype = "mesh",
     mesh = "sticks.obj",
-    tiles = {"1042_plain_node.png^[colorize:#672307:172"},
+    tiles = {"1042_sticks.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#672307:172"},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -311,7 +312,8 @@ core_1042.registry.register_material("1042_core:iron_nugget", {
     description = "Iron Nugget",
     drawtype = "mesh",
     mesh = "nugget.obj",
-    tiles = {"1042_plain_node.png^[colorize:#551111:128"},
+    tiles = {"1042_iron_nugget.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#551111:128"},
     use_texture_alpha = "opaque",
 
 
@@ -356,7 +358,8 @@ core_1042.registry.register_material("1042_core:gold_nugget", {
     description = "Gold Nugget",
     drawtype = "mesh",
     mesh = "nugget.obj",
-    tiles = {"1042_plain_node.png^[colorize:#ddaa22:128"},
+    tiles = {"1042_gold_nugget.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#ddaa22:128"},
     use_texture_alpha = "opaque",
 
 
@@ -401,7 +404,8 @@ core_1042.registry.register_material("1042_core:anvil", {
     description = "Anvil (WIP)",
     drawtype = "mesh",
     mesh = "anvil.obj",
-    tiles = {"1042_plain_node.png^[colorize:#222222:128"},
+    tiles = {"1042_anvil.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#222222:128"},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -438,7 +442,8 @@ core_1042.registry.register_material("1042_core:crude_iron", {
     description = "Crude Iron",
     drawtype = "mesh",
     mesh = "flint.obj",
-    tiles = {"1042_plain_node.png^[colorize:#886666:200"},
+    tiles = {"1042_crude_iron.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#886666:200"},
 
     paramtype = "light",
     paramtype2 = "facedir",
@@ -488,7 +493,8 @@ core_1042.registry.register_material("1042_core:crude_iron", {
 core_1042.registry.register_material("1042_core:iron_ingot", {
     description = "Iron Ingot",
     drawtype = "nodebox",
-    tiles = {"1042_plain_node.png^[colorize:#998888:200"},
+    tiles = {"1042_iron_ingot.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#998888:200"},
 
     paramtype = "light",
     paramtype2 = "facedir",
@@ -540,13 +546,14 @@ core_1042.registry.register_material("1042_core:iron_ingot", {
 
 
 core_1042.registry.register_material("1042_core:candel", {
-    description = "Candel",
+    description = "Candle",
     drawtype = "mesh",
     mesh = "candel.obj",
-    tiles = {
-        "1042_plain_node.png^[colorize:#aaaa88:200",
-        "1042_plain_node.png^[colorize:#554444:200"
-    },
+    tiles = {"1042_candle_wax.png", "1042_candle_wick.png"},
+    --tiles = {
+    --    "1042_plain_node.png^[colorize:#aaaa88:200",
+    --    "1042_plain_node.png^[colorize:#554444:200"
+    --},
 
     paramtype = "light",
     paramtype2 = "facedir",
@@ -581,13 +588,14 @@ core_1042.registry.register_material("1042_core:candel", {
 }, 1, nil, {name = "1042_core:candel", max_count = 16})
 
 core_1042.registry.register_material("1042_core:candel_lit", {
-    description = "Candel Lit",
+    description = "Lit Candle",
     drawtype = "mesh",
     mesh = "candel.obj",
-    tiles = {
-        "1042_plain_node.png^[colorize:#aaaa88:200",
-        "1042_plain_node.png^[colorize:#bb9944:200"
-    },
+    tiles = {"1042_candle_wax.png", "1042_candle_flame.png"},
+    --tiles = {
+    --    "1042_plain_node.png^[colorize:#aaaa88:200",
+    --    "1042_plain_node.png^[colorize:#bb9944:200"
+    --},
 
     paramtype = "light",
     paramtype2 = "facedir",
@@ -625,9 +633,10 @@ core_1042.registry.register_material("1042_core:candel_lit", {
 
 
 core_1042.registry.register_material("1042_core:gold_ingot", {
-    description = "Iron Ingot",
+    description = "Gold Ingot",
     drawtype = "nodebox",
-    tiles = {"1042_plain_node.png^[colorize:#ddaa00:200"},
+    tiles = {"1042_gold_ingot.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#ddaa00:200"},
 
     paramtype = "light",
     paramtype2 = "facedir",
@@ -682,11 +691,12 @@ core_1042.registry.register_material("1042_core:pork_raw", {
     description = "Raw Pork",
     drawtype = "mesh",
     mesh = "pork.obj",
-    tiles = {
-        "1042_plain_node.png^[colorize:#ffbb88:128",
-        "1042_plain_node.png^[colorize:#ffaa77:144",
-        "1042_plain_node.png^[colorize:#ff9966:128"
-    },
+    tiles = {"1042_pork_raw1.png", "1042_pork_raw1.png", "1042_pork_raw1.png"},
+    --tiles = {
+    --    "1042_plain_node.png^[colorize:#ffbb88:128",
+    --    "1042_plain_node.png^[colorize:#ffaa77:144",
+    --    "1042_plain_node.png^[colorize:#ff9966:128"
+    --},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -707,10 +717,10 @@ core_1042.registry.register_material("1042_core:pork_raw", {
 		drop = "1042_core:pork_cooked",
 		model = "cooking_pork.obj",
 		textures = {
-			"1042_plain_node.png^[colorize:#672307:200",
-			"1042_plain_node.png^[colorize:#ffbb88:128",
-			"1042_plain_node.png^[colorize:#ffaa77:144",
-			"1042_plain_node.png^[colorize:#ff9966:128"
+			"1042_pork_cooking.png",
+			"1042_pork_cooking.png",
+			"1042_pork_cooking.png",
+			"1042_pork_cooking.png"
 		}
 	},
 
@@ -723,11 +733,12 @@ core_1042.registry.register_material("1042_core:pork_cooked", {
     description = "Cooked Pork",
     drawtype = "mesh",
     mesh = "pork.obj",
-    tiles = {
-        "1042_plain_node.png^[colorize:#dd4422:128",
-        "1042_plain_node.png^[colorize:#cc3311:144",
-        "1042_plain_node.png^[colorize:#993322:128"
-    },
+    tiles = {"1042_pork_cooked.png", "1042_pork_cooked.png", "1042_pork_cooked.png"},
+    --tiles = {
+    --    "1042_plain_node.png^[colorize:#dd4422:128",
+    --    "1042_plain_node.png^[colorize:#cc3311:144",
+    --    "1042_plain_node.png^[colorize:#993322:128"
+    --},
     use_texture_alpha = "opaque",
 
     paramtype = "light",

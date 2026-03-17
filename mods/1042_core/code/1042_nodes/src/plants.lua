@@ -11,7 +11,7 @@ core.register_node("1042_core:grass_tall", {
     description = "Tall Grass",
     drawtype = "mesh",
     mesh = "grass_tall.obj",
-    tiles = {"turf.png"},
+    tiles = {"1042_grass.png"},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -60,7 +60,7 @@ core.register_node("1042_core:grass_short", {
     description = "Short Grass",
     drawtype = "mesh",
     mesh = "grass_short.obj",
-    tiles = {"turf.png"},
+    tiles = {"1042_grass.png"},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -106,17 +106,12 @@ core.register_node("1042_core:grass_short", {
 
 
 
-
-
-
-
-
-
 core.register_node("1042_core:mushroom", {
     description = "Mushroom",
     drawtype = "mesh",
     mesh = "mushroom.obj",
-    tiles = {"1042_plain_node.png^[colorize:#7B3500:128"},
+    tiles = {"1042_mushroom.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#7B3500:128"},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -139,7 +134,8 @@ core.register_node("1042_core:apple", {
     description = "Apple",
     drawtype = "mesh",
     mesh = "fruit.obj",
-    tiles = {"1042_plain_node.png^[colorize:#ff0000:128"},
+    tiles = {"1042_apple.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#ff0000:128"},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -155,11 +151,6 @@ core.register_node("1042_core:apple", {
 })
 
 
-
-
-
-
-
 -- Flowers
 
 core.register_node("1042_core:light_bloom", {
@@ -167,10 +158,15 @@ core.register_node("1042_core:light_bloom", {
     drawtype = "mesh",
     mesh = "flower_1.obj",
     tiles = {
-        "1042_plain_node.png^[colorize:#178b03:128", -- stem
-        "1042_plain_node.png^[colorize:#110099:64", -- petal
-        "1042_plain_node.png^[colorize:#077b03:128"  -- leaf
+        "1042_flower1_stem.png",
+        "1042_flower1_petal.png",
+        "1042_flower1_leaf.png"
     },
+    --tiles = {
+    --    "1042_plain_node.png^[colorize:#178b03:128", -- stem
+    --    "1042_plain_node.png^[colorize:#110099:64", -- petal
+    --    "1042_plain_node.png^[colorize:#077b03:128"  -- leaf
+    --},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -188,9 +184,13 @@ core.register_node("1042_core:digitalis", {
     drawtype = "mesh",
     mesh = "digitalis.obj",
     tiles = {
-        "1042_plain_node.png^[colorize:#063803:164", -- stem
-        "1042_plain_node.png^[colorize:#991177:64", -- petal
+        "1042_flower2_stem.png",
+        "1042_flower2_petal.png"
     },
+    --tiles = {
+    --    "1042_plain_node.png^[colorize:#063803:164", -- stem
+    --    "1042_plain_node.png^[colorize:#991177:64", -- petal
+    --},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -224,10 +224,15 @@ core.register_node("1042_core:tulip", {
     drawtype = "mesh",
     mesh = "flower_3.obj",
     tiles = {
-        "1042_plain_node.png^[colorize:#11AA22:64", -- stem
-        "1042_plain_node.png^[colorize:#7711AA:64", -- petal
-        "1042_plain_node.png^[colorize:#22AA11:64"  -- leaf
+        "1042_flower3_stem.png",
+        "1042_flower3_petal.png",
+        "1042_flower3_leaf.png"
     },
+    --tiles = {
+    --    "1042_plain_node.png^[colorize:#11AA22:64", -- stem
+    --    "1042_plain_node.png^[colorize:#7711AA:64", -- petal
+    --    "1042_plain_node.png^[colorize:#22AA11:64"  -- leaf
+    --},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -244,10 +249,15 @@ core.register_node("1042_core:sunflower", {
     drawtype = "mesh",
     mesh = "flower_4.obj",
     tiles = {
-        "1042_plain_node.png^[colorize:#11AA22:64", -- stem
-        "1042_plain_node.png^[colorize:#FFAA11:64", -- petal
-        "1042_plain_node.png^[colorize:#22AA11:64"  -- leaf
+        "1042_flower4_stem.png",
+        "1042_flower4_petal.png",
+        "1042_flower4_leaf.png"
     },
+    --tiles = {
+    --    "1042_plain_node.png^[colorize:#11AA22:64", -- stem
+    --    "1042_plain_node.png^[colorize:#FFAA11:64", -- petal
+    --    "1042_plain_node.png^[colorize:#22AA11:64"  -- leaf
+    --},
     use_texture_alpha = "opaque",
 
     paramtype = "light",

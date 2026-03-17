@@ -7,11 +7,11 @@ core.register_node("1042_core:water_source", {
     drawtype = "liquid",
     tiles = {
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = false,
 		},
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = true,
 		},
     },
@@ -53,14 +53,14 @@ core.register_node("1042_core:water_flowing", {
     description = "Flowing Water",
 
     drawtype = "flowingliquid",
-    tiles = {"water.png"},
+    tiles = {"1042_water.png"},
     special_tiles = {
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = false,
 		},
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = true,
 		},
     },
@@ -105,11 +105,11 @@ core.register_node("1042_core:water_source2", {
     drawtype = "liquid",
     tiles = {
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = false,
 		},
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = true,
 		},
     },
@@ -152,14 +152,14 @@ core.register_node("1042_core:water_flowing2", {
     description = "Flowing Water 2",
 
     drawtype = "flowingliquid",
-    tiles = {"water.png"},
+    tiles = {"1042_water.png"},
     special_tiles = {
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = false,
 		},
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = true,
 		},
     },
@@ -208,11 +208,13 @@ core.register_node("1042_core:lava_source", {
     drawtype = "liquid",
     tiles = {
 		{
-			name = "1042_plain_node.png^[colorize:#ff2200:144",
+			name = "1042_lava.png",
+            --name = "1042_plain_node.png^[colorize:#ff2200:144",
 			backface_culling = false,
 		},
 		{
-			name = "1042_plain_node.png^[colorize:#ff2200:144",
+			name = "1042_lava.png",
+            --name = "1042_plain_node.png^[colorize:#ff2200:144",
 			backface_culling = true,
 		},
     },
@@ -250,14 +252,17 @@ core.register_node("1042_core:lava_flowing", {
     description = "Flowing Lava",
 
     drawtype = "flowingliquid",
-    tiles = {"1042_plain_node.png^[colorize:#ff2200:144"},
+    tiles = {"1042_lava.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#ff2200:144"},
     special_tiles = {
 		{
-			name = "1042_plain_node.png^[colorize:#ff2200:144",
+			name = "1042_lava.png",
+            --name = "1042_plain_node.png^[colorize:#ff2200:144",
 			backface_culling = false,
 		},
 		{
-			name = "1042_plain_node.png^[colorize:#ff2200:144",
+			name = "1042_lava.png",
+            --name = "1042_plain_node.png^[colorize:#ff2200:144",
 			backface_culling = true,
 		},
     },

@@ -1,21 +1,18 @@
 
 core.register_node("1042_core:node2", {
     description = "node2",
-    tiles = {"1042_plain_node.png^[colorize:#aaaa88:168"},
-    use_texture_alpha = "opaque",
-
+    tiles = {"1042_sky_stone.png"},
     groups = {unbreakable = 1},
 })
-
-
 
 
 -- Universal nodes
 
 core_1042.registry.register_material("1042_core:bedrock", {
     description = "Bedrock",
-    tiles = {"1042_plain_node.png^[colorize:#110a02:200"},
-    use_texture_alpha = "opaque",
+    tiles = {"1042_bedrock.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#110a02:200"},
+    --use_texture_alpha = "opaque",
 
     diggable = false,
 
@@ -62,13 +59,14 @@ core_1042.registry.register_material("1042_core:black", {
 core.register_node("1042_core:sky_portal", {
     description = "Sky Portal",
     tiles = {{
-        name = "1042_plain_node.png^[colorize:#002228:128",
+        name = "1042_sky_portal.png",
+        --name = "1042_plain_node.png^[colorize:#002228:128",
         backface_culling = true,
         animation = {
             type = "sheet_2d",
-            frames_w = 2,
-            frames_h = 2,
-            frame_length = 1,
+            frames_w = 1,
+            frames_h = 4,
+            frame_length = 0.2,
         }
     }},
     drawtype = "glasslike",
@@ -106,7 +104,8 @@ core.register_node("1042_core:sky_portal", {
 
 core.register_node("1042_core:dirt", {
     description = "Dirt",
-    tiles = {"1042_plain_node.png^[colorize:#8b4513:128"},
+    tiles = {"1042_dirt.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#8b4513:128"},
     use_texture_alpha = "opaque",
 
     groups = {dirt = 1, breakable_by_hand = 3},
@@ -114,7 +113,8 @@ core.register_node("1042_core:dirt", {
 
 core.register_node("1042_core:sand", {
     description = "Sand",
-    tiles = {"1042_sand.png^[colorize:#d9a357:128"},
+    tiles = {"1042_sand.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#d9a357:128"},
     use_texture_alpha = "opaque",
 
     groups = {dirt = 1, falling_node = 1, breakable_by_hand = 3},
@@ -123,7 +123,8 @@ core.register_node("1042_core:sand", {
 core.register_node("1042_core:glass", {
     description = "Glass",
     drawtype = "glasslike",
-    tiles = {"1042_plain_node.png"},
+    --tiles = {"1042_plain_node.png"},
+    tiles = {"1042_glass.png"},
     use_texture_alpha = "blend",
 	paramtype = "light",
 
@@ -132,9 +133,9 @@ core.register_node("1042_core:glass", {
 
 core.register_node("1042_core:moss", {
     description = "Moss",
-    tiles = {"turf.png"},
+    tiles = {"1042_moss.png"},
 
-    color = "#309913ff",
+    --color = "#309913ff",
     node_placement_prediction = "",
 
     sounds = {
@@ -161,11 +162,11 @@ core.register_node("1042_core:moss", {
 core.register_node("1042_core:ice", {
     description = "Ice",
     drawtype = "glasslike",
-    tiles = {"ice.png"},
+    tiles = {"1042_ice.png"},
     use_texture_alpha = "blend",
 	paramtype = "light",
 
-    color = "#333333",
+    --color = "#333333",
 
     _1042_melts_to = "1042_core:water_source",
     groups = {falling_node = 1, float = 1, melts = 1, slippery = 3, cools = 1, frozen = 1},
@@ -173,7 +174,7 @@ core.register_node("1042_core:ice", {
 
 core.register_node("1042_core:turf", {
     description = "Turf",
-    tiles = {"turf.png"},
+    tiles = {"1042_turf.png"},
 
     color = "#309913ff",
     paramtype2 = "color",
@@ -218,8 +219,8 @@ core.register_node("1042_core:turf", {
 
 core.register_node("1042_core:turf_tilled", {
     description = "Turf",
-    tiles = {"turf.png^[colorize:#000000:128"},
-
+    --tiles = {"turf.png^[colorize:#000000:128"},
+    tiles = {"1042_turf_tilled.png"},
     color = "#664413ff",
     paramtype2 = "color",
     palette = "turf_palette.png",
@@ -270,7 +271,8 @@ core_1042.crafting.register_craft({
 
 core.register_node("1042_core:snow", {
     description = "Snow",
-    tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},
+    --tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},
+    tiles = {"1042_snow.png"},
     inventory_image = "snowflake1.png",
     wield_image = "snowflake1.png",
     wield_scale = {x = 0.5, y = 0.5, z = 0.5},
@@ -340,7 +342,8 @@ core.register_node("1042_core:snow", {
 
 core.register_node("1042_core:stone", {
     description = "Stone",
-    tiles = {"1042_plain_node.png^[colorize:#777777:128"},
+    --tiles = {"1042_plain_node.png^[colorize:#777777:128"},
+    tiles = {"1042_stone.png"},
     use_texture_alpha = "opaque",
 
     sounds = {
@@ -366,7 +369,8 @@ core.register_node("1042_core:stone", {
 
 core.register_node("1042_core:basalt", {
     description = "Basalt",
-    tiles = {"1042_plain_node.png^[colorize:#111111:200"},
+    tiles = {"1042_basalt.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#111111:200"},
     use_texture_alpha = "opaque",
 
     sounds = {
@@ -393,7 +397,8 @@ core_1042.register_loot({name = "1042_core:basalt"})
 
 core.register_node("1042_core:gold_ore", {
     description = "Gold Ore",
-    tiles = {"1042_plain_node.png^[colorize:#ddaa22:128"},
+    tiles = {"1042_stone.png^1042_gold_ore.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#ddaa22:128"},
     use_texture_alpha = "opaque",
 
     drop = {
@@ -443,7 +448,8 @@ core_1042.register_loot({name = "1042_core:gold_ore"})
 
 core.register_node("1042_core:iron_ore", {
     description = "Iron Ore",
-    tiles = {"1042_plain_node.png^[colorize:#551111:128"},
+    tiles = {"1042_stone.png^1042_iron_ore.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#551111:128"},
     use_texture_alpha = "opaque",
 
     drop = {
@@ -498,7 +504,8 @@ core_1042.register_loot({name = "1042_core:iron_ore"})
 
 core.register_node("1042_core:charcoal", {
     description = "Charcoal",
-    tiles = {"1042_plain_node.png^[colorize:#221111:168"},
+    tiles = {"1042_charcoal.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#221111:168"},
     use_texture_alpha = "opaque",
 
     groups = {wood = 1, burns = 6, breakable_by_hand = 5},
@@ -508,7 +515,8 @@ core_1042.register_loot({name = "1042_core:charcoal"})
 
 core.register_node("1042_core:charcoal_burning", {
     description = "Burning Charcoal",
-    tiles = {"1042_plain_node.png^[colorize:#441111:168"},
+    tiles = {"1042_charcoal_burning.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#441111:168"},
     use_texture_alpha = "opaque",
 
     drop = "",
@@ -525,7 +533,8 @@ core.register_node("1042_core:charcoal_burning", {
 
 core.register_node("1042_core:iron_slag", {
     description = "Iron Slag",
-    tiles = {"1042_plain_node.png^[colorize:#331111:128"},
+    tiles = {"1042_iron_slag.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#331111:128"},
     use_texture_alpha = "opaque",
 
     sounds = {
@@ -553,7 +562,8 @@ core.register_node("1042_core:iron_slag", {
 
 core.register_node("1042_core:iron_nugget_block", {
     description = "Iron Nugget Block",
-    tiles = {"1042_plain_node.png^[colorize:#664444:128"},
+    tiles = {"1042_iron_nugget_block.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#664444:128"},
     use_texture_alpha = "opaque",
 
     sounds = {
@@ -601,8 +611,8 @@ core.register_node("1042_core:chest", {
     drawtype = "mesh",
     mesh = "chest.obj",
     tiles = {
-        "1042_plain_node.png^[colorize:#572307:200", 
-        "1042_plain_node.png^[colorize:#bbaa37:200"
+        "1042_chest.png", 
+        "1042_chest_lock.png"
     },
     
     paramtype2 = "4dir",

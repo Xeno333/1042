@@ -2,13 +2,10 @@ local aux1_cooldown = {}
 local sprint_increment_cooldown = {}
 
 
-
-
-
-
 core.override_item("", {
-	wield_image = "[combine:2x4:0,0=1042_plain_node.png\\^[colorize\\:#ffffff\\:0:0,2=1042_plain_node.png\\^[transformR90\\^[colorize\\:#aa8877\\:168",
-	wield_scale = {x = 0.35, y = 4, z = 4},
+	wield_image = "wieldhand.png",
+	--wield_image = "[combine:2x4:0,0=1042_plain_node.png\\^[colorize\\:#ffffff\\:0:0,2=1042_plain_node.png\\^[transformR90\\^[colorize\\:#aa8877\\:168",
+	wield_scale = {x = 0.75, y = 1, z = 4},
 
 	range = 4.0,
 	tool_capabilities = {
@@ -22,7 +19,6 @@ core.override_item("", {
 	},
 	groups = {not_in_creative_inventory = 1}
 })
-
 
 
 -- Spawn player; depends on 1042_mapgen
