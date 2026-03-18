@@ -133,7 +133,7 @@ weather.register_weather({
         )
         player:set_moon(
             {
-                texture = "1042_plain_node.png^[colorize:#aaaaaa:144",
+                texture = "moon.png^[colorize:#aaaaaa:144",
                 visible = true,
                 scale = 0.3
             }
@@ -316,7 +316,7 @@ weather.register_weather({
         )
         player:set_moon(
             {
-                texture = "1042_plain_node.png^[colorize:#00aacc:144",
+                texture = "moon.png^[colorize:#00aacc:144",
                 visible = true,
                 scale = 1
             }
@@ -687,7 +687,7 @@ weather.register_weather({
         glow = 2,
 
         texture = {
-            name = "1042_plain_node.png^[colorize:#0044aa:144",
+            name = "1042_rain.png",
             scale = {x=0.25, y=1}
         }
     },
@@ -760,11 +760,18 @@ weather.register_weather({
     on_step = function(player, timer)
         storm_timer = storm_timer + timer
 
+        local function map(value, inMin, inMax, outMin, outMax)
+            return outMin + (value - inMin) * (outMax - outMin) / (inMax - inMin)
+        end
+
+        local light = core.get_node_light(player:get_pos(), core.get_timeofday()) or 7
+        local brightness = map(light, 0, 15, 0, 100)
+
         local s = core_1042.rand:next(1, 30) / 100
         local id = player:hud_add({
             type = "image",
             name = "rain",
-            text = "rain_on_hud.png^[colorize:#0066bb:128",
+            text = "rain_on_hud.png^[hsl:0:255:" .. brightness,
             position = {x = core_1042.rand:next(1, 1000) / 1000, y = core_1042.rand:next(1, 1000) / 1000},
             scale = {x = s, y = s},
         })
@@ -901,11 +908,18 @@ weather.register_weather({
     on_step = function(player, timer)
         light_storm_timer = light_storm_timer + timer
         if light_storm_timer >= 0.5 then
+            local function map(value, inMin, inMax, outMin, outMax)
+                return outMin + (value - inMin) * (outMax - outMin) / (inMax - inMin)
+            end
+    
+            local light = core.get_node_light(player:get_pos(), core.get_timeofday()) or 7
+            local brightness = map(light, 0, 15, 0, 100)
+    
             local s = core_1042.rand:next(1, 20) / 100
             local id = player:hud_add({
                 type = "image",
                 name = "rain",
-                text = "rain_on_hud.png^[colorize:#0066bb:128",
+                text = "rain_on_hud.png^[hsl:0:255:" .. brightness,
                 position = {x = core_1042.rand:next(1, 1000) / 1000, y = core_1042.rand:next(1, 1000) / 1000},
                 scale = {x = s, y = s},
             })
@@ -1034,11 +1048,18 @@ weather.register_weather({
     on_step = function(player, timer)
         drizzle_timer = drizzle_timer + timer
         if drizzle_timer >= 1 then
+            local function map(value, inMin, inMax, outMin, outMax)
+                return outMin + (value - inMin) * (outMax - outMin) / (inMax - inMin)
+            end
+    
+            local light = core.get_node_light(player:get_pos(), core.get_timeofday()) or 7
+            local brightness = map(light, 0, 15, 0, 100)
+    
             local s = core_1042.rand:next(1, 10) / 100
             local id = player:hud_add({
                 type = "image",
                 name = "rain",
-                text = "rain_on_hud.png^[colorize:#4444aa:128",
+                text = "rain_on_hud.png^[hsl:0:255:" .. brightness,
                 position = {x = core_1042.rand:next(1, 1000) / 1000, y = core_1042.rand:next(1, 1000) / 1000},
                 scale = {x = s, y = s},
             })

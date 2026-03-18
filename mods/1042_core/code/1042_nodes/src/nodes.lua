@@ -1,7 +1,7 @@
 
 core.register_node("1042_core:node2", {
     description = "node2",
-    tiles = {"1042_sky_stone.png^[colorize:#aaaa77:128"},
+    tiles = {"1042_sky_stone.png"}, --^[colorize:#aaaa77:128
     groups = {unbreakable = 1},
 })
 

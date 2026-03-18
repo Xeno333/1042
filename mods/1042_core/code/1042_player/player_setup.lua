@@ -154,7 +154,7 @@ core.register_on_joinplayer(function(player, last_join)
 	)
 	player:set_moon(
 		{
-			texture = "1042_plain_node.png^[colorize:#aaaaaa:144",
+			texture = "moon.png",
 			visible = true,
 			scale = 0.3
 		}

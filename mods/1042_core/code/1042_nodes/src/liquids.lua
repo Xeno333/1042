@@ -306,11 +306,12 @@ core.register_node("1042_core:molten_iron_source", {
     drawtype = "liquid",
     tiles = {
 		{
-			name = "1042_plain_node.png^[colorize:#cc3300:144",
+			name = "1042_molten_iron.png", --^[colorize:#cc3300:144
 			backface_culling = false,
 		},
 		{
-			name = "1042_plain_node.png^[colorize:#cc3300:144",
+			name = "1042_molten_iron.png",
+            --name = "1042_plain_node.png^[colorize:#cc3300:144",
 			backface_culling = true,
 		},
     },
@@ -348,14 +349,16 @@ core.register_node("1042_core:molten_iron_flowing", {
     description = "Flowing Molten Iron",
 
     drawtype = "flowingliquid",
-    tiles = {"1042_plain_node.png^[colorize:#cc3300:144"},
+    tiles = {name = "1042_molten_iron.png",},
     special_tiles = {
 		{
-			name = "1042_plain_node.png^[colorize:#cc3300:144",
+			name = "1042_molten_iron.png",
+            --name = "1042_plain_node.png^[colorize:#cc3300:144",
 			backface_culling = false,
 		},
 		{
-			name = "1042_plain_node.png^[colorize:#cc3300:144",
+			name = "1042_molten_iron.png",
+            --name = "1042_plain_node.png^[colorize:#cc3300:144",
 			backface_culling = true,
 		},
     },
