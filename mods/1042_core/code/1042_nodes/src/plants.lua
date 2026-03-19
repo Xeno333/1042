@@ -110,9 +110,22 @@ core.register_node("1042_core:mushroom", {
     description = "Mushroom",
     drawtype = "mesh",
     mesh = "mushroom.obj",
-    tiles = {"1042_mushroom.png"},
+    tiles = {"1042_mushroom_brown.png", "1042_mushroom_stem.png"},
     --tiles = {"1042_plain_node.png^[colorize:#7B3500:128"},
-    use_texture_alpha = "opaque",
+    --use_texture_alpha = "opaque",
+
+    node_box = {
+        type = "fixed",
+        fixed = {-0.4, -0.5, -0.4, 0.4, 0.2, 0.4}
+    },
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.4, -0.5, -0.4, 0.4, 0.2, 0.4}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.4, -0.5, -0.4, 0.4, 0.2, 0.4}
+    },
 
     paramtype = "light",
     paramtype2 = "wallmounted",
