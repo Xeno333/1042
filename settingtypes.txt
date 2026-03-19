@@ -11,6 +11,11 @@
 #   Not recomended for novice players
 1042_enable_hardcore (Enable Hardcore Mode) bool false
 
+#   1042 Lore Language for items, nodes, etc.
+#
+#   This changes only 1042 text and is not a translation
+1042_lorelang (Enable Lore Language) bool false
+
 [Server settings]
 
 #   Warn players to adjust settings on join.

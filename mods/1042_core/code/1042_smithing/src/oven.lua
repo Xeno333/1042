@@ -1,6 +1,6 @@
 
 core.register_node("1042_core:stone_oven_off", {
-	description = "Stone Oven",
+	description = core_1042.lorelang.translate("Stone Oven"),
 	drawtype = "mesh",
 	mesh = "oven.obj",
 	tiles = {
@@ -64,7 +64,7 @@ core_1042.crafting.register_craft({
 
 
 core.register_node("1042_core:stone_oven_on", {
-	description = "Stone Oven",
+	description = core_1042.lorelang.translate("Stone Oven"),
 	drawtype = "mesh",
 	mesh = "oven.obj",
 	tiles = {

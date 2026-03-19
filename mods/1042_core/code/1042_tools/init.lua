@@ -8,7 +8,7 @@ dofile(path.."/src/chisel.lua")
 local c = core.colorize
 
 item_wear.register_complex_node("1042_core:sword",{
-    description = "Sword",
+    description = core_1042.lorelang.translate("Sword"),
     drawtype = "mesh",
     mesh = "sword.obj",
     tiles = {"1042_plain_node.png^[colorize:#444444:168"},
@@ -60,7 +60,7 @@ core_1042.crafting.register_craft({
 
 
 item_wear.register_complex_node("1042_core:pick",{
-    description = "Pick",
+    description = core_1042.lorelang.translate("Pick"),
     drawtype = "mesh",
     mesh = "pick.obj",
     tiles = {
@@ -104,7 +104,7 @@ core_1042.crafting.register_craft({
 
 
 item_wear.register_complex_node("1042_core:axe_flint",{
-    description = "Flint axe",
+    description = core_1042.lorelang.translate("Flint Axe"),
     drawtype = "mesh",
     mesh = "axe.obj",
     tiles = {
@@ -156,7 +156,7 @@ core_1042.crafting.register_craft({
 
 
 item_wear.register_complex_node("1042_core:shovel_iron",{
-    description = "Iron shovel",
+    description = core_1042.lorelang.translate("Iron Shovel"),
     drawtype = "mesh",
     mesh = "axe.obj",
     tiles = {
@@ -208,7 +208,7 @@ core_1042.crafting.register_craft({
 
 
 item_wear.register_complex_node("1042_core:axe_iron",{
-    description = "Iron axe",
+    description = core_1042.lorelang.translate("Iron Axe"),
     drawtype = "mesh",
     mesh = "axe.obj",
     tiles = {

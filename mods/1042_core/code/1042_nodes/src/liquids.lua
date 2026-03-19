@@ -2,7 +2,7 @@
 -- Liquids
 
 core.register_node("1042_core:water_source", {
-    description = "Water Source",
+    description = core_1042.lorelang.translate("Standing Water"),
 
     drawtype = "liquid",
     tiles = {
@@ -50,7 +50,7 @@ core.register_node("1042_core:water_source", {
 })
 
 core.register_node("1042_core:water_flowing", {
-    description = "Flowing Water",
+    description = core_1042.lorelang.translate("Flowing Water"),
 
     drawtype = "flowingliquid",
     tiles = {"1042_water.png"},
@@ -100,7 +100,7 @@ core.register_node("1042_core:water_flowing", {
 
 
 core.register_node("1042_core:water_source2", {
-    description = "Water Source 2",
+    description = core_1042.lorelang.translate("Still Water"),
 
     drawtype = "liquid",
     tiles = {
@@ -149,7 +149,7 @@ core.register_node("1042_core:water_source2", {
 })
 
 core.register_node("1042_core:water_flowing2", {
-    description = "Flowing Water 2",
+    description = core_1042.lorelang.translate("Running Water"),
 
     drawtype = "flowingliquid",
     tiles = {"1042_water.png"},
@@ -203,7 +203,7 @@ core.register_node("1042_core:water_flowing2", {
 
 
 core.register_node("1042_core:lava_source", {
-    description = "Lava Source",
+    description = core_1042.lorelang.translate("Lava"),
 
     drawtype = "liquid",
     tiles = {
@@ -249,7 +249,7 @@ core.register_node("1042_core:lava_source", {
 })
 
 core.register_node("1042_core:lava_flowing", {
-    description = "Flowing Lava",
+    description = core_1042.lorelang.translate("Flowing Lava"),
 
     drawtype = "flowingliquid",
     tiles = {"1042_lava.png"},
@@ -301,7 +301,7 @@ core.register_node("1042_core:lava_flowing", {
 
 
 core.register_node("1042_core:molten_iron_source", {
-    description = "Molten Iron Source",
+    description = core_1042.lorelang.translate("Molten iron"),
 
     drawtype = "liquid",
     tiles = {
@@ -346,7 +346,7 @@ core.register_node("1042_core:molten_iron_source", {
 })
 
 core.register_node("1042_core:molten_iron_flowing", {
-    description = "Flowing Molten Iron",
+    description = core_1042.lorelang.translate("Flowing Molten Iron"),
 
     drawtype = "flowingliquid",
     tiles = {name = "1042_molten_iron.png",},

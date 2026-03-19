@@ -5,7 +5,7 @@ core_1042.trees = {
 function core_1042.trees.register_tree(from_mod, def)
     local sep = ""
     local item_name = string.lower(def.name)
-    local item_desc = def.name
+    local item_desc = core_1042.lorelang.translate(def.name)
 
     if def.name ~= "" then
         sep = " "
@@ -13,9 +13,10 @@ function core_1042.trees.register_tree(from_mod, def)
         item_desc = item_desc .. " "
     end
 
-    def.leaves.description = item_desc .. "Leaves"
-    def.tree.description = item_desc.. "Tree"
-    def.planks.description = item_desc.. "Planks"
+    def.leaves.description = item_desc .. core_1042.lorelang.translate("Leaves")
+    def.tree.description = item_desc .. core_1042.lorelang.translate("Tree")
+    def.planks.description = item_desc .. core_1042.lorelang.translate("Planks")
+    
 
     core.register_node(":" .. from_mod .. ":tree" .. item_name, def.tree)
     core.register_node(":" .. from_mod .. ":leaves" .. item_name, def.leaves)
@@ -23,7 +24,7 @@ function core_1042.trees.register_tree(from_mod, def)
 
     -- WIP
     core.register_node(":" .. from_mod .. ":sapling" .. item_name, {
-        description = item_desc .. "Sapling",
+        description = item_desc .. core_1042.lorelang.translate("Sapling"),
         drawtype = "mesh",
         mesh = "sapling.obj",
         tiles = {

@@ -58,7 +58,7 @@ achievements_1042.register_achievement("oooo_fire", {
 
 
 core_1042.registry.register_material("1042_core:fire", {
-    description = "Fire",
+    description = core_1042.lorelang.translate("Fire"),
     drawtype = "firelike",
     tiles = {
         {
@@ -96,7 +96,7 @@ core_1042.registry.register_material("1042_core:fire", {
 -- Speacal nodes
 
 core_1042.registry.register_material("1042_core:beryl", {
-    description = "Beryl",
+    description = core_1042.lorelang.translate("Beryl"),
     drawtype = "mesh",
     mesh = "crystal.obj",
     tiles = {"1042_beryl.png"},
@@ -126,7 +126,7 @@ core_1042.registry.register_material("1042_core:beryl", {
 }, 5, nil, nil)
 
 core_1042.registry.register_material("1042_core:beryl_hanging", {
-    description = "Hanging Beryl",
+    description = core_1042.lorelang.translate("Hanging Beryl"),
     drawtype = "mesh",
     mesh = "crystal_roof.obj",
     tiles = {"1042_beryl.png"},
@@ -147,7 +147,7 @@ core_1042.registry.register_material("1042_core:beryl_hanging", {
 }, 5, nil, nil)
 
 core_1042.registry.register_material("1042_core:rock", {
-    description = "Rock",
+    description = core_1042.lorelang.translate("Rock"),
     drawtype = "mesh",
     mesh = "rock.obj",
     tiles = {"1042_stone.png"},
@@ -189,7 +189,7 @@ core_1042.registry.register_material("1042_core:rock", {
 }, 2, nil, nil)
 
 core_1042.registry.register_material("1042_core:flint", {
-    description = "Flint",
+    description = core_1042.lorelang.translate("Flint"),
     drawtype = "mesh",
     mesh = "flint.obj",
     tiles = {"1042_flint.png"},
@@ -232,7 +232,7 @@ core_1042.registry.register_material("1042_core:flint", {
 }, 1, nil, nil)
 
 core_1042.registry.register_material("1042_core:torch", {
-    description = "Torch",
+    description = core_1042.lorelang.translate("Torch"),
     drawtype = "nodebox",
     tiles = {"1042_torch_top.png", "1042_torch_side.png"},
     --tiles = {
@@ -282,7 +282,7 @@ core_1042.registry.register_material("1042_core:torch", {
 
 
 core_1042.registry.register_material("1042_core:sticks", {
-    description = "Sticks",
+    description = core_1042.lorelang.translate("Sticks"),
     drawtype = "mesh",
     mesh = "sticks.obj",
     tiles = {"1042_sticks.png"},
@@ -309,7 +309,7 @@ core_1042.registry.register_material("1042_core:sticks", {
 
 
 core_1042.registry.register_material("1042_core:iron_nugget", {
-    description = "Iron Nugget",
+    description = core_1042.lorelang.translate("Iron Nugget"),
     drawtype = "mesh",
     mesh = "nugget.obj",
     tiles = {"1042_iron_nugget.png"},
@@ -355,7 +355,7 @@ core_1042.registry.register_material("1042_core:iron_nugget", {
 }, 2, nil, {name = "1042_core:iron_nugget", max_count = 16})
 
 core_1042.registry.register_material("1042_core:gold_nugget", {
-    description = "Gold Nugget",
+    description = core_1042.lorelang.translate("Gold Nugget"),
     drawtype = "mesh",
     mesh = "nugget.obj",
     tiles = {"1042_gold_nugget.png"},
@@ -401,7 +401,7 @@ core_1042.registry.register_material("1042_core:gold_nugget", {
 
 -- #fixme
 core_1042.registry.register_material("1042_core:anvil", {
-    description = "Anvil (WIP)",
+    description = core_1042.lorelang.translate("Anvil \n(WIP)"),
     drawtype = "mesh",
     mesh = "anvil.obj",
     tiles = {"1042_anvil.png"},
@@ -439,7 +439,7 @@ achievements_1042.register_achievement("smelter", {
 })
 
 core_1042.registry.register_material("1042_core:crude_iron", {
-    description = "Crude Iron",
+    description = core_1042.lorelang.translate("Crude Iron"),
     drawtype = "mesh",
     mesh = "flint.obj",
     tiles = {"1042_crude_iron.png"},
@@ -491,7 +491,7 @@ core_1042.registry.register_material("1042_core:crude_iron", {
 
 
 core_1042.registry.register_material("1042_core:iron_ingot", {
-    description = "Iron Ingot",
+    description = core_1042.lorelang.translate("Iron Ingot"),
     drawtype = "nodebox",
     tiles = {"1042_iron_ingot.png"},
     --tiles = {"1042_plain_node.png^[colorize:#998888:200"},
@@ -546,7 +546,7 @@ core_1042.registry.register_material("1042_core:iron_ingot", {
 
 
 core_1042.registry.register_material("1042_core:candel", {
-    description = "Candle",
+    description = core_1042.lorelang.translate("Candle"),
     drawtype = "mesh",
     mesh = "candel.obj",
     tiles = {"1042_candle_wax.png", "1042_candle_wick.png"},
@@ -588,7 +588,7 @@ core_1042.registry.register_material("1042_core:candel", {
 }, 1, nil, {name = "1042_core:candel", max_count = 16})
 
 core_1042.registry.register_material("1042_core:candel_lit", {
-    description = "Lit Candle",
+    description = core_1042.lorelang.translate("Lit Candle"),
     drawtype = "mesh",
     mesh = "candel.obj",
     tiles = {"1042_candle_wax.png", "1042_candle_flame.png"},
@@ -633,7 +633,7 @@ core_1042.registry.register_material("1042_core:candel_lit", {
 
 
 core_1042.registry.register_material("1042_core:gold_ingot", {
-    description = "Gold Ingot",
+    description = core_1042.lorelang.translate("Gold Ingot"),
     drawtype = "nodebox",
     tiles = {"1042_gold_ingot.png"},
     --tiles = {"1042_plain_node.png^[colorize:#ddaa00:200"},
@@ -688,7 +688,7 @@ core_1042.registry.register_material("1042_core:gold_ingot", {
 
 
 core_1042.registry.register_material("1042_core:pork_raw", {
-    description = "Raw Pork",
+    description = core_1042.lorelang.translate("Raw Pork"),
     drawtype = "mesh",
     mesh = "pork.obj",
     tiles = {"1042_pork_raw1.png", "1042_pork_raw1.png", "1042_pork_raw1.png"},
@@ -730,7 +730,7 @@ core_1042.registry.register_material("1042_core:pork_raw", {
 }, 2, nil, nil)
 
 core_1042.registry.register_material("1042_core:pork_cooked", {
-    description = "Cooked Pork",
+    description = core_1042.lorelang.translate("Cooked Pork"),
     drawtype = "mesh",
     mesh = "pork.obj",
     tiles = {"1042_pork_cooked.png", "1042_pork_cooked.png", "1042_pork_cooked.png"},

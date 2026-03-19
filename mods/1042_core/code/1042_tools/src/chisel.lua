@@ -103,7 +103,7 @@ end
 
 -- #fixme Fix wear to go as delt
 item_wear.register_complex_node("1042_core:chisel_iron", {
-    description = "Iron chisel",
+    description = core_1042.lorelang.translate("Iron Chisel"),
     drawtype = "mesh",
     mesh = "chisel.obj",
     tiles = {

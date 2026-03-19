@@ -2,40 +2,56 @@
 
 # Tools
 
-- axe - akce
+- axe - akc
 - sword - len-kyf
-- chisel - blunt-kyf
-- pick - ctxn-kyf
-
+- chisel - bluf-kyf
+- pick - ctxn-akc
+- shovel - sola-kyf
 
 # Natural
 
-- tree - recte
-- wood - recyla
+- tree - rekte
+- wood - rekyla
 - foliage - lyfe
 - turf - krec
-- grass - len-krec
+- grass - kyn-krec
 - snow - slin
 - stone - ctxn
 - ore - [material] ctxn
 - rock - ctxn
-- flint - sare-ctxn
+- flint - kyn-ctxn
 - sand - cond
 - water - van
-- ice - yc
+- ice - xc
 - mushroom - srem
+- flesh - myt
+- dirt - sola
+- fire - fira
 
 # Weather
 
 - rain - vasne
+- sky - valkar
+- sun - flyr
+- moon - luna
+- hail - kyn-xc
+- snow - ral-xc
 
 # Living
 
-- man
+- man - han
 - pig - svyn
-- fish
+- fish - 
+
+# Minerals
+
+- iron - fero
+- gold - arum
+- beryl - akuavan
 
 # Misc
 
-- iron - fero
 - block - blok
+- knife - kyf
+- portal, door - hodre
+- container, holder - beg

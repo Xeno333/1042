@@ -8,7 +8,7 @@
 local c = core.colorize
 
 core.register_node("1042_core:grass_tall", {
-    description = "Tall Grass",
+    description = core_1042.lorelang.translate("Tall Grass"),
     drawtype = "mesh",
     mesh = "grass_tall.obj",
     tiles = {"1042_grass.png"},
@@ -57,7 +57,7 @@ core.register_node("1042_core:grass_tall", {
 })
 
 core.register_node("1042_core:grass_short", {
-    description = "Short Grass",
+    description = core_1042.lorelang.translate("Short Grass"),
     drawtype = "mesh",
     mesh = "grass_short.obj",
     tiles = {"1042_grass.png"},
@@ -107,7 +107,7 @@ core.register_node("1042_core:grass_short", {
 
 
 core.register_node("1042_core:mushroom", {
-    description = "Mushroom",
+    description = core_1042.lorelang.translate("Mushroom"),
     drawtype = "mesh",
     mesh = "mushroom.obj",
     tiles = {"1042_mushroom_brown.png", "1042_mushroom_stem.png"},
@@ -144,7 +144,7 @@ core.register_node("1042_core:mushroom", {
 })
 
 core.register_node("1042_core:apple", {
-    description = "Apple",
+    description = core_1042.lorelang.translate("Apple"),
     drawtype = "mesh",
     mesh = "fruit.obj",
     tiles = {"1042_apple.png"},
@@ -167,7 +167,7 @@ core.register_node("1042_core:apple", {
 -- Flowers
 
 core.register_node("1042_core:light_bloom", {
-    description = "Light bloom",
+    description = core_1042.lorelang.translate("Light Bloom"),
     drawtype = "mesh",
     mesh = "flower_1.obj",
     tiles = {
@@ -193,7 +193,7 @@ core.register_node("1042_core:light_bloom", {
 })
 
 core.register_node("1042_core:digitalis", {
-    description = "Digitalis",
+    description = core_1042.lorelang.translate("Digitalis"),
     drawtype = "mesh",
     mesh = "digitalis.obj",
     tiles = {
@@ -233,7 +233,7 @@ core.register_node("1042_core:digitalis", {
 })
 
 core.register_node("1042_core:tulip", {
-    description = "Tulip",
+    description = core_1042.lorelang.translate("Tulip"),
     drawtype = "mesh",
     mesh = "flower_3.obj",
     tiles = {
@@ -258,7 +258,7 @@ core.register_node("1042_core:tulip", {
 })
 
 core.register_node("1042_core:sunflower", {
-    description = "Sunflower",
+    description = core_1042.lorelang.translate("Sunflower"),
     drawtype = "mesh",
     mesh = "flower_4.obj",
     tiles = {

@@ -10,8 +10,10 @@ core_1042.phases.register_callback("complex_registration", function()
 		if thing and not cooking_1042.moldable_things[id] then
 			cooking_1042.moldable_things[id] = thing
 
+			local descname = thing.name:gsub("^%l", string.upper)
+
 			core.register_node(":1042_core:mold_with_" .. thing.name, {
-				description = "Mold with " .. thing.name,
+				description = core_1042.lorelang.translate("Mold with " .. descname),
 				drawtype = "mesh",
 				mesh = "mold_filled.obj",
 				tiles = {
@@ -95,7 +97,7 @@ core_1042.phases.register_callback("complex_registration", function()
 end)
 
 core.register_node("1042_core:mold_empty", {
-	description = "Empty mold",
+	description = core_1042.lorelang.translate("Empty Mold"),
 	drawtype = "mesh",
 	mesh = "mold_empty.obj",
 	tiles = {

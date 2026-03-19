@@ -1,6 +1,6 @@
 
 core.register_node("1042_core:node2", {
-    description = "node2",
+    description = core_1042.lorelang.translate("Sky Stone"),
     tiles = {"1042_sky_stone.png"}, --^[colorize:#aaaa77:128
     groups = {unbreakable = 1},
 })
@@ -9,7 +9,7 @@ core.register_node("1042_core:node2", {
 -- Universal nodes
 
 core_1042.registry.register_material("1042_core:bedrock", {
-    description = "Bedrock",
+    description = core_1042.lorelang.translate("Bedrock"),
     tiles = {"1042_bedrock.png"},
     --tiles = {"1042_plain_node.png^[colorize:#110a02:200"},
     --use_texture_alpha = "opaque",
@@ -20,7 +20,7 @@ core_1042.registry.register_material("1042_core:bedrock", {
 }, 6, nil, nil)
 
 core.register_node("1042_core:skyrock", {
-    description = "Skyrock",
+    description = core_1042.lorelang.translate("Sky Rock"),
     drawtype = "airlike",
 
     pointable = false,
@@ -34,7 +34,7 @@ core.register_node("1042_core:skyrock", {
 })
 
 core_1042.registry.register_material("1042_core:white", {
-    description = "White",
+    description = core_1042.lorelang.translate("White"),
     tiles = {"1042_plain_node.png^[colorize:#ffffff:255"},
     use_texture_alpha = "opaque",
 
@@ -44,7 +44,7 @@ core_1042.registry.register_material("1042_core:white", {
 }, 6, nil, nil)
 
 core_1042.registry.register_material("1042_core:black", {
-    description = "Black",
+    description = core_1042.lorelang.translate("Black"),
     tiles = {"1042_plain_node.png^[colorize:#000000:255"},
     use_texture_alpha = "opaque",
 
@@ -57,7 +57,7 @@ core_1042.registry.register_material("1042_core:black", {
 -- Dimensional
 
 core.register_node("1042_core:sky_portal", {
-    description = "Sky Portal",
+    description = core_1042.lorelang.translate("Sky Portal"),
     tiles = {{
         name = "1042_sky_portal.png",
         --name = "1042_plain_node.png^[colorize:#002228:128",
@@ -103,7 +103,7 @@ core.register_node("1042_core:sky_portal", {
 -- Land Nodes
 
 core.register_node("1042_core:dirt", {
-    description = "Dirt",
+    description = core_1042.lorelang.translate("Dirt"),
     tiles = {"1042_dirt.png"},
     --tiles = {"1042_plain_node.png^[colorize:#8b4513:128"},
     use_texture_alpha = "opaque",
@@ -112,7 +112,7 @@ core.register_node("1042_core:dirt", {
 })
 
 core.register_node("1042_core:sand", {
-    description = "Sand",
+    description = core_1042.lorelang.translate("Sand"),
     tiles = {"1042_sand.png"},
     --tiles = {"1042_plain_node.png^[colorize:#d9a357:128"},
     use_texture_alpha = "opaque",
@@ -121,7 +121,7 @@ core.register_node("1042_core:sand", {
 })
 
 core.register_node("1042_core:glass", {
-    description = "Glass",
+    description = core_1042.lorelang.translate("Glass"),
     drawtype = "glasslike",
     --tiles = {"1042_plain_node.png"},
     tiles = {"1042_glass.png"},
@@ -132,7 +132,7 @@ core.register_node("1042_core:glass", {
 })
 
 core.register_node("1042_core:moss", {
-    description = "Moss",
+    description = core_1042.lorelang.translate("Moss"),
     tiles = {"1042_moss.png"},
 
     --color = "#309913ff",
@@ -160,7 +160,7 @@ core.register_node("1042_core:moss", {
 })
 
 core.register_node("1042_core:ice", {
-    description = "Ice",
+    description = core_1042.lorelang.translate("Ice"),
     drawtype = "glasslike",
     tiles = {"1042_ice.png"},
     use_texture_alpha = "blend",
@@ -173,7 +173,7 @@ core.register_node("1042_core:ice", {
 })
 
 core.register_node("1042_core:turf", {
-    description = "Turf",
+    description = core_1042.lorelang.translate("Turf"),
     tiles = {"1042_turf.png"},
 
     color = "#309913ff",
@@ -218,7 +218,7 @@ core.register_node("1042_core:turf", {
 })
 
 core.register_node("1042_core:turf_tilled", {
-    description = "Turf",
+    description = core_1042.lorelang.translate("Tilled Turf"),
     --tiles = {"turf.png^[colorize:#000000:128"},
     tiles = {"1042_turf_tilled.png"},
     color = "#664413ff",
@@ -270,7 +270,7 @@ core_1042.crafting.register_craft({
 })
 
 core.register_node("1042_core:snow", {
-    description = "Snow",
+    description = core_1042.lorelang.translate("Snow"),
     --tiles = {"1042_plain_node.png^[colorize:#ffffff:168"},
     tiles = {"1042_snow.png"},
     inventory_image = "snowflake1.png",
@@ -341,7 +341,7 @@ core.register_node("1042_core:snow", {
 })
 
 core.register_node("1042_core:stone", {
-    description = "Stone",
+    description = core_1042.lorelang.translate("Stone"),
     --tiles = {"1042_plain_node.png^[colorize:#777777:128"},
     tiles = {"1042_stone.png"},
     use_texture_alpha = "opaque",
@@ -368,7 +368,7 @@ core.register_node("1042_core:stone", {
 })
 
 core.register_node("1042_core:basalt", {
-    description = "Basalt",
+    description = core_1042.lorelang.translate("Basalt"),
     tiles = {"1042_basalt.png"},
     --tiles = {"1042_plain_node.png^[colorize:#111111:200"},
     use_texture_alpha = "opaque",
@@ -396,7 +396,7 @@ core.register_node("1042_core:basalt", {
 core_1042.register_loot({name = "1042_core:basalt"})
 
 core.register_node("1042_core:gold_ore", {
-    description = "Gold Ore",
+    description = core_1042.lorelang.translate("Gold Ore"),
     tiles = {"1042_stone.png^1042_gold_ore.png"},
     --tiles = {"1042_plain_node.png^[colorize:#ddaa22:128"},
     use_texture_alpha = "opaque",
@@ -447,7 +447,7 @@ core_1042.register_loot({name = "1042_core:gold_ore"})
 
 
 core.register_node("1042_core:iron_ore", {
-    description = "Iron Ore",
+    description = core_1042.lorelang.translate("Iron Ore"),
     tiles = {"1042_stone.png^1042_iron_ore.png"},
     --tiles = {"1042_plain_node.png^[colorize:#551111:128"},
     use_texture_alpha = "opaque",
@@ -503,7 +503,7 @@ core_1042.register_loot({name = "1042_core:iron_ore"})
 
 
 core.register_node("1042_core:charcoal", {
-    description = "Charcoal",
+    description = core_1042.lorelang.translate("Charcoal"),
     tiles = {"1042_charcoal.png"},
     --tiles = {"1042_plain_node.png^[colorize:#221111:168"},
     use_texture_alpha = "opaque",
@@ -514,7 +514,7 @@ core.register_node("1042_core:charcoal", {
 core_1042.register_loot({name = "1042_core:charcoal"})
 
 core.register_node("1042_core:charcoal_burning", {
-    description = "Burning Charcoal",
+    description = core_1042.lorelang.translate("Burning Charcoal"),
     tiles = {"1042_charcoal_burning.png"},
     --tiles = {"1042_plain_node.png^[colorize:#441111:168"},
     use_texture_alpha = "opaque",
@@ -532,7 +532,7 @@ core.register_node("1042_core:charcoal_burning", {
 -- Iron
 
 core.register_node("1042_core:iron_slag", {
-    description = "Iron Slag",
+    description = core_1042.lorelang.translate("Iron Slag"),
     tiles = {"1042_iron_slag.png"},
     --tiles = {"1042_plain_node.png^[colorize:#331111:128"},
     use_texture_alpha = "opaque",
@@ -561,7 +561,7 @@ core.register_node("1042_core:iron_slag", {
 
 
 core.register_node("1042_core:iron_nugget_block", {
-    description = "Iron Nugget Block",
+    description = core_1042.lorelang.translate("Iron Nugget Block"),
     tiles = {"1042_iron_nugget_block.png"},
     --tiles = {"1042_plain_node.png^[colorize:#664444:128"},
     use_texture_alpha = "opaque",
@@ -607,7 +607,7 @@ core_1042.crafting.register_craft({
 
 
 core.register_node("1042_core:chest", {
-    description = "Chest",
+    description = core_1042.lorelang.translate("Chest"),
     drawtype = "mesh",
     mesh = "chest.obj",
     tiles = {

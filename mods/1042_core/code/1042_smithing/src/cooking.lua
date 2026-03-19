@@ -59,7 +59,7 @@ end)
 
 
 core.register_node("1042_core:campfire", {
-	description = "Campfire",
+	description = core_1042.lorelang.translate("Campfire"),
 	drawtype = "mesh",
 	mesh = "campfire.obj",
 	tiles = {
