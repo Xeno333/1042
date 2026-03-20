@@ -27,26 +27,21 @@ effects_api.effects["tiredness"] = {
 
 effects_api.effects["burning"] = {
     start_effect = function(player, mul)
-        local overlay = player:hud_add({
-            type = "image",
-            position = {x=0, y=0},
-
-            name = "1042_burning_overlay",
-
-            scale = {x = 4, y = 4},
-
-            alignment = {x=0, y=0},
-
-            offset = {x=0, y=0},
-
-            size = {x=0, y=0},
-
-            z_index = -300,
-        })
         local meta = player:get_meta()
         if meta:contains("burning_overlay") then
             player:hud_remove(meta:get_int("burning_overlay"))
         end
+
+        local overlay = player:hud_add({
+            type = "image",
+            position = {x=0.5, y=0.5},
+            text = "1042_burning_overlay.png^[opacity:" .. tostring(math.min(math.max(32*mul, 0), 255)),
+
+            scale = {x = 1000, y = 1000},
+
+            alignment = {x=0, y=0},
+            offset = {x=0, y=0},
+        })
         meta:set_int("burning_overlay", overlay)
     end,
     end_effect = function(player)
