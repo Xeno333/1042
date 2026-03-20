@@ -69,6 +69,7 @@ local gold_ore = core.get_content_id("1042_core:gold_ore")
 local rock = core.get_content_id("1042_core:rock")
 local sticks = core.get_content_id("1042_core:sticks")
 local iron_nugget = core.get_content_id("1042_core:iron_nugget")
+local gold_nugget = core.get_content_id("1042_core:gold_nugget")
 local beryl = core.get_content_id("1042_core:beryl")
 local flint = core.get_content_id("1042_core:flint")
 local beryl_top = core.get_content_id("1042_core:beryl_hanging")
@@ -78,6 +79,7 @@ local grass_tall = core.get_content_id("1042_core:grass_tall")
 local grass_short = core.get_content_id("1042_core:grass_short")
 local light_grass = core.get_content_id("1042_core:light_grass")
 local micro_light_grass = core.get_content_id("1042_core:micro_light_grass")
+local cave_grass = core.get_content_id("1042_core:cave_grass")
 local mushroom = core.get_content_id("1042_core:mushroom")
 local digitalis = core.get_content_id("1042_core:digitalis")
 local light_bloom = core.get_content_id("1042_core:light_bloom")
@@ -227,11 +229,19 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data
     elseif cave == "bottom" then
         if c <= 5 then
             data[area:index(x, y+1, z)] = flint
+
+        elseif c <= 20 and (tempv >= 10 and tempv <= 20) then
+            local v = area:index(x, y+1, z)
+            data[v] = cave_grass
+            param2_data[v] = 16 + 32 + 4
             
         elseif c <= 30 then
             data[area:index(x, y+1, z)] = rock
 
-        elseif c <= 45 then
+        elseif c == 45 then
+            data[area:index(x, y+1, z)] = gold_nugget
+
+        elseif c <= 46 then
             data[area:index(x, y+1, z)] = iron_nugget
 
         elseif c <= 60 and y <= decorated_caves then
