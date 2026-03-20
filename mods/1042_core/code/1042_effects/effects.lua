@@ -37,7 +37,7 @@ effects_api.effects["burning"] = {
             position = {x=0.5, y=0.5},
             text = "1042_burning_overlay.png^[opacity:" .. tostring(math.min(math.max(32*mul, 0), 255)),
 
-            scale = {x = 1000, y = 1000},
+            scale = {x = 4, y = 4},
 
             alignment = {x=0, y=0},
             offset = {x=0, y=0},
