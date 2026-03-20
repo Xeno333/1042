@@ -624,8 +624,11 @@ core.register_node("1042_core:chest", {
     drawtype = "mesh",
     mesh = "chest.obj",
     tiles = {
-        "1042_chest.png", 
-        "1042_chest_lock.png"
+        "1042_iron_ingot.png",
+        "1042_chest.png",
+        "1042_chest_lock.png",
+        "1042_iron_ingot.png",
+        "1042_chest.png"
     },
     
     paramtype2 = "4dir",
