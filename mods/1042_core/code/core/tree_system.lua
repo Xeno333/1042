@@ -25,17 +25,14 @@ function core_1042.trees.register_tree(from_mod, def)
     -- WIP
     core.register_node(":" .. from_mod .. ":sapling" .. item_name, {
         description = item_desc .. core_1042.lorelang.translate("Sapling"),
-        drawtype = "mesh",
-        mesh = "sapling.obj",
-        tiles = {
-            def.leaves.tiles[1],
-            def.tree.tiles[1]
-        },
-        use_texture_alpha = "opaque",
+        drawtype = "plantlike",
+        --mesh = "sapling.obj",
+        tiles = {"1042"..item_name.."_sapling.png"},
+        use_texture_alpha = "clip",
 
         paramtype = "light",
         sunlight_propagates = true,
-        walkable = true,
+        walkable = false,
         buildable_to = false,
 
         groups = {plant = 1, breakable_by_hand = 1},

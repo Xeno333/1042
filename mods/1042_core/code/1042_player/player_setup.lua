@@ -90,6 +90,18 @@ core.register_on_joinplayer(function(player, last_join)
 
 	player:set_properties({
 		visual = "mesh",
+		mesh = "player.glb",
+		textures = {
+			"character.png",
+			"character.png",
+			"character.png",
+			"character.png",
+			"character.png",
+			"character.png",
+			"character.png",
+			"character.png",
+		},
+		--[[
 		mesh = "player.gltf",
 		textures = {
 			"1042_plain_node.png^[colorize:#442211:168", -- Shoe
@@ -101,11 +113,11 @@ core.register_on_joinplayer(function(player, last_join)
 			"1042_plain_node.png^[colorize:#aa8877:144",  -- Head
 			"1042_plain_node.png^[colorize:#aa8877:144", -- Arm
 			"1042_plain_node.png^[colorize:#aa8877:144"  -- Arm
-		},
+		},]]
 		show_on_minimap = false,
 		visual_size = {
-			x = 4,
-			y = 4
+			x = 7,
+			y = 7
 		},
 		stepheight = 1.1,
 
@@ -407,7 +419,7 @@ core.register_globalstep(function(dtime)
 
 		-- Animation
 		if player_controls.movement_y ~= 0 and player_meta:get_string("moving") == "false" then
-			player:set_animation({x = 0, y = 40}, 3)
+			player:set_animation({x = 0, y = 0.8}, 1.1)
 			player_meta:set_string("moving", "true")
 		elseif player_controls.movement_y == 0 and player_meta:get_string("moving") ~= "false" then
 			player:set_animation({x = 0, y = 0}, 1)
