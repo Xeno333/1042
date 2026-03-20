@@ -6,6 +6,19 @@ core.register_node("1042_core:node2", {
 })
 
 
+core_1042.registry.register_material("1042_core:dev", {
+    description = core_1042.lorelang.translate("Dev"),
+    tiles = {"1042_bedrock.png"},
+
+    diggable = true,
+
+    _1042_aux = {
+        mode = "selection"
+    },
+
+    groups = {dig_immediate = 1},
+}, 6, nil, nil)
+
 -- Universal nodes
 
 core_1042.registry.register_material("1042_core:bedrock", {

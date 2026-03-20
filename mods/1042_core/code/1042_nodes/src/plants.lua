@@ -26,7 +26,7 @@ core.register_node("1042_core:grass_tall", {
     node_placement_prediction = "",
 
     sounds = {
-        dig = {
+        dug = {
             name = "turf",
             gain = 0.4,
             pitch = 1.6
@@ -53,7 +53,7 @@ core.register_node("1042_core:grass_tall", {
         drops[#drops+1] = ItemStack("1042_core:grass_tall")
     end,
 
-    groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
+    groups = {leafy = 1, plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
 })
 
 core.register_node("1042_core:grass_short", {
@@ -75,7 +75,7 @@ core.register_node("1042_core:grass_short", {
     node_placement_prediction = "",
 
     sounds = {
-        dig = {
+        dug = {
             name = "turf",
             gain = 0.4,
             pitch = 1.7
@@ -101,7 +101,7 @@ core.register_node("1042_core:grass_short", {
         drops[#drops+1] = ItemStack("1042_core:grass_short")
     end,
 
-    groups = {leafy = 1, plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1},
+    groups = {leafy = 1, plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
 })
 
 
@@ -140,7 +140,7 @@ core.register_node("1042_core:mushroom", {
         return core_1042.eat(itemstack, user, 2, 10)
     end,
 
-    groups = {plant = 1, attached_node = 1, breakable_by_hand = 1, burns = 1, growth = 1, growth_bio_mass = 4, bio_mass = 1}, -- #fixme Add growth, and biomater types to docs
+    groups = {plant = 1, attached_node = 1, dig_immediate = 1, burns = 1, growth = 1, growth_bio_mass = 4, bio_mass = 1}, -- #fixme Add growth, and biomater types to docs
 })
 
 core.register_node("1042_core:apple", {
@@ -160,7 +160,7 @@ core.register_node("1042_core:apple", {
         return core_1042.eat(itemstack, user, 2, nil)
     end,
 
-    groups = {plant = 1, food = 1, breakable_by_hand = 1},
+    groups = {plant = 1, food = 1, dig_immediate = 1},
 })
 
 
@@ -189,7 +189,7 @@ core.register_node("1042_core:light_bloom", {
     walkable = false,
     buildable_to = false,
 
-    groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1, flower = 1},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 1},
 })
 
 core.register_node("1042_core:digitalis", {
@@ -213,7 +213,7 @@ core.register_node("1042_core:digitalis", {
     buildable_to = false,
 
     sounds = {
-        dig = {
+        dug = {
             name = "turf",
             gain = 0.8,
             pitch = 3
@@ -229,7 +229,7 @@ core.register_node("1042_core:digitalis", {
         return core_1042.eat(itemstack, user, 9, 1)
     end,
 
-    groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1, flower = 2},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 2},
 })
 
 core.register_node("1042_core:tulip", {
@@ -254,7 +254,7 @@ core.register_node("1042_core:tulip", {
     walkable = false,
     buildable_to = false,
 
-    groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1, flower = 3},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
 })
 
 core.register_node("1042_core:light_grass", {
@@ -275,7 +275,7 @@ core.register_node("1042_core:light_grass", {
     node_placement_prediction = "",
 
     sounds = {
-        dig = {
+        dug = {
             name = "turf",
             gain = 0.4,
             pitch = 1.7
@@ -301,7 +301,7 @@ core.register_node("1042_core:light_grass", {
         drops[#drops+1] = ItemStack("1042_core:light_grass")
     end,
 
-    groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1, flower = 3},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
 })
 
 core.register_node("1042_core:micro_light_grass", {
@@ -322,7 +322,7 @@ core.register_node("1042_core:micro_light_grass", {
     node_placement_prediction = "",
 
     sounds = {
-        dig = {
+        dug = {
             name = "turf",
             gain = 0.4,
             pitch = 1.7
@@ -348,7 +348,7 @@ core.register_node("1042_core:micro_light_grass", {
         drops[#drops+1] = ItemStack("1042_core:light_grass")
     end,
 
-    groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1, flower = 3},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
 })
 
 core.register_node("1042_core:sunflower", {
@@ -374,7 +374,7 @@ core.register_node("1042_core:sunflower", {
     walkable = false,
     buildable_to = false,
 
-    groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1, flower = 4},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 4},
 })
 
 
@@ -391,7 +391,7 @@ core.register_node("1042_core:cave_grass", {
     buildable_to = false,
 
     sounds = {
-        dig = {
+        dug = {
             name = "turf",
             gain = 0.4,
             pitch = 1.7
@@ -406,5 +406,5 @@ core.register_node("1042_core:cave_grass", {
     paramtype2 = "meshoptions",
     place_param2 = 16 + 32 + 4,
 
-    groups = {plant = 1, attached_node = 3, breakable_by_hand = 1, burns = 1, flower = 3},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
 })

@@ -45,6 +45,18 @@ function player_api.remove_hud(player, unique_hud_name)
     end
 end
 
+function player_api.get_hud(player, unique_hud_name)
+    local player_name = player:get_player_name()
+    local huds = player_huds[player_name] or {}
+
+    if huds[unique_hud_name] then -- if no player huds table
+		return player:hud_get(huds[unique_hud_name])
+
+    else -- if doesnt exist
+        return false
+    end
+end
+
 function player_api.update_hud(player, unique_hud_name, hud_def)
     local player_name = player:get_player_name()
 

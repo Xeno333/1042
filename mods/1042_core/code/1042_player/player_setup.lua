@@ -1,4 +1,6 @@
 local aux1_cooldown = {}
+local auxing_1042 = {}
+local player_callbacks = {}
 local sprint_increment_cooldown = {}
 
 
@@ -83,6 +85,8 @@ core.register_on_joinplayer(function(player, last_join)
 	local name = player:get_player_name()
 	aux1_cooldown[name] = 0
 	sprint_increment_cooldown[name] = 0
+
+	player_callbacks[name] = {}
 
 	player:set_properties({
 		visual = "mesh",
@@ -282,6 +286,8 @@ core.register_on_leaveplayer(function(player)
 	local name = player:get_player_name()
 
 	aux1_cooldown[name] = nil
+	auxing_1042[name] = nil
+	player_callbacks[name] = nil
 	sprint_increment_cooldown[name] = nil
 end)
 
@@ -426,6 +432,66 @@ core.register_globalstep(function(dtime)
 			end
 		end
 
+
+		-- Zoom
+
+		if player_controls.zoom then
+			if not auxing_1042[name] then
+				local itemstack = player:get_wielded_item()
+				local def = core.registered_items[itemstack:get_name()] or {}
+
+				if def._1042_aux then
+					if def._1042_aux.mode == "selection" then
+						local hotbar = player_api.get_hud(player, "hotbar")
+						if hotbar then
+							player_api.remove_hud(player, "hotbar")
+
+							local selection = {
+								type = "hotbar",
+								name = "selection",
+								text = "selection",
+								direction = 0,
+								position = {x=0.5, y=0.95}
+							}
+							player_api.add_hud(player, "selection", selection)
+
+							player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:64")
+							player:hud_set_hotbar_selected_image("1042_bedrock.png")
+							player:hud_set_hotbar_itemcount(def._1042_aux.num or 10)
+
+							local function handel()
+								--player:get_wield_index()
+
+								if auxing_1042[name] then
+									player_callbacks[name].selection = handel
+
+								elseif aux1_cooldown[name] ~= nil then
+									player_api.add_hud(player, "hotbar", hotbar)
+									player_api.remove_hud(player, "selection")
+
+									player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:64")
+									player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:128")
+									player:hud_set_hotbar_itemcount(10)
+								end
+							end
+
+							player_callbacks[name].selection = handel
+						end
+					end
+				end
+
+				auxing_1042[name] = true
+			end
+		else
+			auxing_1042[name] = nil
+		end
+
+		if player_callbacks[name] then
+			for k, func in pairs(player_callbacks[name]) do
+				player_callbacks[name][k] = nil
+				func()
+			end
+		end
 
 
 
