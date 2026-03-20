@@ -43,7 +43,7 @@ core.register_chatcommand("effect", {
             return true, "Failed!"
         end
 
-        effects_api.effects[effect].start_effect(core.get_player_by_name(name), mul)
+        effects_api.effect(true, effect, core.get_player_by_name(name), mul, nil)
 
         return true, "Done!"
     end
