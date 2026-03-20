@@ -756,3 +756,30 @@ core_1042.registry.register_material("1042_core:pork_cooked", {
 
     item_type = "node",
 }, 2, nil, nil)
+
+core_1042.registry.register_material("1042_core:spyglass", {
+    description = core_1042.lorelang.translate("Spyglass"),
+    drawtype = "mesh",
+    mesh = "spyglass.obj",
+    tiles = {"1042_tree.png", "1042_gold_ingot.png", "1042_glass.png"},
+    use_texture_alpha = "opaque",
+
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    groups = {dig_immediate = 1, attached_node = 3},
+
+    item_type = "node",
+}, 3, nil, nil)
+
+core_1042.register_loot({name = "1042_core:spyglass"})
+core_1042.crafting.register_craft({
+    result = "1042_core:spyglass",
+    type = "1042_default",
+    items = {
+        "1042_core:gold_ingot", "1042_core:tree", "1042_core:glass"
+    }
+})
