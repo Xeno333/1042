@@ -10,7 +10,7 @@ function effects_api.effect(enable, effect, player, mul, time)
         return nil
     end
 
-    if enable then
+    if enable and mul ~= 0 then
         effects_api.effects[effect].start_effect(player, mul)
         if time then
             core.after(time, function()
