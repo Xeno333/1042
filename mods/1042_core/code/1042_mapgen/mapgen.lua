@@ -77,6 +77,7 @@ local chest = core.get_content_id("1042_core:chest")
 local grass_tall = core.get_content_id("1042_core:grass_tall")
 local grass_short = core.get_content_id("1042_core:grass_short")
 local light_grass = core.get_content_id("1042_core:light_grass")
+local micro_light_grass = core.get_content_id("1042_core:micro_light_grass")
 local mushroom = core.get_content_id("1042_core:mushroom")
 local digitalis = core.get_content_id("1042_core:digitalis")
 local light_bloom = core.get_content_id("1042_core:light_bloom")
@@ -179,8 +180,11 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data
         elseif c < 50 then
             data[area:index(x, y+1, z)] = grass_short
             param2_data[area:index(x, y+1, z)] = grass_color
-        elseif c < 100 then
+        elseif c < 75 then
             data[area:index(x, y+1, z)] = light_grass
+            param2_data[area:index(x, y+1, z)] = grass_color
+        elseif c < 85 then
+            data[area:index(x, y+1, z)] = micro_light_grass
             param2_data[area:index(x, y+1, z)] = grass_color
         end
 
