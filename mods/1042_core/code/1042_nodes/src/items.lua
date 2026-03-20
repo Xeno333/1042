@@ -208,7 +208,7 @@ core_1042.registry.register_material("1042_core:flint", {
 
 
     sounds = {
-        dig = {
+        dug = {
             name = "stone_dig",
             gain = 0.3,
             pitch = 0.75
@@ -226,7 +226,7 @@ core_1042.registry.register_material("1042_core:flint", {
     walkable = true,
     buildable_to = false,
     
-    groups = {breakable_by_hand = 3, attached_node = 3, rock = 1},
+    groups = {dig_immediate = 1, attached_node = 3, rock = 1},
 
     item_type = "node",
 }, 1, nil, nil)
@@ -269,7 +269,7 @@ core_1042.registry.register_material("1042_core:torch", {
     walkable = false,
     buildable_to = false,
     
-    groups = {breakable_by_hand = 3, attached_node = 3, burning = 1},
+    groups = {dig_immediate = 1, attached_node = 3, burning = 1},
 
     item_type = "node",
 }, nil, {
@@ -302,7 +302,7 @@ core_1042.registry.register_material("1042_core:sticks", {
         }
     },
     
-    groups = {breakable_by_hand = 2, attached_node = 3, burns = 1},
+    groups = {dig_immediate = 1, attached_node = 3, burns = 1},
 
     item_type = "node",
 }, 1, nil, {name = "1042_core:sticks", max_count = 32})
@@ -327,7 +327,7 @@ core_1042.registry.register_material("1042_core:iron_nugget", {
     },
     
     sounds = {
-        dig = {
+        dug = {
             name = "stone_dig",
             gain = 0.2,
             pitch = 1
@@ -349,7 +349,7 @@ core_1042.registry.register_material("1042_core:iron_nugget", {
     walkable = true,
     buildable_to = false,
     
-    groups = {breakable_by_hand = 2, attached_node = 3},
+    groups = {dig_immediate = 1, attached_node = 3},
 
     item_type = "node",
 }, 2, nil, {name = "1042_core:iron_nugget", max_count = 16})
@@ -373,7 +373,7 @@ core_1042.registry.register_material("1042_core:gold_nugget", {
     },
     
     sounds = {
-        dig = {
+        dug = {
             name = "stone_dig",
             gain = 0.2,
             pitch = 1
@@ -393,7 +393,7 @@ core_1042.registry.register_material("1042_core:gold_nugget", {
     walkable = true,
     buildable_to = false,
     
-    groups = {breakable_by_hand = 3, attached_node = 3},
+    groups = {dig_immediate = 1, attached_node = 3},
 
     item_type = "node",
 }, 2, nil, {name = "1042_core:gold_nugget", max_count = 8})
@@ -516,7 +516,7 @@ core_1042.registry.register_material("1042_core:iron_ingot", {
     },
 
     sounds = {
-        dig = {
+        dug = {
             name = "stone_dig",
             gain = 2,
             pitch = 2
@@ -539,7 +539,7 @@ core_1042.registry.register_material("1042_core:iron_ingot", {
         achievements_1042.achieve(digger, "smelter")
     end,
     
-    groups = {breakable_by_hand = 1, falling_node = 1},
+    groups = {dig_immediate = 1, falling_node = 1},
 
     item_type = "node"
 }, 3, nil, {name = "1042_core:iron_ingot", max_count = 6})
@@ -576,7 +576,7 @@ core_1042.registry.register_material("1042_core:candel", {
 
     stack_max = 16,
 
-    groups = {breakable_by_hand = 1, falling_node = 1},
+    groups = {dig_immediate = 1, falling_node = 1},
 
     on_rightclick = function(pos, _, _, itemstack)
         if core.get_item_group(itemstack:get_name(), "burning") > 0 then
@@ -622,7 +622,7 @@ core_1042.registry.register_material("1042_core:candel_lit", {
 
     stack_max = 16,
 
-    groups = {breakable_by_hand = 1, falling_node = 1},
+    groups = {dig_immediate = 1, falling_node = 1},
 
     on_rightclick = function(pos)
         core.set_node(pos, {name = "1042_core:candel"})
@@ -658,7 +658,7 @@ core_1042.registry.register_material("1042_core:gold_ingot", {
     },
 
     sounds = {
-        dig = {
+        dug = {
             name = "stone_dig",
             gain = 2,
             pitch = 2
@@ -681,7 +681,7 @@ core_1042.registry.register_material("1042_core:gold_ingot", {
         achievements_1042.achieve(digger, "smelter")
     end,
     
-    groups = {breakable_by_hand = 1, falling_node = 1},
+    groups = {dig_immediate = 1, falling_node = 1},
 
     item_type = "node"
 }, 3, nil, {name = "1042_core:gold_ingot", max_count = 6})
@@ -724,7 +724,7 @@ core_1042.registry.register_material("1042_core:pork_raw", {
 		}
 	},
 
-    groups = {food = 1, breakable_by_hand = 1, attached_node = 3, cooks = 3},
+    groups = {food = 1, dig_immediate = 1, attached_node = 3, cooks = 3},
 
     item_type = "node",
 }, 2, nil, nil)
@@ -752,7 +752,7 @@ core_1042.registry.register_material("1042_core:pork_cooked", {
     end,
 
 
-    groups = {food = 1, breakable_by_hand = 2, attached_node = 3},
+    groups = {food = 1, dig_immediate = 1, attached_node = 3},
 
     item_type = "node",
 }, 2, nil, nil)
