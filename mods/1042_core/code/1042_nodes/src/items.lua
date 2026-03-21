@@ -37,8 +37,7 @@ local function hit_flint_with_iron(itemstack, player, pointed_thing)
 
             name = player:get_player_name(),
 
-            texture = "1042_flint.png"
-            --texture = "1042_plain_node.png^[colorize:#ffcc66:144"
+            texture = "1042_plain_node.png^[colorize:#ffcc66:144"
         })
 
         if math.random(1, 10) == 1 then
@@ -769,6 +768,16 @@ core_1042.registry.register_material("1042_core:spyglass", {
     sunlight_propagates = true,
     walkable = true,
     buildable_to = false,
+    _1042_aux = {
+        mode = "selection",
+        num = 9,
+        func = function(player, zoom)
+            player:set_fov(100 - (zoom * 10), false)
+        end,
+        done_func = function(player, zoom)
+            player:set_fov(100, false)
+        end,
+    },
 
     groups = {dig_immediate = 1, attached_node = 3},
 
