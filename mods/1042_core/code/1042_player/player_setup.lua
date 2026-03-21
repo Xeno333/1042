@@ -465,9 +465,15 @@ core.register_globalstep(function(dtime)
 								type = "hotbar",
 								name = "selection",
 								text = "selection",
-								direction = 2,
-								position = {x=0.05, y=0.5}
 							}
+							if player_api.get_data(name, "setting_hud_at_bottom") == "true" then
+								selection.direction = 0
+								selection.position = {x=0.5, y=0.95}
+							else
+								selection.direction = 2
+								selection.position = {x=0.05, y=0.5}
+							end
+
 							player_api.add_hud(player, "selection", selection)
 
 							local inv = player:get_inventory()
@@ -530,6 +536,10 @@ core.register_globalstep(function(dtime)
 								end
 							end
 
+
+							if def._1042_aux.func then
+								def._1042_aux.func(player, (def._1042_aux.num or 10) - auxing_1042[name].weild_index)
+							end
 							player_callbacks[name].selection = handel
 						end
 					end
