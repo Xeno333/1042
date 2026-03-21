@@ -17,13 +17,13 @@
 - soft - suf
 - clear, transparent - clyt
 - molten, liquid - laven
-- hot, burning - firy
+- hot, burning - fxry
 - burnt, consumed - fyren
 - moving, flowing - rusr
 - hanging, attached - grypa
 - enclosed, wrapped - rokas
 - empty, void - nul
-- cooked, prepared - ryfi
+- cooked, prepared - ryf
 
 # Adverbs
 - slow - clxsen

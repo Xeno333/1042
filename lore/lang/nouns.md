@@ -26,7 +26,7 @@
 - mushroom - srem
 - flesh - myt
 - dirt - sola
-- fire - fira
+- fire - fyra
 
 # Weather
 

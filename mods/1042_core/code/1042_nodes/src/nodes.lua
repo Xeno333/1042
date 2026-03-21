@@ -408,108 +408,64 @@ core.register_node("1042_core:basalt", {
 })
 core_1042.register_loot({name = "1042_core:basalt"})
 
-core.register_node("1042_core:gold_ore", {
-    description = core_1042.lorelang.translate("Gold Ore"),
-    tiles = {"1042_stone.png^1042_gold_ore.png"},
-    --tiles = {"1042_plain_node.png^[colorize:#ddaa22:128"},
-    use_texture_alpha = "opaque",
-
-    drop = {
-        max_items = 5,
-        items = {
-            {
-                rarity = 1,
-                items = {"1042_core:gold_nugget"}
-            },
-            {
-                rarity = 2,
-                items = {"1042_core:gold_nugget"}
-            },
-            {
-                rarity = 4,
-                items = {"1042_core:gold_nugget"}
-            },
-            {
-                rarity = 8,
-                items = {"1042_core:rock"}
+local function register_ore(name)
+    core.register_node("1042_core:"..name.."_ore", {
+        description = core_1042.lorelang.translate(name:gsub("^%l", string.upper) .. " Ore"),
+        tiles = {"1042_stone.png^1042_"..name.."_ore.png"},
+        --tiles = {"1042_plain_node.png^[colorize:#551111:128"},
+        use_texture_alpha = "opaque",
+    
+        drop = {
+            max_items = 5,
+            items = {
+                {
+                    rarity = 1,
+                    items = {"1042_core:"..name.."_nugget"}
+                },
+                {
+                    rarity = 2,
+                    items = {"1042_core:"..name.."_nugget"}
+                },
+                {
+                    rarity = 4,
+                    items = {"1042_core:"..name.."_nugget"}
+                },
+                {
+                    rarity = 8,
+                    items = {"1042_core:rock"}
+                }
             }
-        }
-    },
-
-    sounds = {
-        dig = {
-            name = "stone_dig",
-            gain = 2,
-            pitch = 1
         },
-        footstep = {
-            name = "stone_walk",
-            gain = 1,
-            pitch = 1.5
-        },
-        place = {
-            name = "stone_walk",
-            gain = 1,
-            pitch = 0.5
-        }
-    },
-
-    groups = {stone = 3},
-})
-core_1042.register_loot({name = "1042_core:gold_ore"})
-
-
-core.register_node("1042_core:iron_ore", {
-    description = core_1042.lorelang.translate("Iron Ore"),
-    tiles = {"1042_stone.png^1042_iron_ore.png"},
-    --tiles = {"1042_plain_node.png^[colorize:#551111:128"},
-    use_texture_alpha = "opaque",
-
-    drop = {
-        max_items = 5,
-        items = {
-            {
-                rarity = 1,
-                items = {"1042_core:iron_nugget"}
+    
+        sounds = {
+            dig = {
+                name = "stone_dig",
+                gain = 2,
+                pitch = 1
             },
-            {
-                rarity = 2,
-                items = {"1042_core:iron_nugget"}
+            footstep = {
+                name = "stone_walk",
+                gain = 1,
+                pitch = 1.5
             },
-            {
-                rarity = 4,
-                items = {"1042_core:iron_nugget"}
-            },
-            {
-                rarity = 8,
-                items = {"1042_core:rock"}
+            place = {
+                name = "stone_walk",
+                gain = 1,
+                pitch = 0.5
             }
-        }
-    },
-
-    sounds = {
-        dig = {
-            name = "stone_dig",
-            gain = 2,
-            pitch = 1
         },
-        footstep = {
-            name = "stone_walk",
-            gain = 1,
-            pitch = 1.5
-        },
-        place = {
-            name = "stone_walk",
-            gain = 1,
-            pitch = 0.5
-        }
-    },
+    
+        groups = {stone = 3},
+    })
+    core_1042.register_loot({name = "1042_core:"..name.."_ore"})
+end
 
-    groups = {stone = 3},
-})
-core_1042.register_loot({name = "1042_core:iron_ore"})
-
-
+register_ore("copper")
+register_ore("iron")
+register_ore("gold")
+register_ore("silver")
+register_ore("cobalt")
+register_ore("titanium")
 
 
 -- Charcoal

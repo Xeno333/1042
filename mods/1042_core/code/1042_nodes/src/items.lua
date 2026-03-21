@@ -306,98 +306,6 @@ core_1042.registry.register_material("1042_core:sticks", {
     item_type = "node",
 }, 1, nil, {name = "1042_core:sticks", max_count = 32})
 
-
-core_1042.registry.register_material("1042_core:iron_nugget", {
-    description = core_1042.lorelang.translate("Iron Nugget"),
-    drawtype = "mesh",
-    mesh = "nugget.obj",
-    tiles = {"1042_iron_nugget.png"},
-    --tiles = {"1042_plain_node.png^[colorize:#551111:128"},
-    use_texture_alpha = "opaque",
-
-
-    selection_box = {
-        type = "fixed",
-        fixed = {-0.1, -0.5, -0.1, 0.1, -0.3, 0.1}
-    },
-    collision_box = {
-        type = "fixed",
-        fixed = {-0.1, -0.5, -0.1, 0.1, -0.3, 0.1}
-    },
-    
-    sounds = {
-        dug = {
-            name = "stone_dig",
-            gain = 0.2,
-            pitch = 1
-        },
-        place = {
-            name = "stone_walk",
-            gain = 0.5,
-            pitch = 1.5
-        }
-    },
-
-    _1042_on_use = hit_flint_with_iron,
-
-    _1042_moldable = {color = "#551111", name = "iron", drop = "1042_core:iron_ingot"},
-
-    paramtype = "light",
-    paramtype2 = "4dir",
-    sunlight_propagates = true,
-    walkable = true,
-    buildable_to = false,
-    
-    groups = {dig_immediate = 1, attached_node = 3},
-
-    item_type = "node",
-}, 2, nil, {name = "1042_core:iron_nugget", max_count = 16})
-
-core_1042.registry.register_material("1042_core:gold_nugget", {
-    description = core_1042.lorelang.translate("Gold Nugget"),
-    drawtype = "mesh",
-    mesh = "nugget.obj",
-    tiles = {"1042_gold_nugget.png"},
-    --tiles = {"1042_plain_node.png^[colorize:#ddaa22:128"},
-    use_texture_alpha = "opaque",
-
-
-    selection_box = {
-        type = "fixed",
-        fixed = {-0.1, -0.5, -0.1, 0.1, -0.3, 0.1}
-    },
-    collision_box = {
-        type = "fixed",
-        fixed = {-0.1, -0.5, -0.1, 0.1, -0.3, 0.1}
-    },
-    
-    sounds = {
-        dug = {
-            name = "stone_dig",
-            gain = 0.2,
-            pitch = 1
-        },
-        place = {
-            name = "stone_walk",
-            gain = 0.5,
-            pitch = 1.5
-        }
-    },
-
-    _1042_moldable = {color = "#ddaa22", name = "gold", drop = "1042_core:gold_ingot"},
-
-    paramtype = "light",
-    paramtype2 = "4dir",
-    sunlight_propagates = true,
-    walkable = true,
-    buildable_to = false,
-    
-    groups = {dig_immediate = 1, attached_node = 3},
-
-    item_type = "node",
-}, 2, nil, {name = "1042_core:gold_nugget", max_count = 8})
-
-
 -- #fixme
 core_1042.registry.register_material("1042_core:anvil", {
     description = core_1042.lorelang.translate("Anvil \n(WIP)"),
@@ -488,62 +396,6 @@ core_1042.registry.register_material("1042_core:crude_iron", {
     item_type = "node",
 }, 3, nil, {{name = "1042_core:crude_iron", max_count = 6}})
 
-
-core_1042.registry.register_material("1042_core:iron_ingot", {
-    description = core_1042.lorelang.translate("Iron Ingot"),
-    drawtype = "nodebox",
-    tiles = {"1042_iron_ingot.png"},
-    --tiles = {"1042_plain_node.png^[colorize:#998888:200"},
-
-    paramtype = "light",
-    paramtype2 = "facedir",
-    sunlight_propagates = true,
-    walkable = true,
-    buildable_to = false,
-
-    node_box = {
-        type = "fixed",
-        fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
-    },
-    selection_box = {
-        type = "fixed",
-        fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
-    },
-    collision_box = {
-        type = "fixed",
-        fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
-    },
-
-    sounds = {
-        dug = {
-            name = "stone_dig",
-            gain = 2,
-            pitch = 2
-        },
-        footstep = {
-            name = "stone_walk",
-            gain = 0.3,
-            pitch = 2
-        },
-        place = {
-            name = "stone_dig",
-            gain = 1,
-            pitch = 2
-        }
-    },
-
-    _1042_on_use = hit_flint_with_iron,
-
-    after_dig_node = function(pos, oldnode, oldmetadata, digger)
-        achievements_1042.achieve(digger, "smelter")
-    end,
-    
-    groups = {dig_immediate = 1, falling_node = 1},
-
-    item_type = "node"
-}, 3, nil, {name = "1042_core:iron_ingot", max_count = 6})
-
-
 core_1042.registry.register_material("1042_core:candel", {
     description = core_1042.lorelang.translate("Candle"),
     drawtype = "mesh",
@@ -630,61 +482,116 @@ core_1042.registry.register_material("1042_core:candel_lit", {
     item_type = "node"
 }, 1, nil, {})
 
-
-core_1042.registry.register_material("1042_core:gold_ingot", {
-    description = core_1042.lorelang.translate("Gold Ingot"),
-    drawtype = "nodebox",
-    tiles = {"1042_gold_ingot.png"},
-    --tiles = {"1042_plain_node.png^[colorize:#ddaa00:200"},
-
-    paramtype = "light",
-    paramtype2 = "facedir",
-    sunlight_propagates = true,
-    walkable = true,
-    buildable_to = false,
-
-    node_box = {
-        type = "fixed",
-        fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
-    },
-    selection_box = {
-        type = "fixed",
-        fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
-    },
-    collision_box = {
-        type = "fixed",
-        fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
-    },
-
-    sounds = {
-        dug = {
-            name = "stone_dig",
-            gain = 2,
-            pitch = 2
-        },
-        footstep = {
-            name = "stone_walk",
-            gain = 0.3,
-            pitch = 2
-        },
-        place = {
-            name = "stone_dig",
-            gain = 1,
-            pitch = 2
-        }
-    },
-
-    _1042_on_use = hit_flint_with_iron,
-
-    after_dig_node = function(pos, oldnode, oldmetadata, digger)
-        achievements_1042.achieve(digger, "smelter")
-    end,
+local function register_metal(name, on_use, base_metal, rarity)
+    core_1042.registry.register_material("1042_core:"..name.."_ingot", {
+        description = core_1042.lorelang.translate(name:gsub("^%l", string.upper) .. " Ingot"),
+        drawtype = "nodebox",
+        tiles = {"1042_"..name.."_ingot.png"},
+        --tiles = {"1042_plain_node.png^[colorize:#ddaa00:200"},
     
-    groups = {dig_immediate = 1, falling_node = 1},
+        paramtype = "light",
+        paramtype2 = "facedir",
+        sunlight_propagates = true,
+        walkable = true,
+        buildable_to = false,
+    
+        node_box = {
+            type = "fixed",
+            fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
+        },
+        selection_box = {
+            type = "fixed",
+            fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
+        },
+        collision_box = {
+            type = "fixed",
+            fixed = {-0.35, -0.5, -0.2, 0.35, -0.2, 0.2}
+        },
+    
+        sounds = {
+            dug = {
+                name = "stone_dig",
+                gain = 2,
+                pitch = 2
+            },
+            footstep = {
+                name = "stone_walk",
+                gain = 0.3,
+                pitch = 2
+            },
+            place = {
+                name = "stone_dig",
+                gain = 1,
+                pitch = 2
+            }
+        },
 
-    item_type = "node"
-}, 3, nil, {name = "1042_core:gold_ingot", max_count = 6})
+        _1042_on_use = on_use, -- hit_flint_with_iron
+    
+        after_dig_node = function(pos, oldnode, oldmetadata, digger)
+            achievements_1042.achieve(digger, "smelter")
+        end,
+        
+        groups = {dig_immediate = 1, falling_node = 1},
+    
+        item_type = "node"
+    }, rarity, nil, {name = "1042_core:"..name.."_ingot", max_count = 6})
 
+    if base_metal then
+        core_1042.registry.register_material("1042_core:"..name.."_nugget", {
+            description = core_1042.lorelang.translate(name:gsub("^%l", string.upper) .. " Nugget"),
+            drawtype = "mesh",
+            mesh = "nugget.obj",
+            tiles = {"1042_"..name.."_nugget.png"},
+            --tiles = {"1042_plain_node.png^[colorize:#ddaa22:128"},
+            use_texture_alpha = "opaque",
+        
+        
+            selection_box = {
+                type = "fixed",
+                fixed = {-0.1, -0.5, -0.1, 0.1, -0.3, 0.1}
+            },
+            collision_box = {
+                type = "fixed",
+                fixed = {-0.1, -0.5, -0.1, 0.1, -0.3, 0.1}
+            },
+            
+            sounds = {
+                dug = {
+                    name = "stone_dig",
+                    gain = 0.2,
+                    pitch = 1
+                },
+                place = {
+                    name = "stone_walk",
+                    gain = 0.5,
+                    pitch = 1.5
+                }
+            },
+        
+            _1042_moldable = {texture = "1042_"..name.."_ingot.png", name = name, drop = "1042_core:"..name.."_ingot"},
+        
+            paramtype = "light",
+            paramtype2 = "4dir",
+            sunlight_propagates = true,
+            walkable = true,
+            buildable_to = false,
+            
+            groups = {dig_immediate = 1, attached_node = 3},
+        
+            item_type = "node",
+        }, math.max(rarity-1, 1), nil, {name = "1042_core:"..name.."_nugget", max_count = 9})
+    end
+end
+
+register_metal("copper", function() end, true, 1)
+register_metal("bronze", function() end, false, 2)
+register_metal("iron", hit_flint_with_iron, true, 3)
+register_metal("steel", hit_flint_with_iron, false, 3)
+register_metal("gold", function() end, true, 4)
+register_metal("silver", function() end, true, 4)
+register_metal("cobalt", function() end, true, 5)
+register_metal("titanium", function() end, true, 5)
 
 core_1042.registry.register_material("1042_core:pork_raw", {
     description = core_1042.lorelang.translate("Raw Pork"),

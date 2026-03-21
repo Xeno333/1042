@@ -17,7 +17,7 @@ core_1042.phases.register_callback("complex_registration", function()
 				drawtype = "mesh",
 				mesh = "mold_filled.obj",
 				tiles = {
-					"1042_plain_node.png^[colorize:" .. thing.color .. ":200",
+					thing.texture,
 					"1042_plain_node.png^[colorize:#777777:200"
 				},
 				
@@ -57,7 +57,7 @@ core_1042.phases.register_callback("complex_registration", function()
 					visual = "mesh",
 					mesh = "mold_filled.obj",
 					textures = {
-						"1042_plain_node.png^[colorize:" .. thing.color .. ":200",
+						thing.texture,
 						"1042_plain_node.png^[colorize:#777777:200"
 					},
 					use_texture_alpha = false,
