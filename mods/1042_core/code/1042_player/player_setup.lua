@@ -506,6 +506,7 @@ core.register_globalstep(function(dtime)
 									local inv = player:get_inventory()
 									local stack = inv:get_stack("main", auxing_1042[name].weild_index)
 									local main = inv:get_list("1042_selection_main_backup")
+
 									inv:set_size("main", 40)
 									inv:set_list("main", main)
 									inv:set_stack("main", auxing_1042[name].org_weild_index, stack)
