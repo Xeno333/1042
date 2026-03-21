@@ -89,6 +89,9 @@ local moss = core.get_content_id("1042_core:moss")
 local air = core.get_content_id("air")
 
 
+local tower = core.get_content_id("1042_core:tower")
+
+
 -- Dimension
 
 local node2 = core.get_content_id("1042_core:node2")
@@ -166,6 +169,7 @@ end
 
 local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data, grass_color)
     local c = pr:next(1, 1000)
+    local c2 = pr:next(1, 1000)
     
     
     -- Land
@@ -191,8 +195,13 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data
         end
 
         if tempv > 0 and not (tempv > 20) then
-                
-            if c == 100 and y > water_level+3 then
+
+            if c == 102 and c2 <= 100 and tempv >= 5 then
+                if data[area:index(x, y, z)] == turf and data[area:index(x-10, y, z-10)] == turf and data[area:index(x-10, y, z)] == turf and data[area:index(x, y, z-10)] == turf then
+                    data[area:index(x-10, y+1, z-10)] = tower
+                end
+
+            elseif c == 100 and y > water_level+3 then
                 data[area:index(x, y+1, z)] = sticks
 
             elseif c == 101 and y > water_level+9 then
