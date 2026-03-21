@@ -64,6 +64,7 @@ core_1042.lorelang.translations = { -- using hardcoded key based translation as 
     ["Anvil"] = "Fero Kece-Blok",
     ["Crude"] = "Nat-Ryfi",
     ["Block"] = "Blok",
+    ["Spyglass"] = "Len Clyt-Cond",
     ["with"] = "nyl"
 }
 
