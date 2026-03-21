@@ -778,6 +778,7 @@ core_1042.registry.register_material("1042_core:spyglass", {
             player:set_fov(100, false)
         end,
     },
+    stack_max = 1,
 
     groups = {dig_immediate = 1, attached_node = 3},
 
