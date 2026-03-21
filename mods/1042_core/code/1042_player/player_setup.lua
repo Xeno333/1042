@@ -482,8 +482,8 @@ core.register_globalstep(function(dtime)
 							inv:set_stack("main", auxing_1042[name].org_weild_index, inv:get_stack("1042_selection_main_backup", auxing_1042[name].org_weild_index))
 
 
-							player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:64")
-							player:hud_set_hotbar_selected_image("1042_bedrock.png")
+							player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ff00:128^[opacity:64")
+							player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ff00:128^[opacity:128")
 							player:hud_set_hotbar_itemcount(def._1042_aux.num or 10)
 
 							local function handel()
