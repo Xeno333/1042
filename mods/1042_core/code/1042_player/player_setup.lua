@@ -495,6 +495,21 @@ core.register_globalstep(function(dtime)
 								if auxing_1042[name].on then
 									player_callbacks[name].selection = handel
 
+
+								if w ~= auxing_1042[name].weild_index then
+									local inv = player:get_inventory()
+
+									local stack = inv:get_stack("main", w)
+									inv:set_stack("main", w, inv:get_stack("main", auxing_1042[name].weild_index))
+									inv:set_stack("main", auxing_1042[name].weild_index, stack)
+
+									auxing_1042[name].weild_index = w
+
+									if def._1042_aux.func then
+										def._1042_aux.func(player, (def._1042_aux.num or 10) - w)
+									end
+								end
+
 								-- Restore
 								elseif auxing_1042[name] ~= nil then
 									player_api.add_hud(player, "hotbar", hotbar)
@@ -502,6 +517,11 @@ core.register_globalstep(function(dtime)
 
 									local inv = player:get_inventory()
 									local stack = inv:get_stack("main", auxing_1042[name].weild_index)
+									for i = 1, inv:get_size("main") do
+										if i ~= auxing_1042[name].weild_index then
+											player_api.add_item_to_player_inventory(player, "1042_selection_main_backup", inv:get_stack("main", i), pos + vector.new(0, 1, 0))
+										end
+									end
 									local main = inv:get_list("1042_selection_main_backup")
 
 									inv:set_size("main", 40)
@@ -517,20 +537,6 @@ core.register_globalstep(function(dtime)
 									end
 
 									return
-								end
-
-								if w ~= auxing_1042[name].weild_index then
-									local inv = player:get_inventory()
-
-									local stack = inv:get_stack("main", w)
-									inv:set_stack("main", w, inv:get_stack("main", auxing_1042[name].weild_index))
-									inv:set_stack("main", auxing_1042[name].weild_index, stack)
-
-									auxing_1042[name].weild_index = w
-
-									if def._1042_aux.func then
-										def._1042_aux.func(player, (def._1042_aux.num or 10) - w)
-									end
 								end
 							end
 

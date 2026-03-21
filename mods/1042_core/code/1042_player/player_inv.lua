@@ -113,6 +113,8 @@ function core_1042.make_inv_formspec(player)
     if show_creative and hide_creative_inv ~= "true" then
         local size = core_1042.creative_inv:get_size("main")
 
+        --inv_formspec = inv_formspec .. "field[21,9;5,0.75;search;Search;...]"
+
         inv_formspec = inv_formspec ..
             "scroll_container[21,11;10,5;creative_inv;vertical;0.1;true]"..
             "list[detached:creative;main;0.1,0.1;8," .. (size / 8) + ((size % 8 > 0) and 1 or 0) .. ";]"..
