@@ -510,6 +510,10 @@ core.register_globalstep(function(dtime)
 									inv:set_list("main", main)
 									inv:set_stack("main", auxing_1042[name].org_weild_index, stack)
 
+									if player.set_wield_index then
+										player:set_wield_index(auxing_1042[name].org_weild_index)
+									end
+
 									player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:64")
 									player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:128")
 									player:hud_set_hotbar_itemcount(10)
