@@ -507,7 +507,7 @@ core.register_globalstep(function(dtime)
 									player:hud_set_hotbar_itemcount(10)
 
 									if def._1042_aux.done_func then
-										def._1042_aux.done_func(player, def._1042_aux.num or 10) - w)
+										def._1042_aux.done_func(player, (def._1042_aux.num or 10) - w)
 									end
 
 									return
