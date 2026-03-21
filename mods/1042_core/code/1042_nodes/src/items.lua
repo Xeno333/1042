@@ -122,7 +122,7 @@ core_1042.registry.register_material("1042_core:beryl", {
     groups = {breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
-}, 5, nil, nil)
+}, 3, nil, nil)
 
 core_1042.registry.register_material("1042_core:beryl_hanging", {
     description = core_1042.lorelang.translate("Hanging Beryl"),
@@ -173,13 +173,73 @@ core_1042.registry.register_material("1042_core:opal", {
     groups = {breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
-}, 3, nil, nil)
+}, 2, nil, nil)
 
 core_1042.registry.register_material("1042_core:sapphire", {
     description = core_1042.lorelang.translate("Sapphire"),
     drawtype = "mesh",
     mesh = "crystal.obj",
     tiles = {"1042_sapphire.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
+    use_texture_alpha = "blend",
+
+    paramtype = "light",
+    paramtype2 = "4dir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+
+    light_source = 5,
+    
+    groups = {breakable_by_hand = 3, attached_node = 3},
+
+    item_type = "node",
+}, 3, nil, nil)
+
+core_1042.registry.register_material("1042_core:ruby", {
+    description = core_1042.lorelang.translate("Ruby"),
+    drawtype = "mesh",
+    mesh = "crystal.obj",
+    tiles = {"1042_ruby.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
+    use_texture_alpha = "blend",
+
+    paramtype = "light",
+    paramtype2 = "4dir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+
+    light_source = 5,
+    
+    groups = {breakable_by_hand = 3, attached_node = 3},
+
+    item_type = "node",
+}, 3, nil, nil)
+
+core_1042.registry.register_material("1042_core:topaz", {
+    description = core_1042.lorelang.translate("Topaz"),
+    drawtype = "mesh",
+    mesh = "crystal.obj",
+    tiles = {"1042_topaz.png"},
     --tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
     use_texture_alpha = "blend",
 
@@ -210,6 +270,66 @@ core_1042.registry.register_material("1042_core:tourmaline", {
     drawtype = "mesh",
     mesh = "crystal.obj",
     tiles = {"1042_tourmaline.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
+    use_texture_alpha = "blend",
+
+    paramtype = "light",
+    paramtype2 = "4dir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+
+    light_source = 5,
+    
+    groups = {breakable_by_hand = 3, attached_node = 3},
+
+    item_type = "node",
+}, 4, nil, nil)
+
+core_1042.registry.register_material("1042_core:emerald", {
+    description = core_1042.lorelang.translate("Emerald"),
+    drawtype = "mesh",
+    mesh = "crystal.obj",
+    tiles = {"1042_emerald.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
+    use_texture_alpha = "blend",
+
+    paramtype = "light",
+    paramtype2 = "4dir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+
+    light_source = 5,
+    
+    groups = {breakable_by_hand = 3, attached_node = 3},
+
+    item_type = "node",
+}, 5, nil, nil)
+
+core_1042.registry.register_material("1042_core:diamond", {
+    description = core_1042.lorelang.translate("Diamond"),
+    drawtype = "mesh",
+    mesh = "crystal.obj",
+    tiles = {"1042_diamond.png"},
     --tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
     use_texture_alpha = "blend",
 
