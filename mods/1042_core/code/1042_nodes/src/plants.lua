@@ -406,5 +406,39 @@ core.register_node("1042_core:cave_grass", {
     paramtype2 = "meshoptions",
     place_param2 = 16 + 32 + 4,
 
-    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
+})
+
+core.register_node("1042_core:thin_moss", {
+    description = core_1042.lorelang.translate("Thin Moss"),
+    drawtype = "signlike",
+
+    tiles = {"1042_thin_moss.png"},
+    use_texture_alpha = "clip",
+    paramtype2 = "wallmounted",
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+    buildable_to = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.5, -0.5, -0.5, 0.5, -0.45, 0.5}
+    },
+
+    groups = {plant = 1, attached_node = 1, dig_immediate = 1, burns = 1},
 })
