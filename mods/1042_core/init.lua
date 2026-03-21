@@ -95,11 +95,11 @@ local mod_load_order = {
     path .. "1042_effects/init.lua",
     path .. "1042_achievements/init.lua",
 
+    path .. "1042_schematics/init.lua",
     path .. "1042_nodes/init.lua",
     path .. "1042_tools/init.lua",
     path .. "1042_smithing/init.lua",
     path .. "1042_mobs/mobs.lua",
-    path .. "1042_schematics/init.lua",
     path .. "1042_weather/init.lua",
 
     path .. "1042_mapgen/init.lua",

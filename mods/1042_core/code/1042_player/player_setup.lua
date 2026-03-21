@@ -427,14 +427,14 @@ core.register_globalstep(function(dtime)
 			player_meta:set_string("moving", "false")
 		end
 
+		local itemstack = player:get_wielded_item()
+		local def = core.registered_items[itemstack:get_name()] or {}
+
 		-- _1042_use (optimised)
 		if aux1_cooldown[name] then
 			if aux1_cooldown[name] > 0 then
 				aux1_cooldown[name] = aux1_cooldown[name] - dtime
 			elseif player_controls.aux1 then
-				local itemstack = player:get_wielded_item()
-				local def = core.registered_items[itemstack:get_name()] or {}
-
 				if def._1042_on_use then
 					local ret_itemstack = def._1042_on_use(itemstack, player, pointed_thing)
 					if ret_itemstack then
@@ -451,9 +451,6 @@ core.register_globalstep(function(dtime)
 		if player_controls.zoom then
 			if not auxing_1042[name].on then
 				auxing_1042[name].on = true
-
-				local itemstack = player:get_wielded_item()
-				local def = core.registered_items[itemstack:get_name()] or {}
 
 				if def._1042_aux then
 					if def._1042_aux.mode == "selection" then

@@ -9,6 +9,7 @@ dofile(path.."/src/items.lua")
 dofile(path.."/src/nodes.lua")
 dofile(path.."/src/plants.lua")
 dofile(path.."/src/liquids.lua")
+dofile(path.."/src/spawn_nodes.lua")
 dofile(path.."/src/abms.lua")
 
 
