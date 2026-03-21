@@ -445,7 +445,7 @@ core.register_globalstep(function(dtime)
 		end
 
 
-		-- Zoom
+		-- aux2
 
 		if player_controls.zoom then
 			if not auxing_1042[name] then
