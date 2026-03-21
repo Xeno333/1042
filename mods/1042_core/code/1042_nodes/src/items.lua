@@ -92,7 +92,7 @@ core_1042.registry.register_material("1042_core:fire", {
 }, 6, nil, nil)
 
 
--- Speacal nodes
+-- Special nodes
 
 core_1042.registry.register_material("1042_core:beryl", {
     description = core_1042.lorelang.translate("Beryl"),
@@ -141,6 +141,96 @@ core_1042.registry.register_material("1042_core:beryl_hanging", {
     light_source = 5,
     
     groups = {breakable_by_hand = 3, attached_node = 4},
+
+    item_type = "node",
+}, 4, nil, nil)
+
+core_1042.registry.register_material("1042_core:opal", {
+    description = core_1042.lorelang.translate("Opal"),
+    drawtype = "mesh",
+    mesh = "crystal.obj",
+    tiles = {"1042_opal.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
+    use_texture_alpha = "blend",
+
+    paramtype = "light",
+    paramtype2 = "4dir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+
+    light_source = 5,
+    
+    groups = {breakable_by_hand = 3, attached_node = 3},
+
+    item_type = "node",
+}, 3, nil, nil)
+
+core_1042.registry.register_material("1042_core:sapphire", {
+    description = core_1042.lorelang.translate("Sapphire"),
+    drawtype = "mesh",
+    mesh = "crystal.obj",
+    tiles = {"1042_sapphire.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
+    use_texture_alpha = "blend",
+
+    paramtype = "light",
+    paramtype2 = "4dir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+
+    light_source = 5,
+    
+    groups = {breakable_by_hand = 3, attached_node = 3},
+
+    item_type = "node",
+}, 4, nil, nil)
+
+core_1042.registry.register_material("1042_core:tourmaline", {
+    description = core_1042.lorelang.translate("Tourmaline"),
+    drawtype = "mesh",
+    mesh = "crystal.obj",
+    tiles = {"1042_tourmaline.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#66eecc:128"},
+    use_texture_alpha = "blend",
+
+    paramtype = "light",
+    paramtype2 = "4dir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+    collision_box = {
+        type = "fixed",
+        fixed = {-0.35, -0.5, -0.35, 0.35, 0.3, 0.35}
+    },
+
+    light_source = 5,
+    
+    groups = {breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
 }, 5, nil, nil)
