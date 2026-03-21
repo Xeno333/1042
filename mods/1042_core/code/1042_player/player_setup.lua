@@ -487,6 +487,8 @@ core.register_globalstep(function(dtime)
 							player:hud_set_hotbar_itemcount(def._1042_aux.num or 10)
 
 							local function handel()
+								local w = player:get_wield_index()
+
 								if auxing_1042[name].on then
 									player_callbacks[name].selection = handel
 
@@ -513,7 +515,6 @@ core.register_globalstep(function(dtime)
 									return
 								end
 
-								local w = player:get_wield_index()
 								if w ~= auxing_1042[name].weild_index then
 									local inv = player:get_inventory()
 
