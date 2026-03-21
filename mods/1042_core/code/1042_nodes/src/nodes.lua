@@ -13,7 +13,13 @@ core_1042.registry.register_material("1042_core:dev", {
     diggable = true,
 
     _1042_aux = {
-        mode = "selection"
+        horizontal = true,
+        bar_params = {
+            image = "1042_plain_node.png^[colorize:#00ffff:128^[opacity:64",
+            selected_image = "1042_plain_node.png^[colorize:#00ffff:128^[opacity:128"
+        },
+        mode = "selection",
+        num = 16,
     },
 
     groups = {dig_immediate = 1},

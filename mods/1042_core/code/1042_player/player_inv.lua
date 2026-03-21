@@ -36,19 +36,26 @@ end
 
 
 
+local hotbar_settings_index = {
+    ["Default"] = 1,
+    ["Bottom"] = 2,
+    ["Top"] = 3,
+}
 
 
 
 function core_1042.make_inv_formspec(player)
     local name = player:get_player_name()
     local greyscale = player_api.get_data(name, "setting_greyscale") or "false"
-    local hud_at_bottom = player_api.get_data(name, "setting_hud_at_bottom") or "false"
+    local hotbar_mode = player_api.get_data(name, "setting_hotbar_mode") or "Default"
     local show_creative = core.is_creative_enabled(name)
     local hide_creative_inv = "false"
     local position = "0.53,0.5"
 
-    if hud_at_bottom == "true" then
+    if hotbar_mode == "Bottom" then
         position = "0.5,0.48"
+    elseif hotbar_mode == "Top" then
+        position = "0.5,0.53"
     end
 
     local craft_count = core.get_inventory({type="detached", name=name .. "_crafts"}):get_size("main")
@@ -75,7 +82,8 @@ function core_1042.make_inv_formspec(player)
             end
 
             inv_formspec = inv_formspec..
-            "checkbox[0,1.5;setting_hud_at_bottom;Hud at bottom;"..hud_at_bottom.."]"..
+            "label[0,1.7;Hotbar Mode]"..
+            "dropdown[0,2;4;setting_hotbar_mode;Default,Bottom,Top;"..hotbar_settings_index[hotbar_mode] .. ";false"..hotbar_mode.."]"..
             --"label[0,2.5;HUD Stats]"..
             --"checkbox[1,3;setting_hud_stats_default;Enable default HUD stats;false]"..
             --"checkbox[1,3.5;setting_hud_stats_default;Enable advanced HUD stats;false]"..
@@ -84,7 +92,7 @@ function core_1042.make_inv_formspec(player)
         "scrollbar[1,2;0.5,4;vertical;setting_box_scrollbar;0]"..
 
         "label[1.5,7.5;Controls]"..
-        "label[2,8;Use - Aux1\nSprint - Walk]"..
+        "label[2,8;Use - Aux1\nSelect and use - Zoom + Scroll\nSprint - Walk]"..
 
         --"label[1.5,7.5;Docs]"..
         --"image_button[2,8;2,1;1042_plain_node.png^[colorize:#22ff44:144;doc_gameplay_md;Guide]"..
@@ -152,14 +160,18 @@ core.register_on_player_receive_fields(function(player, form, fields)
             end
             player:set_inventory_formspec(core_1042.make_inv_formspec(player))
 
-        elseif fields.setting_hud_at_bottom then
-            player_api.set_data(player:get_player_name(), "setting_hud_at_bottom", fields.setting_hud_at_bottom)
+        elseif fields.setting_hotbar_mode ~= nil then
+            player_api.set_data(player:get_player_name(), "setting_hotbar_mode", fields.setting_hotbar_mode)
 
             local id = player_api.get_hud_id(player, "hotbar")
             if id then
-                if fields.setting_hud_at_bottom == "true" then
+                if fields.setting_hotbar_mode == "Bottom" then
                     player:hud_change(id, "direction", 0)
                     player:hud_change(id, "position", {x=0.5, y=0.95})
+
+                elseif fields.setting_hotbar_mode == "Top" then
+                    player:hud_change(id, "direction", 0)
+                    player:hud_change(id, "position", {x=0.5, y=0.1})
 
                 else
                     player:hud_change(id, "direction", 2)

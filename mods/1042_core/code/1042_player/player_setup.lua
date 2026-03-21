@@ -240,9 +240,12 @@ core.register_on_joinplayer(function(player, last_join)
 		name = "hotbar",
 		text = "main",
 	}
-	if player_api.get_data(name, "setting_hud_at_bottom") == "true" then
+	if player_api.get_data(name, "setting_hotbar_mode") == "Bottom" then
 		hotbar.direction = 0
 		hotbar.position = {x=0.5, y=0.95}
+	elseif player_api.get_data(name, "setting_hotbar_mode") == "Top" then
+		hotbar.direction = 0
+		hotbar.position = {x=0.5, y=0.05}
 	else
 		hotbar.direction = 2
 		hotbar.position = {x=0.05, y=0.5}
@@ -448,7 +451,7 @@ core.register_globalstep(function(dtime)
 
 		-- aux2
 
-		if player_controls.zoom then
+		if player_controls.zoom and not player_controls.aux1 then
 			if not auxing_1042[name].on then
 				auxing_1042[name].on = true
 
@@ -463,9 +466,12 @@ core.register_globalstep(function(dtime)
 								name = "selection",
 								text = "selection",
 							}
-							if player_api.get_data(name, "setting_hud_at_bottom") == "true" then
+							if player_api.get_data(name, "setting_hotbar_mode") == "Bottom" or def._1042_aux.horizontal then
 								selection.direction = 0
 								selection.position = {x=0.5, y=0.95}
+							elseif player_api.get_data(name, "setting_hotbar_mode") == "Top" then
+								selection.direction = 0
+								selection.position = {x=0.5, y=0.05}
 							else
 								selection.direction = 2
 								selection.position = {x=0.05, y=0.5}
@@ -485,8 +491,13 @@ core.register_globalstep(function(dtime)
 							inv:set_stack("main", auxing_1042[name].org_weild_index, inv:get_stack("1042_selection_main_backup", auxing_1042[name].org_weild_index))
 
 
-							player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ff00:128^[opacity:64")
-							player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ff00:128^[opacity:128")
+							if def._1042_aux.bar_params ~= nil then
+								player:hud_set_hotbar_image(def._1042_aux.bar_params.image)
+								player:hud_set_hotbar_selected_image(def._1042_aux.bar_params.selected_image)
+							else
+								player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ff00:128^[opacity:64")
+								player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ff00:128^[opacity:128")
+							end
 							player:hud_set_hotbar_itemcount(def._1042_aux.num or 10)
 
 							local function handel()
@@ -549,8 +560,14 @@ core.register_globalstep(function(dtime)
 					end
 				end
 			end
+		elseif player_controls.zoom and player_controls.aux1 then
+			if not auxing_1042[name].on_and_aux1 then
+				auxing_1042[name].on_and_aux1 = true
+				-- Free extra
+			end
 		else
 			auxing_1042[name].on = nil
+			auxing_1042[name].on_and_aux1 = nil
 		end
 
 		if player_callbacks[name] then
