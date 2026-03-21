@@ -85,6 +85,7 @@ core.register_on_joinplayer(function(player, last_join)
 	local name = player:get_player_name()
 	aux1_cooldown[name] = 0
 	sprint_increment_cooldown[name] = 0
+	auxing_1042[name] = {}
 
 	player_callbacks[name] = {}
 
@@ -448,7 +449,9 @@ core.register_globalstep(function(dtime)
 		-- aux2
 
 		if player_controls.zoom then
-			if not auxing_1042[name] then
+			if not auxing_1042[name].on then
+				auxing_1042[name].on = true
+
 				local itemstack = player:get_wielded_item()
 				local def = core.registered_items[itemstack:get_name()] or {}
 
@@ -462,35 +465,63 @@ core.register_globalstep(function(dtime)
 								type = "hotbar",
 								name = "selection",
 								text = "selection",
-								direction = 0,
-								position = {x=0.5, y=0.95}
+								direction = 2,
+								position = {x=0.05, y=0.5}
 							}
 							player_api.add_hud(player, "selection", selection)
+
 							local inv = player:get_inventory()
 							local main = inv:get_list("main")
 							inv:set_list("1042_selection_main_backup", main)
+
+							auxing_1042[name].weild_index = player:get_wield_index()
+							auxing_1042[name].org_weild_index = auxing_1042[name].weild_index
+
+							inv:set_size("main", 0)
+							inv:set_size("main", def._1042_aux.num or 10)
+							inv:set_stack("main", auxing_1042[name].org_weild_index, inv:get_stack("1042_selection_main_backup", auxing_1042[name].org_weild_index))
+
 
 							player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:64")
 							player:hud_set_hotbar_selected_image("1042_bedrock.png")
 							player:hud_set_hotbar_itemcount(def._1042_aux.num or 10)
 
 							local function handel()
-								--player:get_wield_index()
-
-								if auxing_1042[name] then
+								if auxing_1042[name].on then
 									player_callbacks[name].selection = handel
 
-								elseif aux1_cooldown[name] ~= nil then
+								-- Restore
+								elseif auxing_1042[name] ~= nil then
 									player_api.add_hud(player, "hotbar", hotbar)
 									player_api.remove_hud(player, "selection")
 
 									local inv = player:get_inventory()
+									local stack = inv:get_stack("main", auxing_1042[name].weild_index)
 									local main = inv:get_list("1042_selection_main_backup")
+									inv:set_size("main", 40)
 									inv:set_list("main", main)
+									inv:set_stack("main", auxing_1042[name].org_weild_index, stack)
 
 									player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:64")
 									player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:128")
 									player:hud_set_hotbar_itemcount(10)
+
+									return
+								end
+
+								local w = player:get_wield_index()
+								if w ~= auxing_1042[name].weild_index then
+									local inv = player:get_inventory()
+
+									local stack = inv:get_stack("main", w)
+									inv:set_stack("main", w, inv:get_stack("main", auxing_1042[name].weild_index))
+									inv:set_stack("main", auxing_1042[name].weild_index, stack)
+
+									auxing_1042[name].weild_index = w
+
+									if def._1042_aux.func then
+										def._1042_aux.func(player, w)
+									end
 								end
 							end
 
@@ -498,11 +529,9 @@ core.register_globalstep(function(dtime)
 						end
 					end
 				end
-
-				auxing_1042[name] = true
 			end
 		else
-			auxing_1042[name] = nil
+			auxing_1042[name].on = nil
 		end
 
 		if player_callbacks[name] then
