@@ -445,7 +445,7 @@ core.register_globalstep(function(dtime)
 		end
 
 
-		-- Zoom
+		-- aux2
 
 		if player_controls.zoom then
 			if not auxing_1042[name] then
@@ -466,6 +466,9 @@ core.register_globalstep(function(dtime)
 								position = {x=0.5, y=0.95}
 							}
 							player_api.add_hud(player, "selection", selection)
+							local inv = player:get_inventory()
+							local main = inv:get_list("main")
+							inv:set_list("1042_selection_main_backup", main)
 
 							player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:64")
 							player:hud_set_hotbar_selected_image("1042_bedrock.png")
@@ -480,6 +483,10 @@ core.register_globalstep(function(dtime)
 								elseif aux1_cooldown[name] ~= nil then
 									player_api.add_hud(player, "hotbar", hotbar)
 									player_api.remove_hud(player, "selection")
+
+									local inv = player:get_inventory()
+									local main = inv:get_list("1042_selection_main_backup")
+									inv:set_list("main", main)
 
 									player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:64")
 									player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:128")
