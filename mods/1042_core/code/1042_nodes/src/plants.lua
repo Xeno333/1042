@@ -7,112 +7,13 @@
 
 local c = core.colorize
 
-core.register_node("1042_core:grass_tall", {
-    description = core_1042.lorelang.translate("Tall Grass"),
-    drawtype = "mesh",
-    mesh = "grass_tall.obj",
-    tiles = {"1042_grass.png"},
-    use_texture_alpha = "opaque",
-
-    paramtype = "light",
-    sunlight_propagates = true,
-    floodable = true,
-    walkable = false,
-    buildable_to = true,
-
-    color = "#309913ff",
-    paramtype2 = "color",
-    palette = "turf_palette.png",
-    node_placement_prediction = "",
-
-    sounds = {
-        dug = {
-            name = "turf",
-            gain = 0.4,
-            pitch = 1.6
-        },
-        place = {
-            name = "turf",
-            gain = 0.4,
-            pitch = 1.7
-        }
-    },
-
-    on_construct = function(pos)
-        local node = core.get_node(pos)
-
-        if node then
-            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
-            core.swap_node(pos, node)
-        end
-    end,
-
-    -- Add self as a drop to avoid meta
-    drop = "",
-    preserve_metadata = function(_, _, _, drops)
-        drops[#drops+1] = ItemStack("1042_core:grass_tall")
-    end,
-
-    groups = {leafy = 1, plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
-})
-
-core.register_node("1042_core:grass_short", {
-    description = core_1042.lorelang.translate("Short Grass"),
-    drawtype = "mesh",
-    mesh = "grass_short.obj",
-    tiles = {"1042_grass.png"},
-    use_texture_alpha = "opaque",
-
-    paramtype = "light",
-    sunlight_propagates = true,
-    floodable = true,
-    walkable = false,
-    buildable_to = true,
-
-    color = "#309913ff",
-    paramtype2 = "color",
-    palette = "turf_palette.png",
-    node_placement_prediction = "",
-
-    sounds = {
-        dug = {
-            name = "turf",
-            gain = 0.4,
-            pitch = 1.7
-        },
-        place = {
-            name = "turf",
-            gain = 0.4,
-            pitch = 1.7
-        }
-    },
-
-    on_construct = function(pos)
-        local node = core.get_node(pos)
-        if node then
-            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
-            core.swap_node(pos, node)
-        end
-    end,
-
-    -- Add self as a drop to avoid meta
-    drop = "",
-    preserve_metadata = function(_, _, _, drops)
-        drops[#drops+1] = ItemStack("1042_core:grass_short")
-    end,
-
-    groups = {leafy = 1, plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
-})
-
-
 
 core.register_node("1042_core:mushroom", {
     description = core_1042.lorelang.translate("Mushroom"),
     drawtype = "mesh",
     mesh = "mushroom.obj",
     tiles = {"1042_mushroom_brown.png", "1042_mushroom_stem.png"},
-    --tiles = {"1042_plain_node.png^[colorize:#7B3500:128"},
-    --use_texture_alpha = "opaque",
+    use_texture_alpha = "opaque",
 
     node_box = {
         type = "fixed",
@@ -148,7 +49,6 @@ core.register_node("1042_core:apple", {
     drawtype = "mesh",
     mesh = "fruit.obj",
     tiles = {"1042_apple.png"},
-    --tiles = {"1042_plain_node.png^[colorize:#ff0000:128"},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -175,11 +75,6 @@ core.register_node("1042_core:light_bloom", {
         "1042_plain_node.png^[colorize:#110099:64", -- petal
         "1042_plain_node.png^[colorize:#077b03:128"  -- leaf
     },
-    --tiles = {
-    --    "1042_plain_node.png^[colorize:#178b03:128", -- stem
-    --    "1042_plain_node.png^[colorize:#110099:64", -- petal
-    --    "1042_plain_node.png^[colorize:#077b03:128"  -- leaf
-    --},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -200,10 +95,6 @@ core.register_node("1042_core:digitalis", {
         "1042_flower2_stem.png",
         "1042_flower2_petal.png"
     },
-    --tiles = {
-    --    "1042_plain_node.png^[colorize:#063803:164", -- stem
-    --    "1042_plain_node.png^[colorize:#991177:64", -- petal
-    --},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -241,11 +132,6 @@ core.register_node("1042_core:tulip", {
         "1042_flower3_petal.png",
         "1042_flower3_leaf.png"
     },
-    --tiles = {
-    --    "1042_plain_node.png^[colorize:#11AA22:64", -- stem
-    --    "1042_plain_node.png^[colorize:#7711AA:64", -- petal
-    --    "1042_plain_node.png^[colorize:#22AA11:64"  -- leaf
-    --},
     use_texture_alpha = "opaque",
 
     paramtype = "light",
@@ -257,8 +143,8 @@ core.register_node("1042_core:tulip", {
     groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
 })
 
-core.register_node("1042_core:light_grass", {
-    description = core_1042.lorelang.translate("Light Grass"),
+core.register_node("1042_core:grass_tall", {
+    description = core_1042.lorelang.translate("Tall Grass"),
     drawtype = "plantlike",
     tiles = {"1042_small_grass.png"},
     use_texture_alpha = "clip",
@@ -304,8 +190,8 @@ core.register_node("1042_core:light_grass", {
     groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
 })
 
-core.register_node("1042_core:micro_light_grass", {
-    description = core_1042.lorelang.translate("Micro Light Grass"),
+core.register_node("1042_core:grass_short", {
+    description = core_1042.lorelang.translate("Short Grass"),
     drawtype = "plantlike",
     tiles = {"1042_micro_grass.png"},
     use_texture_alpha = "clip",
@@ -360,11 +246,6 @@ core.register_node("1042_core:sunflower", {
         "1042_flower4_petal.png",
         "1042_flower4_leaf.png"
     },
-    --tiles = {
-    --    "1042_plain_node.png^[colorize:#11AA22:64", -- stem
-    --    "1042_plain_node.png^[colorize:#FFAA11:64", -- petal
-    --    "1042_plain_node.png^[colorize:#22AA11:64"  -- leaf
-    --},
     use_texture_alpha = "opaque",
 
     paramtype = "light",

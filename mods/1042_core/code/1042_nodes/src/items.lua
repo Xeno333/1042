@@ -119,7 +119,7 @@ core_1042.registry.register_material("1042_core:beryl", {
 
     light_source = 5,
     
-    groups = {breakable_by_hand = 3, attached_node = 3},
+    groups = {gem = 1, breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
 }, 3, nil, nil)
@@ -170,7 +170,7 @@ core_1042.registry.register_material("1042_core:opal", {
 
     light_source = 5,
     
-    groups = {breakable_by_hand = 3, attached_node = 3},
+    groups = {gem = 1, breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
 }, 2, nil, nil)
@@ -200,7 +200,7 @@ core_1042.registry.register_material("1042_core:sapphire", {
 
     light_source = 5,
     
-    groups = {breakable_by_hand = 3, attached_node = 3},
+    groups = {gem = 1, breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
 }, 3, nil, nil)
@@ -230,7 +230,7 @@ core_1042.registry.register_material("1042_core:ruby", {
 
     light_source = 5,
     
-    groups = {breakable_by_hand = 3, attached_node = 3},
+    groups = {gem = 1, breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
 }, 3, nil, nil)
@@ -260,7 +260,7 @@ core_1042.registry.register_material("1042_core:topaz", {
 
     light_source = 5,
     
-    groups = {breakable_by_hand = 3, attached_node = 3},
+    groups = {gem = 1, breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
 }, 4, nil, nil)
@@ -290,7 +290,7 @@ core_1042.registry.register_material("1042_core:tourmaline", {
 
     light_source = 5,
     
-    groups = {breakable_by_hand = 3, attached_node = 3},
+    groups = {gem = 1, breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
 }, 4, nil, nil)
@@ -320,7 +320,7 @@ core_1042.registry.register_material("1042_core:emerald", {
 
     light_source = 5,
     
-    groups = {breakable_by_hand = 3, attached_node = 3},
+    groups = {gem = 1, breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
 }, 5, nil, nil)
@@ -350,7 +350,7 @@ core_1042.registry.register_material("1042_core:diamond", {
 
     light_source = 5,
     
-    groups = {breakable_by_hand = 3, attached_node = 3},
+    groups = {gem = 1, breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
 }, 5, nil, nil)
@@ -395,7 +395,7 @@ core_1042.registry.register_material("1042_core:rock", {
     groups = {breakable_by_hand = 3, attached_node = 3, rock = 1},
 
     item_type = "node",
-}, 2, nil, nil)
+}, 1, nil, nil)
 
 core_1042.registry.register_material("1042_core:flint", {
     description = core_1042.lorelang.translate("Flint"),
