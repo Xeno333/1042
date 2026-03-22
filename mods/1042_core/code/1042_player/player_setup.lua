@@ -646,7 +646,7 @@ core.register_globalstep(function(dtime)
 
 		if core_1042.get(name .. "_gliding") == "on" then
 			local p_pos = player:get_pos()
-			local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.1, z = p_pos.z})
+			local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.5, z = p_pos.z})
 			local def = core.registered_nodes[node_below.name]
 
 			if def.walkable then

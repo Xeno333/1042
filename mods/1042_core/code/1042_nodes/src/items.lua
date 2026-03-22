@@ -929,7 +929,7 @@ core_1042.registry.register_material("1042_core:glider", {
 
     on_use = function(itemstack, player, pointed_thing)
         local p_pos = player:get_pos()
-        local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.1, z = p_pos.z})
+        local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.5, z = p_pos.z})
         local def = core.registered_nodes[node_below.name]
 
         if not def.walkable then
