@@ -630,8 +630,7 @@ core.register_globalstep(function(dtime)
 
 			local vel = player:get_velocity()
 			local dir = player:get_look_dir()
-			local speed = math.sqrt(vel.x*vel.x + vel.y*vel.y + vel.z*vel.z)
-			speed = math.max(math.min(speed, 8), 0)
+			local speed = math.max(math.min(math.sqrt(vel.x*vel.x + vel.y*vel.y + vel.z*vel.z), 8), 0)
 
 			local s = speed * 0.1
 			local r = 50
