@@ -424,20 +424,13 @@ core.register_globalstep(function(dtime)
 		end
 
 		-- Animation
-		if core_1042.get(name .. "_gliding") == "off" then
-			if player_controls.movement_y ~= 0 and player_meta:get_string("moving") == "false" then
-				player:set_animation({x = 0, y = 0.8}, 1.1)
-				player_meta:set_string("moving", "true")
-				player_meta:set_string("gliding", "false")
-			elseif player_controls.movement_y == 0 and player_meta:get_string("moving") ~= "false" then
-				player:set_animation({x = 0, y = 0}, 1)
-				player_meta:set_string("moving", "false")
-				player_meta:set_string("gliding", "false")
-			end
+		if core_1042.get(name .. "_gliding") == "on" then
+			core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.3})
 		else
-			if player_meta:get_string("gliding") ~= "true" then
-				player:set_animation({x = 2.7, y = 3.6}, 0.3)
-				player_meta:set_string("gliding", "true")
+			if player_controls.movement_y ~= 0 then
+				core_1042.player.set_animation(player, {name="walk", range={x = 0, y = 0.8}, speed=1.1})
+			elseif player_controls.movement_y == 0 and core_1042.player.get_animation ~= "walk" then
+				core_1042.player.set_animation(player, {name="idle", range={x = 0, y = 0}, speed=1})
 			end
 		end
 
