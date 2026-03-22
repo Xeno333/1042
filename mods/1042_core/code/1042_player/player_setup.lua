@@ -424,12 +424,21 @@ core.register_globalstep(function(dtime)
 		end
 
 		-- Animation
-		if player_controls.movement_y ~= 0 and player_meta:get_string("moving") == "false" then
-			player:set_animation({x = 0, y = 0.8}, 1.1)
-			player_meta:set_string("moving", "true")
-		elseif player_controls.movement_y == 0 and player_meta:get_string("moving") ~= "false" then
-			player:set_animation({x = 0, y = 0}, 1)
-			player_meta:set_string("moving", "false")
+		if core_1042.get(name .. "_gliding") == "off" then
+			if player_controls.movement_y ~= 0 and player_meta:get_string("moving") == "false" then
+				player:set_animation({x = 0, y = 0.8}, 1.1)
+				player_meta:set_string("moving", "true")
+				player_meta:set_string("gliding", "false")
+			elseif player_controls.movement_y == 0 and player_meta:get_string("moving") ~= "false" then
+				player:set_animation({x = 0, y = 0}, 1)
+				player_meta:set_string("moving", "false")
+				player_meta:set_string("gliding", "false")
+			end
+		else
+			if player_meta:get_string("gliding") ~= "true" then
+				player:set_animation({x = 2.7, y = 3.6}, 0.3)
+				player_meta:set_string("gliding", "true")
+			end
 		end
 
 		local itemstack = player:get_wielded_item()
