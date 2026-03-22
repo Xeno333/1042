@@ -628,7 +628,8 @@ core.register_globalstep(function(dtime)
 			local r = 50
 			local n = 0.5
 			if dir.y > 0 then
-				n = n / math.max(0.1, math.floor(dir.y * 4))
+				print(math.floor(dir.y * 20) / 10)
+				n = n / math.max(0.1, math.floor(dir.y * 20) / 10)
 			end
 
 			player:add_velocity(vector.new(-vel.x / r, -vel.y / r * 2, -vel.z / r))
