@@ -183,7 +183,7 @@ mapgen_1042.ymin = core_1042.shared_lib.consts.plain_world_y_levels.min
 
 mapgen_1042.water_level = core_1042.shared_lib.consts.plain_world_y_levels.sea_level
 mapgen_1042.bedrock_level = mapgen_1042.ymin
-mapgen_1042.lava_level = mapgen_1042.bedrock_level + 32
+mapgen_1042.cave_pool_level = mapgen_1042.bedrock_level + 32
 mapgen_1042.caves_max = mapgen_1042.ymax - 68
 mapgen_1042.decorated_caves = mapgen_1042.ymin + 128
 

@@ -514,21 +514,21 @@ weather.register_weather({
             type = "regular",
             clouds = false,
             sky_color = {
-                night_sky = "#554400ff",
-                night_horizon = "#554400ff",
-                day_horizon = "#554400ff",
-                day_sky = "#554400ff",
-                dawn_sky = "#554400ff",
-                dawn_horizon = "#554400ff",
-                indoors = "#554400ff",
-                fog_sun_tint = "#693c554400ff00ff",
-                fog_moon_tint = "#554400ff",
+                night_sky = "#2f5c4f",
+                night_horizon = "#2f5c4f",
+                day_horizon = "#2f5c4f",
+                day_sky = "#2f5c4f",
+                dawn_sky = "#2f5c4f",
+                dawn_horizon = "#2f5c4f",
+                indoors = "#2f5c4f",
+                fog_sun_tint = "#2f5c4f",
+                fog_moon_tint = "#2f5c4f",
                 fog_tint_type = "custom"
             },
             fog = {
                 fog_start = 0,
                 fog_distance = 100,
-                fog_color = "#554400ff"
+                fog_color = "#2f5c4f"
             }
         })
         player:set_stars(
@@ -610,21 +610,21 @@ weather.register_weather({
             type = "regular",
             clouds = false,
             sky_color = {
-                night_sky = "#554400ff",
-                night_horizon = "#554400ff",
-                day_horizon = "#66772255",
-                day_sky = "#66772255",
-                dawn_sky = "#693c00ff",
-                dawn_horizon = "#693c00ff",
-                indoors = "#693c00ff",
-                fog_sun_tint = "#693c00ff",
-                fog_moon_tint = "#693c00ff",
+                night_sky = "#203f36",
+                night_horizon = "#203f36",
+                day_horizon = "#203f36",
+                day_sky = "#203f36",
+                dawn_sky = "#203f36",
+                dawn_horizon = "#203f36",
+                indoors = "#203f36",
+                fog_sun_tint = "#203f36",
+                fog_moon_tint = "#203f36",
                 fog_tint_type = "custom"
             },
             fog = {
                 fog_start = 0,
                 fog_distance = 100,
-                fog_color = "#66660055"
+                fog_color = "#203f36"
             }
         })
         player:set_stars(

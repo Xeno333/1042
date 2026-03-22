@@ -31,7 +31,7 @@ local T_ymax = mapgen_1042.ymax
 local T_ymax_Real = mapgen_1042.d_ymax
 local T_ymin = mapgen_1042.ymin
 local water_level = mapgen_1042.water_level
-local lava_level = mapgen_1042.lava_level
+local cave_pool_level = mapgen_1042.cave_pool_level
 local bedrock_level = mapgen_1042.bedrock_level
 local caves_max = mapgen_1042.caves_max
 local decorated_caves = mapgen_1042.decorated_caves
@@ -348,7 +348,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
             ly = ly + 1
             local cave_v = 0.2
             if y < 0 then
-                cave_v = math.abs((y + caves_max) / lava_level)
+                cave_v = math.abs((y + caves_max) / cave_pool_level)
             end
 
             local lz = 0
@@ -477,8 +477,8 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                                 dec(pr, x, y, z, data, area, place_list, tempv, nil, param2_data, grass_color)
                             end
                         end
-                    elseif y <= ny and y<= lava_level then
-                        data[vi] = lava
+                    elseif y <= ny and y<= cave_pool_level then
+                        data[vi] = water
                     else
                         if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > cave_v and y <= ny then
                             if tempv >= 10 and tempv <= 20 then
