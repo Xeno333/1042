@@ -626,8 +626,13 @@ core.register_globalstep(function(dtime)
 
 			local s = speed * 0.1
 			local r = 50
+			local n = 0.5
+			if dir.y > 0 then
+				n = n / math.max(0.1, math.floor(dir.y * 4))
+			end
+
 			player:add_velocity(vector.new(-vel.x / r, -vel.y / r * 2, -vel.z / r))
-			player:add_velocity(vector.new(dir.x * s, dir.y * s * 0.5, dir.z * s))
+			player:add_velocity(vector.new(dir.x * s, dir.y * s * n, dir.z * s))
 		end
 
 		if core_1042.get(name .. "_gliding") == "on" then
