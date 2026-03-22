@@ -280,7 +280,7 @@ local function dec(pr, x, y, z, data, area, place_list, tempv, cave, param2_data
     
     else
         if c <= 10 and y == water_level then
-            data[area:index(x, y, z)] = rock
+            data[area:index(x, y+1, z)] = rock
         end
     end
 

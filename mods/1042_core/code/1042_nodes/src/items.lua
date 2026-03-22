@@ -911,19 +911,6 @@ core_1042.crafting.register_craft({
     }
 })
 
-local function begin_glide(player)
-    local meta = player:get_meta()
-    if (meta:get_int("gliding") == 0) then
-        core.log("gilder enabled")
-        meta:set_float("original_gravity", player:get_meta():get_float("original_gravity"))
-        meta:set_float("original_speed", player:get_meta():get_float("original_speed"))
-        meta:set_int("gliding", 1)
-    else
-        core.log("glider disabled")
-        meta:set_int("gliding", 0)
-    end
-end
-
 core_1042.registry.register_material("1042_core:glider", {
     description = core_1042.lorelang.translate("Glider"),
     drawtype = "mesh",
@@ -940,12 +927,20 @@ core_1042.registry.register_material("1042_core:glider", {
 
     groups = {glider = 1, dig_immediate = 1, attached_node = 3},
 
-    on_use = function(itemstack, user, pointed_thing)
-        local p_pos = user:get_pos()
+    on_use = function(itemstack, player, pointed_thing)
+        local p_pos = player:get_pos()
         local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.1, z = p_pos.z})
         local def = core.registered_nodes[node_below.name]
+
         if not def.walkable then
-            begin_glide(user)
+            local name = player:get_player_name()
+            if (core_1042.get(name .. "_gliding") == "off") then
+                core_1042.set(name .. "_gliding", "on")
+                core_1042.set(name .. "_gliding_physics_backup", player:get_physics_override())
+            else
+                core_1042.set(name .. "_gliding", "off")
+                player:set_physics_override(core_1042.get(name .. "_gliding_physics_backup"))
+            end
         end
     end,
 

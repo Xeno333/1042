@@ -614,20 +614,37 @@ core.register_globalstep(function(dtime)
 		end
 
 		local function apply_glide(player, dtime)
-			--player:add_velocity()
+			player:set_physics_override({
+				gravity = 0.3,
+				speed_walk = 0
+			})
+
+			local vel = player:get_velocity()
+			local dir = player:get_look_dir()
+			local speed = math.sqrt(vel.x*vel.x + vel.y*vel.y + vel.z*vel.z)
+			speed = math.max(math.min(speed, 8), 0)
+
+			local s = speed * 0.1
+			local r = 50
+			player:add_velocity(vector.new(-vel.x / r, -vel.y / r * 2, -vel.z / r))
+			player:add_velocity(vector.new(dir.x * s, dir.y * s * 0.5, dir.z * s))
 		end
 
-		if player_meta:get_int("gliding") == 1 then
+		if core_1042.get(name .. "_gliding") == "on" then
 			local p_pos = player:get_pos()
 			local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.1, z = p_pos.z})
 			local def = core.registered_nodes[node_below.name]
+
 			if def.walkable then
-				player_meta:set_int("gliding", 0)
-				core.log("glider disabled")
+				core_1042.set(name .. "_gliding", "off")
+				set_physics(player)
+
+			elseif player_controls.jump then
+				apply_glide(player, dtime)
+
+			else
+				player:set_physics_override(core_1042.get(name .. "_gliding_physics_backup"))
 			end
-
-			--apply_glide(player, dtime)
 		end
-
 	end
 end)
