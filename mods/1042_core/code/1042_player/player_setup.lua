@@ -76,7 +76,17 @@ end)
 
 
 
-
+local function set_physics(player)
+	player:set_physics_override(
+		{
+			gravity = 1.5,
+			jump = 1.2,
+			sneak_glitch = true,
+			liquid_sink = 2,
+			speed_walk = 0.5
+		}
+	)
+end
 
 
 -- Join player
@@ -124,15 +134,7 @@ core.register_on_joinplayer(function(player, last_join)
 
 		nametag_color = "#00000000",
 	})
-	player:set_physics_override(
-		{
-			gravity = 1.5,
-			jump = 1.2,
-			sneak_glitch = true,
-			liquid_sink = 2,
-			speed_walk = 0.5
-		}
-	)
+	set_physics(player)
 	player:hud_set_flags(
 		{
 			minimap = false,
@@ -609,6 +611,22 @@ core.register_globalstep(function(dtime)
 				number = 0x00ffdd,
 				style = 3
 			})
+		end
+
+		local function apply_glide(player, dtime)
+			--player:add_velocity()
+		end
+
+		if player_meta:get_int("gliding") == 1 then
+			local p_pos = player:get_pos()
+			local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.1, z = p_pos.z})
+			local def = core.registered_nodes[node_below.name]
+			if def.walkable then
+				player_meta:set_int("gliding", 0)
+				core.log("glider disabled")
+			end
+
+			--apply_glide(player, dtime)
 		end
 
 	end

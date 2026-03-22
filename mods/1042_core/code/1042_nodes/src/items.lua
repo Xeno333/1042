@@ -910,3 +910,50 @@ core_1042.crafting.register_craft({
         "1042_core:gold_ingot", "1042_core:tree", "1042_core:glass"
     }
 })
+
+local function begin_glide(player)
+    local meta = player:get_meta()
+    if (meta:get_int("gliding") == 0) then
+        core.log("gilder enabled")
+        meta:set_float("original_gravity", player:get_meta():get_float("original_gravity"))
+        meta:set_float("original_speed", player:get_meta():get_float("original_speed"))
+        meta:set_int("gliding", 1)
+    else
+        core.log("glider disabled")
+        meta:set_int("gliding", 0)
+    end
+end
+
+core_1042.registry.register_material("1042_core:glider", {
+    description = core_1042.lorelang.translate("Glider"),
+    drawtype = "mesh",
+    mesh = "glider_node.obj",
+    tiles = {"1042_tree.png", "1042_thin_moss.png"},
+    use_texture_alpha = "blend",
+
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+    stack_max = 1,
+
+    groups = {glider = 1, dig_immediate = 1, attached_node = 3},
+
+    on_use = function(itemstack, user, pointed_thing)
+        local p_pos = user:get_pos()
+        local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.1, z = p_pos.z})
+        local def = core.registered_nodes[node_below.name]
+        if not def.walkable then
+            begin_glide(user)
+        end
+    end,
+
+    item_type = "item",
+}, 3, {
+    result = "1042_core:glider",
+    type = "1042_default",
+    items = {
+        "group:plant 6", "1042_core:sticks 4"
+    }
+}, {name = "1042_core:glider"})

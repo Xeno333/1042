@@ -71,6 +71,7 @@ core_1042.lorelang.translations = { -- using hardcoded key based translation as 
     ["Silver"] = "Silvr",
     ["Cobalt"] = "Cobalt",
     ["Titanium"] = "Txtenyum",
+    ["Glider"] = "Valkar-Lyfe",
     ["with"] = "nyl"
 }
 
