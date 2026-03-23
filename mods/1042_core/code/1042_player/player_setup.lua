@@ -4,10 +4,6 @@ local player_callbacks = {}
 local sprint_increment_cooldown = {}
 
 
-
-
-
-
 core.override_item("", {
 	wield_image = "wieldhand.png",
 	wield_scale = {x = 1, y = 1, z = 4},
@@ -29,8 +25,6 @@ core.override_item("", {
 
 -- Spawn player; depends on 1042_mapgen
 
-
-
 core.register_on_respawnplayer(player_api.spawn_player)
 
 
@@ -47,9 +41,6 @@ core.register_on_dieplayer(function(player, reason)
 		end
 	end
 end)
-
-
-
 
 
 -- Join player
@@ -108,7 +99,7 @@ core.register_on_joinplayer(function(player, last_join)
 		}
 	)
 
-	-- Ligthing and enviorment
+	-- Lighting and enviorment
 	local saturation = 1.8
 	if player_api.get_data(name, "setting_greyscale") == "true" then
 		saturation = 0
@@ -164,12 +155,7 @@ core.register_on_joinplayer(function(player, last_join)
 
 	end
 
-	player:set_fov(100, false, zoom_time)
-
-
-
-
-
+	player:set_fov(core.settings:get("fov"), false, zoom_time)
 
 
 	-- Hud
@@ -387,7 +373,7 @@ core.register_globalstep(function(dtime)
 
 		-- Sprint
 		local phy = player:get_physics_override()
-		if sprint_increment_cooldown[name] then -- sanity chgeck
+		if sprint_increment_cooldown[name] then -- sanity check
 			if sprint_increment_cooldown[name] > 0 then
 				sprint_increment_cooldown[name] = sprint_increment_cooldown[name] - dtime
 
@@ -395,14 +381,16 @@ core.register_globalstep(function(dtime)
 				if (player_controls.movement_y ~= 0 or player_controls.movement_x ~= 0) and not player_controls.sneak then
 					if phy.speed_walk < 1.2 then
 						phy.speed_walk = phy.speed_walk + 0.05
-						player:set_physics_override(phy)
+						player_api.set_physics(player, {speed_walk=phy.speed_walk})
+						--player:set_physics_override(phy)
 
 						sprint_increment_cooldown[name] = 0.5
 					end
 
 				elseif phy.speed_walk > 0.5 then
 					phy.speed_walk = phy.speed_walk - 0.05
-					player:set_physics_override(phy)
+					player_api.set_physics(player, {speed_walk=phy.speed_walk})
+					--player:set_physics_override(phy)
 
 					sprint_increment_cooldown[name] = 0.5
 				end
@@ -613,10 +601,7 @@ core.register_globalstep(function(dtime)
 		player:set_bone_override("Neck", { position = nil, rotation = {vec=vector.new((1-dir.y+270)*1.6, 0, 0), interpolation=0.1}})
 
 		local function apply_glide(player, dtime)
-			player:set_physics_override({
-				gravity = 0.3,
-				speed_walk = 0
-			})
+			player_api.set_physics(player, {gravity=0.3,speed_walk=0})
 
 			local vel = player:get_velocity()
 			--local dir = player:get_look_dir()
@@ -657,7 +642,8 @@ core.register_globalstep(function(dtime)
 				if not p then
 					player_api.set_physics(player)
 				else
-					player:set_physics_override(p)
+					player_api.set_physics(player, p)
+					--player:set_physics_override(p)
 				end
 			end
 		end

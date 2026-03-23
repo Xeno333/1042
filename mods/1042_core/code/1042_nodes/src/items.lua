@@ -892,7 +892,7 @@ core_1042.registry.register_material("1042_core:spyglass", {
             player:set_fov(100 - (zoom * 10), false)
         end,
         done_func = function(player, zoom)
-            player:set_fov(100, false)
+            player:set_fov(core.settings:get("fov"), false)
         end,
     },
     stack_max = 1,
