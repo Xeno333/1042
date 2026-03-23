@@ -940,7 +940,7 @@ core_1042.registry.register_material("1042_core:glider", {
             else
                 core_1042.set(name .. "_gliding", "off")
                 player:set_physics_override(core_1042.get(name .. "_gliding_physics_backup"))
-                player:set_bone_position("Spine", {x=0, y=0, z=0}, {x=0, y=0, z=0})
+                player:set_bone_override("Spine", nil)
             end
         end
     end,

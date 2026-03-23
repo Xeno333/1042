@@ -86,7 +86,7 @@ local function set_physics(player)
 			speed_walk = 0.5
 		}
 	)
-	player:set_bone_position("Spine", {x=0, y=0, z=0}, {x=0, y=0, z=0})
+	player:set_bone_override("Spine", nil)
 end
 
 
@@ -642,6 +642,10 @@ core.register_globalstep(function(dtime)
 			})
 		end
 
+		local dir = player:get_look_dir()
+		local bone_pos = player:get_bone_position("Neck")
+		player:set_bone_override("Neck", { position = nil, rotation = {vec=vector.new((1-dir.y+270)*1.6, 0, 0), interpolation=0.1}})
+
 		local function apply_glide(player, dtime)
 			player:set_physics_override({
 				gravity = 0.3,
@@ -649,9 +653,10 @@ core.register_globalstep(function(dtime)
 			})
 
 			local vel = player:get_velocity()
-			local dir = player:get_look_dir()
+			--local dir = player:get_look_dir()
 
-			player:set_bone_position("Spine", {x=0, y=0, z=0}, {x=(1-dir.y)*90, y=0, z=0})
+			player:set_bone_override("Spine", { position = nil, rotation = {vec=vector.new((1-dir.y+45)*1.5, 0, 0), interpolation=0.2}})
+			player:set_bone_override("Neck", nil)
 
 			local speed = math.max(math.min(math.sqrt(vel.x*vel.x + vel.y*vel.y + vel.z*vel.z), 8), 0)
 
