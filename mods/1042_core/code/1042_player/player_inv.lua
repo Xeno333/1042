@@ -102,6 +102,7 @@ function core_1042.make_inv_formspec(player)
 
         "list[current_player;main;1,11;10,4;]"..
         "list[current_player;glider;12.2,9;1,1;]"..
+        "image[12,8.8;1.4,1.4;glider_inv_bg.png]" ..
         "listring[current_player;main]"
 
         if craft_count > 0 then
