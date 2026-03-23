@@ -184,7 +184,7 @@ core.register_node("1042_core:grass_tall", {
     -- Add self as a drop to avoid meta
     drop = "",
     preserve_metadata = function(_, _, _, drops)
-        drops[#drops+1] = ItemStack("1042_core:light_grass")
+        drops[#drops+1] = ItemStack("1042_core:grass_tall")
     end,
 
     groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
@@ -231,7 +231,7 @@ core.register_node("1042_core:grass_short", {
     -- Add self as a drop to avoid meta
     drop = "",
     preserve_metadata = function(_, _, _, drops)
-        drops[#drops+1] = ItemStack("1042_core:light_grass")
+        drops[#drops+1] = ItemStack("1042_core:grass_short")
     end,
 
     groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
