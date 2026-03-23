@@ -159,3 +159,47 @@ end
 function player_api.get_data(playername, id)
     return core_1042.get("1042_player_data__" .. playername .. "__" .. id)
 end
+
+
+
+
+function player_api.spawn_player(player)
+	local pos = nil
+
+	for tries = 0, 5000 do -- Max 5000 tries (This is very fast, and is mearly theoretical)
+		local x = math.random(0, 20000)
+		local z = math.random(0, 20000)
+		local y = mapgen_1042.get_spawn_y(x, z) 
+
+		if y then
+			pos = vector.new(x, y+1, z)
+			break
+		end
+	end
+
+	-- stop inf loop
+	if not pos then
+		pos = vector.new(0, 0, 0) -- Put here on problem to stop inf loop
+	end
+
+	player:set_pos(pos)
+
+	-- Reset hunger
+	player_api.set_data(player:get_player_name(), "hunger", 20)
+	player_api.add_hunger(player, 0)
+
+	return true
+end
+
+function player_api.set_physics(player)
+	player:set_physics_override(
+		{
+			gravity = 1.5,
+			jump = 1.2,
+			sneak_glitch = true,
+			liquid_sink = 2,
+			speed_walk = 0.5
+		}
+	)
+	player:set_bone_override("Spine", nil)
+end

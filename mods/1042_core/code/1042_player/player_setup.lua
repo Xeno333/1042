@@ -29,35 +29,9 @@ core.override_item("", {
 
 -- Spawn player; depends on 1042_mapgen
 
-local function spawn_player(player)
-	local pos = nil
 
-	for tries = 0, 5000 do -- Max 5000 tries (This is very fast, and is mearly theoretical)
-		local x = math.random(0, 20000)
-		local z = math.random(0, 20000)
-		local y = mapgen_1042.get_spawn_y(x, z) 
 
-		if y then
-			pos = vector.new(x, y+1, z)
-			break
-		end
-	end
-
-	-- stop inf loop
-	if not pos then
-		pos = vector.new(0, 0, 0) -- Put here on problem to stop inf loop
-	end
-
-	player:set_pos(pos)
-
-	-- Reset hunger
-	player_api.set_data(player:get_player_name(), "hunger", 20)
-	player_api.add_hunger(player, 0)
-
-	return true
-end
-
-core.register_on_respawnplayer(spawn_player)
+core.register_on_respawnplayer(player_api.spawn_player)
 
 
 -- Die player
@@ -76,18 +50,6 @@ end)
 
 
 
-local function set_physics(player)
-	player:set_physics_override(
-		{
-			gravity = 1.5,
-			jump = 1.2,
-			sneak_glitch = true,
-			liquid_sink = 2,
-			speed_walk = 0.5
-		}
-	)
-	player:set_bone_override("Spine", nil)
-end
 
 
 -- Join player
@@ -135,7 +97,7 @@ core.register_on_joinplayer(function(player, last_join)
 
 		nametag_color = "#00000000",
 	})
-	set_physics(player)
+	player_api.set_physics(player)
 	player:hud_set_flags(
 		{
 			minimap = false,
@@ -192,7 +154,7 @@ core.register_on_joinplayer(function(player, last_join)
 
 	local zoom_time = 0
 	if last_join == nil then
-		spawn_player(player)
+		player_api.spawn_player(player)
 		zoom_time = 1
 
 		core.chat_send_player(name, core.colorize("#00ff00", "It is the year 1042 and you are lost."))
@@ -682,13 +644,18 @@ core.register_globalstep(function(dtime)
 
 			if def.walkable then
 				core_1042.set(name .. "_gliding", "off")
-				set_physics(player)
+				player_api.set_physics(player)
 
 			elseif player_controls.jump then
 				apply_glide(player, dtime)
 
 			else
-				player:set_physics_override(core_1042.get(name .. "_gliding_physics_backup"))
+				local p = core_1042.get(name .. "_gliding_physics_backup")
+				if not p then
+					player_api.set_physics(player)
+				else
+					player:set_physics_override(p)
+				end
 			end
 		end
 	end
