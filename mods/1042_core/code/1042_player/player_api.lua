@@ -191,68 +191,49 @@ function player_api.spawn_player(player)
 	return true
 end
 
-function player_api.set_physics(player, override)
-    local gravity = 1.5
-    local jump = 1.2
-    local speed_walk = 0.5
-    local speed_climb = 1
-    local speed_crouch = 1
-    local speed_fast = 1
-    local speed = 1
-    local acceleration_default = 1
-    local acceleration_air = 1
-    local acceleration_fast = 1
-    local liquid_sink = 1
-    local liquid_fluidity = 1
-    local liquid_fluidity_smooth = 1
-    local sneak = true
-    local sneak_glitch = true
-    local new_move = true
+local default_physics = {
+    gravity = 1.5,
+    jump = 1.2,
+    speed_walk = 0.5,
+    sneak_glitch = true,
+    acceleration_default = 1,
+    acceleration_air = 1
+}
 
-    if override ~= nil then
-        gravity = override.gravity or gravity
-        jump = override.jump or jump
-        speed_walk = override.speed_walk or speed_walk
-        speed_climb = override.speed_climb or speed_climb
-        speed_crouch = override.speed_crouch or speed_crouch
-        speed_fast = override.speed_fast or speed_fast
-        speed = override.speed or speed
-        acceleration_default = override.acceleration_default or acceleration_default
-        acceleration_air = override.acceleration_air or acceleration_air
-        acceleration_fast = override.acceleration_fast or acceleration_fast
-        liquid_sink = override.liquid_sink or liquid_sink
-        gravity = override.gravity or gravity
-        liquid_fluidity = override.liquid_fluidity or liquid_fluidity
-        liquid_fluidity_smooth = override.liquid_fluidity_smooth or liquid_fluidity_smooth
-        sneak = override.sneak or sneak
-        sneak_glitch = override.sneak_glitch or sneak_glitch
-        new_move = override.new_move or new_move
-    elseif core.settings:get_bool("1042_experimental_physics") == true then
-        gravity = 0.8
-        jump = 1
-        speed_walk = 1.5
+local experimental_physics = {
+    gravity = 0.8,
+    jump = 1,
+    speed_walk = 1.5,
+    sneak_glitch = true,
+    acceleration_default = 2,
+    acceleration_air = 0.8
+}
+
+player_api.get_default_physics = function()
+    if core.settings:get_bool("1042_experimental_physics", false) == true then
+        return experimental_physics
+    else
+        return default_physics
+    end
+end
+
+function player_api.set_physics(player, override)
+    local phy = player:get_physics_override()
+    if override then
+        for k, v in pairs(override) do
+            phy[k] = v
+        end
+    elseif core.settings:get_bool("1042_experimental_physics", false) == true then
+        for k, v in pairs(experimental_physics) do
+            phy[k] = v
+        end
+    else
+        for k, v in pairs(default_physics) do
+            phy[k] = v
+        end
     end
 
-    player:set_physics_override(
-        {
-            gravity = gravity,
-            jump = jump,
-            speed_walk = speed_walk,
-            speed_climb = speed_climb,
-            speed_crouch = speed_crouch,
-            speed_fast = speed_fast,
-            speed = speed,
-            acceleration_default = acceleration_default,
-            acceleration_air = acceleration_air,
-            acceleration_fast = acceleration_fast,
-            liquid_sink = liquid_sink,
-            liquid_fluidity = liquid_fluidity,
-            liquid_fluidity_smooth = liquid_fluidity_smooth,
-            sneak = sneak,
-            sneak_glitch = sneak_glitch,
-            new_move = new_move,
-        }
-    )
+    player:set_physics_override(phy)
 	
 	player:set_bone_override("Spine", nil)
 end

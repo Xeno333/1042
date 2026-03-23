@@ -379,16 +379,16 @@ core.register_globalstep(function(dtime)
 
 			else
 				if (player_controls.movement_y ~= 0 or player_controls.movement_x ~= 0) and not player_controls.sneak then
-					if phy.speed_walk < 1.2 then
-						phy.speed_walk = phy.speed_walk + 0.05
+					if phy.speed_walk < player_api.get_default_physics().speed_walk+0.7 then
+						phy.speed_walk = tonumber(string.format("%.2f", phy.speed_walk + 0.05))
 						player_api.set_physics(player, {speed_walk=phy.speed_walk})
 						--player:set_physics_override(phy)
 
 						sprint_increment_cooldown[name] = 0.5
 					end
 
-				elseif phy.speed_walk > 0.5 then
-					phy.speed_walk = phy.speed_walk - 0.05
+				elseif phy.speed_walk > player_api.get_default_physics().speed_walk then
+					phy.speed_walk = tonumber(string.format("%.2f", phy.speed_walk - 0.05))
 					player_api.set_physics(player, {speed_walk=phy.speed_walk})
 					--player:set_physics_override(phy)
 
@@ -585,11 +585,11 @@ core.register_globalstep(function(dtime)
 
 		-- Wield Item
 		local item = core.registered_items[ player:get_wielded_item():get_name()]
-		if item and item.short_description then
+		if item then
 			player_api.update_hud(player, "wield_text", {
 				type = "text",
 				name = "wield_text_hud",
-				text = item.short_description,
+				text = item.short_description or "",
 				position = {x=0.05, y=0.9},
 				number = 0x00ffdd,
 				style = 3
@@ -601,8 +601,6 @@ core.register_globalstep(function(dtime)
 		player:set_bone_override("Neck", { position = nil, rotation = {vec=vector.new((1-dir.y+270)*1.6, 0, 0), interpolation=0.1}})
 
 		local function apply_glide(player, dtime)
-			player_api.set_physics(player, {gravity=0.3,speed_walk=0})
-
 			local vel = player:get_velocity()
 			--local dir = player:get_look_dir()
 
@@ -629,6 +627,9 @@ core.register_globalstep(function(dtime)
 			local def = core.registered_nodes[node_below.name]
 
 			if not def.walkable and core.settings:get_bool("free_move") and core.get_player_privs(player:get_player_name()).fly ~= true then
+				if core_1042.get(name .. "_gliding") ~= "on" then
+					player_api.set_physics(player, {gravity=0.3,speed_walk=0})
+				end
 				core_1042.set(name .. "_gliding", "on")
 				player_api.set_physics(player)
 				apply_glide(player, dtime)
@@ -636,15 +637,18 @@ core.register_globalstep(function(dtime)
 				if core.get_player_privs(player:get_player_name()).fly ~= true then
 					core.settings:set_bool("free_move", false)
 				end
+				if core_1042.get(name .. "_gliding") ~= "off" then
+					player_api.set_physics(player)
+				end
 				core_1042.set(name .. "_gliding", "off")
 				player:set_bone_override("Spine", nil)
-				local p = core_1042.get(name .. "_gliding_physics_backup")
-				if not p then
-					player_api.set_physics(player)
-				else
-					player_api.set_physics(player, p)
+				--local p = core_1042.get(name .. "_gliding_physics_backup")
+				--if not p then
+				--	player_api.set_physics(player)
+				--else
+				--	player_api.set_physics(player, p)
 					--player:set_physics_override(p)
-				end
+				--end
 			end
 		end
 	end
