@@ -940,6 +940,7 @@ core_1042.registry.register_material("1042_core:glider", {
             else
                 core_1042.set(name .. "_gliding", "off")
                 player:set_physics_override(core_1042.get(name .. "_gliding_physics_backup"))
+                player:set_bone_position("Spine", {x=0, y=0, z=0}, {x=0, y=0, z=0})
             end
         end
     end,
@@ -952,3 +953,22 @@ core_1042.registry.register_material("1042_core:glider", {
         "group:plant 6", "1042_core:sticks 4"
     }
 }, {name = "1042_core:glider"})
+
+core.register_entity("1042_core:glider_entity", {
+    initial_properties = {
+        hp_max = 100,
+        collide_with_objects = false,
+        pointable = false,
+        visual = "mesh",
+        visual_size = {x = 2, y = 2, z = 2},
+        mesh = "glider.obj",
+        textures = {"1042_tree.png", "1042_thin_moss.png"},
+        use_texture_alpha = true,
+        backface_culling = false,
+    },
+    on_detach = function(self, parent)
+        if self.object ~= nil then
+            self.object:remove()
+        end
+    end,
+})

@@ -86,6 +86,7 @@ local function set_physics(player)
 			speed_walk = 0.5
 		}
 	)
+	player:set_bone_position("Spine", {x=0, y=0, z=0}, {x=0, y=0, z=0})
 end
 
 
@@ -309,9 +310,31 @@ core.register_on_leaveplayer(function(player)
 	sprint_increment_cooldown[name] = nil
 end)
 
+local function remove_glider(player)
+	local meta = player:get_meta()
+	if meta:get_string("glider_entity_guid") ~= "" then
+		local glider = core.objects_by_guid[meta:get_string("glider_entity_guid")]
+		if (glider ~= nil) then
+			glider:set_detach()
+		end
+		meta:set_string("glider_entity_guid", "")
+	end
+end
 
+local function add_glider(player)
+	local meta = player:get_meta()
+	if meta:get_string("glider_entity_guid") == "" then
+		local glider = core.add_entity(player:get_pos(), "1042_core:glider_entity", nil)
+		meta:set_string("glider_entity_guid", glider:get_guid())
+		glider:set_attach(player, "Spine", vector.new(0, 0.5, -0.5), vector.new(90, 0, 0), true)
+		if core.settings:get_bool("1042_flight_cam") then
+			player:set_camera({mode="third"}) -- force into third person
+			core.after(0, function(...) player:set_camera(...) end, {mode="any"}) -- allow changing pov again
+		end
+	end
+end
 
-local function make_death_formspec( reason)
+local function make_death_formspec(reason)
 	local msg = "You "
 	if reason then
 		if reason._1042_death_msg then
@@ -425,11 +448,15 @@ core.register_globalstep(function(dtime)
 
 		-- Animation
 		if core_1042.get(name .. "_gliding") == "on" then
-			core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.3})
+			if core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.3}) then
+				add_glider(player)
+			end
 		else
 			if player_controls.movement_y ~= 0 then
+				remove_glider(player)
 				core_1042.player.set_animation(player, {name="walk", range={x = 0, y = 0.8}, speed=1.1})
 			elseif player_controls.movement_y == 0 and core_1042.player.get_animation ~= "walk" then
+				remove_glider(player)
 				core_1042.player.set_animation(player, {name="idle", range={x = 0, y = 0}, speed=1})
 			end
 		end
@@ -623,6 +650,9 @@ core.register_globalstep(function(dtime)
 
 			local vel = player:get_velocity()
 			local dir = player:get_look_dir()
+
+			player:set_bone_position("Spine", {x=0, y=0, z=0}, {x=(1-dir.y)*90, y=0, z=0})
+
 			local speed = math.max(math.min(math.sqrt(vel.x*vel.x + vel.y*vel.y + vel.z*vel.z), 8), 0)
 
 			local s = speed * 0.1

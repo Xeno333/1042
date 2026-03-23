@@ -5,7 +5,9 @@ core_1042.player.set_animation = function(player, anim)
     if meta:get_string("animation") ~= anim.name then
         player:set_animation(anim.range, anim.speed, anim.blend or 0, anim.loop or true)
         meta:set_string("animation", anim.name)
+        return true
     end
+    return false
 end
 
 core_1042.player.get_animation = function(player)
