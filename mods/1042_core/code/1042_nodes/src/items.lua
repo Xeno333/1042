@@ -926,7 +926,16 @@ core_1042.registry.register_material("1042_core:glider", {
     stack_max = 1,
 
     groups = {glider = 1, dig_immediate = 1, attached_node = 3},
-
+    on_secondary_use = function(itemstack, user, pointed_thing)
+        local inv = user:get_inventory()
+        local glider_slot = inv:get_stack("glider", 1):get_name()
+        if glider_slot ~= "1042_core:glider" then
+            inv:set_stack("glider", 1, ItemStack("1042_core:glider"))
+            return ItemStack()
+        end
+        return itemstack
+    end,
+    --[[
     on_use = function(itemstack, player, pointed_thing)
         local p_pos = player:get_pos()
         local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.5, z = p_pos.z})
@@ -949,6 +958,7 @@ core_1042.registry.register_material("1042_core:glider", {
             end
         end
     end,
+    ]]
 
     item_type = "item",
 }, 3, {

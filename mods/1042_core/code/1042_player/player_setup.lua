@@ -257,11 +257,12 @@ core.register_on_joinplayer(function(player, last_join)
 		number = 0x00ffff,
 		style = 3
 	})
+
+	local inv = player:get_inventory() -- do this in joinplayer as opposed to newplayer so old worlds are supported
+	if inv:get_size("glider") ~= 1 then
+		inv:set_size("glider", 1)
+	end
 end)
-
-
-
-
 
 core.register_on_leaveplayer(function(player)
 	local name = player:get_player_name()
@@ -411,7 +412,7 @@ core.register_globalstep(function(dtime)
 		-- Animation
 		if core_1042.get(name .. "_gliding") == "on" then
 			core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.3})
-			if player_controls.jump then
+			if core.settings:get_bool("free_move") and core.get_player_privs(player:get_player_name()).fly ~= true then
 				add_glider(player)
 			else
 				remove_glider(player)
@@ -637,19 +638,21 @@ core.register_globalstep(function(dtime)
 			player:add_velocity(vector.new(dir.x * s, dir.y * s * n, dir.z * s))
 		end
 
-		if core_1042.get(name .. "_gliding") == "on" then
+		if player:get_inventory():get_stack("glider", 1):get_name() == "1042_core:glider" then
 			local p_pos = player:get_pos()
 			local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.5, z = p_pos.z})
 			local def = core.registered_nodes[node_below.name]
 
-			if def.walkable then
-				core_1042.set(name .. "_gliding", "off")
+			if not def.walkable and core.settings:get_bool("free_move") and core.get_player_privs(player:get_player_name()).fly ~= true then
+				core_1042.set(name .. "_gliding", "on")
 				player_api.set_physics(player)
-
-			elseif player_controls.jump then
 				apply_glide(player, dtime)
-
 			else
+				if core.get_player_privs(player:get_player_name()).fly ~= true then
+					core.settings:set_bool("free_move", false)
+				end
+				core_1042.set(name .. "_gliding", "off")
+				player:set_bone_override("Spine", nil)
 				local p = core_1042.get(name .. "_gliding_physics_backup")
 				if not p then
 					player_api.set_physics(player)
