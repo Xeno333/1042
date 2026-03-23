@@ -101,7 +101,7 @@ function core_1042.make_inv_formspec(player)
         --"image_button[11,8;2,1;1042_plain_node.png^[colorize:#448888:144;credits_txt;Credits]"..
 
         "list[current_player;main;1,11;10,4;]"..
-        "list[current_player;glider;1,8;1,1;]"..
+        "list[current_player;glider;12.2,9;1,1;]"..
         "listring[current_player;main]"
 
         if craft_count > 0 then
