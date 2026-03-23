@@ -448,8 +448,11 @@ core.register_globalstep(function(dtime)
 
 		-- Animation
 		if core_1042.get(name .. "_gliding") == "on" then
-			if core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.3}) then
+			core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.3})
+			if player_controls.jump then
 				add_glider(player)
+			else
+				remove_glider(player)
 			end
 		else
 			if player_controls.movement_y ~= 0 then
