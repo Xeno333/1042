@@ -219,16 +219,18 @@ end
 
 function player_api.set_physics(player, override)
     local phy = player:get_physics_override()
-    if override then
-        for k, v in pairs(override) do
-            phy[k] = v
-        end
-    elseif core.settings:get_bool("1042_experimental_physics", false) == true then
+    if core.settings:get_bool("1042_experimental_physics", false) == true then
         for k, v in pairs(experimental_physics) do
             phy[k] = v
         end
     else
         for k, v in pairs(default_physics) do
+            phy[k] = v
+        end
+    end
+
+    if override then
+        for k, v in pairs(override) do
             phy[k] = v
         end
     end
