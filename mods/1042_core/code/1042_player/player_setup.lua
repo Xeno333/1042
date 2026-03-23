@@ -411,7 +411,7 @@ core.register_globalstep(function(dtime)
 
 		-- Animation
 		if core_1042.get(name .. "_gliding") == "on" then
-			core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.3})
+			core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.2})
 			if core.settings:get_bool("free_move") and core.get_player_privs(player:get_player_name()).fly ~= true then
 				add_glider(player)
 			else
