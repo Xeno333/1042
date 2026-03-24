@@ -935,30 +935,6 @@ core_1042.registry.register_material("1042_core:glider", {
         end
         return itemstack
     end,
-    --[[
-    on_use = function(itemstack, player, pointed_thing)
-        local p_pos = player:get_pos()
-        local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.5, z = p_pos.z})
-        local def = core.registered_nodes[node_below.name]
-
-        if not def.walkable then
-            local name = player:get_player_name()
-            if (core_1042.get(name .. "_gliding") == "off") then
-                core_1042.set(name .. "_gliding", "on")
-                core_1042.set(name .. "_gliding_physics_backup", player:get_physics_override())
-            else
-                core_1042.set(name .. "_gliding", "off")
-				local p = core_1042.get(name .. "_gliding_physics_backup")
-				if not p then
-					player_api.set_physics(player)
-				else
-					player:set_physics_override(p)
-				end
-                player:set_bone_override("Spine", nil)
-            end
-        end
-    end,
-    ]]
 
     item_type = "item",
 }, 3, {
