@@ -24,7 +24,6 @@ core.override_item("", {
 
 
 -- Spawn player; depends on 1042_mapgen
-
 core.register_on_respawnplayer(player_api.spawn_player)
 
 

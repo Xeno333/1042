@@ -191,6 +191,20 @@ function player_api.spawn_player(player)
 	return true
 end
 
+core.register_privilege("spawn", {
+    description = "Respawn",
+    give_to_admin = true,
+    give_to_singleplayer = false
+})
+core.register_chatcommand("spawn", {
+    privs = {["spawn"] = true},
+    description = "Respawn",
+    func = function(name)
+        player_api.spawn_player(core.get_player_by_name(name))
+        return true, "Done!"
+    end
+})
+
 local default_physics = {
     gravity = 1.5,
     jump = 1.2,
