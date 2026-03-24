@@ -51,6 +51,7 @@ local required_settings = {
     ["enable_water_reflections"] = {single_player=true, value="true"},
     ["soft_clouds"] = {single_player=true, value="true"},
     ["enable_fog"] = {single_player=true, value="true"},
+    ["hurt_flash_enabled"] = {single_player=true, value="false"},
 }
 
 if core.settings:get_bool("1042_auto_adjust_settings", false) then
