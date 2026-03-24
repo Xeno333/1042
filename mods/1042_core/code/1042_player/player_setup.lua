@@ -266,6 +266,7 @@ local function remove_glider(player)
 		if (glider ~= nil) then
 			glider:set_detach()
 		end
+		player:set_camera({mode="first"}) -- force into third person
 		meta:set_string("glider_entity_guid", "")
 	end
 end
@@ -276,9 +277,13 @@ local function add_glider(player)
 		local glider = core.add_entity(player:get_pos(), "1042_core:glider_entity", nil)
 		meta:set_string("glider_entity_guid", glider:get_guid())
 		glider:set_attach(player, "Spine", vector.new(0, 0.5, -0.5), vector.new(90, 0, 0), true)
+
 		if core.settings:get_bool("1042_flight_cam", true) then
 			player:set_camera({mode="third"}) -- force into third person
-			core.after(0, function(...) player:set_camera(...) end, {mode="any"}) -- allow changing pov again
+
+			core.after(0, function(...)
+				player:set_camera(...)
+			end, {mode="any"}) -- allow changing pov again
 		end
 	end
 end
@@ -370,82 +375,32 @@ core.register_globalstep(function(dtime)
 		end
 
 
-		-- Gliding
-		local gliding = false
-
-		local dir = player:get_look_dir()
-		local bone_pos = player:get_bone_position("Neck")
-		player:set_bone_override("Neck", { position = nil, rotation = {vec=vector.new((1-dir.y+270)*1.6, 0, 0), interpolation=0.1}})
-
-		local function apply_glide(player, dtime)
-			player_api.set_physics(player, {gravity=0.3,speed_walk=0})
-
-			local vel = player:get_velocity()
-			--local dir = player:get_look_dir()
-
-			player:set_bone_override("Spine", { position = nil, rotation = {vec=vector.new((1-dir.y+45)*1.5, 0, 0), interpolation=0.2}})
-			player:set_bone_override("Neck", nil)
-
-			local speed = math.max(math.min(math.sqrt(vel.x*vel.x + vel.y*vel.y + vel.z*vel.z), 8), 0)
-
-			local s = speed * 0.1
-			local r = 50
-			local n = 0.5
-			local dy = dir.y + 0.2
-			if dy > 0 then
-				n = n / math.max(0.1, math.floor(dy * 20) / 10)
-			end
-
-			player:add_velocity(vector.new(-vel.x / r, -vel.y / r * 2, -vel.z / r))
-			player:add_velocity(vector.new(dir.x * s, dir.y * s * n, dir.z * s))
-		end
-
-		if player:get_inventory():get_stack("glider", 1):get_name() == "1042_core:glider" then
-			local p_pos = player:get_pos()
-			local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.5, z = p_pos.z})
-			local def = core.registered_nodes[node_below.name]
-
-			if not def.walkable and core.settings:get_bool("free_move") and core.get_player_privs(player:get_player_name()).fly ~= true then
-				core_1042.set(name .. "_gliding", "on")
-				gliding = true
-				apply_glide(player, dtime)
-			else
-				if core.get_player_privs(player:get_player_name()).fly ~= true then
-					core.settings:set_bool("free_move", false)
-				end
-				if core_1042.get(name .. "_gliding") ~= "off" then
-					player_api.set_physics(player)
-				end
-				core_1042.set(name .. "_gliding", "off")
-				player:set_bone_override("Spine", nil)
-			end
-		end
-
 
 		-- Sprint
-		if not gliding then
-			local phy = player:get_physics_override()
-			if sprint_increment_cooldown[name] then -- sanity check
-				if sprint_increment_cooldown[name] > 0 then
-					sprint_increment_cooldown[name] = sprint_increment_cooldown[name] - dtime
+		local phy = player:get_physics_override()
+		if sprint_increment_cooldown[name] then -- sanity check
+			if sprint_increment_cooldown[name] > 0 then
+				sprint_increment_cooldown[name] = sprint_increment_cooldown[name] - dtime
 
-				else
-					if (player_controls.movement_y ~= 0 or player_controls.movement_x ~= 0) and not player_controls.sneak then
-						if phy.speed_walk < player_api.get_default_physics().speed_walk+0.7 then
-							player_api.set_physics(player, {speed_walk = math.floor((phy.speed_walk + 0.05) * 100) / 100})
-
-							sprint_increment_cooldown[name] = 0.5
-						end
-
-					elseif phy.speed_walk > player_api.get_default_physics().speed_walk then
-						player_api.set_physics(player, {speed_walk = math.floor((phy.speed_walk - 0.05) * 100) / 100})
+			else
+				if (player_controls.movement_y ~= 0 or player_controls.movement_x ~= 0) and not player_controls.sneak then
+					if phy.speed_walk < 1.2 then
+						phy.speed_walk = phy.speed_walk + 0.05
+						player_api.set_physics(player, {speed_walk=phy.speed_walk})
+						--player:set_physics_override(phy)
 
 						sprint_increment_cooldown[name] = 0.5
 					end
+
+				elseif phy.speed_walk > 0.5 then
+					phy.speed_walk = phy.speed_walk - 0.05
+					player_api.set_physics(player, {speed_walk=phy.speed_walk})
+					--player:set_physics_override(phy)
+
+					sprint_increment_cooldown[name] = 0.5
 				end
 			end
 		end
-		
 
 		-- Animation
 		if core_1042.get(name .. "_gliding") == "on" then
@@ -635,15 +590,67 @@ core.register_globalstep(function(dtime)
 
 		-- Wield Item
 		local item = core.registered_items[ player:get_wielded_item():get_name()]
-		if item then
+		if item and item.short_description then
 			player_api.update_hud(player, "wield_text", {
 				type = "text",
 				name = "wield_text_hud",
-				text = item.short_description or item.name or "",
+				text = item.short_description,
 				position = {x=0.05, y=0.9},
 				number = 0x00ffdd,
 				style = 3
 			})
+		end
+
+		local dir = player:get_look_dir()
+		local bone_pos = player:get_bone_position("Neck")
+		player:set_bone_override("Neck", { position = nil, rotation = {vec=vector.new((1-dir.y+270)*1.6, 0, 0), interpolation=0.1}})
+
+		local function apply_glide(player, dtime)
+			player_api.set_physics(player, {gravity=0.3,speed_walk=0})
+
+			local vel = player:get_velocity()
+			--local dir = player:get_look_dir()
+
+			player:set_bone_override("Spine", { position = nil, rotation = {vec=vector.new((1-dir.y+45)*1.5, 0, 0), interpolation=0.2}})
+			player:set_bone_override("Neck", nil)
+
+			local speed = math.max(math.min(math.sqrt(vel.x*vel.x + vel.y*vel.y + vel.z*vel.z), 8), 0)
+
+			local s = speed * 0.1
+			local r = 50
+			local n = 0.5
+			local dy = dir.y + 0.2
+			if dy > 0 then
+				n = n / math.max(0.1, math.floor(dy * 20) / 10)
+			end
+
+			player:add_velocity(vector.new(-vel.x / r, -vel.y / r * 2, -vel.z / r))
+			player:add_velocity(vector.new(dir.x * s, dir.y * s * n, dir.z * s))
+		end
+
+		if player:get_inventory():get_stack("glider", 1):get_name() == "1042_core:glider" then
+			local p_pos = player:get_pos()
+			local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.5, z = p_pos.z})
+			local def = core.registered_nodes[node_below.name]
+
+			if not def.walkable and core.settings:get_bool("free_move") and core.get_player_privs(player:get_player_name()).fly ~= true then
+				core_1042.set(name .. "_gliding", "on")
+				player_api.set_physics(player)
+				apply_glide(player, dtime)
+			else
+				if core.get_player_privs(player:get_player_name()).fly ~= true then
+					core.settings:set_bool("free_move", false)
+				end
+				core_1042.set(name .. "_gliding", "off")
+				player:set_bone_override("Spine", nil)
+				local p = core_1042.get(name .. "_gliding_physics_backup")
+				if not p then
+					player_api.set_physics(player)
+				else
+					player_api.set_physics(player, p)
+					--player:set_physics_override(p)
+				end
+			end
 		end
 	end
 end)
