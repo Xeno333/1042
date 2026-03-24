@@ -267,6 +267,11 @@ local function remove_glider(player)
 			glider:set_detach()
 		end
 		meta:set_string("glider_entity_guid", "")
+
+		player:set_camera({mode="first"}) -- force into third person
+		core.after(0, function(...)
+			player:set_camera(...)
+		end, {mode="any"}) -- allow changing pov again
 	end
 end
 
@@ -278,7 +283,9 @@ local function add_glider(player)
 		glider:set_attach(player, "Spine", vector.new(0, 0.5, -0.5), vector.new(90, 0, 0), true)
 		if core.settings:get_bool("1042_flight_cam", true) then
 			player:set_camera({mode="third"}) -- force into third person
-			core.after(0, function(...) player:set_camera(...) end, {mode="any"}) -- allow changing pov again
+			core.after(0, function(...)
+				player:set_camera(...)
+			end, {mode="any"}) -- allow changing pov again
 		end
 	end
 end
