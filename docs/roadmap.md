@@ -7,7 +7,6 @@
 - A calm simple aesthetic.
 
 
-
 ## Development goals
 
 ### APIs
@@ -18,28 +17,17 @@
 
 ### Player
 
-- Add player API and hunger/thirst mechanic.
+- Add player API and energy/thirst mechanic.
 - Add weather mechanic with seasons.
-
-
-### Textures
-
-We strive to maintain a simple base texturepack for the game.
-
-- Move base texture to more base textures per node with less overlays.
-- Add more textures for mobs
-- Make a higher res texture pack
-
 
 ### Nodes
 
 - More more nodes for basic gameplay
 - More nodes for building
-- More natrual nodes
+- More natural nodes
 
 ### Weather
 
-- Make weather have affects on the enviorment, like hail damage the player, and rain put out fires.
 - Add feature where transitions between weathers is clean.
 
 
@@ -54,15 +42,19 @@ We strive to maintain a simple base texturepack for the game.
 
 
 
-## Demensions
+## Dimensions
 
 ### Normal
 
 Normal world
 
+## Sky world
+
+Can be accessed by sky portal node
+
 ## Void (Planned)
 
-A demension with low gravity and dark skies that slowly change color with few nodes, but colorful life.
+A dimension with low gravity and dark skies that slowly change color with few nodes, but colorful life.
 
 
 

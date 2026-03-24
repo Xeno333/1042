@@ -133,11 +133,92 @@ core.register_abm({
 core.register_abm({
 	label = "Burning Sound",
 	nodenames = {"group:burning"},
-	interval = 30,
+	interval = 2,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
-		core.sound_play("fire", {pos = pos, gain = .1, max_hear_distance = 10})
+		core.sound_play("fire", {pos = pos, pitch = 2, gain = 0.5, max_hear_distance = 10})
 	end
+})
+
+core.register_abm({
+    label = "Burning Particles",
+    interval = 4,
+    chance = 5,
+    nodenames = {"group:burning_2"},
+    neighbors = {"air"},
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        core.add_particlespawner({
+            amount = 4,
+            time = 4,
+
+            collisiondetection = true,
+            object_collision = true,
+
+            vel = {
+                min = vector.new(-1, 1, -1),
+                max = vector.new(1, 2, 1),
+                bias = 0
+            },
+
+            acc = vector.new(0, 1, 0),
+
+            size = {
+                min = 0.5,
+                max = 1
+            },
+
+            exptime = {
+                min = 0.5,
+                max = 1
+            },
+
+            bounce = {
+                min = 0,
+                max = 0.3
+            },
+
+            glow = 14,
+
+            pos = {
+                min = vector.new(pos.x-0.3,pos.y-0.5,pos.z-0.3),
+                max = vector.new(pos.x+0.3,pos.y,pos.z+0.3),
+                bias = 0
+            },
+
+            texpool = {
+                {
+                    name = "1042_plain_node.png^[colorize:#ffee77:255",
+                    scale = 0.5,
+                    alpha_tween = {
+                        0.5, 1,
+                        style = "pulse",
+                        reps = 2,
+
+                    }
+                },
+                {
+                    name = "1042_plain_node.png^[colorize:#ffee77:255",
+                    scale = 0.25,
+                    alpha_tween = {
+                        0.5, 1,
+                        style = "pulse",
+                        reps = 2,
+
+                    }
+                },
+                {
+                    name = "1042_plain_node.png^[colorize:#ffdd88:255",
+                    scale = 0.1,
+                    alpha_tween = {
+                        0.5, 1,
+                        style = "pulse",
+                        reps = 2,
+
+                    }
+                }
+            }
+        })
+    end
 })
 
 
@@ -154,7 +235,7 @@ core.register_abm({
     interval = 4,
     chance = 4,
     nodenames = {"group:melts"},
-    neighbors = {"group:burning"},
+    neighbors = {"group:burning", "group:burning_2"},
     action = function(pos, node, active_object_count, active_object_count_wider)
         local def = core.registered_nodes[node.name]
         if def._1042_melts_to then
@@ -187,7 +268,7 @@ core.register_abm({
 core.register_abm({
     label = "Cook",
     nodenames = {"group:cooks"},
-    neighbors = {"group:burning"},
+    neighbors = {"group:burning", "group:burning_2"},
     catch_up = true,
     interval = 8,
     chance = 4,

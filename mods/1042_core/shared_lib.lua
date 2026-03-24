@@ -1,9 +1,9 @@
 
 core_1042 = {
     version_release_to_string = {"", "-pre-release", "-dev"},
-    version = {major = 0, minor = 3, patch = 1, release = 3},
+    version = {major = 0, minor = 4, patch = 0, release = 3},
     version_string = nil, -- string set at start time
-    oldest_supported_version = {major = 0, minor = 3, patch = 1, release = 3},
+    oldest_supported_version = {major = 0, minor = 4, patch = 0, release = 3},
     world_version = nil,
     world_version_string = nil, -- string set at start time
 
@@ -22,9 +22,28 @@ core_1042.shared_lib = {
             max = 512,
             min = -256,
 
+            deep_cave = -100,
             sea_level = 0,
             land_max = 128
-        }
+        },
+        underworldworld_y_levels = {
+            max = -257,
+            min = -512,
+
+            lava_sea_level = -428
+        },
+        sky_world_y_levels = {
+            max = 4096,
+            min = 1024,
+
+            main_level = 2048
+        },
+        void_y_levels = {
+            max = -513,
+            min = -1024,
+
+            main_level = -800
+        },
     }
 }
 

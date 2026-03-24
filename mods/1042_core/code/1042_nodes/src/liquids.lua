@@ -2,16 +2,16 @@
 -- Liquids
 
 core.register_node("1042_core:water_source", {
-    description = "Water Source",
+    description = core_1042.lorelang.translate("Standing Water"),
 
     drawtype = "liquid",
     tiles = {
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = false,
 		},
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = true,
 		},
     },
@@ -31,7 +31,7 @@ core.register_node("1042_core:water_source", {
         footstep = {
             name = "water",
             gain = 0.5,
-            pitch = 1
+            pitch = 0.5
         },
     },
 
@@ -50,17 +50,17 @@ core.register_node("1042_core:water_source", {
 })
 
 core.register_node("1042_core:water_flowing", {
-    description = "Flowing Water",
+    description = core_1042.lorelang.translate("Flowing Water"),
 
     drawtype = "flowingliquid",
-    tiles = {"water.png"},
+    tiles = {"1042_water.png"},
     special_tiles = {
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = false,
 		},
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = true,
 		},
     },
@@ -80,7 +80,7 @@ core.register_node("1042_core:water_flowing", {
         footstep = {
             name = "water",
             gain = 0.5,
-            pitch = 1
+            pitch = 0.75
         },
     },
 
@@ -100,16 +100,16 @@ core.register_node("1042_core:water_flowing", {
 
 
 core.register_node("1042_core:water_source2", {
-    description = "Water Source 2",
+    description = core_1042.lorelang.translate("Still Water"),
 
     drawtype = "liquid",
     tiles = {
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = false,
 		},
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = true,
 		},
     },
@@ -130,7 +130,7 @@ core.register_node("1042_core:water_source2", {
         footstep = {
             name = "water",
             gain = 0.5,
-            pitch = 1
+            pitch = 0.5
         },
     },
 
@@ -149,17 +149,17 @@ core.register_node("1042_core:water_source2", {
 })
 
 core.register_node("1042_core:water_flowing2", {
-    description = "Flowing Water 2",
+    description = core_1042.lorelang.translate("Running Water"),
 
     drawtype = "flowingliquid",
-    tiles = {"water.png"},
+    tiles = {"1042_water.png"},
     special_tiles = {
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = false,
 		},
 		{
-			name = "water.png^[makealpha:1,1,1",
+			name = "1042_water.png",
 			backface_culling = true,
 		},
     },
@@ -180,7 +180,7 @@ core.register_node("1042_core:water_flowing2", {
         footstep = {
             name = "water",
             gain = 0.5,
-            pitch = 1
+            pitch = 0.75
         },
     },
 
@@ -203,16 +203,18 @@ core.register_node("1042_core:water_flowing2", {
 
 
 core.register_node("1042_core:lava_source", {
-    description = "Lava Source",
+    description = core_1042.lorelang.translate("Lava"),
 
     drawtype = "liquid",
     tiles = {
 		{
-			name = "1042_plain_node.png^[colorize:#ff2200:144",
+			name = "1042_lava.png",
+            --name = "1042_plain_node.png^[colorize:#ff2200:144",
 			backface_culling = false,
 		},
 		{
-			name = "1042_plain_node.png^[colorize:#ff2200:144",
+			name = "1042_lava.png",
+            --name = "1042_plain_node.png^[colorize:#ff2200:144",
 			backface_culling = true,
 		},
     },
@@ -242,22 +244,25 @@ core.register_node("1042_core:lava_source", {
 
     _1042_cools_to = "1042_core:basalt",
     post_effect_color = {a = 144, r = 0xff, g = 0x22, b = 0x00},
-    groups = {molten = 1, liquid = 1, burning = 1},
+    groups = {molten = 1, liquid = 1, burning_2 = 1},
 
 })
 
 core.register_node("1042_core:lava_flowing", {
-    description = "Flowing Lava",
+    description = core_1042.lorelang.translate("Flowing Lava"),
 
     drawtype = "flowingliquid",
-    tiles = {"1042_plain_node.png^[colorize:#ff2200:144"},
+    tiles = {"1042_lava.png"},
+    --tiles = {"1042_plain_node.png^[colorize:#ff2200:144"},
     special_tiles = {
 		{
-			name = "1042_plain_node.png^[colorize:#ff2200:144",
+			name = "1042_lava.png",
+            --name = "1042_plain_node.png^[colorize:#ff2200:144",
 			backface_culling = false,
 		},
 		{
-			name = "1042_plain_node.png^[colorize:#ff2200:144",
+			name = "1042_lava.png",
+            --name = "1042_plain_node.png^[colorize:#ff2200:144",
 			backface_culling = true,
 		},
     },
@@ -286,7 +291,7 @@ core.register_node("1042_core:lava_flowing", {
     damage_per_second = 10,
 
     post_effect_color = {a = 144, r = 0xff, g = 0x22, b = 0x00},
-    groups = {molten = 1, liquid = 1, burning = 1, not_in_creative_inventory = 1},
+    groups = {molten = 1, liquid = 1, burning_2 = 1, not_in_creative_inventory = 1},
 })
 
 
@@ -296,16 +301,17 @@ core.register_node("1042_core:lava_flowing", {
 
 
 core.register_node("1042_core:molten_iron_source", {
-    description = "Molten Iron Source",
+    description = core_1042.lorelang.translate("Molten iron"),
 
     drawtype = "liquid",
     tiles = {
 		{
-			name = "1042_plain_node.png^[colorize:#cc3300:144",
+			name = "1042_molten_iron.png", --^[colorize:#cc3300:144
 			backface_culling = false,
 		},
 		{
-			name = "1042_plain_node.png^[colorize:#cc3300:144",
+			name = "1042_molten_iron.png",
+            --name = "1042_plain_node.png^[colorize:#cc3300:144",
 			backface_culling = true,
 		},
     },
@@ -340,17 +346,19 @@ core.register_node("1042_core:molten_iron_source", {
 })
 
 core.register_node("1042_core:molten_iron_flowing", {
-    description = "Flowing Molten Iron",
+    description = core_1042.lorelang.translate("Flowing Molten Iron"),
 
     drawtype = "flowingliquid",
-    tiles = {"1042_plain_node.png^[colorize:#cc3300:144"},
+    tiles = {name = "1042_molten_iron.png",},
     special_tiles = {
 		{
-			name = "1042_plain_node.png^[colorize:#cc3300:144",
+			name = "1042_molten_iron.png",
+            --name = "1042_plain_node.png^[colorize:#cc3300:144",
 			backface_culling = false,
 		},
 		{
-			name = "1042_plain_node.png^[colorize:#cc3300:144",
+			name = "1042_molten_iron.png",
+            --name = "1042_plain_node.png^[colorize:#cc3300:144",
 			backface_culling = true,
 		},
     },

@@ -25,7 +25,7 @@ core_1042.creative_inv = core.create_detached_inventory("creative",
 
 
 -- Generate the inv
-core.after(0,function() -- use after to ensure compleate initalization
+core_1042.phases.register_callback("startup_done", function()
     local size = 0
     local lists = {core.registered_nodes, core.registered_items, core.registered_tools, core.registered_craftitems}
 

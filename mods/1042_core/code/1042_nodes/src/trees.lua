@@ -7,7 +7,8 @@ core_1042.trees.register_tree("1042_core", {
     name = "Dark",
 
     tree = {
-        tiles = {"1042_plain_node.png^[colorize:#371307:200"},
+        tiles = {"1042_tree_dark.png"},
+        --tiles = {"1042_plain_node.png^[colorize:#371307:200"},
         use_texture_alpha = "opaque",
 
         sounds = {
@@ -21,9 +22,10 @@ core_1042.trees.register_tree("1042_core", {
         groups = {wood = 2, plant = 1, burns = 4},
     },
     leaves = {
-        tiles = {"1042_plain_node.png^[colorize:#1f470a:168"},
+        tiles = {"1042_tree_dark_leaves.png"},
+        special_tiles = {"1042_tree_dark_leaves_simple.png"},
         use_texture_alpha = "blend",
-        drawtype = "allfaces",
+        drawtype = "allfaces_optional",
 
         paramtype = "light",
         sunlight_propagates = true,
@@ -31,7 +33,7 @@ core_1042.trees.register_tree("1042_core", {
         groups = {leafy = 1, plant = 1, breakable_by_hand = 1, burns = 1},
     },
     planks = {
-        tiles = {"1042_plain_node.png^[colorize:#371307:128"},
+        tiles = {"1042_tree_dark_planks.png"},
         use_texture_alpha = "opaque",
     
         sounds = {
@@ -50,7 +52,7 @@ core_1042.trees.register_tree("1042_core", {
     name = "",
     
     tree = {
-        tiles = {"1042_plain_node.png^[colorize:#672307:200"},
+        tiles = {"1042_tree.png"},
         use_texture_alpha = "opaque",
 
         sounds = {
@@ -64,9 +66,11 @@ core_1042.trees.register_tree("1042_core", {
         groups = {wood = 1, plant = 1, burns = 3},
     },
     leaves = {
-        tiles = {"1042_plain_node.png^[colorize:#1c770a:168"},
+        tiles = {"1042_tree_leaves.png"},
+        special_tiles = {"1042_tree_leaves_simple.png"},
+        --tiles = {"1042_plain_node.png^[colorize:#1c770a:168"},
         use_texture_alpha = "blend",
-        drawtype = "allfaces",
+        drawtype = "allfaces_optional",
 
         paramtype = "light",
         sunlight_propagates = true,
@@ -74,7 +78,8 @@ core_1042.trees.register_tree("1042_core", {
         groups = {leafy = 1, plant = 1, breakable_by_hand = 1, burns = 1},
     },
     planks = {
-        tiles = {"1042_plain_node.png^[colorize:#672307:128"},
+        tiles = {"1042_tree_planks.png"},
+        --tiles = {"1042_plain_node.png^[colorize:#672307:128"},
         use_texture_alpha = "opaque",
 
         sounds = {
@@ -94,7 +99,8 @@ core_1042.trees.register_tree("1042_core", {
     name = "Light",
 
     tree = {
-        tiles = {"1042_plain_node.png^[colorize:#676357:200"},
+        tiles = {"1042_tree_light.png"},
+        --tiles = {"1042_plain_node.png^[colorize:#676357:200"},
         use_texture_alpha = "opaque",
 
         sounds = {
@@ -108,9 +114,11 @@ core_1042.trees.register_tree("1042_core", {
         groups = {wood = 1, plant = 1, burns = 2},
     },
     leaves = {
-        tiles = {"1042_plain_node.png^[colorize:#99cc99:168"},
+        tiles = {"1042_tree_light_leaves.png"},
+        special_tiles = {"1042_tree_light_leaves_simple.png"},
+        --tiles = {"1042_plain_node.png^[colorize:#99cc99:168"},
         use_texture_alpha = "blend",
-        drawtype = "allfaces",
+        drawtype = "allfaces_optional",
 
         paramtype = "light",
         sunlight_propagates = true,
@@ -118,7 +126,8 @@ core_1042.trees.register_tree("1042_core", {
         groups = {leafy = 1, plant = 1, breakable_by_hand = 1, burns = 1},
     },
     planks = {
-        tiles = {"1042_plain_node.png^[colorize:#676357:128"},
+        tiles = {"1042_tree_light_planks.png"},
+        --tiles = {"1042_plain_node.png^[colorize:#676357:128"},
         use_texture_alpha = "opaque",
 
         sounds = {

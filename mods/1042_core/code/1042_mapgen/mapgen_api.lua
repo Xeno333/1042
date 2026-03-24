@@ -78,14 +78,14 @@ mapgen_1042.map_single_tectonics = PerlinNoise(map_noise_params_tectonics)]]
 mapgen_1042.cave_map = PerlinNoiseMap({
     offset = 0,
     scale = 1,
-    spread = {x = 50, y = 30, z = 50},
-    seed = core.get_mapgen_setting("seed") + 34634,
+    spread = {x = 100, y = 50, z = 100},
+    seed = core.get_mapgen_setting("seed") + 3632612,
     octaves = 3,
-    persist = 0.7,
+    persist = 0.75,
     lacunarity = 2,
     flags = {
-        eased = true,
-        absvalue = false,
+        eased = false,
+        absvalue = true,
         defaults = false
     }
 }, {x=80, y=80, z=80})
@@ -99,27 +99,106 @@ mapgen_1042.ore_map = PerlinNoiseMap({
     persist = 0.7,
     lacunarity = 2,
     flags = {
+        eased = false,
+        absvalue = false,
+        defaults = false
+    }
+}, {x=80, y=80, z=80})
+
+mapgen_1042.ore_map_gold = PerlinNoiseMap({
+    offset = 0,
+    scale = 1,
+    spread = {x = 10, y = 5, z = 10},
+    seed = core.get_mapgen_setting("seed") + 3723542,
+    octaves = 3,
+    persist = 0.7,
+    lacunarity = 2,
+    flags = {
+        eased = false,
+        absvalue = false,
+        defaults = false
+    }
+}, {x=80, y=80, z=80})
+
+mapgen_1042.complex_lands = PerlinNoiseMap({
+    offset = 0,
+    scale = 1,
+    spread = {x = 100, y = 50, z = 100},
+    seed = core.get_mapgen_setting("seed") + 125542,
+    octaves = 2,
+    persist = 0.5,
+    lacunarity = 1,
+    flags = {
         eased = true,
         absvalue = false,
         defaults = false
     }
 }, {x=80, y=80, z=80})
 
+mapgen_1042.underworld = PerlinNoiseMap({
+    offset = 0,
+    scale = 1,
+    spread = {x = 100, y = 50, z = 100},
+    seed = core.get_mapgen_setting("seed") + 56634,
+    octaves = 3,
+    persist = 0.75,
+    lacunarity = 2,
+    flags = {
+        eased = false,
+        absvalue = true,
+        defaults = false
+    }
+}, {x=80, y=80, z=80})
+mapgen_1042.underworld_density = PerlinNoiseMap({
+    offset = 0,
+    scale = 1,
+    spread = {x = 500, y = 500, z = 500},
+    seed = core.get_mapgen_setting("seed") + 7654678968,
+    octaves = 1,
+    persist = 1,
+    lacunarity = 1,
+    flags = {
+        eased = false,
+        absvalue = true,
+        defaults = false
+    }
+}, {x=80, y=80, z=80})
+
+
+local entrences_pr = PseudoRandom(core.get_mapgen_setting("seed"))
+local entrences = {}
+for i = 1, entrences_pr:next(10, 20) do
+    local x = entrences_pr:next(-1000, 1000) * entrences_pr:next(1, 20)
+    local z = entrences_pr:next(-1000, 1000) * entrences_pr:next(1, 20)
+    entrences[x .. " " .. z] = vector.new(x, 0, z)
+end
+
+mapgen_1042.underworld_entrences = entrences
 
 
 -- #fixme these need to be dynmic and need to be fixed in mapgen overhaul
 mapgen_1042.ymax = core_1042.shared_lib.consts.plain_world_y_levels.land_max
 mapgen_1042.d_ymax = core_1042.shared_lib.consts.plain_world_y_levels.max
 mapgen_1042.ymin = core_1042.shared_lib.consts.plain_world_y_levels.min
+
 mapgen_1042.water_level = core_1042.shared_lib.consts.plain_world_y_levels.sea_level
-mapgen_1042.lava_level = mapgen_1042.ymin + 32
 mapgen_1042.bedrock_level = mapgen_1042.ymin
+mapgen_1042.cave_pool_level = mapgen_1042.bedrock_level + 32
 mapgen_1042.caves_max = mapgen_1042.ymax - 68
 mapgen_1042.decorated_caves = mapgen_1042.ymin + 128
+
+mapgen_1042.underworld_ymax = core_1042.shared_lib.consts.underworldworld_y_levels.max
+mapgen_1042.underworld_ymin = core_1042.shared_lib.consts.underworldworld_y_levels.min
+mapgen_1042.underworld_lava_sea = core_1042.shared_lib.consts.underworldworld_y_levels.lava_sea_level
+
+mapgen_1042.void_ymin = core_1042.shared_lib.consts.void_y_levels.min
+mapgen_1042.void_ymax = core_1042.shared_lib.consts.void_y_levels.max
 
 mapgen_1042.continent_radius = 30000
 
 
+mapgen_1042.portal_room = vector.new(entrences_pr:next(-1000, 1000) * entrences_pr:next(1, 20), mapgen_1042.bedrock_level + 1, entrences_pr:next(-1000, 1000) * entrences_pr:next(1, 20))
+mapgen_1042.portal = vector.new(mapgen_1042.portal_room.x + 4, mapgen_1042.portal_room.y + 2, mapgen_1042.portal_room.z + 4)
 
 
 local T_ymax = mapgen_1042.ymax
@@ -133,7 +212,6 @@ function mapgen_1042.get_y(x, z, noisei, temp)
     end
 
     local ny
-    local mountin_top = false
 
     -- Distance from (0,y,0)
     local r = math.sqrt(x^2+z^2)
@@ -154,11 +232,11 @@ function mapgen_1042.get_y(x, z, noisei, temp)
     else
         -- Mountin hole
         local rv = math.floor((0.9 * math.abs(0.9)) * T_ymax - 3)
-        if temp and temp > 20 then
-            return math.floor(math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/(8*(temp/20)) + 4)), rv, false, noise
-        else
+        --if temp and temp > 20 then
+        --    return math.floor(math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/(8*(temp/20)) + 4)), rv, false, noise
+        --else
             return math.floor(math.floor((0.9 * math.abs(0.9)) * T_ymax - (noise * math.abs(noise)) * T_ymax/8 + 4)), rv, true, noise
-        end
+        --end
     end
     
 

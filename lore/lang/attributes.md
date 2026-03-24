@@ -3,12 +3,27 @@
 # Adjectives
 
 - long, high, tall - len
-- blunt, dull, flat - blunt
-- pointed, sharp, featured - sare
+- short - cen
+- blunt, dull, flat - bluf
+- pointed, sharp, featured - kyn
 - plain, generic, normal, default - plyke
 - light (weight) - mece
-- light (brightness) - lec
+- heavy -  kece
+- bright - lec
 - dark - dec
+- small - ral
+- large - kal
+- hard - tuf
+- soft - suf
+- clear, transparent - clyt
+- molten, liquid - laven
+- hot, burning - fxry
+- burnt, consumed - fyren
+- moving, flowing - rusr
+- hanging, attached - grypa
+- enclosed, wrapped - rokas
+- empty, void - nul
+- cooked, prepared - ryf
 
 # Adverbs
-
+- slow - clxsen

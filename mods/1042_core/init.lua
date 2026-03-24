@@ -51,6 +51,7 @@ local required_settings = {
     ["enable_water_reflections"] = {single_player=true, value="true"},
     ["soft_clouds"] = {single_player=true, value="true"},
     ["enable_fog"] = {single_player=true, value="true"},
+    ["hurt_flash_enabled"] = {single_player=true, value="false"},
 }
 
 if core.settings:get_bool("1042_auto_adjust_settings", false) then
@@ -92,13 +93,14 @@ local mod_load_order = {
 
     path .. "1042_player/player.lua",
     path .. "1042_tests/init.lua",
+    path .. "1042_effects/init.lua",
     path .. "1042_achievements/init.lua",
 
+    path .. "1042_schematics/init.lua",
     path .. "1042_nodes/init.lua",
     path .. "1042_tools/init.lua",
     path .. "1042_smithing/init.lua",
     path .. "1042_mobs/mobs.lua",
-    path .. "1042_schematics/init.lua",
     path .. "1042_weather/init.lua",
 
     path .. "1042_mapgen/init.lua",

@@ -45,6 +45,18 @@ function player_api.remove_hud(player, unique_hud_name)
     end
 end
 
+function player_api.get_hud(player, unique_hud_name)
+    local player_name = player:get_player_name()
+    local huds = player_huds[player_name] or {}
+
+    if huds[unique_hud_name] then -- if no player huds table
+		return player:hud_get(huds[unique_hud_name])
+
+    else -- if doesnt exist
+        return false
+    end
+end
+
 function player_api.update_hud(player, unique_hud_name, hud_def)
     local player_name = player:get_player_name()
 
@@ -146,4 +158,98 @@ end
 
 function player_api.get_data(playername, id)
     return core_1042.get("1042_player_data__" .. playername .. "__" .. id)
+end
+
+
+
+
+function player_api.spawn_player(player)
+	local pos = nil
+
+	for tries = 0, 5000 do -- Max 5000 tries (This is very fast, and is mearly theoretical)
+		local x = math.random(0, 20000)
+		local z = math.random(0, 20000)
+		local y = mapgen_1042.get_spawn_y(x, z) 
+
+		if y then
+			pos = vector.new(x, y+1, z)
+			break
+		end
+	end
+
+	-- stop inf loop
+	if not pos then
+		pos = vector.new(0, 0, 0) -- Put here on problem to stop inf loop
+	end
+
+	player:set_pos(pos)
+
+	-- Reset hunger
+	player_api.set_data(player:get_player_name(), "hunger", 20)
+	player_api.add_hunger(player, 0)
+
+	return true
+end
+
+core.register_privilege("spawn", {
+    description = "Respawn",
+    give_to_admin = true,
+    give_to_singleplayer = false
+})
+core.register_chatcommand("spawn", {
+    privs = {["spawn"] = true},
+    description = "Respawn",
+    func = function(name)
+        player_api.spawn_player(core.get_player_by_name(name))
+        return true, "Done!"
+    end
+})
+
+local default_physics = {
+    gravity = 1.5,
+    jump = 1.2,
+    speed_walk = 0.5,
+    sneak_glitch = true,
+    acceleration_default = 1,
+    acceleration_air = 1
+}
+
+local experimental_physics = {
+    gravity = 0.9,
+    jump = 1.2,
+    speed_walk = 1.2,
+    sneak_glitch = true,
+    acceleration_default = 2,
+    acceleration_air = 0.8
+}
+
+player_api.get_default_physics = function()
+    if core.settings:get_bool("1042_experimental_physics", false) == true then
+        return experimental_physics
+    else
+        return default_physics
+    end
+end
+
+function player_api.set_physics(player, override)
+    local phy = player:get_physics_override()
+    if core.settings:get_bool("1042_experimental_physics", false) == true then
+        for k, v in pairs(experimental_physics) do
+            phy[k] = v
+        end
+    else
+        for k, v in pairs(default_physics) do
+            phy[k] = v
+        end
+    end
+
+    if override then
+        for k, v in pairs(override) do
+            phy[k] = v
+        end
+    end
+
+    player:set_physics_override(phy)
+	
+	player:set_bone_override("Spine", nil)
 end

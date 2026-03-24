@@ -2,6 +2,7 @@
 local path = core_1042.get_core_mod_path("core") .. "/"
 
 local files = {
+    "lorelang.lua",
     "phases.lua",
     "funcs.lua",
     "crafting.lua",
@@ -14,7 +15,6 @@ local files = {
     "item.lua",
     "register.lua",
 }
-
 
 for _, file in ipairs(files) do
     dofile(path .. file)

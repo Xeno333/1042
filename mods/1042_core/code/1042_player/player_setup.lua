@@ -1,14 +1,12 @@
 local aux1_cooldown = {}
+local auxing_1042 = {}
+local player_callbacks = {}
 local sprint_increment_cooldown = {}
 
 
-
-
-
-
 core.override_item("", {
-	wield_image = "[combine:2x4:0,0=1042_plain_node.png\\^[colorize\\:#ffffff\\:0:0,2=1042_plain_node.png\\^[transformR90\\^[colorize\\:#aa8877\\:168",
-	wield_scale = {x = 0.35, y = 4, z = 4},
+	wield_image = "wieldhand.png",
+	wield_scale = {x = 1, y = 1, z = 4},
 
 	range = 4.0,
 	tool_capabilities = {
@@ -26,32 +24,7 @@ core.override_item("", {
 
 
 -- Spawn player; depends on 1042_mapgen
-
-local function spawn_player(player)
-	local pos = nil
-
-	for tries = 0, 5000 do -- Max 5000 tries (This is very fast, and is mearly theoretical)
-		local x = math.random(0, 20000)
-		local z = math.random(0, 20000)
-		local y = mapgen_1042.get_spawn_y(x, z) 
-
-		if y then
-			pos = vector.new(x, y+1, z)
-			break
-		end
-	end
-
-	-- stop inf loop
-	if not pos then
-		pos = vector.new(0, 0, 0) -- Put here on problem to stop inf loop
-	end
-
-	player:set_pos(pos)
-
-	return true
-end
-
-core.register_on_respawnplayer(spawn_player)
+core.register_on_respawnplayer(player_api.spawn_player)
 
 
 -- Die player
@@ -69,19 +42,30 @@ core.register_on_dieplayer(function(player, reason)
 end)
 
 
-
-
-
-
 -- Join player
 
 core.register_on_joinplayer(function(player, last_join)
 	local name = player:get_player_name()
 	aux1_cooldown[name] = 0
 	sprint_increment_cooldown[name] = 0
+	auxing_1042[name] = {}
+
+	player_callbacks[name] = {}
 
 	player:set_properties({
 		visual = "mesh",
+		mesh = "player.glb",
+		textures = {
+			"character.png",
+			"character.png",
+			"character.png",
+			"character.png",
+			"character.png",
+			"character.png",
+			"character.png",
+			"character.png",
+		},
+		--[[
 		mesh = "player.gltf",
 		textures = {
 			"1042_plain_node.png^[colorize:#442211:168", -- Shoe
@@ -93,25 +77,17 @@ core.register_on_joinplayer(function(player, last_join)
 			"1042_plain_node.png^[colorize:#aa8877:144",  -- Head
 			"1042_plain_node.png^[colorize:#aa8877:144", -- Arm
 			"1042_plain_node.png^[colorize:#aa8877:144"  -- Arm
-		},
+		},]]
 		show_on_minimap = false,
 		visual_size = {
-			x = 4,
-			y = 4
+			x = 7,
+			y = 7
 		},
 		stepheight = 1.1,
 
 		nametag_color = "#00000000",
 	})
-	player:set_physics_override(
-		{
-			gravity = 1.5,
-			jump = 1.2,
-			sneak_glitch = true,
-			liquid_sink = 2,
-			speed_walk = 0.5
-		}
-	)
+	player_api.set_physics(player)
 	player:hud_set_flags(
 		{
 			minimap = false,
@@ -122,7 +98,7 @@ core.register_on_joinplayer(function(player, last_join)
 		}
 	)
 
-	-- Ligthing and enviorment
+	-- Lighting and enviorment
 	local saturation = 1.8
 	if player_api.get_data(name, "setting_greyscale") == "true" then
 		saturation = 0
@@ -150,11 +126,12 @@ core.register_on_joinplayer(function(player, last_join)
 	)
 	player:set_moon(
 		{
-			texture = "1042_plain_node.png^[colorize:#aaaaaa:144",
+			texture = "moon.png",
 			visible = true,
 			scale = 0.3
 		}
 	)
+	player:set_sun({sunrise_visible = false})
 	player:set_stars(
 		{
 			visible = true,
@@ -167,7 +144,7 @@ core.register_on_joinplayer(function(player, last_join)
 
 	local zoom_time = 0
 	if last_join == nil then
-		spawn_player(player)
+		player_api.spawn_player(player)
 		zoom_time = 1
 
 		core.chat_send_player(name, core.colorize("#00ff00", "It is the year 1042 and you are lost."))
@@ -177,12 +154,7 @@ core.register_on_joinplayer(function(player, last_join)
 
 	end
 
-	player:set_fov(100, false, zoom_time)
-
-
-
-
-
+	player:set_fov(core.settings:get("fov"), false, zoom_time)
 
 
 	-- Hud
@@ -218,9 +190,12 @@ core.register_on_joinplayer(function(player, last_join)
 		name = "hotbar",
 		text = "main",
 	}
-	if player_api.get_data(name, "setting_hud_at_bottom") == "true" then
+	if player_api.get_data(name, "setting_hotbar_mode") == "Bottom" then
 		hotbar.direction = 0
 		hotbar.position = {x=0.5, y=0.95}
+	elseif player_api.get_data(name, "setting_hotbar_mode") == "Top" then
+		hotbar.direction = 0
+		hotbar.position = {x=0.5, y=0.05}
 	else
 		hotbar.direction = 2
 		hotbar.position = {x=0.05, y=0.5}
@@ -267,22 +242,54 @@ core.register_on_joinplayer(function(player, last_join)
 		number = 0x00ffff,
 		style = 3
 	})
+
+	local inv = player:get_inventory() -- do this in joinplayer as opposed to newplayer so old worlds are supported
+	if inv:get_size("glider") ~= 1 then
+		inv:set_size("glider", 1)
+	end
 end)
-
-
-
-
 
 core.register_on_leaveplayer(function(player)
 	local name = player:get_player_name()
 
 	aux1_cooldown[name] = nil
+	auxing_1042[name] = nil
+	player_callbacks[name] = nil
 	sprint_increment_cooldown[name] = nil
 end)
 
+local function remove_glider(player)
+	local meta = player:get_meta()
+	if meta:get_string("glider_entity_guid") ~= "" then
+		local glider = core.objects_by_guid[meta:get_string("glider_entity_guid")]
+		if (glider ~= nil) then
+			glider:set_detach()
+		end
+		meta:set_string("glider_entity_guid", "")
 
+		player:set_camera({mode="first"}) -- force into third person
+		core.after(0, function(...)
+			player:set_camera(...)
+		end, {mode="any"}) -- allow changing pov again
+	end
+end
 
-local function make_death_formspec( reason)
+local function add_glider(player)
+	local meta = player:get_meta()
+	if meta:get_string("glider_entity_guid") == "" then
+		local glider = core.add_entity(player:get_pos(), "1042_core:glider_entity", nil)
+		meta:set_string("glider_entity_guid", glider:get_guid())
+		glider:set_attach(player, "Spine", vector.new(0, 0.5, -0.5), vector.new(90, 0, 0), true)
+		if core.settings:get_bool("1042_flight_cam", true) then
+			player:set_camera({mode="third"}) -- force into third person
+			core.after(0, function(...)
+				player:set_camera(...)
+			end, {mode="any"}) -- allow changing pov again
+		end
+	end
+end
+
+local function make_death_formspec(reason)
 	local msg = "You "
 	if reason then
 		if reason._1042_death_msg then
@@ -369,48 +376,99 @@ core.register_globalstep(function(dtime)
 		end
 
 
+		-- Gliding
+		local gliding = false
 
-		-- Sprint
-		local phy = player:get_physics_override()
-		if sprint_increment_cooldown[name] then -- sanity chgeck
-			if sprint_increment_cooldown[name] > 0 then
-				sprint_increment_cooldown[name] = sprint_increment_cooldown[name] - dtime
+		local dir = player:get_look_dir()
+		local bone_pos = player:get_bone_position("Neck")
+		player:set_bone_override("Neck", { position = nil, rotation = {vec=vector.new((1-dir.y+270)*1.6, 0, 0), interpolation=0.1}})
 
-			else
-				if (player_controls.movement_y ~= 0 or player_controls.movement_x ~= 0) and not player_controls.sneak then
-					if phy.speed_walk < 1.2 then
-						phy.speed_walk = phy.speed_walk + 0.05
-						player:set_physics_override(phy)
+		local function apply_glide(player, dtime)
+			player_api.set_physics(player, {gravity=0.3,speed_walk=0})
 
-						sprint_increment_cooldown[name] = 0.5
-					end
+			local vel = player:get_velocity()
+			--local dir = player:get_look_dir()
 
-				elseif phy.speed_walk > 0.5 then
-					phy.speed_walk = phy.speed_walk - 0.05
-					player:set_physics_override(phy)
+			player:set_bone_override("Spine", { position = nil, rotation = {vec=vector.new((1-dir.y+45)*1.5, 0, 0), interpolation=0.2}})
+			player:set_bone_override("Neck", nil)
 
-					sprint_increment_cooldown[name] = 0.5
-				end
+			local speed = math.max(math.min(math.sqrt(vel.x*vel.x + vel.y*vel.y + vel.z*vel.z), 8), 0)
+
+			local s = speed * 0.1
+			local r = 50
+			local n = 0.5
+			local dy = dir.y + 0.2
+			if dy > 0 then
+				n = n / math.max(0.1, math.floor(dy * 20) / 10)
+			end
+
+			player:add_velocity(vector.new(-vel.x / r, -vel.y / r * 2, -vel.z / r))
+			player:add_velocity(vector.new(dir.x * s, dir.y * s * n, dir.z * s))
+		end
+
+		if player:get_inventory():get_stack("glider", 1):get_name() == "1042_core:glider" then
+			local p_pos = player:get_pos()
+			local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.5, z = p_pos.z})
+			local def = core.registered_nodes[node_below.name]
+
+			if not def.walkable and (player_controls.jump or core_1042.get(name .. "_gliding") == "on") and player_controls.dig and player_controls.place then
+				core_1042.set(name .. "_gliding", "on")
+				gliding = true
+				apply_glide(player, dtime)
+			elseif core_1042.get(name .. "_gliding") ~= "off" then
+				player_api.set_physics(player)
+				player:set_bone_override("Spine", nil)
+				core_1042.set(name .. "_gliding", "off")
 			end
 		end
 
-		-- Animation
-		if player_controls.movement_y ~= 0 and player_meta:get_string("moving") == "false" then
-			player:set_animation({x = 0, y = 40}, 3)
-			player_meta:set_string("moving", "true")
-		elseif player_controls.movement_y == 0 and player_meta:get_string("moving") ~= "false" then
-			player:set_animation({x = 0, y = 0}, 1)
-			player_meta:set_string("moving", "false")
+
+		-- Sprint
+		if not gliding then
+			local phy = player:get_physics_override()
+			if sprint_increment_cooldown[name] then -- sanity check
+				if sprint_increment_cooldown[name] > 0 then
+					sprint_increment_cooldown[name] = sprint_increment_cooldown[name] - dtime
+
+				else
+					if (player_controls.movement_y ~= 0 or player_controls.movement_x ~= 0) and not player_controls.sneak then
+						if phy.speed_walk < player_api.get_default_physics().speed_walk+0.7 then
+							player_api.set_physics(player, {speed_walk = math.floor((phy.speed_walk + 0.05) * 100) / 100})
+
+							sprint_increment_cooldown[name] = 0.5
+						end
+
+					elseif phy.speed_walk > player_api.get_default_physics().speed_walk then
+						player_api.set_physics(player, {speed_walk = math.floor((phy.speed_walk - 0.05) * 100) / 100})
+
+						sprint_increment_cooldown[name] = 0.5
+					end
+				end
+			end
 		end
+		
+
+		-- Animation
+		if gliding then
+			core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.2})
+			add_glider(player)
+		else
+			remove_glider(player)
+			if player_controls.movement_y ~= 0 then
+				core_1042.player.set_animation(player, {name="walk", range={x = 0, y = 0.8}, speed=1.1})
+			elseif player_controls.movement_y == 0 and core_1042.player.get_animation ~= "walk" then
+				core_1042.player.set_animation(player, {name="idle", range={x = 0, y = 0}, speed=1})
+			end
+		end
+
+		local itemstack = player:get_wielded_item()
+		local def = core.registered_items[itemstack:get_name()] or {}
 
 		-- _1042_use (optimised)
 		if aux1_cooldown[name] then
 			if aux1_cooldown[name] > 0 then
 				aux1_cooldown[name] = aux1_cooldown[name] - dtime
 			elseif player_controls.aux1 then
-				local itemstack = player:get_wielded_item()
-				local def = core.registered_items[itemstack:get_name()] or {}
-
 				if def._1042_on_use then
 					local ret_itemstack = def._1042_on_use(itemstack, player, pointed_thing)
 					if ret_itemstack then
@@ -421,6 +479,134 @@ core.register_globalstep(function(dtime)
 			end
 		end
 
+
+		-- aux2
+
+		if player_controls.zoom and not player_controls.aux1 then
+			if not auxing_1042[name].on then
+				auxing_1042[name].on = true
+
+				if def._1042_aux then
+					if def._1042_aux.mode == "selection" then
+						local hotbar = player_api.get_hud(player, "hotbar")
+						if hotbar then
+							player_api.remove_hud(player, "hotbar")
+
+							local selection = {
+								type = "hotbar",
+								name = "selection",
+								text = "selection",
+							}
+							if player_api.get_data(name, "setting_hotbar_mode") == "Bottom" or def._1042_aux.horizontal then
+								selection.direction = 0
+								selection.position = {x=0.5, y=0.95}
+							elseif player_api.get_data(name, "setting_hotbar_mode") == "Top" then
+								selection.direction = 0
+								selection.position = {x=0.5, y=0.05}
+							else
+								selection.direction = 2
+								selection.position = {x=0.05, y=0.5}
+							end
+
+							player_api.add_hud(player, "selection", selection)
+
+							local inv = player:get_inventory()
+							local main = inv:get_list("main")
+							inv:set_list("1042_selection_main_backup", main)
+
+							auxing_1042[name].weild_index = player:get_wield_index()
+							auxing_1042[name].org_weild_index = auxing_1042[name].weild_index
+
+							inv:set_size("main", 0)
+							inv:set_size("main", def._1042_aux.num or 10)
+							inv:set_stack("main", auxing_1042[name].org_weild_index, inv:get_stack("1042_selection_main_backup", auxing_1042[name].org_weild_index))
+
+
+							if def._1042_aux.bar_params ~= nil then
+								player:hud_set_hotbar_image(def._1042_aux.bar_params.image)
+								player:hud_set_hotbar_selected_image(def._1042_aux.bar_params.selected_image)
+							else
+								player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ff00:128^[opacity:64")
+								player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ff00:128^[opacity:128")
+							end
+							player:hud_set_hotbar_itemcount(def._1042_aux.num or 10)
+
+							local function handel()
+								local w = player:get_wield_index()
+
+								if auxing_1042[name].on then
+									player_callbacks[name].selection = handel
+
+
+								if w ~= auxing_1042[name].weild_index then
+									local inv = player:get_inventory()
+
+									local stack = inv:get_stack("main", w)
+									inv:set_stack("main", w, inv:get_stack("main", auxing_1042[name].weild_index))
+									inv:set_stack("main", auxing_1042[name].weild_index, stack)
+
+									auxing_1042[name].weild_index = w
+
+									if def._1042_aux.func then
+										def._1042_aux.func(player, (def._1042_aux.num or 10) - w)
+									end
+								end
+
+								-- Restore
+								elseif auxing_1042[name] ~= nil then
+									player_api.add_hud(player, "hotbar", hotbar)
+									player_api.remove_hud(player, "selection")
+
+									local inv = player:get_inventory()
+									local stack = inv:get_stack("main", auxing_1042[name].weild_index)
+									for i = 1, inv:get_size("main") do
+										if i ~= auxing_1042[name].weild_index then
+											player_api.add_item_to_player_inventory(player, "1042_selection_main_backup", inv:get_stack("main", i), pos + vector.new(0, 1, 0))
+										end
+									end
+									local main = inv:get_list("1042_selection_main_backup")
+
+									inv:set_size("main", 40)
+									inv:set_list("main", main)
+									inv:set_stack("main", auxing_1042[name].org_weild_index, stack)
+
+									player:hud_set_hotbar_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:64")
+									player:hud_set_hotbar_selected_image("1042_plain_node.png^[colorize:#00ffff:128^[opacity:128")
+									player:hud_set_hotbar_itemcount(10)
+
+									if def._1042_aux.done_func then
+										def._1042_aux.done_func(player, (def._1042_aux.num or 10) - w)
+									end
+
+									return
+								end
+							end
+
+
+							if def._1042_aux.func then
+								def._1042_aux.func(player, (def._1042_aux.num or 10) - auxing_1042[name].weild_index)
+							end
+							player_callbacks[name].selection = handel
+						end
+					end
+				end
+			end
+		elseif player_controls.zoom and player_controls.aux1 then
+			if not auxing_1042[name].on_and_aux1 then
+				auxing_1042[name].on_and_aux1 = true
+				-- Free extra
+			end
+		else
+			auxing_1042[name].on = nil
+			auxing_1042[name].on_and_aux1 = nil
+		end
+
+		if player_callbacks[name] then
+			for k, func in pairs(player_callbacks[name]) do
+				player_callbacks[name][k] = nil
+				func()
+			end
+		end
 
 
 
@@ -445,16 +631,15 @@ core.register_globalstep(function(dtime)
 
 		-- Wield Item
 		local item = core.registered_items[ player:get_wielded_item():get_name()]
-		if item and item.short_description then
+		if item then
 			player_api.update_hud(player, "wield_text", {
 				type = "text",
 				name = "wield_text_hud",
-				text = item.short_description,
+				text = item.short_description or item.name or "",
 				position = {x=0.05, y=0.9},
 				number = 0x00ffdd,
 				style = 3
 			})
 		end
-
 	end
 end)

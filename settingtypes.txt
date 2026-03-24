@@ -11,6 +11,16 @@
 #   Not recomended for novice players
 1042_enable_hardcore (Enable Hardcore Mode) bool false
 
+#   1042 Lore Language for items, nodes, etc.
+#
+#   This changes only 1042 text and is not a translation
+1042_lorelang (Enable Lore Language) bool false
+
+#   Set camera to Third Person (Back) when gliding
+#
+#   Whether to update the camera during gliding.
+1042_flight_cam (Update Camera During Flight) bool true
+
 [Server settings]
 
 #   Warn players to adjust settings on join.
@@ -36,4 +46,7 @@
 #
 #   ***THIS IS NOT RECOMENDED***
 1042_enable_intigrated_tests (Enable intigrated tests) bool false
+
+#   Enable experimental Movement Physics
+1042_experimental_physics (Enable Experimental Physics) bool false
 

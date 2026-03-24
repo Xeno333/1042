@@ -29,7 +29,7 @@ function schematics_1042.register_schematic(name, schem)
 end
 
 -- Get a global schamtic
-function schematics_1042.get_schematic(name, schem)
+function schematics_1042.get_schematic(name)
     -- Check if it exists and return false if it doesn't
     if not schematics_1042.registered_schematics[name] then return nil end
 
@@ -81,6 +81,7 @@ function schematics_1042.load_schematic(path)
     return schem
 end
 
+-- #FIXME there is an issue where some schematics end up with wrong sizes for center = true
 
 function schematics_1042.place_schematic(posin, schematic, force)
     local size = schematic.size

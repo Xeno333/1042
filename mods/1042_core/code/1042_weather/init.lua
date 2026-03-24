@@ -3,6 +3,34 @@ core.log("action", "Loading 1042_weather...")
 
 dofile(core_1042.get_core_mod_path("1042_weather") .. "/weather_api.lua")
 
+--[[local w = 388
+print("Checking " .. (w*2)^2 .. " chunks and building map")
+local map = {}
+for x = -w, w do
+    map[x] = {}
+    for y = -w, w do
+        map[x][y] = weather.get_biome_palette_index(weather.get_temp_single(vector.new(x, 0, y)))
+    end
+end]]
+
+--[[local img = core.encode_base64(core.encode_png(tex))
+
+
+
+core.register_chatcommand("a", {
+    description = "Kill self instantly.",
+    func = function(name)
+        core.show_formspec(name, "a", 
+            "formspec_version[8]size[32,17.5,false]" ..
+            "image[1,0.6;1,2;^[png:" .. img .. "]"
+        )
+
+        return true
+    end
+})]]
+
+
+
 -- Skip weather
 if core.settings:get_bool("1042_disable_weather", false) then
     weather.is_loaded = false
@@ -27,7 +55,7 @@ local weather_hight = weather.weather_hight
 
 core.register_globalstep(function(dtime)
     timer = timer + dtime
-    if timer > 1 then
+    if timer > 0.25 then
         for _, player in ipairs(core.get_connected_players()) do
             local pos = player:get_pos()
             local name = player:get_player_name()
@@ -70,15 +98,16 @@ core.register_globalstep(function(dtime)
             end
 
             if the_weather.on_step then
-                the_weather.on_step(player)
+                the_weather.on_step(player, timer)
             end
 
             local def = the_weather.particlespawner
             if def then
                 local width = def._1042_weather_box_distance or 16
+                local y_spawn = def.y_spawn or {}
                 def.pos = {
-                    min = vector.new(pos.x-width,pos.y+weather_hight,pos.z-width),
-                    max = vector.new(pos.x+width,pos.y+weather_hight,pos.z+width),
+                    min = vector.new(pos.x-width,pos.y + (y_spawn.min or weather_hight),pos.z-width),
+                    max = vector.new(pos.x+width,pos.y + (y_spawn.max or weather_hight),pos.z+width),
                     bias = 0
                 }
                 def.width = nil
@@ -130,6 +159,7 @@ core.register_chatcommand("change_weather", {
         end
 
         weather.weather_index = index
+        core_1042.set("current_weather", index)
         return true, "Setting weather to " .. weather.weathers[weather.weather_index].name
     end
 })

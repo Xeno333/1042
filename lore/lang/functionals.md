@@ -51,3 +51,8 @@ Not to be confused with Descriptive words (Attributes), Functional words include
 - or    - ot
 - yet   - ete
 - so    - cot
+
+# Responses
+
+no, negative - nin
+yes, affirmative - yac
