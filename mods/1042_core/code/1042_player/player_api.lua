@@ -215,9 +215,9 @@ local default_physics = {
 }
 
 local experimental_physics = {
-    gravity = 0.8,
-    jump = 1,
-    speed_walk = 1.5,
+    gravity = 0.9,
+    jump = 1.2,
+    speed_walk = 1.2,
     sneak_glitch = true,
     acceleration_default = 2,
     acceleration_air = 0.8
