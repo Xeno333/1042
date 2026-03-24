@@ -415,12 +415,10 @@ core.register_globalstep(function(dtime)
 				core_1042.set(name .. "_gliding", "on")
 				gliding = true
 				apply_glide(player, dtime)
-			else
-				if core_1042.get(name .. "_gliding") ~= "off" then
-					player_api.set_physics(player)
-				end
-				core_1042.set(name .. "_gliding", "off")
+			elseif core_1042.get(name .. "_gliding") ~= "off" then
+				player_api.set_physics(player)
 				player:set_bone_override("Spine", nil)
+				core_1042.set(name .. "_gliding", "off")
 			end
 		end
 
@@ -451,7 +449,7 @@ core.register_globalstep(function(dtime)
 		
 
 		-- Animation
-		if core_1042.get(name .. "_gliding") == "on" then
+		if gliding then
 			core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.2})
 			add_glider(player)
 		else
