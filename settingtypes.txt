@@ -48,7 +48,5 @@
 1042_enable_intigrated_tests (Enable intigrated tests) bool false
 
 #   Enable experimental Movement Physics
-#
-#   ***THIS IS NOT RECOMENDED***
 1042_experimental_physics (Enable Experimental Physics) bool false
 
