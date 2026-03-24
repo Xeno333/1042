@@ -343,9 +343,6 @@ core.register_on_generated(function(vm, minp, maxp, seed)
         local y_avr = 0
         local y_avr_c = 0
 
-        local y_avr = 0
-        local y_avr_c = 0
-
         local ly = 0
         for y = minp.y, maxp.y do
             ly = ly + 1
