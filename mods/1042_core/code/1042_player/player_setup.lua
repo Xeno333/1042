@@ -411,14 +411,11 @@ core.register_globalstep(function(dtime)
 			local node_below = core.get_node({x = p_pos.x, y = p_pos.y - 0.5, z = p_pos.z})
 			local def = core.registered_nodes[node_below.name]
 
-			if not def.walkable and core.settings:get_bool("free_move") and core.get_player_privs(player:get_player_name()).fly ~= true then
+			if not def.walkable and (player_controls.jump or core_1042.get(name .. "_gliding") == "on") and player_controls.dig and player_controls.place then
 				core_1042.set(name .. "_gliding", "on")
 				gliding = true
 				apply_glide(player, dtime)
 			else
-				if core.get_player_privs(player:get_player_name()).fly ~= true then
-					core.settings:set_bool("free_move", false)
-				end
 				if core_1042.get(name .. "_gliding") ~= "off" then
 					player_api.set_physics(player)
 				end
@@ -456,17 +453,12 @@ core.register_globalstep(function(dtime)
 		-- Animation
 		if core_1042.get(name .. "_gliding") == "on" then
 			core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.2})
-			if core.settings:get_bool("free_move") and core.get_player_privs(player:get_player_name()).fly ~= true then
-				add_glider(player)
-			else
-				remove_glider(player)
-			end
+			add_glider(player)
 		else
+			remove_glider(player)
 			if player_controls.movement_y ~= 0 then
-				remove_glider(player)
 				core_1042.player.set_animation(player, {name="walk", range={x = 0, y = 0.8}, speed=1.1})
 			elseif player_controls.movement_y == 0 and core_1042.player.get_animation ~= "walk" then
-				remove_glider(player)
 				core_1042.player.set_animation(player, {name="idle", range={x = 0, y = 0}, speed=1})
 			end
 		end
