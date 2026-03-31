@@ -3,7 +3,8 @@ core_1042.player = {}
 core_1042.player.set_animation = function(player, anim)
     local meta = player:get_meta()
     if meta:get_string("animation") ~= anim.name then
-        player:set_animation(anim.range, anim.speed, anim.blend or 0, anim.loop or true)
+        core_1042.animation.animate(player, anim)
+        --player:set_animation(anim.range, anim.speed, anim.blend or 0, anim.loop or true)
         meta:set_string("animation", anim.name)
         return true
     end

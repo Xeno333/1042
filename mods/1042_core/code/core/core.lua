@@ -14,6 +14,7 @@ local files = {
     "abms.lua",
     "item.lua",
     "register.lua",
+    "animation.lua"
 }
 
 for _, file in ipairs(files) do

@@ -41,6 +41,29 @@ core.register_on_dieplayer(function(player, reason)
 	end
 end)
 
+core_1042.animation.register_animation("player", {
+	name = "idle",
+	range = {x = 0, y = 0},
+	speed = 1,
+	blend = nil,
+	loop = true
+})
+
+core_1042.animation.register_animation("player", {
+	name = "walk",
+	range = {x = 0, y = 0.8},
+	speed = 1.1,
+	blend = nil,
+	loop = true
+})
+
+core_1042.animation.register_animation("player", {
+	name = "glide",
+	range = {x = 2.7, y = 3.7},
+	speed = 0.2,
+	blend = nil,
+	loop = true
+})
 
 -- Join player
 
@@ -267,10 +290,12 @@ local function remove_glider(player)
 		end
 		meta:set_string("glider_entity_guid", "")
 
-		player:set_camera({mode="first"}) -- force into third person
-		core.after(0, function(...)
-			player:set_camera(...)
-		end, {mode="any"}) -- allow changing pov again
+		if core.settings:get_bool("1042_flight_cam", true) then
+			player:set_camera({mode="first"}) -- force into third person
+			core.after(0, function(...)
+				player:set_camera(...)
+			end, {mode="any"}) -- allow changing pov again
+		end
 	end
 end
 
@@ -450,14 +475,14 @@ core.register_globalstep(function(dtime)
 
 		-- Animation
 		if gliding then
-			core_1042.player.set_animation(player, {name="glide", range={x = 2.7, y = 3.7}, speed=0.2})
+			core_1042.player.set_animation(player, {name="glide"}) -- range={x = 2.7, y = 3.7}, speed=0.2
 			add_glider(player)
 		else
 			remove_glider(player)
 			if player_controls.movement_y ~= 0 then
-				core_1042.player.set_animation(player, {name="walk", range={x = 0, y = 0.8}, speed=1.1})
+				core_1042.player.set_animation(player, {name="walk"}) -- , range={x = 0, y = 0.8}, speed=1.1
 			elseif player_controls.movement_y == 0 and core_1042.player.get_animation ~= "walk" then
-				core_1042.player.set_animation(player, {name="idle", range={x = 0, y = 0}, speed=1})
+				core_1042.player.set_animation(player, {name="idle"}) -- , range={x = 0, y = 0}, speed=1
 			end
 		end
 
