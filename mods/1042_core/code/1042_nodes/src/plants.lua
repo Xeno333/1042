@@ -57,7 +57,7 @@ core.register_node("1042_core:apple", {
     buildable_to = false,
     
     _1042_on_use = function(itemstack, user, pointed_thing)
-        return core_1042.eat(itemstack, user, 2, nil)
+        return core_1042.eat(itemstack, user, 3, nil)
     end,
 
     groups = {plant = 1, food = 1, dig_immediate = 1},
@@ -143,10 +143,57 @@ core.register_node("1042_core:tulip", {
     groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
 })
 
+core.register_node("1042_core:grass_mid", {
+    description = core_1042.lorelang.translate("Grass"),
+    drawtype = "plantlike",
+    tiles = {"1042_grass_mid.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+    buildable_to = false,
+
+    color = "#309913ff",
+    paramtype2 = "color",
+    palette = "turf_palette.png",
+    node_placement_prediction = "",
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    on_construct = function(pos)
+        local node = core.get_node(pos)
+        if node then
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            core.swap_node(pos, node)
+        end
+    end,
+
+    -- Add self as a drop to avoid meta
+    drop = "",
+    preserve_metadata = function(_, _, _, drops)
+        drops[#drops+1] = ItemStack("1042_core:grass_mid")
+    end,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
+})
+
 core.register_node("1042_core:grass_tall", {
     description = core_1042.lorelang.translate("Tall Grass"),
     drawtype = "plantlike",
-    tiles = {"1042_small_grass.png"},
+    tiles = {"1042_grass_tall.png"},
     use_texture_alpha = "clip",
 
     paramtype = "light",
@@ -187,13 +234,13 @@ core.register_node("1042_core:grass_tall", {
         drops[#drops+1] = ItemStack("1042_core:grass_tall")
     end,
 
-    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
 })
 
 core.register_node("1042_core:grass_short", {
     description = core_1042.lorelang.translate("Short Grass"),
     drawtype = "plantlike",
-    tiles = {"1042_micro_grass.png"},
+    tiles = {"1042_grass_short.png"},
     use_texture_alpha = "clip",
 
     paramtype = "light",
@@ -234,7 +281,7 @@ core.register_node("1042_core:grass_short", {
         drops[#drops+1] = ItemStack("1042_core:grass_short")
     end,
 
-    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1, flower = 3},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
 })
 
 core.register_node("1042_core:sunflower", {
@@ -322,4 +369,164 @@ core.register_node("1042_core:thin_moss", {
     },
 
     groups = {plant = 1, attached_node = 1, dig_immediate = 1, burns = 1},
+})
+
+core.register_node("1042_core:clover", {
+    description = core_1042.lorelang.translate("Clover"),
+    drawtype = "plantlike",
+    tiles = {"1042_clover.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 1, 15)
+    end,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, flower = 5},
+})
+
+core.register_node("1042_core:thistles", {
+    description = core_1042.lorelang.translate("Thistles"),
+    drawtype = "plantlike",
+    tiles = {"1042_thistles.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 1, 2)
+    end,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, flower = 6},
+})
+
+core.register_node("1042_core:honeysuckle", {
+    description = core_1042.lorelang.translate("Honeysuckle"),
+    drawtype = "plantlike",
+    tiles = {"1042_honeysuckle.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 1, 15)
+    end,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, flower = 7},
+})
+
+core.register_node("1042_core:wildberries", {
+    description = core_1042.lorelang.translate("Wildberries"),
+    drawtype = "plantlike",
+    tiles = {"1042_wildberries.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 2, 15)
+    end,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1},
+})
+
+core.register_node("1042_core:sword_grass", {
+    description = core_1042.lorelang.translate("Swordgass"),
+    drawtype = "plantlike",
+    tiles = {"1042_sword_grass.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+    buildable_to = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 1, 3)
+    end,
+
+
+    paramtype2 = "meshoptions",
+    place_param2 = 16 + 32 + 4,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
 })
