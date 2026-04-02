@@ -199,6 +199,102 @@ core.register_node("1042_core:water_flowing2", {
 })
 
 
+core.register_node("1042_core:sulfur_water_source", {
+    description = core_1042.lorelang.translate("Standing Sulfiric Water"),
+
+    drawtype = "liquid",
+    tiles = {
+		{
+			name = "1042_sulfur_water.png",
+			backface_culling = false,
+		},
+		{
+			name = "1042_sulfur_water.png",
+			backface_culling = true,
+		},
+    },
+	use_texture_alpha = "blend",
+    
+    paramtype = "light",
+    paramtype2 = "none",
+    light_source = 4,
+
+    walkable = false,
+    pointable = false,
+    diggable = false,
+    buildable_to = true,
+    is_ground_content = false,
+
+    sounds = {
+        footstep = {
+            name = "water",
+            gain = 0.5,
+            pitch = 0.5
+        },
+    },
+
+    liquidtype = "source",
+    liquid_alternative_flowing = "1042_core:sulfur_water_flowing",
+    liquid_alternative_source = "1042_core:sulfur_water_source",
+    drop = "",
+
+    drowning = 3,
+    liquid_viscosity = 2,
+    liquid_range = 5,
+	waving = 3,
+
+    post_effect_color = {a = 128, r = 0x00, g = 0x9e, b = 0xa9},
+    groups = {water = 1, liquid = 1, cools = 1},
+})
+
+core.register_node("1042_core:sulfur_water_flowing", {
+    description = core_1042.lorelang.translate("Flowing Sulfiric Water"),
+
+    drawtype = "flowingliquid",
+    tiles = {"1042_sulfur_water.png"},
+    special_tiles = {
+		{
+			name = "1042_sulfur_water.png",
+			backface_culling = false,
+		},
+		{
+			name = "1042_sulfur_water.png",
+			backface_culling = true,
+		},
+    },
+	use_texture_alpha = "blend",
+
+    paramtype = "light",
+    paramtype2 = "flowingliquid",
+    light_source = 4,
+
+    walkable = false,
+    pointable = false,
+    diggable = false,
+    buildable_to = true,
+    is_ground_content = false,
+
+    sounds = {
+        footstep = {
+            name = "water",
+            gain = 0.5,
+            pitch = 0.75
+        },
+    },
+
+    liquidtype = "flowing",
+    liquid_alternative_flowing = "1042_core:sulfur_water_flowing",
+    liquid_alternative_source = "1042_core:sulfur_water_source",
+    drop = "",
+
+    drowning = 3,
+    liquid_viscosity = 2,
+    liquid_range = 5,
+	waving = 3,
+
+    post_effect_color = {a = 128, r = 0x00, g = 0x9e, b = 0xa9},
+    groups = {water = 1, liquid = 1, cools = 1, not_in_creative_inventory = 1},
+})
 
 
 

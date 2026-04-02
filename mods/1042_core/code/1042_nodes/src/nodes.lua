@@ -141,6 +141,8 @@ core.register_node("1042_core:sulfur_mud", {
 
 core.register_node("1042_core:bubbling_sulfur_mud", {
     description = core_1042.lorelang.translate("Bubbling Sulfur Mud"),
+
+    drawtype = "liquid",
     tiles = {{
         name = "1042_bubbling_sulfur_mud.png",
         animation = {
@@ -148,8 +150,37 @@ core.register_node("1042_core:bubbling_sulfur_mud", {
             frames_w = 1,
             frames_h = 4,
             frame_length = 0.2,
-        }
+        },
+        backface_culling = false,
+    },{
+        name = "1042_bubbling_sulfur_mud.png",
+        animation = {
+            type = "sheet_2d",
+            frames_w = 1,
+            frames_h = 4,
+            frame_length = 0.2,
+        },
+        backface_culling = true,
     }},
+    
+    --paramtype = "light",
+    --paramtype2 = "none",
+    --light_source = 4,
+
+    walkable = false,
+    buildable_to = true,
+    is_ground_content = false,
+
+    liquidtype = "source",
+    liquid_alternative_flowing = "1042_core:bubbling_sulfur_mud",
+    liquid_alternative_source = "1042_core:bubbling_sulfur_mud",
+
+    drowning = 10,
+    liquid_viscosity = 32,
+    --move_resistance = 7,
+    liquid_range = 0,
+
+    --post_effect_color = {a = 128, r = 0x00, g = 0x9e, b = 0xa9},
     drop = "1042_core:sulfur_mud",
     groups = {soil = 1, breakable_by_hand = 3},
 })
