@@ -221,6 +221,18 @@ core.register_node("1042_core:limestone", {
     groups = {stone = 1},
 })
 
+core.register_node("1042_core:pumice", {
+    description = core_1042.lorelang.translate("Pumice"),
+    tiles = {"1042_pumice.png"},
+    groups = {stone = 1},
+})
+
+core.register_node("1042_core:cinder", {
+    description = core_1042.lorelang.translate("Scoria"),
+    tiles = {"1042_cinder.png"},
+    groups = {stone = 1},
+})
+
 core.register_node("1042_core:gusher_spout", {
     description = core_1042.lorelang.translate("Gusher Spout"),
     tiles = {
