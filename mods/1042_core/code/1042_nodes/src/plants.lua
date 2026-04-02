@@ -795,7 +795,7 @@ core.register_node("1042_core:branch_cactus", {
     _1042_on_use = function(itemstack, user, pointed_thing)
         return core_1042.eat(itemstack, user, 1, 3)
     end,
-    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 2},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1},
 })
 
 core.register_node("1042_core:barrel_cactus", {
@@ -815,7 +815,7 @@ core.register_node("1042_core:barrel_cactus", {
     _1042_on_use = function(itemstack, user, pointed_thing)
         return core_1042.eat(itemstack, user, 1, 5)
     end,
-    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 2},
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1},
 })
 
 core.register_node("1042_core:short_palm", {
@@ -830,5 +830,39 @@ core.register_node("1042_core:short_palm", {
     sunlight_propagates = true,
     walkable = true,
 
-    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 2},
+    groups = {plant = 1, attached_node = 3, wood = 1},
+})
+
+core.register_node("1042_core:hanging_moss", {
+    description = core_1042.lorelang.translate("Hanging Moss"),
+    drawtype = "plantlike",
+    tiles = {"1042_hanging_moss.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    walkable = false,
+    climbable = true,
+
+    groups = {plant = 1, attached_node = 4, dig_immediate = 1}, -- TODO: not hanging on itself anymore for some reason
+})
+
+core.register_node("1042_core:coconut", {
+    description = core_1042.lorelang.translate("Coconut"),
+    drawtype = "nodebox",
+    tiles = {"1042_coconut.png"},
+
+    node_box = {
+        type = "fixed",
+        fixed = {-3/8, -3/8, -3/8, 3/8, 3/8, 3/8}
+    },
+
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 2, 15)
+    end,
+    groups = {plant = 1, attached_node = 1, dig_immediate = 1},
 })
