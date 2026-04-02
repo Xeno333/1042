@@ -284,6 +284,53 @@ core.register_node("1042_core:grass_short", {
     groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
 })
 
+core.register_node("1042_core:grass_thin", {
+    description = core_1042.lorelang.translate("Thin Grass"),
+    drawtype = "plantlike",
+    tiles = {"1042_grass_thin.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+    buildable_to = false,
+
+    color = "#309913ff",
+    paramtype2 = "color",
+    palette = "turf_palette.png",
+    node_placement_prediction = "",
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    on_construct = function(pos)
+        local node = core.get_node(pos)
+        if node then
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            core.swap_node(pos, node)
+        end
+    end,
+
+    -- Add self as a drop to avoid meta
+    drop = "",
+    preserve_metadata = function(_, _, _, drops)
+        drops[#drops+1] = ItemStack("1042_core:grass_thin")
+    end,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
+})
+
 core.register_node("1042_core:sunflower", {
     description = core_1042.lorelang.translate("Sunflower"),
     drawtype = "mesh",
@@ -464,10 +511,103 @@ core.register_node("1042_core:honeysuckle", {
     groups = {plant = 1, attached_node = 3, dig_immediate = 1, flower = 7},
 })
 
-core.register_node("1042_core:wildberries", {
-    description = core_1042.lorelang.translate("Wildberries"),
+core.register_node("1042_core:raspberries", {
+    description = core_1042.lorelang.translate("Raspberries"),
     drawtype = "plantlike",
-    tiles = {"1042_wildberries.png"},
+    tiles = {"1042_raspberries.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 2, 15)
+    end,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1},
+})
+
+core.register_node("1042_core:blackberries", {
+    description = core_1042.lorelang.translate("Blackberries"),
+    drawtype = "plantlike",
+    tiles = {"1042_blackberries.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 2, 15)
+    end,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1},
+})
+
+core.register_node("1042_core:strawberries", {
+    description = core_1042.lorelang.translate("Strawberries"),
+    drawtype = "plantlike",
+    tiles = {"1042_strawberries.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 2, 15)
+    end,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1},
+})
+
+core.register_node("1042_core:blueberries", {
+    description = core_1042.lorelang.translate("Blueberries"),
+    drawtype = "plantlike",
+    tiles = {"1042_blueberries.png"},
     use_texture_alpha = "clip",
 
     paramtype = "light",
@@ -529,4 +669,166 @@ core.register_node("1042_core:sword_grass", {
     place_param2 = 16 + 32 + 4,
 
     groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 1},
+})
+
+core.register_node("1042_core:grass_dry", {
+    description = core_1042.lorelang.translate("Dry Grass"),
+    drawtype = "plantlike",
+    tiles = {"1042_grass_dry.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+    buildable_to = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 1, 3)
+    end,
+
+
+    paramtype2 = "meshoptions",
+    place_param2 = 16 + 32 + 4,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 2},
+})
+
+-- TODO: Seaweed, Lilypads, Milfoil
+
+core.register_node("1042_core:marsh_grass", {
+    description = core_1042.lorelang.translate("Marsh Grass"),
+    drawtype = "plantlike",
+    tiles = {"1042_marsh_grass.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+    buildable_to = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 1, 3)
+    end,
+
+
+    paramtype2 = "meshoptions",
+    place_param2 = 16 + 32 + 4,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 2},
+})
+
+core.register_node("1042_core:tufted_grass", {
+    description = core_1042.lorelang.translate("Tufted Grass"),
+    drawtype = "plantlike",
+    tiles = {"1042_tufted_grass.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    floodable = true,
+    walkable = false,
+    buildable_to = false,
+
+    sounds = {
+        dug = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 1.7
+        }
+    },
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 1, 3)
+    end,
+
+
+    paramtype2 = "meshoptions",
+    place_param2 = 16 + 32 + 4,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 2},
+})
+
+core.register_node("1042_core:branch_cactus", {
+    description = core_1042.lorelang.translate("Saguaro Cactus"),
+    drawtype = "mesh",
+    mesh = "branch_cactus.obj",
+    tiles = {"1042_cactus_branched.png"},
+
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+    walkable = true,
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 1, 3)
+    end,
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 2},
+})
+
+core.register_node("1042_core:barrel_cactus", {
+    description = core_1042.lorelang.translate("Barrel Cactus"),
+    drawtype = "nodebox",
+    tiles = {"1042_cactus_barrel.png"},
+
+    node_box = {
+        type = "fixed",
+        fixed = {-2/8, -4/8, -2/8, 2/8, 2/8, 2/8}
+    },
+
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+
+    _1042_on_use = function(itemstack, user, pointed_thing)
+        return core_1042.eat(itemstack, user, 1, 5)
+    end,
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 2},
+})
+
+core.register_node("1042_core:short_palm", {
+    description = core_1042.lorelang.translate("Sago Palm"),
+    drawtype = "mesh",
+    mesh = "short_palm.obj",
+    tiles = {"1042_palm_short.png"},
+    use_texture_alpha = "clip",
+
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+    walkable = true,
+
+    groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 2},
 })

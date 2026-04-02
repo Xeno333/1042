@@ -49,10 +49,72 @@ core.register_abm({
     end
 })
 
+local function geyser_squirt(pos)
+    local len = rand:next(3, 20)
+    core.add_particlespawner({
+        amount = 50*len,
+        time = len,
+        size = 20,
+        collisiondetection = true,
+        texture = {name="1042_geyser_steam.png", blend="screen"},
+        minpos = vector.offset(pos, -0.1, 0.5, -0.1),
+        maxpos = vector.offset(pos, 0.1, 0.5, 0.1),
+        minvel = {x=-1, y=20, z=-1},
+        maxvel = {x=1, y=25, z=1},
+        minacc = {x=0.1, y=-3, z=0.1},
+        maxacc = {x=-0.1, y=-5, z=-0.1},
+        minsize = 10,
+        maxsize = 30,
+        minexptime = 1,
+        maxexptime = 3,
+    })
+    local handle = core.sound_play({name="1042_geyser", gain=1, pitch=1.1}, {loop=true})
+    core.after(len-1, core.sound_fade, handle, 1, 0)
+end
+
+core.register_abm({
+    label = "Geyser Squirt",
+    catch_up = false,
+    interval = 30,
+    chance = 15,
+    nodenames = {"1042_core:geyser_nozzle"},
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        -- play rumble sound
+        core.after(5, geyser_squirt, pos)
+    end
+})
+
+core.register_abm({
+    label = "Gusher Bubble",
+    catch_up = false,
+    interval = 5,
+    chance = 1,
+    nodenames = {"1042_core:gusher_spout"},
+    action = function(pos, node, active_object_count, active_object_count_wider)
+        core.add_particlespawner({
+            amount = 50,
+            time = 5,
+            size = 5,
+            collisiondetection = true,
+            collision_removal = true,
+            texture = {name="1042_gusher_bubble.png", blend="alpha"}, -- , blend = "add"
+            minpos = vector.offset(pos, -0.2, 0.5, -0.2),
+            maxpos = vector.offset(pos, 0.2, 0.5, 0.2),
+            minvel = {x=-2, y=4, z=-2},
+            maxvel = {x=2, y=8, z=2},
+            minacc = {x=1, y=-20, z=1},
+            maxacc = {x=-1, y=-30, z=-1},
+            minsize = 4,
+            maxsize = 6,
+            minexptime = 1,
+            maxexptime = 5,
+        })
+    end
+})
 
 --[[
     Notes:
-        This compeates with "Spread Fire"
+        This competes with "Spread Fire"
         This adds the challenge of having to watch it to make sure it burns
 ]]
 core.register_abm({

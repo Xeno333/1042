@@ -124,19 +124,125 @@ core.register_node("1042_core:sky_portal", {
 core.register_node("1042_core:dirt", {
     description = core_1042.lorelang.translate("Dirt"),
     tiles = {"1042_dirt.png"},
-    --tiles = {"1042_plain_node.png^[colorize:#8b4513:128"},
-    use_texture_alpha = "opaque",
+    groups = {soil = 1, breakable_by_hand = 3},
+})
 
-    groups = {dirt = 1, breakable_by_hand = 3},
+core.register_node("1042_core:mud", {
+    description = core_1042.lorelang.translate("Mud"),
+    tiles = {"1042_mud.png"},
+    groups = {soil = 1, breakable_by_hand = 3},
+})
+
+core.register_node("1042_core:sulfur_mud", {
+    description = core_1042.lorelang.translate("Sulfur Mud"),
+    tiles = {"1042_sulfur_mud.png"},
+    groups = {soil = 1, breakable_by_hand = 3},
+})
+
+core.register_node("1042_core:bubbling_sulfur_mud", {
+    description = core_1042.lorelang.translate("Bubbling Sulfur Mud"),
+    tiles = {{
+        name = "1042_bubbling_sulfur_mud.png",
+        animation = {
+            type = "sheet_2d",
+            frames_w = 1,
+            frames_h = 4,
+            frame_length = 0.2,
+        }
+    }},
+    drop = "1042_core:sulfur_mud",
+    groups = {soil = 1, breakable_by_hand = 3},
+})
+
+
+core.register_node("1042_core:silt", {
+    description = core_1042.lorelang.translate("Silt"),
+    tiles = {"1042_silt.png"},
+    groups = {soil = 1, breakable_by_hand = 3},
+})
+
+core.register_node("1042_core:clay", {
+    description = core_1042.lorelang.translate("Clay"),
+    tiles = {"1042_clay.png"},
+    groups = {soil = 1, breakable_by_hand = 3},
 })
 
 core.register_node("1042_core:sand", {
     description = core_1042.lorelang.translate("Sand"),
     tiles = {"1042_sand.png"},
-    --tiles = {"1042_plain_node.png^[colorize:#d9a357:128"},
-    use_texture_alpha = "opaque",
+    groups = {soil = 1, falling_node = 1, breakable_by_hand = 3},
+})
 
-    groups = {dirt = 1, falling_node = 1, breakable_by_hand = 3},
+core.register_node("1042_core:burning_sand", {
+    description = core_1042.lorelang.translate("Burning Sand"),
+    tiles = {"1042_burning_sand.png"},
+    groups = {soil = 1, falling_node = 1, breakable_by_hand = 3},
+})
+
+core.register_node("1042_core:scorched_sand", {
+    description = core_1042.lorelang.translate("Scorched Sand"),
+    tiles = {"1042_scorched_sand.png"},
+    groups = {soil = 1, falling_node = 1, breakable_by_hand = 2},
+})
+
+core.register_node("1042_core:wet_sand", {
+    description = core_1042.lorelang.translate("Wet Sand"),
+    tiles = {"1042_wet_sand.png"},
+    groups = {soil = 1, falling_node = 1, breakable_by_hand = 2},
+})
+
+core.register_node("1042_core:frozen_sand", {
+    description = core_1042.lorelang.translate("Frozen Sand"),
+    tiles = {"1042_frozen_sand.png"},
+    groups = {soil = 1, cools = 1, breakable_by_hand = 2},
+})
+
+core.register_node("1042_core:weathered_sand", {
+    description = core_1042.lorelang.translate("Weathered Sand"),
+    tiles = {"1042_weathered_sand.png"},
+    groups = {soil = 1, falling_node = 1, breakable_by_hand = 3},
+})
+
+core.register_node("1042_core:sandstone", {
+    description = core_1042.lorelang.translate("Sandstone"),
+    tiles = {"1042_sandstone.png"},
+    groups = {stone = 1, breakable_by_hand = 1},
+})
+
+core.register_node("1042_core:mudstone", {
+    description = core_1042.lorelang.translate("mudstone"),
+    tiles = {"1042_mudstone.png"},
+    groups = {stone = 1, breakable_by_hand = 1},
+})
+
+core.register_node("1042_core:limestone", {
+    description = core_1042.lorelang.translate("Limestone"),
+    tiles = {"1042_limestone.png"},
+    groups = {stone = 1},
+})
+
+core.register_node("1042_core:gusher_spout", {
+    description = core_1042.lorelang.translate("Gusher Spout"),
+    tiles = {
+        "1042_limestone.png^1042_gusher_spout.png",
+        "1042_limestone.png"
+    },
+    groups = {stone = 1},
+})
+
+core.register_node("1042_core:geyser_nozzle", {
+    description = core_1042.lorelang.translate("Geyser Nozzle"),
+    tiles = {
+        "1042_limestone.png^1042_geyser_nozzle.png",
+        "1042_limestone.png"
+    },
+    groups = {stone = 1},
+})
+
+core.register_node("1042_core:permafrost", {
+    description = core_1042.lorelang.translate("Permafrost"),
+    tiles = {"1042_permafrost.png"},
+    groups = {stone = 1, cools = 1},
 })
 
 core.register_node("1042_core:glass", {
@@ -147,7 +253,31 @@ core.register_node("1042_core:glass", {
     use_texture_alpha = "blend",
 	paramtype = "light",
 
-    groups = {falling_node = 1, slippery = 1},
+    groups = {stone=3, slippery = 1},
+})
+
+core.register_node("1042_core:leaf_litter", {
+    description = core_1042.lorelang.translate("Leaf Litter"),
+    tiles = {"1042_dirt.png^1042_leaf_litter.png"},
+    sounds = {
+        footstep = {
+            name = "turf",
+            gain = 0.8,
+            pitch = 0.75
+        },
+        dig = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 0.75
+        },
+        place = {
+            name = "turf",
+            gain = 0.4,
+            pitch = 0.75
+        }
+    },
+
+    groups = {breakable_by_hand = 2, bio_mass = 8},
 })
 
 core.register_node("1042_core:moss", {
@@ -233,7 +363,7 @@ core.register_node("1042_core:turf", {
         drops[#drops+1] = ItemStack("1042_core:turf")
     end,
 
-    groups = {dirt = 1, breakable_by_hand = 3, bio_mass = 8},
+    groups = {soil = 1, breakable_by_hand = 3, bio_mass = 8},
 })
 
 core.register_node("1042_core:turf_tilled", {
@@ -278,7 +408,7 @@ core.register_node("1042_core:turf_tilled", {
         drops[#drops+1] = ItemStack("1042_core:turf")
     end,
 
-    groups = {dirt = 1, breakable_by_hand = 3, bio_mass = 8},
+    groups = {soil = 1, breakable_by_hand = 3, bio_mass = 8},
 })
 
 
