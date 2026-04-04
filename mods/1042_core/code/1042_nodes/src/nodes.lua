@@ -33,6 +33,8 @@ core_1042.registry.register_material("1042_core:bedrock", {
     --tiles = {"1042_plain_node.png^[colorize:#110a02:200"},
     --use_texture_alpha = "opaque",
 
+    _mg_name = "bedrock",
+
     diggable = false,
 
     groups = {unbreakable = 1},
@@ -41,6 +43,8 @@ core_1042.registry.register_material("1042_core:bedrock", {
 core.register_node("1042_core:skyrock", {
     description = core_1042.lorelang.translate("Sky Rock"),
     drawtype = "airlike",
+
+    _mg_name = "skyrock",
 
     pointable = false,
     diggable = false,
