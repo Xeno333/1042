@@ -54,7 +54,7 @@ function weather.default_on_change(player, name, players_weather)
             fog_tint_type = "custom"
         },
         fog = {
-            fog_start = 0,
+            fog_start = 1 - weather.get_humidity_single(player:get_pos()) / 100,
             fog_distance = 360,
             fog_color = "#ffffff00"
         }
@@ -123,7 +123,12 @@ weather.weathers = {
                 min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
             }
         },
-        on_change = weather.default_on_change
+        on_change = weather.default_on_change,
+        on_step = function(player, timer)
+            local sky = player:get_sky(true)
+            sky.fog.fog_start = 1 - weather.get_humidity_single(player:get_pos()) / 100
+            player:set_sky(sky)
+        end
     }
 }
 
@@ -160,7 +165,7 @@ end
 function weather.get_weather_at_pos(pos)
     local i = weather.weather_index
     local temp = weather.get_temp_single(pos)
-    local humidity = weather.get_humidity_single(pos)
+    --local humidity = weather.get_humidity_single(pos)
 
     --print(temp, humidity)
 
