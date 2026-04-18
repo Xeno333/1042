@@ -1,3 +1,6 @@
+local node2 = core.get_content_id("1042_core:node2")
+local water2 = core.get_content_id("1042_core:water_source2")
+
 
 local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm)
     local noise_m = mapgen_1042.map2:get_2d_map({z=0,y=minp.x, x=minp.z})

@@ -9,6 +9,54 @@ local lava = core.get_content_id("1042_core:lava_source")
 local iron_ore = core.get_content_id("1042_core:iron_ore")
 local gold_ore = core.get_content_id("1042_core:gold_ore")
 
+-- Dec
+local rock = core.get_content_id("1042_core:rock")
+local sticks = core.get_content_id("1042_core:sticks")
+local iron_nugget = core.get_content_id("1042_core:iron_nugget")
+local gold_nugget = core.get_content_id("1042_core:gold_nugget")
+
+local flint = core.get_content_id("1042_core:flint")
+local beryl_top = core.get_content_id("1042_core:beryl_hanging")
+local chest = core.get_content_id("1042_core:chest")
+
+local grass_tall = core.get_content_id("1042_core:grass_tall")
+local grass_short = core.get_content_id("1042_core:grass_short")
+local cave_grass = core.get_content_id("1042_core:cave_grass")
+local thin_moss = core.get_content_id("1042_core:thin_moss")
+local mushroom = core.get_content_id("1042_core:mushroom")
+local digitalis = core.get_content_id("1042_core:digitalis")
+local light_bloom = core.get_content_id("1042_core:light_bloom")
+local sunflower = core.get_content_id("1042_core:sunflower")
+local moss = core.get_content_id("1042_core:moss")
+
+
+
+-- trees
+local tree_dark = core.get_content_id("1042_core:tree_dark")
+local leaves_dark = core.get_content_id("1042_core:leaves_dark")
+local tree_light = core.get_content_id("1042_core:tree_light")
+local leaves_light = core.get_content_id("1042_core:leaves_light")
+local tree = core.get_content_id("1042_core:tree")
+local leaves = core.get_content_id("1042_core:leaves")
+
+
+
+
+-- Info
+
+local water_level = mapgen_1042.water_level
+local cave_pool_level = mapgen_1042.cave_pool_level
+local bedrock_level = mapgen_1042.bedrock_level
+local caves_max = mapgen_1042.caves_max
+local decorated_caves = mapgen_1042.decorated_caves
+local treasure_y = mapgen_1042.water_level - 10
+
+
+-- Structures
+
+local tower = core.get_content_id("1042_core:tower")
+
+
 
 local function dec(pr, x, y, z, data, area, tempv, cave, param2_data, grass_color)
     local c = pr:next(1, 1000)
@@ -223,13 +271,13 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
                     vi = vi + 1
                     goto skip
                 end
-                if y == T_ymax_Real then
+                if y == mapgen_1042.d_ymax then
                     data[vi] = nodes.skyrock
 
                     vi = vi + 1
                     goto skip
-                end
-                if y >= T_ymax then
+
+                elseif y > mapgen_1042.d_ymax then
                     vi = vi + 1
                     goto skip
                 end
