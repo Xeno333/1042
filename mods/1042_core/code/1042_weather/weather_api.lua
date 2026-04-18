@@ -126,9 +126,9 @@ end
 
 -- This equation is hard coded in mapgen!
 function weather.get_biome_palette_index(temp, humidity)
-    print(temp, math.floor((((temp + 30) / 60)) * 15))
-    print(humidity, math.floor((humidity / 100) * 15))
-    print((math.floor((((temp + 30) / 60)) * 15) * 16) + math.floor((humidity / 100) * 15))
+    --print(temp, math.floor((((temp + 30) / 60)) * 15))
+    --print(humidity, math.floor((humidity / 100) * 15))
+    --print((math.floor((((temp + 30) / 60)) * 15) * 16) + math.floor((humidity / 100) * 15))
 
     return (math.floor((((temp + 30) / 60)) * 15) * 16) + math.floor((humidity / 100) * 15)
 end
