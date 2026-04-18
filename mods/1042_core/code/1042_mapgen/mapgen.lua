@@ -82,7 +82,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
         local r, ipr, itemp = f(minp.y, maxp.y)
         if r ~= nil then
             -- data
-            local pr, pr2, temp
+            local pr, pr2, temp, humidity
             if not ipr then
                 pr = PseudoRandom(seed + minp.x + minp.y + minp.z)
                 pr2 = PseudoRandom(seed + 13572126 + minp.x + minp.y + minp.z)

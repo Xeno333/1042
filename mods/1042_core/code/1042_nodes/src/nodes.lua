@@ -222,12 +222,14 @@ core.register_node("1042_core:mudstone", {
 core.register_node("1042_core:limestone", {
     description = core_1042.lorelang.translate("Limestone"),
     tiles = {"1042_limestone.png"},
+    _mg_name = "limestone",
     groups = {stone = 1},
 })
 
 core.register_node("1042_core:pumice", {
     description = core_1042.lorelang.translate("Pumice"),
     tiles = {"1042_pumice.png"},
+    _mg_name = "pumice",
     groups = {stone = 1},
 })
 
@@ -243,6 +245,7 @@ core.register_node("1042_core:gusher_spout", {
         "1042_limestone.png^1042_gusher_spout.png",
         "1042_limestone.png"
     },
+    _mg_name = "gusher_spout",
     groups = {stone = 1},
 })
 
@@ -252,6 +255,7 @@ core.register_node("1042_core:geyser_nozzle", {
         "1042_limestone.png^1042_geyser_nozzle.png",
         "1042_limestone.png"
     },
+    _mg_name = "geyser_nozzle",
     groups = {stone = 1},
 })
 

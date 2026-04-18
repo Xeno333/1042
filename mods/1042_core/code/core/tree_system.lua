@@ -14,8 +14,12 @@ function core_1042.trees.register_tree(from_mod, def)
     end
 
     def.leaves.description = item_desc .. core_1042.lorelang.translate("Leaves")
+    def.leaves._mg_name = "leaves" .. item_name
     def.tree.description = item_desc .. core_1042.lorelang.translate("Tree")
+    def.tree._mg_name = "tree" .. item_name
+    print(def.tree._mg_name)
     def.planks.description = item_desc .. core_1042.lorelang.translate("Planks")
+    def.planks._mg_name = "planks" .. item_name
     
 
     core.register_node(":" .. from_mod .. ":tree" .. item_name, def.tree)
