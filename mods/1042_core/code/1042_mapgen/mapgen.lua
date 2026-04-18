@@ -17,6 +17,9 @@ function add_mapgen(miny, maxy, func, pr, temp)
     end
 end
 
+
+-- nodes
+
 nodes = {}
 for name, def in pairs(core.registered_nodes) do
     if def._mg_name then
@@ -35,15 +38,9 @@ for name, def in pairs(core.registered_nodes) do
 end
 table.sort(gems)
 
--- Load and register schematics
-schematic_path = core_1042.get_core_mod_path("1042_mapgen") .. "/schematics/"
-schem = schematics_1042.load_schematic(schematic_path .. "/big_tree_1")
-schematics_1042.register_schematic("big_tree_1", schem)
-schem = schematics_1042.load_schematic(schematic_path .. "/big_tree_dark_1")
-schematics_1042.register_schematic("big_tree_dark_1", schem)
-schem = schematics_1042.load_schematic(schematic_path .. "/big_tree_light_1")
-schematics_1042.register_schematic("big_tree_light_1", schem)
 
+
+-- Moduals
 
 dofile(core_1042.get_core_mod_path("1042_mapgen") .. "/mapgen_api.lua")
 dofile(core_1042.get_core_mod_path("1042_mapgen") .. "/structures.lua")
@@ -54,71 +51,13 @@ dofile(core_1042.get_core_mod_path("1042_mapgen") .. "/world2_mg.lua")
 dofile(core_1042.get_core_mod_path("1042_mapgen") .. "/void_mg.lua")
 
 
--- Settings
-T_ymax = mapgen_1042.ymax
-T_ymax_Real = mapgen_1042.d_ymax
-T_ymin = mapgen_1042.ymin
-water_level = mapgen_1042.water_level
-cave_pool_level = mapgen_1042.cave_pool_level
-bedrock_level = mapgen_1042.bedrock_level
-caves_max = mapgen_1042.caves_max
-decorated_caves = mapgen_1042.decorated_caves
-treasure_y = mapgen_1042.water_level - 10
-
-
 
 
 
 -- Mapgen
 air = core.get_content_id("air")
-
 ice = core.get_content_id("1042_core:ice")
 
-
--- Dec
-rock = core.get_content_id("1042_core:rock")
-sticks = core.get_content_id("1042_core:sticks")
-iron_nugget = core.get_content_id("1042_core:iron_nugget")
-gold_nugget = core.get_content_id("1042_core:gold_nugget")
-
-
-flint = core.get_content_id("1042_core:flint")
-beryl_top = core.get_content_id("1042_core:beryl_hanging")
-chest = core.get_content_id("1042_core:chest")
-
-grass_tall = core.get_content_id("1042_core:grass_tall")
-grass_short = core.get_content_id("1042_core:grass_short")
-cave_grass = core.get_content_id("1042_core:cave_grass")
-thin_moss = core.get_content_id("1042_core:thin_moss")
-mushroom = core.get_content_id("1042_core:mushroom")
-digitalis = core.get_content_id("1042_core:digitalis")
-light_bloom = core.get_content_id("1042_core:light_bloom")
-sunflower = core.get_content_id("1042_core:sunflower")
-moss = core.get_content_id("1042_core:moss")
-
-
-
-tower = core.get_content_id("1042_core:tower")
-
-
--- Dimension
-
-node2 = core.get_content_id("1042_core:node2")
-water2 = core.get_content_id("1042_core:water_source2")
-
-
-
-
-tree_dark = core.get_content_id("1042_core:tree_dark")
-leaves_dark = core.get_content_id("1042_core:leaves_dark")
-tree_light = core.get_content_id("1042_core:tree_light")
-leaves_light = core.get_content_id("1042_core:leaves_light")
-tree = core.get_content_id("1042_core:tree")
-leaves = core.get_content_id("1042_core:leaves")
-
-
---local avrg = 0
---local c = 0
 
 
 

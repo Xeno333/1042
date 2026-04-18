@@ -1,4 +1,5 @@
 
+
 function grow_tree(pos, data, area, def)
     local pr = PseudoRandom(pos.x + pos.y + pos.z)
     local h = def.h
