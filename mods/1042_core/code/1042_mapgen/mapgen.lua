@@ -89,6 +89,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
             end
             if not itemp then
                 temp = weather.get_temp_map(minp.x, minp.z)
+                humidity = weather.get_humidity_map(minp.x, minp.z)
             end
 
             updated_param2, updated_liquid = r(
@@ -96,7 +97,7 @@ core.register_on_generated(function(vm, minp, maxp, seed)
                 area, data, param2_data,
                 pr, pr2,
                 structs,
-                temp
+                temp, humidity
             )
             break
         end

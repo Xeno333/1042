@@ -176,7 +176,7 @@ core.register_node("1042_core:grass_mid", {
     on_construct = function(pos)
         local node = core.get_node(pos)
         if node then
-            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos), weather.get_humidity_single(pos))
             core.swap_node(pos, node)
         end
     end,
@@ -223,7 +223,7 @@ core.register_node("1042_core:grass_tall", {
     on_construct = function(pos)
         local node = core.get_node(pos)
         if node then
-            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos), weather.get_humidity_single(pos))
             core.swap_node(pos, node)
         end
     end,
@@ -270,7 +270,7 @@ core.register_node("1042_core:grass_short", {
     on_construct = function(pos)
         local node = core.get_node(pos)
         if node then
-            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos), weather.get_humidity_single(pos))
             core.swap_node(pos, node)
         end
     end,
@@ -317,7 +317,7 @@ core.register_node("1042_core:grass_thin", {
     on_construct = function(pos)
         local node = core.get_node(pos)
         if node then
-            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos), weather.get_humidity_single(pos))
             core.swap_node(pos, node)
         end
     end,

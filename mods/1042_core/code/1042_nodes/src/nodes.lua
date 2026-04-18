@@ -368,7 +368,7 @@ core.register_node("1042_core:turf", {
         local node = core.get_node(pos)
 
         if node then
-            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos), weather.get_humidity_single(pos))
             core.swap_node(pos, node)
         end
     end,
@@ -413,7 +413,7 @@ core.register_node("1042_core:turf_tilled", {
         local node = core.get_node(pos)
 
         if node then
-            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos))
+            node.param2 = weather.get_biome_palette_index(weather.get_temp_single(pos), weather.get_humidity_single(pos))
             core.swap_node(pos, node)
         end
     end,
