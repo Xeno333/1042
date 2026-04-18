@@ -160,6 +160,9 @@ end
 function weather.get_weather_at_pos(pos)
     local i = weather.weather_index
     local temp = weather.get_temp_single(pos)
+    local humidity = weather.get_humidity_single(pos)
+
+    --print(temp, humidity)
 
     for n=1,#weather.weathers do -- Avoid inf loop
         local weather_t = weather.weathers[i]

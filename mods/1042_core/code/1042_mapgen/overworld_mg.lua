@@ -143,7 +143,7 @@ local function dec(pr, x, y, z, data, area, tempv, cave, param2_data, grass_colo
                 data[area:index(x, y, z)] = chest
             end
 
-        elseif c <= 200 and (tempv >= 10 and tempv <= 20) then
+        elseif c <= 200 and (tempv >= 10) then
             local v = area:index(x, y, z)
             data[v] = thin_moss
             param2_data[v] = 1
@@ -151,7 +151,7 @@ local function dec(pr, x, y, z, data, area, tempv, cave, param2_data, grass_colo
         end
 
     elseif cave == "top" then
-        if c <= 100 and (tempv >= 10 and tempv <= 20) then
+        if c <= 100 and (tempv >= 10) then
             local v = area:index(x, y, z)
             data[v] = thin_moss
             param2_data[v] = 6
@@ -169,7 +169,7 @@ local function dec(pr, x, y, z, data, area, tempv, cave, param2_data, grass_colo
 end
 
 
-local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm)
+local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm, hm)
     local m_pos = {z=minp.x,y=minp.y,x=minp.z}
 
     local noise_m = mapgen_1042.map:get_2d_map({z=0,y=minp.x, x=minp.z})
@@ -210,6 +210,7 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
                 lx = lx + 1
 
                 local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
+                local humidity = weather.get_humidity({x=lx, y=y, z=lz}, hm)
                 local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, noise_m[lx][lz], tempv)
 
                 if x == mapgen_1042.portal_room.x and z == mapgen_1042.portal_room.z and y == mapgen_1042.portal_room.y then
@@ -298,7 +299,7 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
                         data[vi] = dirt
 
                     elseif y == ny then
-                        local grass_color = math.min(math.floor(((tempv / 30) + 1) * 8 * 16) - 1, 255) -- From weather_api.lua
+                        local grass_color = (math.floor((((tempv + 30) / 60)) * 15) * 16) + math.floor((humidity / 100) * 15) -- From weather_api.lua
                         if y > water_level then
                             if mountin_top then
                                 data[vi] = dirt
@@ -330,7 +331,7 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
                     data[vi] = water
                 else
                     if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > cave_v and y <= ny then
-                        if tempv >= 10 and tempv <= 20 then
+                        if tempv >= 10 then
                             data[area:index(x, y-1, z)] = moss
                         end
                         dec(pr, x, y, z, data, area, tempv, "bottom", param2_data)
