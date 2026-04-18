@@ -230,7 +230,7 @@ core_1042.registry.register_material("1042_core:ruby", {
 
     light_source = 5,
     
-    groups = {gem = 1, breakable_by_hand = 3, attached_node = 3},
+    groups = {--[[gem = 1, ]]breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
 }, 3, nil, nil)
@@ -260,7 +260,7 @@ core_1042.registry.register_material("1042_core:topaz", {
 
     light_source = 5,
     
-    groups = {gem = 1, breakable_by_hand = 3, attached_node = 3},
+    groups = {--[[gem = 1, ]]breakable_by_hand = 3, attached_node = 3},
 
     item_type = "node",
 }, 4, nil, nil)
