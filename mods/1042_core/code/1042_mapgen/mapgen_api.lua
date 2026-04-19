@@ -6,9 +6,9 @@ local map_noise_params = {
     scale = 1,
     spread = {x = 800, y = 800, z = 800},
     seed = core.get_mapgen_setting("seed") + 3754634652,
-    octaves = 4,
-    persist = 0.3,
-    lacunarity = 3,
+    octaves = 5,
+    persist = 0.5,
+    lacunarity = 2,
     flags = {
         eased = true,
         absvalue = false,
