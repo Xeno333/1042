@@ -64,8 +64,20 @@ local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, 
     
     -- Land
     if cave == nil and y > water_level then
-        local depth = pr:next(1, 2) - 2
-        if flags.sulfer_field then
+        if flags.hot_dry then
+            if c <= 3 then
+                data[area:index(x, y+1, z)] = nodes.branch_cactus
+                param2_data[area:index(x, y+1, z)] = pr:next(1,4)
+            elseif c <= 6 then
+                data[area:index(x, y+1, z)] = nodes.barrel_cactus
+                param2_data[area:index(x, y+1, z)] = pr:next(1,4)
+            elseif c == 7 then
+                data[area:index(x, y+1, z)] = grass_tall
+                param2_data[area:index(x, y+1, z)] = grass_color
+            end
+
+        elseif flags.sulfer_field then
+            local depth = pr:next(1, 2) - 2
             if c <= 2 then
                 local l = pr:next(depth + 2, 3)
                 for i = 1, l-1 do
@@ -143,7 +155,7 @@ local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, 
         if c <= 5 then
             data[area:index(x, y, z)] = flint
 
-        elseif c <= 20 and (tempv >= 10 and tempv <= 20) then
+        elseif c <= 20 and flags.warm_cave then
             local v = area:index(x, y, z)
             data[v] = cave_grass
             param2_data[v] = 16 + 32 + 4
@@ -165,7 +177,7 @@ local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, 
                 data[area:index(x, y, z)] = chest
             end
 
-        elseif c <= 200 and (tempv >= 10) then
+        elseif c <= 200 and flags.warm_cave then
             local v = area:index(x, y, z)
             data[v] = thin_moss
             param2_data[v] = 1
@@ -173,7 +185,7 @@ local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, 
         end
 
     elseif cave == "top" then
-        if c <= 100 and (tempv >= 10) then
+        if c <= 100 and flags.warm_cave then
             local v = area:index(x, y, z)
             data[v] = thin_moss
             param2_data[v] = 6
@@ -343,6 +355,11 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
                                 flags.sulfer_field = true
                                 data[vi] = sand
 
+                            elseif tempv >= 20 and humidity <= 25 then
+                                flags.hot_dry = true
+                                data[vi] = turf
+                                param2_data[vi] = grass_color
+
                             else
                                 data[vi] = turf
                                 param2_data[vi] = grass_color
@@ -371,7 +388,8 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
                     data[vi] = water
                 else
                     if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > cave_v and y <= ny then
-                        if tempv >= 10 then
+                        if tempv >= 10 and humidity >= 50 then
+                            flags.warm_cave = true
                             data[area:index(x, y-1, z)] = moss
                         end
                         dec(pr, x, y, z, data, area, tempv, humidity, "bottom", param2_data, nil, flags)

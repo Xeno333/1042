@@ -787,8 +787,10 @@ core.register_node("1042_core:branch_cactus", {
     mesh = "branch_cactus.obj",
     tiles = {"1042_cactus_branched.png"},
 
+    _mg_name = "branch_cactus",
+
     paramtype = "light",
-    paramtype2 = "facedir",
+    paramtype2 = "4dir",
     sunlight_propagates = true,
     walkable = true,
 
@@ -808,8 +810,10 @@ core.register_node("1042_core:barrel_cactus", {
         fixed = {-2/8, -4/8, -2/8, 2/8, 2/8, 2/8}
     },
 
+    _mg_name = "barrel_cactus",
+
     paramtype = "light",
-    paramtype2 = "facedir",
+    paramtype2 = "4dir",
     sunlight_propagates = true,
 
     _1042_on_use = function(itemstack, user, pointed_thing)
