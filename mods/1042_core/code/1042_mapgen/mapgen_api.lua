@@ -19,7 +19,8 @@ local map_noise_params = {
 mapgen_1042.map = PerlinNoiseMap(map_noise_params, {x=80, y=80, z=0})
 mapgen_1042.map_single = PerlinNoise(map_noise_params)
 
-mapgen_1042.rock_map = PerlinNoiseMap({
+
+local rock_map_params = {
     offset = 0,
     scale = 1,
     spread = {x = 60, y = 60, z = 60},
@@ -32,9 +33,12 @@ mapgen_1042.rock_map = PerlinNoiseMap({
         absvalue = true,
         defaults = false
     }
-}, {x=80, y=80, z=0})
+}
+mapgen_1042.rock_map = PerlinNoiseMap(rock_map_params, {x=80, y=80, z=0})
+mapgen_1042.rock_map_single = PerlinNoise(rock_map_params)
 
-mapgen_1042.plateau_map = PerlinNoiseMap({
+
+local plateau_map_params = {
     offset = 0,
     scale = 1,
     spread = {x = 60, y = 60, z = 60},
@@ -47,9 +51,13 @@ mapgen_1042.plateau_map = PerlinNoiseMap({
         absvalue = true,
         defaults = false
     }
-}, {x=80, y=80, z=0})
+}
 
-mapgen_1042.flatness_map = PerlinNoiseMap({
+mapgen_1042.plateau_map = PerlinNoiseMap(plateau_map_params, {x=80, y=80, z=0})
+mapgen_1042.plateau_map_single = PerlinNoise(plateau_map_params)
+
+
+local flatness_map_params = {
     offset = 1,
     scale = 1,
     spread = {x = 1000, y = 1000, z = 1000},
@@ -60,7 +68,9 @@ mapgen_1042.flatness_map = PerlinNoiseMap({
         absvalue = false,
         defaults = false
     }
-}, {x=80, y=80, z=0})
+}
+mapgen_1042.flatness_map = PerlinNoiseMap(flatness_map_params, {x=80, y=80, z=0})
+mapgen_1042.flatness_map_single = PerlinNoise(flatness_map_params)
 
 
 
@@ -252,7 +262,11 @@ local continent_radius = mapgen_1042.continent_radius
 function mapgen_1042.get_y(x, z, noisei, temp)
     local noise = noisei
     if not noise then
-        noise = mapgen_1042.map_single:get_2d(vector.new(z, x, 0))
+        noise = ((mapgen_1042.map_single:get_2d(vector.new(z, x, 0))
+                + (math.max(math.min(1, mapgen_1042.rock_map_single:get_2d(vector.new(z, x, 0))) - 0.7, 0) / 4)
+                + (math.max(math.min(1, mapgen_1042.plateau_map_single:get_2d(vector.new(z, x, 0))) - 0.9, 0)))
+                * (mapgen_1042.flatness_map_single:get_2d(vector.new(z, x, 0)) / 1.5))
+
     end
 
     local ny
@@ -295,7 +309,8 @@ end
 
 function mapgen_1042.get_spawn_y(x, z)
     local temp = weather.get_temp_single(vector.new(x, 0, z))
-    if not (temp >= 10 and temp <= 20) then -- Temp range
+    local humidity = weather.get_humidity_single(vector.new(x, 0, z))
+    if not (temp >= 10 and temp <= 25 and humidity >= 50) then -- Temp range
         return false
     end
 
