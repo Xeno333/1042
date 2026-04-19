@@ -6,9 +6,9 @@ local map_noise_params = {
     scale = 1,
     spread = {x = 800, y = 800, z = 800},
     seed = core.get_mapgen_setting("seed") + 3754634652,
-    octaves = 5,
-    persist = 0.5,
-    lacunarity = 2,
+    octaves = 4,
+    persist = 0.3,
+    lacunarity = 3,
     flags = {
         eased = true,
         absvalue = false,
@@ -18,6 +18,50 @@ local map_noise_params = {
 
 mapgen_1042.map = PerlinNoiseMap(map_noise_params, {x=80, y=80, z=0})
 mapgen_1042.map_single = PerlinNoise(map_noise_params)
+
+mapgen_1042.rock_map = PerlinNoiseMap({
+    offset = 0,
+    scale = 1,
+    spread = {x = 60, y = 60, z = 60},
+    seed = core.get_mapgen_setting("seed") + 26354,
+    octaves = 2,
+    persist = 0.5,
+    lacunarity = 2,
+    flags = {
+        eased = false,
+        absvalue = true,
+        defaults = false
+    }
+}, {x=80, y=80, z=0})
+
+mapgen_1042.plateau_map = PerlinNoiseMap({
+    offset = 0,
+    scale = 1,
+    spread = {x = 60, y = 60, z = 60},
+    seed = core.get_mapgen_setting("seed") + 62367374,
+    octaves = 2,
+    persist = 0.5,
+    lacunarity = 2,
+    flags = {
+        eased = false,
+        absvalue = true,
+        defaults = false
+    }
+}, {x=80, y=80, z=0})
+
+mapgen_1042.flatness_map = PerlinNoiseMap({
+    offset = 1,
+    scale = 1,
+    spread = {x = 1000, y = 1000, z = 1000},
+    seed = core.get_mapgen_setting("seed") + 2737458,
+    octaves = 1,
+    flags = {
+        eased = true,
+        absvalue = false,
+        defaults = false
+    }
+}, {x=80, y=80, z=0})
+
 
 
 local map_noise_params_2 = {

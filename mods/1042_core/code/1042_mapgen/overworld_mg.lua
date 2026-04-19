@@ -188,6 +188,10 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
     local m_pos = {z=minp.x,y=minp.y,x=minp.z}
 
     local noise_m = mapgen_1042.map:get_2d_map({z=0,y=minp.x, x=minp.z})
+    local rock_noise_m = mapgen_1042.rock_map:get_2d_map({z=0,y=minp.x, x=minp.z})
+    local plateau_noise_m = mapgen_1042.plateau_map:get_2d_map({z=0,y=minp.x, x=minp.z})
+    local flatness_noise_m = mapgen_1042.flatness_map:get_2d_map({z=0,y=minp.x, x=minp.z})    
+    
     local cave_noise_m = mapgen_1042.cave_map:get_3d_map(m_pos)
     local ore_noise_m = mapgen_1042.ore_map:get_3d_map(m_pos)
     local gold_ore_noise_m = mapgen_1042.ore_map_gold:get_3d_map(m_pos)
@@ -228,7 +232,10 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
 
                 local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
                 local humidity = weather.get_humidity({x=lx, y=y, z=lz}, hm)
-                local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, noise_m[lx][lz], tempv)
+                local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, 
+                    ((noise_m[lx][lz] + (math.max(math.min(1, rock_noise_m[lx][lz]) - 0.7, 0) / 4) + (math.max(math.min(1, plateau_noise_m[lx][lz]) - 0.9, 0)))
+                    * (flatness_noise_m[lx][lz] / 1.5))
+                ,tempv)
 
                 if x == mapgen_1042.portal_room.x and z == mapgen_1042.portal_room.z and y == mapgen_1042.portal_room.y then
                     structs[#structs+1] = function(d)
