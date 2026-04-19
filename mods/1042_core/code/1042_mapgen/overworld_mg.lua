@@ -78,7 +78,7 @@ local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, 
             elseif c == 11 and c2 <= 100 then
                 grow_tree(vector.new(x, y-2, z), data, area, {tree = nodes.tree_palm, leaves = nodes.leaves_palm, h = 25, r = 1, down_c = 8, down = 5, lc = {min = 3, max = 5}})
             elseif c == 11 then
-                data[area:index(x, y+depth+1, z)] = nodes.short_palm
+                data[area:index(x, y+1, z)] = nodes.short_palm
             end
         else
             if c <= 20 then
