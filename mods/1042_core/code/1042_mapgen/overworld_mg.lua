@@ -62,7 +62,6 @@ local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, 
     local c = pr:next(1, 1000)
     local c2 = pr:next(1, 1000)
     
-    
     -- Land
     if cave == nil and y > water_level then
         local depth = pr:next(1, 2) - 2
@@ -78,6 +77,8 @@ local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, 
                 data[area:index(x, y+depth+1, z)] = nodes.gusher_spout
             elseif c == 11 and c2 <= 100 then
                 grow_tree(vector.new(x, y-2, z), data, area, {tree = nodes.tree_palm, leaves = nodes.leaves_palm, h = 25, r = 1, down_c = 8, down = 5, lc = {min = 3, max = 5}})
+            elseif c == 11 then
+                data[area:index(x, y+depth+1, z)] = nodes.short_palm
             end
         else
             if c <= 20 then
@@ -94,8 +95,7 @@ local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, 
                 param2_data[area:index(x, y+1, z)] = grass_color
             end
 
-            if tempv > 0 and not (tempv > 20) then
-
+            if tempv > 0 and not (tempv > 20) and humidity > 45 then
                 if c == 102 and c2 <= 100 and tempv >= 5 then
                     if data[area:index(x, y, z)] == turf and data[area:index(x-10, y, z-10)] == turf and data[area:index(x-10, y, z)] == turf and data[area:index(x, y, z-10)] == turf then
                         data[area:index(x-10, y+1, z-10)] = tower
@@ -116,9 +116,10 @@ local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, 
                     grow_tree(vector.new(x, y-2, z), data, area, {tree = tree_dark, leaves = leaves_dark, h = 20, r = 2})
                 end
 
-            elseif tempv > 20 then
-                if c <= 10 then
+            elseif tempv > 10 then
+                if c <= 20 then
                     data[area:index(x, y+1, z)] = grass_short
+                    param2_data[area:index(x, y+1, z)] = grass_color
                 end
 
             elseif tempv <= -3 then

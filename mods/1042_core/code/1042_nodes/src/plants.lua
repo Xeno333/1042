@@ -825,6 +825,8 @@ core.register_node("1042_core:short_palm", {
     tiles = {"1042_palm_short.png"},
     use_texture_alpha = "clip",
 
+    _mg_name = "short_palm",
+
     paramtype = "light",
     paramtype2 = "facedir",
     sunlight_propagates = true,
