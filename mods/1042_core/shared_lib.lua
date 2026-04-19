@@ -15,7 +15,12 @@ core_1042 = {
 
 core_1042.version_string = "1042 v" .. core_1042.version.major .. "." .. core_1042.version.minor .. "." .. core_1042.version.patch .. core_1042.version_release_to_string[core_1042.version.release]
 
+function core_1042.null() end
+
 core_1042.shared_lib = {
+    mapgen = {
+        decorations = core.settings:get_bool("1042_mapgen_decorations", true)
+    },
     consts = {
         -- Later use these for automaticly creating dimensions from a base value
         plain_world_y_levels = {

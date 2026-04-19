@@ -21,10 +21,19 @@
 #   Whether to update the camera during gliding.
 1042_flight_cam (Update Camera During Flight) bool true
 
+
 [Server settings]
 
 #   Warn players to adjust settings on join.
 1042_warn_players_about_settings (Warn players about settings) bool true
+
+
+[Mapgen]
+
+#   Enable mapgen decorations
+#
+#   Recomended: true
+1042_mapgen_decorations (Enable mapgen decorations) bool true
 
 
 [Advanced]

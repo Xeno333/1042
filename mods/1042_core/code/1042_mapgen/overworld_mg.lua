@@ -191,6 +191,11 @@ local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, 
 end
 
 
+if not core_1042.shared_lib.mapgen.decorations then
+    dec = core_1042.null
+end
+
+
 local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm, hm)
     local m_pos = {z=minp.x,y=minp.y,x=minp.z}
 
