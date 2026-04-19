@@ -394,6 +394,9 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
                         end
                         dec(pr, x, y, z, data, area, tempv, humidity, "bottom", param2_data, nil, flags)
                     elseif cave_noise_m[lx][ly+1] and cave_noise_m[lx][ly+1][lz] > cave_v and y <= ny then
+                        if tempv >= 10 and humidity >= 50 then
+                            flags.warm_cave = true
+                        end
                         dec(pr, x, y, z, data, area, tempv, humidity, "top", param2_data, nil, flags)
                     end
                 end
