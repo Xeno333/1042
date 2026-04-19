@@ -424,6 +424,8 @@ core.register_node("1042_core:clover", {
     tiles = {"1042_clover.png"},
     use_texture_alpha = "clip",
 
+    _mg_name = "clover",
+
     paramtype = "light",
     sunlight_propagates = true,
     floodable = true,
@@ -459,6 +461,8 @@ core.register_node("1042_core:thistles", {
     sunlight_propagates = true,
     floodable = true,
     walkable = false,
+
+    _mg_name = "thistles",
 
     sounds = {
         dug = {
@@ -773,10 +777,6 @@ core.register_node("1042_core:tufted_grass", {
     _1042_on_use = function(itemstack, user, pointed_thing)
         return core_1042.eat(itemstack, user, 1, 3)
     end,
-
-
-    paramtype2 = "meshoptions",
-    place_param2 = 16 + 32 + 4,
 
     groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 2},
 })

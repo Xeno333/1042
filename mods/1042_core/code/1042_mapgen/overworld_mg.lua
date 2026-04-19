@@ -84,12 +84,18 @@ local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, 
             if c <= 20 then
                 data[area:index(x, y+1, z)] = grass_tall
                 param2_data[area:index(x, y+1, z)] = grass_color
-            elseif c == 21 and tempv >= 10 and tempv <= 20 then
+
+            elseif c <= 21 and tempv >= 10 and tempv <= 20 and humidity >= 50 then
                 data[area:index(x, y+1, z)] = digitalis
-            elseif c <= 25 and tempv >= 5 and tempv <= 15 and y >= water_level+5 then -- be with dark trees
+            elseif c <= 22 and tempv >= 10 and tempv <= 20 and humidity >= 50 then
+                data[area:index(x, y+1, z)] = nodes.clover
+            elseif c <= 23 and tempv >= 0 and tempv <= 15 and humidity >= 45 then
+                data[area:index(x, y+1, z)] = nodes.thistles
+            elseif c <= 25 and tempv >= 10 and humidity >= 75 then
                 data[area:index(x, y+1, z)] = light_bloom
             elseif c <= 25 and tempv >= 20 then
                 data[area:index(x, y+1, z)] = sunflower
+
             elseif c < 75 then
                 data[area:index(x, y+1, z)] = grass_short
                 param2_data[area:index(x, y+1, z)] = grass_color
