@@ -9,7 +9,7 @@ weather.register_weather({
         },
         y_level = {
             max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
+            min = core_1042.shared_lib.consts.plain_world_y_levels.cave
         }
     },
     particlespawner = {
@@ -184,7 +184,7 @@ weather.register_weather({
                 fog_tint_type = "custom"
             },
             fog = {
-                fog_start = 100,
+                fog_start = 0.5,
                 fog_distance = 200,
                 fog_color = "#000000"
             }
@@ -301,7 +301,7 @@ weather.register_weather({
             },
             fog = {
                 fog_start = 0,
-                fog_distance = 40,
+                fog_distance = 50,
                 fog_color = "#223355"
             }
         })
@@ -445,7 +445,105 @@ weather.register_weather({
                 visible = false,
             }
         )
+        player:override_day_night_ratio(0.60)
         player:set_lighting({exposure = {exposure_correction = 2}})
+    end,
+})
+
+weather.register_weather({
+    name = "Cave",
+    conditions = {
+        y_level = {
+            max = core_1042.shared_lib.consts.plain_world_y_levels.cave,
+            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
+        }
+    },
+    particlespawner = {
+        y_spawn = {
+            min = -16,
+            max = 16
+        },
+
+        amount = 25,
+        time = 2,
+
+        collisiondetection = true,
+        object_collision = true,
+
+        vel = {
+            min = vector.new(-16, -16, -16),
+            max = vector.new(16, 16, 16),
+            bias = 0
+        },
+
+        acc = vector.new(0, -9.8, 0),
+
+        size = {
+            min = 0.5,
+            max = 2
+        },
+
+        exptime = {
+            min = 2,
+            max = 3
+        },
+
+        glow = 14,
+
+        texpool = {
+            {
+                name = "1042_plain_node.png^[colorize:#222222:144",
+                scale = 1,
+                blend = "alpha"
+            },
+            {
+                name = "1042_plain_node.png^[colorize:#111111:144",
+                scale = 1,
+                blend = "alpha"
+            },
+        }
+    },
+
+    on_change = function(player, name, players_weather)
+        -- Sky changes
+        player:set_sun(
+            {
+                visible = false
+            }
+        )
+        player:set_sky({
+            type = "regular",
+            clouds = false,
+            sky_color = {
+                night_sky = "#2f5c4f",
+                night_horizon = "#2f5c4f",
+                day_horizon = "#2f5c4f",
+                day_sky = "#2f5c4f",
+                dawn_sky = "#2f5c4f",
+                dawn_horizon = "#2f5c4f",
+                indoors = "#2f5c4f",
+                fog_sun_tint = "#2f5c4f",
+                fog_moon_tint = "#2f5c4f",
+                fog_tint_type = "custom"
+            },
+            fog = {
+                fog_start = 0.25,
+                fog_distance = 100,
+                fog_color = "#2f5c4f"
+            }
+        })
+        player:set_stars(
+            {
+                visible = false,
+            }
+        )
+        player:set_moon(
+            {
+                visible = false,
+            }
+        )
+        player:override_day_night_ratio(0.75)
+        player:set_lighting({exposure = {exposure_correction = -1}})
     end,
 })
 
@@ -541,6 +639,7 @@ weather.register_weather({
                 visible = false,
             }
         )
+        player:override_day_night_ratio(0.60)
         player:set_lighting({exposure = {exposure_correction = -2}})
     end,
 })
@@ -637,6 +736,7 @@ weather.register_weather({
                 visible = false,
             }
         )
+        player:override_day_night_ratio(0.5)
         player:set_lighting({exposure = {exposure_correction = -4}})
     end,
 })
@@ -650,7 +750,7 @@ weather.register_weather({
         },
         y_level = {
             max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
+            min = core_1042.shared_lib.consts.plain_world_y_levels.cave
         }
     },
     particlespawner = {
@@ -802,7 +902,7 @@ weather.register_weather({
         },
         y_level = {
             max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
+            min = core_1042.shared_lib.consts.plain_world_y_levels.cave
         }
     },
     particlespawner = {
@@ -871,7 +971,7 @@ weather.register_weather({
             },
             fog = {
                 fog_start = 0,
-                fog_distance = 40,
+                fog_distance = 60,
                 fog_color = "#44444400"
             }
         })
@@ -942,7 +1042,7 @@ weather.register_weather({
         },
         y_level = {
             max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
+            min = core_1042.shared_lib.consts.plain_world_y_levels.cave
         }
     },
     particlespawner = {
@@ -1010,7 +1110,7 @@ weather.register_weather({
                 fog_tint_type = "custom"
             },
             fog = {
-                fog_start = 0,
+                fog_start = 1 - weather.get_humidity_single(player:get_pos()) / 100,
                 fog_distance = 270,
                 fog_color = "#ffffff00"
             }
@@ -1069,6 +1169,10 @@ weather.register_weather({
             end)
 
             drizzle_timer = 0
+
+            local sky = player:get_sky(true)
+            sky.fog.fog_start = 1 - weather.get_humidity_single(player:get_pos()) / 100
+            player:set_sky(sky)
         end
     end,
 })
@@ -1082,7 +1186,7 @@ weather.register_weather({
         },
         y_level = {
             max = core_1042.shared_lib.consts.plain_world_y_levels.max,
-            min = core_1042.shared_lib.consts.plain_world_y_levels.deep_cave
+            min = core_1042.shared_lib.consts.plain_world_y_levels.cave
         }
     },
     particlespawner = {

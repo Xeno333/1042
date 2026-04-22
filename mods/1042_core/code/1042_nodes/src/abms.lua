@@ -68,18 +68,19 @@ local function geyser_squirt(pos)
         minexptime = 1,
         maxexptime = 3,
     })
-    local handle = core.sound_play({name="1042_geyser", gain=1, pitch=1.1}, {loop=true})
+    local handle = core.sound_play({name="1042_geyser", gain=2, pitch=1.1}, {loop=true, pos=pos, max_hear_distance = 128})
     core.after(len-1, core.sound_fade, handle, 1, 0)
 end
 
 core.register_abm({
     label = "Geyser Squirt",
     catch_up = false,
-    interval = 30,
-    chance = 15,
+    interval = 10,
+    chance = 10,
     nodenames = {"1042_core:geyser_nozzle"},
     action = function(pos, node, active_object_count, active_object_count_wider)
-        -- play rumble sound
+        local handle = core.sound_play({name="1042_geyser", gain=2, pitch=0.1}, {loop=false, pos=pos, max_hear_distance = 128})
+        core.sound_fade(handle, 0.1, 0)
         core.after(5, geyser_squirt, pos)
     end
 })
@@ -87,17 +88,17 @@ core.register_abm({
 core.register_abm({
     label = "Gusher Bubble",
     catch_up = false,
-    interval = 5,
-    chance = 1,
+    interval = 1,
+    chance = 3,
     nodenames = {"1042_core:gusher_spout"},
     action = function(pos, node, active_object_count, active_object_count_wider)
         core.add_particlespawner({
             amount = 50,
-            time = 5,
+            time = 1,
             size = 5,
             collisiondetection = true,
             collision_removal = true,
-            texture = {name="1042_gusher_bubble.png", blend="alpha"}, -- , blend = "add"
+            texture = {name="1042_gusher_bubble.png", blend="screen"}, -- , blend = "add"
             minpos = vector.offset(pos, -0.2, 0.5, -0.2),
             maxpos = vector.offset(pos, 0.2, 0.5, 0.2),
             minvel = {x=-2, y=4, z=-2},

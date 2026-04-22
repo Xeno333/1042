@@ -666,5 +666,17 @@ core.register_globalstep(function(dtime)
 				style = 3
 			})
 		end
+
+
+		local temp = math.floor(weather.get_temp_single(pos))
+		local humidity = math.floor(weather.get_humidity_single(pos))
+		player_api.update_hud(player, "info", {
+			type = "text",
+			name = "info",
+			text = humidity .. "% " .. temp .. " C",
+			position = {x=0.5, y=0.9},
+			number = 0x00ffdd,
+			style = 3
+		})
 	end
 end)

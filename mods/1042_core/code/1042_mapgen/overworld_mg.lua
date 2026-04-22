@@ -58,70 +58,104 @@ local tower = core.get_content_id("1042_core:tower")
 
 
 
-local function dec(pr, x, y, z, data, area, tempv, cave, param2_data, grass_color)
+local function dec(pr, x, y, z, data, area, tempv, humidity, cave, param2_data, grass_color, flags)
     local c = pr:next(1, 1000)
     local c2 = pr:next(1, 1000)
     
-    
     -- Land
     if cave == nil and y > water_level then
-        if c <= 20 then
-            data[area:index(x, y+1, z)] = grass_tall
-            param2_data[area:index(x, y+1, z)] = grass_color
-        elseif c == 21 and tempv >= 10 and tempv <= 20 then
-            data[area:index(x, y+1, z)] = digitalis
-        elseif c <= 25 and tempv >= 5 and tempv <= 15 and y >= water_level+5 then -- be with dark trees
-            data[area:index(x, y+1, z)] = light_bloom
-        elseif c <= 25 and tempv >= 20 then
-            data[area:index(x, y+1, z)] = sunflower
-        elseif c < 75 then
-            data[area:index(x, y+1, z)] = grass_short
-            param2_data[area:index(x, y+1, z)] = grass_color
-        end
+        if flags.hot_dry then
+            if c <= 3 then
+                data[area:index(x, y+1, z)] = nodes.branch_cactus
+                param2_data[area:index(x, y+1, z)] = pr:next(1,4)
+            elseif c <= 6 then
+                data[area:index(x, y+1, z)] = nodes.barrel_cactus
+                param2_data[area:index(x, y+1, z)] = pr:next(1,4)
+            elseif c == 7 then
+                data[area:index(x, y+1, z)] = grass_tall
+                param2_data[area:index(x, y+1, z)] = grass_color
+            end
 
-        if tempv > 0 and not (tempv > 20) then
+        elseif flags.sulfer_field then
+            local depth = pr:next(1, 2) - 2
+            if c <= 2 then
+                local l = pr:next(depth + 2, 3)
+                for i = 1, l-1 do
+                    data[area:index(x, y+i, z)] = nodes.limestone
+                end
+                data[area:index(x, y+l, z)] = nodes.geyser_nozzle
+                
+            elseif c <= 10 then
+                data[area:index(x, y+depth+1, z)] = nodes.gusher_spout
+            elseif c == 11 and c2 <= 100 then
+                grow_tree(vector.new(x, y-2, z), data, area, {tree = nodes.tree_palm, leaves = nodes.leaves_palm, h = 25, r = 1, down_c = 8, down = 5, lc = {min = 3, max = 5}})
+            elseif c == 11 then
+                data[area:index(x, y+1, z)] = nodes.short_palm
+            end
+        else
+            if c <= 20 then
+                data[area:index(x, y+1, z)] = grass_tall
+                param2_data[area:index(x, y+1, z)] = grass_color
 
-            if c == 102 and c2 <= 100 and tempv >= 5 then
-                if data[area:index(x, y, z)] == turf and data[area:index(x-10, y, z-10)] == turf and data[area:index(x-10, y, z)] == turf and data[area:index(x, y, z-10)] == turf then
-                    data[area:index(x-10, y+1, z-10)] = tower
+            elseif c <= 21 and tempv >= 10 and tempv <= 20 and humidity >= 50 then
+                data[area:index(x, y+1, z)] = digitalis
+            elseif c <= 22 and tempv >= 10 and tempv <= 20 and humidity >= 50 then
+                data[area:index(x, y+1, z)] = nodes.clover
+            elseif c <= 23 and tempv >= 0 and tempv <= 15 and humidity >= 45 then
+                data[area:index(x, y+1, z)] = nodes.thistles
+            elseif c <= 25 and tempv >= 10 and humidity >= 75 then
+                data[area:index(x, y+1, z)] = light_bloom
+            elseif c <= 25 and tempv >= 20 then
+                data[area:index(x, y+1, z)] = sunflower
+
+            elseif c < 75 then
+                data[area:index(x, y+1, z)] = grass_short
+                param2_data[area:index(x, y+1, z)] = grass_color
+            end
+
+            if tempv > 0 and not (tempv > 20) and humidity > 45 then
+                if c == 102 and c2 <= 100 and tempv >= 5 then
+                    if data[area:index(x, y, z)] == turf and data[area:index(x-10, y, z-10)] == turf and data[area:index(x-10, y, z)] == turf and data[area:index(x, y, z-10)] == turf then
+                        data[area:index(x-10, y+1, z-10)] = tower
+                    end
+
+                elseif c == 100 and y > water_level+3 then
+                    data[area:index(x, y+1, z)] = sticks
+
+                elseif c == 101 and y > water_level+9 then
+                    data[area:index(x, y+1, z)] = mushroom
+                    param2_data[area:index(x, y+1, z)] = 1
+
+                -- Big tree
+                elseif y >= water_level+10 and tempv >= 15 and c == 995 then
+                    grow_tree(vector.new(x, y-2, z), data, area, {tree = tree, leaves = leaves, h = 10})
+
+                elseif y >= water_level+5 and tempv >= 5 and c == 999 then
+                    grow_tree(vector.new(x, y-2, z), data, area, {tree = tree_dark, leaves = leaves_dark, h = 20, r = 2})
                 end
 
-            elseif c == 100 and y > water_level+3 then
-                data[area:index(x, y+1, z)] = sticks
+            elseif tempv > 10 then
+                if c <= 20 then
+                    data[area:index(x, y+1, z)] = grass_short
+                    param2_data[area:index(x, y+1, z)] = grass_color
+                end
 
-            elseif c == 101 and y > water_level+9 then
-                data[area:index(x, y+1, z)] = mushroom
-                param2_data[area:index(x, y+1, z)] = 1
-
-            -- Big tree
-            elseif y >= water_level+10 and tempv >= 15 and c == 995 then
-                grow_tree(vector.new(x, y-2, z), data, area, {tree = tree, leaves = leaves, h = 10})
-
-            elseif y >= water_level+5 and tempv >= 5 and c == 999 then
-                grow_tree(vector.new(x, y-2, z), data, area, {tree = tree_dark, leaves = leaves_dark, h = 12})
+            elseif tempv <= -3 then
+                if y >= water_level+3 and c >= 999+(tempv/8) then
+                    grow_tree(vector.new(x, y-2, z), data, area, {tree = tree_light, leaves = leaves_light, h = 16, down_c = 8, down = 5})
+                else
+                    local vi = area:index(x, y+1, z)
+                    data[vi] = snow
+                    param2_data[vi] = pr:next(8, 16)
+                end
             end
-
-        elseif tempv > 20 then
-            if c <= 10 then
-                data[area:index(x, y+1, z)] = grass_short
-            end
-
-        elseif tempv <= -3 then
-            if y >= water_level+3 and c >= 999+(tempv/8) then
-                grow_tree(vector.new(x, y-2, z), data, area, {tree = tree_light, leaves = leaves_light, h = 16, down_c = 8, down = 5})
-            else
-                local vi = area:index(x, y+1, z)
-                data[vi] = snow
-                param2_data[vi] = pr:next(8, 16)
-            end
-
         end
 
     elseif cave == "bottom" then
         if c <= 5 then
             data[area:index(x, y, z)] = flint
 
-        elseif c <= 20 and (tempv >= 10 and tempv <= 20) then
+        elseif c <= 20 and flags.warm_cave then
             local v = area:index(x, y, z)
             data[v] = cave_grass
             param2_data[v] = 16 + 32 + 4
@@ -143,7 +177,7 @@ local function dec(pr, x, y, z, data, area, tempv, cave, param2_data, grass_colo
                 data[area:index(x, y, z)] = chest
             end
 
-        elseif c <= 200 and (tempv >= 10) then
+        elseif c <= 200 and flags.warm_cave then
             local v = area:index(x, y, z)
             data[v] = thin_moss
             param2_data[v] = 1
@@ -151,7 +185,7 @@ local function dec(pr, x, y, z, data, area, tempv, cave, param2_data, grass_colo
         end
 
     elseif cave == "top" then
-        if c <= 100 and (tempv >= 10) then
+        if c <= 100 and flags.warm_cave then
             local v = area:index(x, y, z)
             data[v] = thin_moss
             param2_data[v] = 6
@@ -169,10 +203,19 @@ local function dec(pr, x, y, z, data, area, tempv, cave, param2_data, grass_colo
 end
 
 
+if not core_1042.shared_lib.mapgen.decorations then
+    dec = core_1042.null
+end
+
+
 local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm, hm)
     local m_pos = {z=minp.x,y=minp.y,x=minp.z}
 
     local noise_m = mapgen_1042.map:get_2d_map({z=0,y=minp.x, x=minp.z})
+    local rock_noise_m = mapgen_1042.rock_map:get_2d_map({z=0,y=minp.x, x=minp.z})
+    local plateau_noise_m = mapgen_1042.plateau_map:get_2d_map({z=0,y=minp.x, x=minp.z})
+    local flatness_noise_m = mapgen_1042.flatness_map:get_2d_map({z=0,y=minp.x, x=minp.z})    
+    
     local cave_noise_m = mapgen_1042.cave_map:get_3d_map(m_pos)
     local ore_noise_m = mapgen_1042.ore_map:get_3d_map(m_pos)
     local gold_ore_noise_m = mapgen_1042.ore_map_gold:get_3d_map(m_pos)
@@ -209,9 +252,14 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
             for x = minp.x, maxp.x do
                 lx = lx + 1
 
+                local flags = {}
+
                 local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
                 local humidity = weather.get_humidity({x=lx, y=y, z=lz}, hm)
-                local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, noise_m[lx][lz], tempv)
+                local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, 
+                    ((noise_m[lx][lz] + (math.max(math.min(1, rock_noise_m[lx][lz]) - 0.7, 0) / 4) + (math.max(math.min(1, plateau_noise_m[lx][lz]) - 0.9, 0)))
+                    * (flatness_noise_m[lx][lz] / 1.5))
+                ,tempv)
 
                 if x == mapgen_1042.portal_room.x and z == mapgen_1042.portal_room.z and y == mapgen_1042.portal_room.y then
                     structs[#structs+1] = function(d)
@@ -303,6 +351,15 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
                         if y > water_level then
                             if mountin_top then
                                 data[vi] = dirt
+                            elseif tempv >= 20 and humidity >= 60 then
+                                flags.sulfer_field = true
+                                data[vi] = sand
+
+                            elseif tempv >= 20 and humidity <= 25 then
+                                flags.hot_dry = true
+                                data[vi] = turf
+                                param2_data[vi] = grass_color
+
                             else
                                 data[vi] = turf
                                 param2_data[vi] = grass_color
@@ -324,19 +381,23 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
                         end
 
                         if not mountin_top then
-                            dec(pr, x, y, z, data, area, tempv, nil, param2_data, grass_color)
+                            dec(pr, x, y, z, data, area, tempv, humidity, nil, param2_data, grass_color, flags)
                         end
                     end
                 elseif y <= ny and y<= cave_pool_level then
                     data[vi] = water
                 else
                     if cave_noise_m[lx][ly-1] and cave_noise_m[lx][ly-1][lz] > cave_v and y <= ny then
-                        if tempv >= 10 then
+                        if tempv >= 10 and humidity >= 50 then
+                            flags.warm_cave = true
                             data[area:index(x, y-1, z)] = moss
                         end
-                        dec(pr, x, y, z, data, area, tempv, "bottom", param2_data)
+                        dec(pr, x, y, z, data, area, tempv, humidity, "bottom", param2_data, nil, flags)
                     elseif cave_noise_m[lx][ly+1] and cave_noise_m[lx][ly+1][lz] > cave_v and y <= ny then
-                        dec(pr, x, y, z, data, area, tempv, "top", param2_data)
+                        if tempv >= 10 and humidity >= 50 then
+                            flags.warm_cave = true
+                        end
+                        dec(pr, x, y, z, data, area, tempv, humidity, "top", param2_data, nil, flags)
                     end
                 end
 

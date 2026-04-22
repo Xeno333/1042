@@ -424,6 +424,8 @@ core.register_node("1042_core:clover", {
     tiles = {"1042_clover.png"},
     use_texture_alpha = "clip",
 
+    _mg_name = "clover",
+
     paramtype = "light",
     sunlight_propagates = true,
     floodable = true,
@@ -459,6 +461,8 @@ core.register_node("1042_core:thistles", {
     sunlight_propagates = true,
     floodable = true,
     walkable = false,
+
+    _mg_name = "thistles",
 
     sounds = {
         dug = {
@@ -774,10 +778,6 @@ core.register_node("1042_core:tufted_grass", {
         return core_1042.eat(itemstack, user, 1, 3)
     end,
 
-
-    paramtype2 = "meshoptions",
-    place_param2 = 16 + 32 + 4,
-
     groups = {plant = 1, attached_node = 3, dig_immediate = 1, burns = 2},
 })
 
@@ -787,8 +787,10 @@ core.register_node("1042_core:branch_cactus", {
     mesh = "branch_cactus.obj",
     tiles = {"1042_cactus_branched.png"},
 
+    _mg_name = "branch_cactus",
+
     paramtype = "light",
-    paramtype2 = "facedir",
+    paramtype2 = "4dir",
     sunlight_propagates = true,
     walkable = true,
 
@@ -808,8 +810,10 @@ core.register_node("1042_core:barrel_cactus", {
         fixed = {-2/8, -4/8, -2/8, 2/8, 2/8, 2/8}
     },
 
+    _mg_name = "barrel_cactus",
+
     paramtype = "light",
-    paramtype2 = "facedir",
+    paramtype2 = "4dir",
     sunlight_propagates = true,
 
     _1042_on_use = function(itemstack, user, pointed_thing)
@@ -824,6 +828,8 @@ core.register_node("1042_core:short_palm", {
     mesh = "short_palm.obj",
     tiles = {"1042_palm_short.png"},
     use_texture_alpha = "clip",
+
+    _mg_name = "short_palm",
 
     paramtype = "light",
     paramtype2 = "facedir",

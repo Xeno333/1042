@@ -77,6 +77,9 @@ core.register_globalstep(function(dtime)
             -- Only run if player changed weathers
             if players_weather.weather ~= the_weather then
                 -- Reset weather defaults
+
+                player:override_day_night_ratio(nil)
+
                 if the_weather.on_end then
                     the_weather.on_end(player, name, players_weather)
                 else
