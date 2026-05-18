@@ -47,8 +47,8 @@
 - Improve turf -Xeno333 & Python-Sargent
 - Add Flowers -Python-Sargent
 - Work on tree Saplings -Futuray && Xeno333
-- Add intigrated tests mod -Xeno333
-- Add `admin` priv and migrate `change_weather` to use it insted of `creative` along with other priv fixes -Xeno333
+- Add integrated tests mod -Xeno333
+- Add `admin` priv and migrate `change_weather` to use it instead of `creative` along with other priv fixes -Xeno333
 - Add `player_api.add_item_to_player_inventory(player, list, itemstack, drop_overflow_pos)` and improve node dropping for tools and snow -Xeno333
 - Add foundational growth mechanics -Xeno333
 - Work on sounds and lower item break times with hand for some things -Xeno333
@@ -57,7 +57,7 @@
 - Weather fixes and sprint mechanics -Xeno333
 - Fix snow and grass and turf -Xeno333
 - Color grasses by biome with same system as turf -Xeno333
-- Make player spawn in tempetures [10 C, 20 C] -Xeno333
+- Make player spawn in temperatures [10 C, 20 C] -Xeno333
 - Speed changes -Xeno333
 - Death screen -Xeno333
 - HUD reworking -Xeno333
@@ -73,7 +73,7 @@
 - Start torch -Xeno333
 - Use new allow_close[false] in death screen -Xeno333
 - Flowers and mapgen changes along with massive re-structure -Xeno333
-- Remove doc buttons in menu and add simple controles guid -Xeno333
+- Remove doc buttons in menu and add simple controls guid -Xeno333
 - Add /mob command -Xeno333
 - Start of hunger -Xeno333
 - Hunger mechanic -Xeno333
@@ -86,10 +86,10 @@
 
 ### WIP
 - Lore.Lang dev -Xeno333 & Python-Sargent
-- Adding contenent border to mapgen and spawing -Xeno333
+- Adding continent border to mapgen and spawning -Xeno333
 - Improve textures and models -Xeno333 & Python-Sargent
 - Improve mapgen code -Xeno333
-- Improve and orginize documentation -Xeno333 & Python-Sargent
+- Improve and organize documentation -Xeno333 & Python-Sargent
 - Dynamic item rarity/item registration system -Xeno333 & Python-Sargent
 
 

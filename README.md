@@ -15,18 +15,18 @@ We Hope you enjoy playing it and any feedback is welcome!
 
 ## Features
 
-_See changelog for more compleate list._
+_See changelog for more complete list._
 
-- Mapgen with 4 biomes (tempeture areas) vast mountins and plains with deep oceans and caves
-- Unique UI with custom HUD and Invintory and in-game settings (on a per-player basis)
+- Mapgen with 4 biomes (temperature areas) vast mountains and plains with deep oceans and caves
+- Unique UI with custom HUD and Inventory and in-game settings (on a per-player basis)
 - Several nodes
 - Working weather system
 - Working tools (with custom system)
-- Ores (Iorn)
-- Achivments API
+- Ores (Iron)
+- Achievements API
 - Some sounds
 - Basic mobs Fish and pigs
-- Basic smelting and crafting recipies
+- Basic smelting and crafting recipes
 - Hardcore mode
 - Crafting
 - Weather sounds
@@ -56,8 +56,8 @@ _See changelog for more compleate list._
 
 ## Settings
 
-- `1042_warn_players_about_settings` Warns players abour the requirements for settings to be enabled if they join in servermode, default: `true`
-- `1042_auto_adjust_settings` Automaticly turns on settings for player (and updates to minetest.conf) if user settings conflict, default: `false`
+- `1042_warn_players_about_settings` Warns players about the requirements for settings to be enabled if they join in servermode, default: `true`
+- `1042_auto_adjust_settings` Automatically turns on settings for player (and updates to minetest.conf) if user settings conflict, default: `false`
 
 ### NOT RECOMMENDED
 
@@ -78,7 +78,7 @@ _See changelog for more compleate list._
 #### Can be overridden with `1042_ignore_required_settings = true`
 
 - `enable_shaders = true` for rendering some nodes properly
-- `enable_auto_exposure = true` for the colours in the game to look right
+- `enable_auto_exposure = true` for the colors in the game to look right
 - `enable_post_processing = true` for rendering
 - `translucent_liquids = true` to render things like water
 - `enable_clouds = true` for weather to look right

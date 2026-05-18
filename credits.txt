@@ -1,5 +1,9 @@
-Textures - Xeno333 (aka TX_Miner), SuperStarSonic
+Textures - Xeno333 (aka TX_Miner), Python-Sargent (aka SuperStarSonic)
+
 Code - Xeno333 (aka TX_Miner), Python-Sargent (aka SuperStarSonic), Futuray-pgm
+
 Models - Xeno333 (aka TX_Miner), Python-Sargent (aka SuperStarSonic), Futuray-pgm
 
-Schematics - TX_Warrior, Lone_Star_Miner
+Music - Python-Sargent (aka SuperStarSonic)
+
+Schematics - TX_Warrior, Lone_Star_Miner, Python-Sargent (aka SuperStarSonic)
