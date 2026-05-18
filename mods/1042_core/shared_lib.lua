@@ -4,13 +4,15 @@ core_1042 = {
     version = {major = 0, minor = 4, patch = 0, release = 3},
     version_string = nil, -- string set at start time
     oldest_supported_version = {major = 0, minor = 4, patch = 0, release = 3},
-    world_version = nil,
-    world_version_string = nil, -- string set at start time
-
-    core_path = core.get_modpath("1042_core"),
 
     info = core.get_game_info(),
-    rand = PcgRandom(math.random(1, 2048)) -- Good for all random needed
+    rand = PcgRandom(math.random(1, 2048)), -- Good for all random needed
+    core_path = core.get_modpath("1042_core"),
+
+    -- Only for main env
+    world_version = nil,
+    world_version_string = nil, -- string set at start time
+    init = false,
 }
 
 core_1042.version_string = "1042 v" .. core_1042.version.major .. "." .. core_1042.version.minor .. "." .. core_1042.version.patch .. core_1042.version_release_to_string[core_1042.version.release]

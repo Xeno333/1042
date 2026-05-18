@@ -62,6 +62,8 @@ ice = core.get_content_id("1042_core:ice")
 
 
 core.register_on_generated(function(vm, minp, maxp, seed)
+    mapgen_1042.mapgen_mode = core.ipc_get("1042_core:mapgen_mode")
+
     --local stime = core.get_us_time()
 
     -- Core data

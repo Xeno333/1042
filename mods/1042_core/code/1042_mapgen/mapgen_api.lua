@@ -1,4 +1,6 @@
-mapgen_1042 = {}
+mapgen_1042 = {
+    mapgen_mode = "plain"
+}
 
 
 local map_noise_params = {

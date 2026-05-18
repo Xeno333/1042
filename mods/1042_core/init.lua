@@ -119,6 +119,8 @@ end
 local world_version = core_1042.get("1042_world_version")
 
 if world_version == nil then
+    -- Is first start
+    core_1042.init = true
     core_1042.world_version = core_1042.version
     core_1042.set("1042_world_version", core_1042.world_version)
     core_1042.world_version_string = "1042 v" .. core_1042.world_version.major .. "." .. core_1042.world_version.minor .. "." .. core_1042.world_version.patch ..  core_1042.version_release_to_string[core_1042.world_version.release]

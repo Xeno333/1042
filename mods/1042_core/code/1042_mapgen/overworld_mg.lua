@@ -235,6 +235,12 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
     local y_avr = 0
     local y_avr_c = 0
 
+    local classic = false
+    if mapgen_1042.mapgen_mode == "classic" then
+        classic = true
+        print(classic)
+    end
+
     local ly = 0
     for y = minp.y, maxp.y do
         ly = ly + 1
@@ -256,10 +262,17 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
 
                 local tempv = weather.get_temp({x=lx, y=y, z=lz}, tm)
                 local humidity = weather.get_humidity({x=lx, y=y, z=lz}, hm)
-                local ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, 
-                    ((noise_m[lx][lz] + (math.max(math.min(1, rock_noise_m[lx][lz]) - 0.7, 0) / 4) + (math.max(math.min(1, plateau_noise_m[lx][lz]) - 0.9, 0)))
-                    * (flatness_noise_m[lx][lz] / 1.5))
-                ,tempv)
+                local ny, rv, mountin_top, noise
+                if classic then
+                    ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, 
+                        noise_m[lx][lz]
+                    ,tempv)
+                else
+                    ny, rv, mountin_top, noise = mapgen_1042.get_y(x, z, 
+                        ((noise_m[lx][lz] + (math.max(math.min(1, rock_noise_m[lx][lz]) - 0.7, 0) / 4) + (math.max(math.min(1, plateau_noise_m[lx][lz]) - 0.9, 0)))
+                        * (flatness_noise_m[lx][lz] / 1.5))
+                    ,tempv)
+                end
 
                 if x == mapgen_1042.portal_room.x and z == mapgen_1042.portal_room.z and y == mapgen_1042.portal_room.y then
                     structs[#structs+1] = function(d)
