@@ -41,30 +41,6 @@ core.register_on_dieplayer(function(player, reason)
 	end
 end)
 
-core_1042.animation.register_animation("player", {
-	name = "idle",
-	range = {x = 0, y = 0},
-	speed = 1,
-	blend = nil,
-	loop = true
-})
-
-core_1042.animation.register_animation("player", {
-	name = "walk",
-	range = {x = 0, y = 0.8},
-	speed = 1.1,
-	blend = nil,
-	loop = true
-})
-
-core_1042.animation.register_animation("player", {
-	name = "glide",
-	range = {x = 2.7, y = 3.7},
-	speed = 0.2,
-	blend = nil,
-	loop = true
-})
-
 -- Join player
 
 core.register_on_joinplayer(function(player, last_join)
@@ -75,41 +51,6 @@ core.register_on_joinplayer(function(player, last_join)
 
 	player_callbacks[name] = {}
 
-	player:set_properties({
-		visual = "mesh",
-		mesh = "player.glb",
-		textures = {
-			"character.png",
-			"character.png",
-			"character.png",
-			"character.png",
-			"character.png",
-			"character.png",
-			"character.png",
-			"character.png",
-		},
-		--[[
-		mesh = "player.gltf",
-		textures = {
-			"1042_plain_node.png^[colorize:#442211:168", -- Shoe
-			"1042_plain_node.png^[colorize:#442211:144", -- Leg
-			"1042_plain_node.png^[colorize:#442211:144", -- Leg
-			"1042_plain_node.png^[colorize:#442211:200", -- Shoe
-			"1042_plain_node.png^[colorize:#553311:168", -- Shirt
-			"1042_plain_node.png^[colorize:#aa8877:144", -- Neck
-			"1042_plain_node.png^[colorize:#aa8877:144",  -- Head
-			"1042_plain_node.png^[colorize:#aa8877:144", -- Arm
-			"1042_plain_node.png^[colorize:#aa8877:144"  -- Arm
-		},]]
-		show_on_minimap = false,
-		visual_size = {
-			x = 7,
-			y = 7
-		},
-		stepheight = 1.1,
-
-		nametag_color = "#00000000",
-	})
 	player_api.set_physics(player)
 	player:hud_set_flags(
 		{
@@ -414,7 +355,7 @@ core.register_globalstep(function(dtime)
 			local vel = player:get_velocity()
 			--local dir = player:get_look_dir()
 
-			player:set_bone_override("Spine", { position = nil, rotation = {vec=vector.new((1-dir.y+45)*1.5, 0, 0), interpolation=0.2}})
+			player:set_bone_override("Spine", { position = nil, rotation = {vec=vector.new((1-dir.y)*1.5, 0, 0), interpolation=0.2}})
 			player:set_bone_override("Neck", nil)
 
 			local speed = math.max(math.min(math.sqrt(vel.x*vel.x + vel.y*vel.y + vel.z*vel.z), 8), 0)
@@ -475,15 +416,15 @@ core.register_globalstep(function(dtime)
 
 		-- Animation
 		if gliding then
-			core_1042.player.set_animation(player, {name="glide"}) -- range={x = 2.7, y = 3.7}, speed=0.2
+			--core_1042.player.set_animation(player, {name="glide"}) -- range={x = 2.7, y = 3.7}, speed=0.2
 			add_glider(player)
 		else
 			remove_glider(player)
-			if player_controls.movement_y ~= 0 then
-				core_1042.player.set_animation(player, {name="walk"}) -- , range={x = 0, y = 0.8}, speed=1.1
-			elseif player_controls.movement_y == 0 and core_1042.player.get_animation ~= "walk" then
-				core_1042.player.set_animation(player, {name="idle"}) -- , range={x = 0, y = 0}, speed=1
-			end
+			--if player_controls.movement_y ~= 0 then
+			--	core_1042.player.set_animation(player, {name="walk"}) -- , range={x = 0, y = 0.8}, speed=1.1
+			--elseif player_controls.movement_y == 0 and core_1042.player.get_animation ~= "walk" then
+			--	core_1042.player.set_animation(player, {name="idle"}) -- , range={x = 0, y = 0}, speed=1
+			--end
 		end
 
 		local itemstack = player:get_wielded_item()

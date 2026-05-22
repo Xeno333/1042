@@ -956,6 +956,7 @@ core.register_entity("1042_core:glider_entity", {
         textures = {"1042_tree.png", "1042_thin_moss.png"},
         use_texture_alpha = true,
         backface_culling = false,
+        static_save = false,
     },
     on_detach = function(self, parent)
         if self.object ~= nil then

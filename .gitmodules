@@ -1,0 +1,3 @@
+[submodule "mods/Characters"]
+	path = mods/Characters
+	url = git@github.com:Python-Sargent/Characters.git
