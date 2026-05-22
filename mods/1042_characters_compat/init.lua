@@ -209,9 +209,11 @@ characters.api.add_step(function(player, dtime)
             end
         else
             if characters.get_anim(player) ~= nil then
-                local an = characters.get_anim(player).name
+                local an = characters.get_anim(player)
                 if an == "walk" or an == "strafe" then
                     player:set_animation_frame_speed(1*speed)
+                else
+                    characters.set_animation(player, {name="idle"})
                 end
             else
                 characters.set_animation(player, {name="idle"})
