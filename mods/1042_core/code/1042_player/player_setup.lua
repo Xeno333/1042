@@ -376,8 +376,6 @@ core.register_globalstep(function(dtime)
 			local speed_factor = math.min(s / 2, 1)
 	
 			local roll = angle * speed_factor
-	
-			core.log(roll)
 
 			if roll > max_roll then
 				roll = max_roll
