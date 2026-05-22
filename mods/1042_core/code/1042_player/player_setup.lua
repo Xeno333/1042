@@ -303,6 +303,13 @@ core.register_on_player_receive_fields(function(player, form, fields)
 	end
 end)
 
+local function normalize2(x, z)
+    local len = math.sqrt(x * x + z * z)
+    if len == 0 then
+        return 0, 0
+    end
+    return x / len, z / len
+end
 
 core.register_globalstep(function(dtime)
 	for _, player in ipairs(core.get_connected_players()) do
@@ -353,9 +360,32 @@ core.register_globalstep(function(dtime)
 			player_api.set_physics(player, {gravity=0.3,speed_walk=0})
 
 			local vel = player:get_velocity()
-			--local dir = player:get_look_dir()
 
-			player:set_bone_override("Spine", { position = nil, rotation = {vec=vector.new((1-dir.y)*1.5, 0, 0), interpolation=0.2}})
+			local vx, vz = normalize2(dir.x, dir.z)
+			local lx, lz = normalize2(vel.x, vel.z)
+
+			local cross = lx * vz - lz * vx
+    		local dot = lx * vx + lz * vz
+			 
+			local angle = math.atan2(cross, dot)
+
+			local max_roll = 3
+
+			local s = math.sqrt(vx * vx + vz * vz)
+	
+			local speed_factor = math.min(s / 2, 1)
+	
+			local roll = angle * speed_factor
+	
+			core.log(roll)
+
+			if roll > max_roll then
+				roll = max_roll
+			elseif roll < -max_roll then
+				roll = -max_roll
+			end
+
+			player:set_bone_override("Spine", { position = nil, rotation = {vec=vector.new((1-dir.y)*1.5, 0, roll), interpolation=0.2}})
 			player:set_bone_override("Neck", nil)
 
 			local speed = math.max(math.min(math.sqrt(vel.x*vel.x + vel.y*vel.y + vel.z*vel.z), 8), 0)
