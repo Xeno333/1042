@@ -371,9 +371,9 @@ core.register_globalstep(function(dtime)
 
 			local max_roll = 3
 
-			local s = math.sqrt(vx * vx + vz * vz)
+			local s = math.sqrt(vel.x * vel.x + vel.z * vel.z)
 	
-			local speed_factor = math.min(s / 2, 1)
+			local speed_factor = math.min(s / 10, 1)
 	
 			local roll = angle * speed_factor
 
@@ -383,6 +383,8 @@ core.register_globalstep(function(dtime)
 				roll = -max_roll
 			end
 
+			if s < 0.01 then roll = 0 end
+
 			player:set_bone_override("Spine", { position = nil, rotation = {vec=vector.new((1-dir.y)*1.5, 0, roll), interpolation=0.2}})
 			player:set_bone_override("Neck", nil)
 
@@ -390,6 +392,7 @@ core.register_globalstep(function(dtime)
 
 			local s = speed * 0.1
 			local r = 50
+			local d = 0.9
 			local n = 0.5
 			local dy = dir.y + 0.2
 			if dy > 0 then
@@ -398,6 +401,9 @@ core.register_globalstep(function(dtime)
 
 			player:add_velocity(vector.new(-vel.x / r, -vel.y / r * 2, -vel.z / r))
 			player:add_velocity(vector.new(dir.x * s, dir.y * s * n, dir.z * s))
+
+			--player:add_velocity(vector.new(-vel.x / r, -vel.y / r, -vel.z / r))
+			--player:add_velocity(vector.new(dir.x * s * d, dir.y * s * d, dir.z * s * d))
 		end
 
 		if player:get_inventory():get_stack("glider", 1):get_name() == "1042_core:glider" then
