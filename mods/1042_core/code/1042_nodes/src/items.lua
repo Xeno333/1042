@@ -964,3 +964,40 @@ core.register_entity("1042_core:glider_entity", {
         end
     end,
 })
+
+core_1042.registry.register_material("1042_core:ghorn", {
+    description = core_1042.lorelang.translate("Horn (G)"),
+    drawtype = "mesh",
+    mesh = "horn.obj",
+    tiles = {"1042_gold_ingot.png"},
+    use_texture_alpha = "opaque",
+
+    paramtype = "light",
+    paramtype2 = "facedir",
+    sunlight_propagates = true,
+    walkable = true,
+    buildable_to = false,
+    stack_max = 1,
+    groups = {dig_immediate = 1, attached_node = 3},
+    item_type = "node",
+
+    on_use = function(itemstack, user, pointed_thing)
+        local handle = core.sound_play("GHorn_1", {
+            gain = 1.0,
+            pitch = 1.0,
+            object = user,
+            max_hear_distance = 128,
+        })
+        player_api.set_data(user:get_player_name(), "musical_instrument", {name="GHorn", note=1, handle=handle}) -- 1 = G natural
+    end
+    
+}, 3, nil, nil)
+
+core_1042.register_loot({name = "1042_core:spyglass"})
+core_1042.crafting.register_craft({
+    result = "1042_core:spyglass",
+    type = "1042_default",
+    items = {
+        "1042_core:gold_ingot", "1042_core:tree", "1042_core:glass"
+    }
+})

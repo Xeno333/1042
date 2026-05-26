@@ -311,6 +311,53 @@ local function normalize2(x, z)
     return x / len, z / len
 end
 
+local function normalize_symmetric(x, m)
+	return (x+m)/(2*m)
+end
+
+local update_instrument = function(user, instrument)
+	local cont = user:get_player_control()
+	if cont.dig then
+		local pitch = 1-normalize_symmetric(user:get_look_vertical(), 1.57)
+
+		if pitch >= 2/3 then
+			if instrument.note ~= 3 then
+				core.sound_fade(instrument.handle, 0.5, 0)
+				local handle = core.sound_play(instrument.name.."_3", {
+					gain = 1.0,
+					pitch = 1.0,
+					object = user,
+					max_hear_distance = 128,
+				})
+				player_api.set_data(user:get_player_name(), "musical_instrument", {name=instrument.name, note=3, handle=handle})
+			end
+		elseif pitch >= 1/3 then
+			if instrument.note ~= 2 then
+				core.sound_stop(instrument.handle, 0.5, 0)
+				local handle = core.sound_play(instrument.name.."_2", {
+					gain = 1.0,
+					pitch = 1.0,
+					object = user,
+					max_hear_distance = 128,
+				})
+				player_api.set_data(user:get_player_name(), "musical_instrument", {name=instrument.name, note=2, handle=handle})
+			end
+		elseif instrument.note ~= 1 then
+			core.sound_fade(instrument.handle, 0.5, 0)
+			local handle = core.sound_play(instrument.name.."_1", {
+				gain = 1.0,
+				pitch = 1.0,
+				object = user,
+				max_hear_distance = 128,
+			})
+			player_api.set_data(user:get_player_name(), "musical_instrument", {name=instrument.name, note=1, handle=handle})
+		end
+	else
+		core.sound_fade(instrument.handle, 0.9, 0)
+		player_api.set_data(user:get_player_name(), "musical_instrument", nil)
+	end
+end
+
 core.register_globalstep(function(dtime)
 	for _, player in ipairs(core.get_connected_players()) do
 		local name = player:get_player_name()
@@ -328,7 +375,7 @@ core.register_globalstep(function(dtime)
 		end]]
 
 
-		-- Controles
+		-- Controls
 		local player_controls = player:get_player_control()
 		local player_meta = player:get_meta()
 
@@ -348,6 +395,13 @@ core.register_globalstep(function(dtime)
 			player_api.set_data(name, "hunger_cooldown", hunger_cooldown + dtime)
 		end
 
+		-- Musical Instruments (such as horns, etc.)
+
+		local inst = player_api.get_data(name, "musical_instrument")
+
+		if (inst ~= nil and inst ~= "") then
+			update_instrument(player, inst)
+		end
 
 		-- Gliding
 		local gliding = false
