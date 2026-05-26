@@ -56,77 +56,82 @@ core.register_abm({
     nodenames = {"group:burning"},
     neighbors = {"air"},
     action = function(pos, node, active_object_count, active_object_count_wider)
-        core.add_particlespawner({
-            amount = 32,
-            time = 4,
+        local amt = 32
+        local p = core.settings:get("1042_particle_limit")
+        if p == "Decreased" then amt = 4 end
+        if p ~= "Minimal" then
+            core.add_particlespawner({
+                amount = amt,
+                time = 4,
 
-            collisiondetection = true,
-            object_collision = true,
+                collisiondetection = true,
+                object_collision = true,
 
-            vel = {
-                min = vector.new(-1, 1, -1),
-                max = vector.new(1, 2, 1),
-                bias = 0
-            },
-
-            acc = vector.new(0, 1, 0),
-
-            size = {
-                min = 0.5,
-                max = 1
-            },
-
-            exptime = {
-                min = 0.5,
-                max = 1
-            },
-
-            bounce = {
-                min = 0,
-                max = 0.3
-            },
-
-            glow = 14,
-
-            pos = {
-                min = vector.new(pos.x-0.3,pos.y-0.5,pos.z-0.3),
-                max = vector.new(pos.x+0.3,pos.y,pos.z+0.3),
-                bias = 0
-            },
-
-            texpool = {
-                {
-                    name = "1042_plain_node.png^[colorize:#ffee77:255",
-                    scale = 0.5,
-                    alpha_tween = {
-                        0.5, 1,
-                        style = "pulse",
-                        reps = 2,
-
-                    }
+                vel = {
+                    min = vector.new(-1, 1, -1),
+                    max = vector.new(1, 2, 1),
+                    bias = 0
                 },
-                {
-                    name = "1042_plain_node.png^[colorize:#ffee77:255",
-                    scale = 0.25,
-                    alpha_tween = {
-                        0.5, 1,
-                        style = "pulse",
-                        reps = 2,
 
-                    }
+                acc = vector.new(0, 1, 0),
+
+                size = {
+                    min = 0.5,
+                    max = 1
                 },
-                {
-                    name = "1042_plain_node.png^[colorize:#ffdd88:255",
-                    scale = 0.1,
-                    alpha_tween = {
-                        0.5, 1,
-                        style = "pulse",
-                        reps = 2,
 
+                exptime = {
+                    min = 0.5,
+                    max = 1
+                },
+
+                bounce = {
+                    min = 0,
+                    max = 0.3
+                },
+
+                glow = 14,
+
+                pos = {
+                    min = vector.new(pos.x-0.3,pos.y-0.5,pos.z-0.3),
+                    max = vector.new(pos.x+0.3,pos.y,pos.z+0.3),
+                    bias = 0
+                },
+
+                texpool = {
+                    {
+                        name = "1042_plain_node.png^[colorize:#ffee77:255",
+                        scale = 0.5,
+                        alpha_tween = {
+                            0.5, 1,
+                            style = "pulse",
+                            reps = 2,
+
+                        }
+                    },
+                    {
+                        name = "1042_plain_node.png^[colorize:#ffee77:255",
+                        scale = 0.25,
+                        alpha_tween = {
+                            0.5, 1,
+                            style = "pulse",
+                            reps = 2,
+
+                        }
+                    },
+                    {
+                        name = "1042_plain_node.png^[colorize:#ffdd88:255",
+                        scale = 0.1,
+                        alpha_tween = {
+                            0.5, 1,
+                            style = "pulse",
+                            reps = 2,
+
+                        }
                     }
                 }
-            }
-        })
+            })
+        end
     end
 })
 
@@ -147,77 +152,82 @@ core.register_abm({
     nodenames = {"group:burning_2"},
     neighbors = {"air"},
     action = function(pos, node, active_object_count, active_object_count_wider)
-        core.add_particlespawner({
-            amount = 4,
-            time = 4,
+        local amt = 4
+        local p = core.settings:get("1042_particle_limit")
+        if p == "Decreased" then amt = 1 end
+        if p ~= "Minimal" then
+            core.add_particlespawner({
+                amount = amt,
+                time = 4,
 
-            collisiondetection = true,
-            object_collision = true,
+                collisiondetection = true,
+                object_collision = true,
 
-            vel = {
-                min = vector.new(-1, 1, -1),
-                max = vector.new(1, 2, 1),
-                bias = 0
-            },
-
-            acc = vector.new(0, 1, 0),
-
-            size = {
-                min = 0.5,
-                max = 1
-            },
-
-            exptime = {
-                min = 0.5,
-                max = 1
-            },
-
-            bounce = {
-                min = 0,
-                max = 0.3
-            },
-
-            glow = 14,
-
-            pos = {
-                min = vector.new(pos.x-0.3,pos.y-0.5,pos.z-0.3),
-                max = vector.new(pos.x+0.3,pos.y,pos.z+0.3),
-                bias = 0
-            },
-
-            texpool = {
-                {
-                    name = "1042_plain_node.png^[colorize:#ffee77:255",
-                    scale = 0.5,
-                    alpha_tween = {
-                        0.5, 1,
-                        style = "pulse",
-                        reps = 2,
-
-                    }
+                vel = {
+                    min = vector.new(-1, 1, -1),
+                    max = vector.new(1, 2, 1),
+                    bias = 0
                 },
-                {
-                    name = "1042_plain_node.png^[colorize:#ffee77:255",
-                    scale = 0.25,
-                    alpha_tween = {
-                        0.5, 1,
-                        style = "pulse",
-                        reps = 2,
 
-                    }
+                acc = vector.new(0, 1, 0),
+
+                size = {
+                    min = 0.5,
+                    max = 1
                 },
-                {
-                    name = "1042_plain_node.png^[colorize:#ffdd88:255",
-                    scale = 0.1,
-                    alpha_tween = {
-                        0.5, 1,
-                        style = "pulse",
-                        reps = 2,
 
+                exptime = {
+                    min = 0.5,
+                    max = 1
+                },
+
+                bounce = {
+                    min = 0,
+                    max = 0.3
+                },
+
+                glow = 14,
+
+                pos = {
+                    min = vector.new(pos.x-0.3,pos.y-0.5,pos.z-0.3),
+                    max = vector.new(pos.x+0.3,pos.y,pos.z+0.3),
+                    bias = 0
+                },
+
+                texpool = {
+                    {
+                        name = "1042_plain_node.png^[colorize:#ffee77:255",
+                        scale = 0.5,
+                        alpha_tween = {
+                            0.5, 1,
+                            style = "pulse",
+                            reps = 2,
+
+                        }
+                    },
+                    {
+                        name = "1042_plain_node.png^[colorize:#ffee77:255",
+                        scale = 0.25,
+                        alpha_tween = {
+                            0.5, 1,
+                            style = "pulse",
+                            reps = 2,
+
+                        }
+                    },
+                    {
+                        name = "1042_plain_node.png^[colorize:#ffdd88:255",
+                        scale = 0.1,
+                        alpha_tween = {
+                            0.5, 1,
+                            style = "pulse",
+                            reps = 2,
+
+                        }
                     }
                 }
-            }
-        })
+            })
+        end
     end
 })
 

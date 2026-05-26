@@ -115,8 +115,11 @@ core.register_globalstep(function(dtime)
                 }
                 def.width = nil
                 def.playername = name
-                
-                core.add_particlespawner(def)
+                local p = core.settings:get("1042_particle_limit")
+                if p == "Decreased" then def.amount = 8 end -- TODO: use the weather definition to adjust the amount
+                if p ~= "Minimal" then
+                    core.add_particlespawner(def)
+                end
             end
         end
 

@@ -1,14 +1,14 @@
 
 [General]
 
-#   Allow 1042 to automaticly adjust your settings to what the game requires.
+#   Allow 1042 to automatically adjust your settings to what the game requires.
 #
-#   Recomended for novice players
-1042_auto_adjust_settings (Automaticly adjust settings) bool false
+#   Recommended for novice players
+1042_auto_adjust_settings (Automatically adjust settings) bool false
 
 #   Hardcore Mode
 #
-#   Not recomended for novice players
+#   Not recommended for novice players
 1042_enable_hardcore (Enable Hardcore Mode) bool false
 
 #   1042 Lore Language for items, nodes, etc.
@@ -27,12 +27,14 @@
 #   Warn players to adjust settings on join.
 1042_warn_players_about_settings (Warn players about settings) bool true
 
+#   Set the amount of particles for systems with slower hardware
+1042_particle_limit (Particles) enum All All,Decreased,Minimal
 
 [Mapgen]
 
 #   Enable mapgen decorations
 #
-#   Recomended: true
+#   Recommended for normal gameplay
 1042_mapgen_decorations (Enable mapgen decorations) bool true
 
 
@@ -40,12 +42,12 @@
 
 #   Ignore game required settings, and force run.
 #
-#   ***THIS IS NOT RECOMENDED***
+#   ***THIS IS NOT RECOMMENDED***
 1042_ignore_required_settings (Force override required settings) bool false
 
 #   Disable in-game weather
 #
-#   ***THIS IS NOT RECOMENDED***
+#   ***THIS IS NOT RECOMMENDED***
 1042_disable_weather (Disable in-game weather) bool false
 
 
@@ -53,8 +55,8 @@
 
 #   Enable and run the intigrated tests mod (WIP)
 #
-#   ***THIS IS NOT RECOMENDED***
-1042_enable_intigrated_tests (Enable intigrated tests) bool false
+#   ***THIS IS NOT RECOMMENDED***
+1042_enable_intigrated_tests (Enable integrated tests) bool false
 
 #   Enable experimental Movement Physics
 1042_experimental_physics (Enable Experimental Physics) bool false

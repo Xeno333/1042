@@ -51,23 +51,28 @@ core.register_abm({
 
 local function geyser_squirt(pos)
     local len = rand:next(3, 20)
-    core.add_particlespawner({
-        amount = 50*len,
-        time = len,
-        size = 20,
-        collisiondetection = true,
-        texture = {name="1042_geyser_steam.png", blend="screen"},
-        minpos = vector.offset(pos, -0.1, 0.5, -0.1),
-        maxpos = vector.offset(pos, 0.1, 0.5, 0.1),
-        minvel = {x=-1, y=20, z=-1},
-        maxvel = {x=1, y=25, z=1},
-        minacc = {x=0.1, y=-3, z=0.1},
-        maxacc = {x=-0.1, y=-5, z=-0.1},
-        minsize = 10,
-        maxsize = 30,
-        minexptime = 1,
-        maxexptime = 3,
-    })
+    local amt = 50
+    local p = core.settings:get("1042_particle_limit")
+    if p == "Decreased" then amt = 2 end
+    if p ~= "Minimal" then
+        core.add_particlespawner({
+            amount = amt*len,
+            time = len,
+            size = 20,
+            collisiondetection = true,
+            texture = {name="1042_geyser_steam.png", blend="screen"},
+            minpos = vector.offset(pos, -0.1, 0.5, -0.1),
+            maxpos = vector.offset(pos, 0.1, 0.5, 0.1),
+            minvel = {x=-1, y=20, z=-1},
+            maxvel = {x=1, y=25, z=1},
+            minacc = {x=0.1, y=-3, z=0.1},
+            maxacc = {x=-0.1, y=-5, z=-0.1},
+            minsize = 10,
+            maxsize = 30,
+            minexptime = 1,
+            maxexptime = 3,
+        })
+    end
     local handle = core.sound_play({name="1042_geyser", gain=2, pitch=1.1}, {loop=true, pos=pos, max_hear_distance = 128})
     core.after(len-1, core.sound_fade, handle, 1, 0)
 end
@@ -92,24 +97,30 @@ core.register_abm({
     chance = 3,
     nodenames = {"1042_core:gusher_spout"},
     action = function(pos, node, active_object_count, active_object_count_wider)
-        core.add_particlespawner({
-            amount = 50,
-            time = 1,
-            size = 5,
-            collisiondetection = true,
-            collision_removal = true,
-            texture = {name="1042_gusher_bubble.png", blend="screen"}, -- , blend = "add"
-            minpos = vector.offset(pos, -0.2, 0.5, -0.2),
-            maxpos = vector.offset(pos, 0.2, 0.5, 0.2),
-            minvel = {x=-2, y=4, z=-2},
-            maxvel = {x=2, y=8, z=2},
-            minacc = {x=1, y=-20, z=1},
-            maxacc = {x=-1, y=-30, z=-1},
-            minsize = 4,
-            maxsize = 6,
-            minexptime = 1,
-            maxexptime = 5,
-        })
+        local len = rand:next(3, 20)
+        local amt = 50
+        local p = core.settings:get("1042_particle_limit")
+        if p == "Decreased" then amt = 1 end
+        if p ~= "Minimal" then
+            core.add_particlespawner({
+                amount = amt,
+                time = 1,
+                size = 5,
+                collisiondetection = true,
+                collision_removal = true,
+                texture = {name="1042_gusher_bubble.png", blend="screen"}, -- , blend = "add"
+                minpos = vector.offset(pos, -0.2, 0.5, -0.2),
+                maxpos = vector.offset(pos, 0.2, 0.5, 0.2),
+                minvel = {x=-2, y=4, z=-2},
+                maxvel = {x=2, y=8, z=2},
+                minacc = {x=1, y=-20, z=1},
+                maxacc = {x=-1, y=-30, z=-1},
+                minsize = 4,
+                maxsize = 6,
+                minexptime = 1,
+                maxexptime = 5,
+            })
+        end
     end
 })
 
