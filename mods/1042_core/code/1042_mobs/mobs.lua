@@ -135,7 +135,9 @@ core.register_entity("1042_core:pig", {
     },
 
     on_death = function(self, player)
-        achievements_1042.achieve(player, "hog_slayer")
+        if player and player:is_player() then
+            achievements_1042.achieve(player, "hog_slayer")
+        end
 
         local pos = self.object:get_pos()
         if core.get_node(pos).name == "air" then
@@ -162,8 +164,8 @@ core.register_entity("1042_core:pig", {
 
             local dir = vector.random_direction()
             dir.y = -9.8
-            dir.z = dir.z * 2
-            dir.x = dir.x * 2
+            dir.z = dir.z
+            dir.x = dir.x
             self.object:set_velocity(dir)
             self.object:set_animation({x = 0, y = 40}, (math.abs(dir.x)+math.abs(dir.y))/2, 0, true)
             self.object:set_rotation(vector.new(0, 3*math.pi/2 + math.atan2(dir.z, dir.x), 0)) -- Offset by 1/4 pi for some reason, this needs fixed. #fixme

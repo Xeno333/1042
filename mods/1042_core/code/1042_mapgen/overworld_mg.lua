@@ -235,10 +235,11 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
     local y_avr = 0
     local y_avr_c = 0
 
-    local classic = false
+    local classic, flat = false, false
     if mapgen_1042.mapgen_mode == "classic" then
         classic = true
-        print(classic)
+    elseif mapgen_1042.mapgen_mode == "flat" then
+        flat = true
     end
 
     local ly = 0
@@ -272,6 +273,10 @@ local function f(minp, maxp, area, data, param2_data, pr, struct_pr, structs, tm
                         ((noise_m[lx][lz] + (math.max(math.min(1, rock_noise_m[lx][lz]) - 0.7, 0) / 4) + (math.max(math.min(1, plateau_noise_m[lx][lz]) - 0.9, 0)))
                         * (flatness_noise_m[lx][lz] / 1.5))
                     ,tempv)
+                end
+
+                if flat then
+                    ny = math.min(ny, 2)
                 end
 
                 if x == mapgen_1042.portal_room.x and z == mapgen_1042.portal_room.z and y == mapgen_1042.portal_room.y then
